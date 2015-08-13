@@ -1,0 +1,42 @@
+{
+  "name": "eslint-plugin-lodash3",
+  "version": "0.0.0",
+  "author": "Ido <?+npm@gmail.com>",
+  "description": "Lodash specific linting rules for ESLint",
+  "main": "index.js",
+  "scripts": {
+    "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
+    "lint": "eslint ./",
+    "test": "npm run lint && npm run unit-test",
+    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/**/*.js -- --reporter dot"
+  },
+  "files": [
+    "LICENSE",
+    "README.md",
+    "index.js",
+    "lib"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/wix/eslint-plugin-lodash3"
+  },
+  "homepage": "https://github.com/wix/eslint-plugin-lodash3",
+  "bugs": "https://github.com/wix/eslint-plugin-lodash3/issues",
+  "dependencies": {
+    "lodash": "^3.10.1"
+  },
+  "devDependencies": {
+    "babel-eslint": "4.0.5",
+    "coveralls": "2.11.3",
+    "eslint": "1.0.0",
+    "istanbul": "0.3.17",
+    "mocha": "2.2.5"
+  },
+  "keywords": [
+    "eslint",
+    "eslint-plugin",
+    "eslintplugin",
+    "lodash"
+  ],
+  "license": "MIT"
+}

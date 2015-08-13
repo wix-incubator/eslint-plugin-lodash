@@ -1,7 +1,3 @@
-/**
- * @fileoverview Prevent missing displayName in a React component definition
- * @author Yannick Croissant
- */
 'use strict';
 
 // ------------------------------------------------------------------------------

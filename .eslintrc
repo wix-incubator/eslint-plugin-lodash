@@ -96,7 +96,7 @@
         "no-unused-vars": 2,
         "no-use-before-define": 2,
         // Stylistic Issues
-        "indent": [2, 2, {"SwitchCase": 1}],
+        "indent": [2, 4, {"SwitchCase": 1}],
         "brace-style": 2,
         "camelcase": 0,
         "comma-spacing": 2,
@@ -140,7 +140,7 @@
         "wrap-regex": 0,
         // Legacy
         "max-depth": 0,
-        "max-len": [2, 120],
+        "max-len": [2, 200],
         "max-params": 0,
         "max-statements": 0,
         "no-plusplus": 0

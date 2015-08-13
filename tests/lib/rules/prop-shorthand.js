@@ -14,7 +14,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-ruleTester.run('preferred-alias', rule, {
+ruleTester.run('prop-shorthand', rule, {
 
     valid: [{
         code: [
@@ -31,7 +31,7 @@ ruleTester.run('preferred-alias', rule, {
             'var isPublic = _.map([], function (i) { return i.id; });'
         ].join('\n'),
         errors: [{
-            message: "Prefer pluck syntax1"
+            message: 'Prefer property shorthand syntax'
         }]
     }
     ]

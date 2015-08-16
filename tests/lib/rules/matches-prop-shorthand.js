@@ -20,6 +20,8 @@ ruleTester.run('matches-prop-shorthand', rule, {
             'var isPublic = _.find([], function (i) { return x.id; });'
         ].join('\n')
     }, {
+        code: 'var r = _.find(this.packages, {name: name});'
+    }, {
         code: [
             'var isPublic = _.map([], function (i) { return i.id + "?"; });'
         ].join('\n')

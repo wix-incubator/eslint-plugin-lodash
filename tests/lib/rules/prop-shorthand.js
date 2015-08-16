@@ -15,28 +15,37 @@ var RuleTester = require('eslint').RuleTester;
 
 var ruleTester = new RuleTester();
 ruleTester.run('prop-shorthand', rule, {
+    //valid: [],
+    //valid: [{
+    //    code: 'var publicModules = _(files).map(readModule).compact().value();'
+    //}],
+    //invalid: [{
+    //    code: 'var ids = _(users).map(function (i) { return i.id; });',
+    //    errors: [{message: 'Prefer property shorthand syntax'}]
+    //}]
 
     valid: [{
-        code: [
-            'var isPublic = _.map([], function (i) { return x.id; });'
-        ].join('\n')
+        code: 'var ids = _.map([], function (i) { return x.id; });'
     }, {
-        code: [
-            'var isPublic = _.map([], function (i) { return i.id + "?"; });'
-        ].join('\n')
+        code: 'var ids = _.map([], function (i) { return i.id + "?"; });'
+    }, {
+        code: 'var publicModules = _(files).map(readModule).compact().value();'
     }],
-
     invalid: [{
-        code: [
-            'var isPublic = _.map([], function (i) { return i.id; });'
-        ].join('\n'),
-        errors: [{
-            message: 'Prefer property shorthand syntax'
-        }]
-    }
-    ]
+        code: 'var ids = _(users).map(function (i) { return i.id; });',
+        errors: [{message: 'Prefer property shorthand syntax'}]
+    }, {
+        code: 'var ids = _.map([], function (i) { return i.id; });',
+        errors: [{message: 'Prefer property shorthand syntax'}]
+    }, {
+        code: 'var ids = _(users).map().map().map(function (i) { return i.id; });',
+        errors: [{message: 'Prefer property shorthand syntax'}]
+    }]
 });
 
+//var deletedCookies = _.map(deleteCookieCalls.allArgs(), function(arg) {
+//    return arg[0];
+//});
 
 //// using the `_.matches` callback shorthand
 //_.result(_.find(users, { 'age': 1, 'active': true }), 'user');

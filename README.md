@@ -48,6 +48,9 @@ Finally, enable all of the rules that you would like to use.
 * [prop-shorthand](docs/rules/prefer-chain.md): Prefer chain
 
 
+# TODO
+* no-single-chain prevent 1 length _().map().value()
+
 
 # License
 

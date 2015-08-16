@@ -32,6 +32,5 @@ ruleTester.run('matches-prop-shorthand', rule, {
         errors: [{
             message: 'Prefer matches property syntax'
         }]
-    }
-    ]
+    }]
 });

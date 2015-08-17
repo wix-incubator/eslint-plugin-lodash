@@ -15,7 +15,6 @@ var RuleTester = require('eslint').RuleTester;
 
 var ruleTester = new RuleTester();
 ruleTester.run('preferred-alias', rule, {
-
     valid: [{
         code: [
             '_.forEach();'
@@ -25,7 +24,6 @@ ruleTester.run('preferred-alias', rule, {
             'var x = _.map(y, function (i) { return i; });'
         ].join('\n')
     }],
-
     invalid: [{
         code: [
             '_.each(users, function (i) { i.f(); });'
@@ -33,6 +31,5 @@ ruleTester.run('preferred-alias', rule, {
         errors: [{
             message: "Method 'each' is an alias, for consistency prefer using 'forEach'"
         }]
-    }
-    ]
+    }]
 });

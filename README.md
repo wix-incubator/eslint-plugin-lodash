@@ -43,9 +43,9 @@ Finally, enable all of the rules that you would like to use.
 # List of supported rules
 
 * [prop-shorthand](docs/rules/prop-shorthand.md): Prefer property shorthand syntax
-* [prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
-* [prop-shorthand](docs/rules/preferred-alias.md): Preferred aliases
-* [prop-shorthand](docs/rules/prefer-chain.md): Prefer chain
+* [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
+* [preferred-alias](docs/rules/preferred-alias.md): Preferred aliases
+* [prefer-chain](docs/rules/prefer-chain.md): Prefer chain
 
 
 # TODO

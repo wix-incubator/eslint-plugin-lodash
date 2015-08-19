@@ -21,12 +21,14 @@ ruleTester.run('matches-prop-shorthand', rule, {
         code: 'var r = _.find(this.packages, {name: name});'
     }, {
         code: 'var isPublic = _.map([], function (i) { return i.id + "?"; });'
+    }, {
+        code: 'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});'
+    }, {
+        code: 'var isPublic = _.find([], function (i) { return i.id == 3; });'
     }],
 
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
-        errors: [{
-            message: 'Prefer matches property syntax'
-        }]
+        errors: [{message: 'Prefer matches property syntax'}]
     }]
 });

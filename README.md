@@ -49,7 +49,8 @@ Finally, enable all of the rules that you would like to use.
 
 
 # TODO
-* no-single-chain prevent 1 length _().map().value()
+* `no-single-chain` prevent 1 length chains, e.g.  `_(x).map().value()`
+* `prefer-reject` prefer `reject` over filter with `_.negate`, `!(expression)` or `x.prop1.prop2 !== value`
 
 
 # License

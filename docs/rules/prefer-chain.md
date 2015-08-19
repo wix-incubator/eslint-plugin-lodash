@@ -4,7 +4,7 @@ When using multiple calls to lodash methods, the resulting code is more readable
 
 ## Rule Details
 
-This rule takes one argument, the depth.
+This rule takes one argument, the depth (default is 3).
 
 The following patterns are considered warnings, when depth is 2:
 

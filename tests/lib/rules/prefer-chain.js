@@ -17,6 +17,9 @@ ruleTester.run('prefer-chain', rule, {
         code: 'var isPublic = _.map([], function (i) { return x.id; });',
         options: [2]
     }, {
+        code: 'var isPublic = _.map([], function (i) { return _.now() });',
+        options: [2]
+    }, {
         code: 'var isPublic = _.map([], function (i) { return x.id + "?"; });',
         options: [2]
     }, {

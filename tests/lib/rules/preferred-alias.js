@@ -7,7 +7,6 @@
 var rule = require('../../../lib/rules/preferred-alias');
 var RuleTester = require('eslint').RuleTester;
 
-//require('babel-eslint');
 
 // ------------------------------------------------------------------------------
 // Tests

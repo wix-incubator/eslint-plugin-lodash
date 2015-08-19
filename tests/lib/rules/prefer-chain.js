@@ -7,8 +7,6 @@
 var rule = require('../../../lib/rules/prefer-chain');
 var RuleTester = require('eslint').RuleTester;
 
-//require('babel-eslint');
-
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------

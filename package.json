@@ -26,7 +26,6 @@
     "lodash": "^3.10.1"
   },
   "devDependencies": {
-    "babel-eslint": "4.0.5",
     "coveralls": "2.11.3",
     "eslint": "1.0.0",
     "istanbul": "0.3.17",

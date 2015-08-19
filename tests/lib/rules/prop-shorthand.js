@@ -7,7 +7,6 @@
 var rule = require('../../../lib/rules/prop-shorthand');
 var RuleTester = require('eslint').RuleTester;
 
-//require('babel-eslint');
 
 // ------------------------------------------------------------------------------
 // Tests

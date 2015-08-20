@@ -24,10 +24,16 @@ ruleTester.run('matches-prop-shorthand', rule, {
         code: 'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});'
     }, {
         code: 'var isPublic = _.find([], function (i) { return i.id == 3; });'
+    }, {
+        code: 'var isPublic = _.find([], function (i) { return i[0] === 3; });'
     }],
 
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
         errors: [{message: 'Prefer matches property syntax'}]
+    //}, {
+    //    TODO: handle this
+    //    code: '_.find(arr, function(i){ return i.b.c === compId; });',
+    //    errors: [{message: 'Prefer matches property syntax'}]
     }]
 });

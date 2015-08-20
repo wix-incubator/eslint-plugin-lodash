@@ -13,6 +13,8 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
+var errors = [{message: 'Prefer property shorthand syntax'}];
+
 ruleTester.run('prop-shorthand', rule, {
     valid: [{
         code: 'var ids = _.map([], function (i) { return x.id; });'
@@ -27,15 +29,15 @@ ruleTester.run('prop-shorthand', rule, {
     }],
     invalid: [{
         code: 'var ids = _(users).map(function (i) { return i.id; });',
-        errors: [{message: 'Prefer property shorthand syntax'}]
+        errors: errors
     }, {
         code: 'var ids = _.map([], function (i) { return i.id; });',
-        errors: [{message: 'Prefer property shorthand syntax'}]
+        errors: errors
     }, {
         code: 'var ids = _(users).map("x").map("y").map(function (i) { return i.id; });',
-        errors: [{message: 'Prefer property shorthand syntax'}]
+        errors: errors
     }, {
         code: 'var ids = _.map([], function (i) { return i["id"]; });',
-        errors: [{message: 'Prefer property shorthand syntax'}]
+        errors: errors
     }]
 });

@@ -23,10 +23,10 @@ ruleTester.run('prefer-chain', rule, {
         code: 'var isPublic = _.map([], function (i) { return x.id + "?"; });',
         options: [2]
     }, {
-        code: 'var isPublic = _.find(_.map(users, \'id\'), 3)',
+        code: 'var isPublic = _.find(_.map(users, "id"), 3)',
         options: [3]
     }, {
-        code: 'var isPublic = _.some(attrs, \'Public\')',
+        code: 'var isPublic = _.some(attrs, "Public")',
         options: [1]
     }],
     invalid: [{

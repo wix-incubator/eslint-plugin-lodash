@@ -34,6 +34,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/matches-prop-shorthand": 1,
     "lodash3/prefer-chain": 1,
     "lodash3/preferred-alias": 1
+    "lodash3/prefer-reject": 1
   }
 }
 ```

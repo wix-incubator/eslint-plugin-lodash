@@ -94,7 +94,7 @@
         "no-undef-init": 2,
         "no-undefined": 2,
         "no-unused-vars": 2,
-        "no-use-before-define": 2,
+        "no-use-before-define": [2, "nofunc"],
         // Stylistic Issues
         "indent": [2, 4, {"SwitchCase": 1}],
         "brace-style": 2,

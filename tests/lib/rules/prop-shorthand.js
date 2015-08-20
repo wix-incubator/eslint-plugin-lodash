@@ -28,7 +28,7 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map([], function (i) { return i.id; });',
         errors: [{message: 'Prefer property shorthand syntax'}]
     }, {
-        code: 'var ids = _(users).map().map().map(function (i) { return i.id; });',
+        code: 'var ids = _(users).map("x").map("y").map(function (i) { return i.id; });',
         errors: [{message: 'Prefer property shorthand syntax'}]
     }]
 });

@@ -20,9 +20,7 @@ Add `plugins` section and specify ESLint-plugin-React as a plugin.
 
 ```json
 {
-  "plugins": [
-    "lodash3"
-  ]
+  "plugins": ["lodash3"]
 }
 ```
 
@@ -45,7 +43,7 @@ Finally, enable all of the rules that you would like to use.
 * [prop-shorthand](docs/rules/prop-shorthand.md): Prefer property shorthand syntax
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [preferred-alias](docs/rules/preferred-alias.md): Preferred aliases
-* [prefer-chain](docs/rules/prefer-chain.md): Prefer chain
+* [prefer-chain](docs/rules/prefer-chain.md): Prefer chain over nested lodash calls
 
 
 # TODO

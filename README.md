@@ -44,10 +44,9 @@ Finally, enable all of the rules that you would like to use.
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [preferred-alias](docs/rules/preferred-alias.md): Preferred aliases
 * [prefer-chain](docs/rules/prefer-chain.md): Prefer chain over nested lodash calls
-
+* [no-single-chain](docs/rules/no-single-chain.md):Prevent chaining syntax for single method, e.g.  `_(x).map().value()`
 
 # TODO
-* `no-single-chain` prevent 1 length chains, e.g.  `_(x).map().value()`
 * `prefer-reject` prefer `reject` over filter with `_.negate`, `!(expression)` or `x.prop1.prop2 !== value`
 
 

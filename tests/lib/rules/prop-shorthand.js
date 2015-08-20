@@ -20,6 +20,10 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map([], function (i) { return i.id + "?"; });'
     }, {
         code: 'var publicModules = _(files).map(readModule).compact().value();'
+    }, {
+        code: 'var ids = _.map([], function (i) { return i[0]; });'
+    }, {
+        code: 'var ids = _.map([], function (i) { return i[k]; });'
     }],
     invalid: [{
         code: 'var ids = _(users).map(function (i) { return i.id; });',
@@ -29,6 +33,9 @@ ruleTester.run('prop-shorthand', rule, {
         errors: [{message: 'Prefer property shorthand syntax'}]
     }, {
         code: 'var ids = _(users).map("x").map("y").map(function (i) { return i.id; });',
+        errors: [{message: 'Prefer property shorthand syntax'}]
+    }, {
+        code: 'var ids = _.map([], function (i) { return i["id"]; });',
         errors: [{message: 'Prefer property shorthand syntax'}]
     }]
 });

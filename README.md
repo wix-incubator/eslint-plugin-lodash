@@ -34,7 +34,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/matches-prop-shorthand": 1,
     "lodash3/prefer-chain": 1,
     "lodash3/preferred-alias": 1,
-    "lodash3/no-single-chain": 1
+    "lodash3/no-single-chain": 1,
+    "lodash3/prefer-reject": 1
   }
 }
 ```
@@ -46,9 +47,8 @@ Finally, enable all of the rules that you would like to use.
 * [preferred-alias](docs/rules/preferred-alias.md): Preferred aliases
 * [prefer-chain](docs/rules/prefer-chain.md): Prefer chain over nested lodash calls
 * [no-single-chain](docs/rules/no-single-chain.md): Prevent chaining syntax for single method, e.g. `_(x).map().value()`
+* [prefer-reject](docs/rules/prefer-reject.md): Prefer `_.reject` over filter with `!(expression)` or `x.prop1 !== value`
 
-# TODO
-* `prefer-reject` prefer `reject` over filter with `_.negate`, `!(expression)` or `x.prop1.prop2 !== value`
 
 
 # License

@@ -1,4 +1,4 @@
-# Prefer reject
+# Prefer filter
 
 When using _.forEach with a single `if` statement, you should probably use `_.filter` or `_.some` instead.
 

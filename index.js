@@ -7,7 +7,8 @@ module.exports = {
         'prop-shorthand': require('./lib/rules/prop-shorthand'),
         'matches-prop-shorthand': require('./lib/rules/matches-prop-shorthand'),
         'no-single-chain': require('./lib/rules/no-single-chain'),
-        'prefer-reject': require('./lib/rules/prefer-reject')
+        'prefer-reject': require('./lib/rules/prefer-reject'),
+        'prefer-filter': require('./lib/rules/prefer-filter')
     },
     rulesConfig: {
         'preferred-alias': 0,
@@ -15,6 +16,7 @@ module.exports = {
         'prop-shorthand': 0,
         'matches-prop-shorthand': 0,
         'no-single-chain': 0,
-        'prefer-reject': 0
+        'prefer-reject': 0,
+        'prefer-filter': 0
     }
 };

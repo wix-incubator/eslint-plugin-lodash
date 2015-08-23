@@ -9,7 +9,8 @@ module.exports = {
         'no-single-chain': require('./lib/rules/no-single-chain'),
         'prefer-reject': require('./lib/rules/prefer-reject'),
         'prefer-filter': require('./lib/rules/prefer-filter'),
-        'no-unnecessary-bind': require('./lib/rules/no-unnecessary-bind')
+        'no-unnecessary-bind': require('./lib/rules/no-unnecessary-bind'),
+        unwrap: require('./lib/rules/unwrap')
     },
     rulesConfig: {
         'preferred-alias': 0,
@@ -19,6 +20,7 @@ module.exports = {
         'no-single-chain': 0,
         'prefer-reject': 0,
         'prefer-filter': 0,
-        'no-unnecessary-bind': 0
+        'no-unnecessary-bind': 0,
+        unwrap: 0
     }
 };

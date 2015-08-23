@@ -18,6 +18,8 @@ ruleTester.run('no-unnecessary-bind', rule, {
         code: 'var x = _.map(arr, f)'
     }, {
         code: 'var r = _.find(themeStyleList, function (themeStyle) { return this.x; }, this);'
+    }, {
+        code: 'var r = _.find(arr, function (i) { return this.x; }.bind(this, x));'
     }],
     invalid: [{
         code: 'var r = _.find(users, function (user) { return user.age > this.age; }.bind(this));',

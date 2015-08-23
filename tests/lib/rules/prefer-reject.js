@@ -24,6 +24,9 @@ ruleTester.run('prefer-reject', rule, {
         code: '_.filter(arr, function(x) { return x.a !== b})',
         errors: [ruleError]
     }, {
+        code: '_.filter(arr, function(x) { return b !== x.a})',
+        errors: [ruleError]
+    }, {
         code: '_.filter(arr, function(x) {return !x.isSomething})',
         errors: [ruleError]
     }]

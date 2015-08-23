@@ -28,6 +28,8 @@ ruleTester.run('prefer-chain', rule, {
     }, {
         code: 'var isPublic = _.some(attrs, "Public")',
         options: [1]
+    }, {
+        code: 'var isPublic = _.find(_.map(users, "id"), 3)'
     }],
     invalid: [{
         code: "var user = _.find(_.map(users, 'id'), 3)",

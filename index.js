@@ -11,7 +11,7 @@ module.exports = {
         'prefer-filter': require('./lib/rules/prefer-filter'),
         'no-unnecessary-bind': require('./lib/rules/no-unnecessary-bind'),
         unwrap: require('./lib/rules/unwrap'),
-        'prefer-compact': ('./lib/rules/prefer-compact')
+        'prefer-compact': require('./lib/rules/prefer-compact')
     },
     rulesConfig: {
         'preferred-alias': 0,

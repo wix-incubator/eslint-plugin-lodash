@@ -10,7 +10,8 @@ module.exports = {
         'prefer-reject': require('./lib/rules/prefer-reject'),
         'prefer-filter': require('./lib/rules/prefer-filter'),
         'no-unnecessary-bind': require('./lib/rules/no-unnecessary-bind'),
-        unwrap: require('./lib/rules/unwrap')
+        unwrap: require('./lib/rules/unwrap'),
+        'prefer-compact': ('./lib/rules/prefer-compact')
     },
     rulesConfig: {
         'preferred-alias': 0,
@@ -21,6 +22,7 @@ module.exports = {
         'prefer-reject': 0,
         'prefer-filter': 0,
         'no-unnecessary-bind': 0,
-        unwrap: 0
+        unwrap: 0,
+        'prefer-compact': 1
     }
 };

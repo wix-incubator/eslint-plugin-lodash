@@ -38,7 +38,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-reject": 1,
     "lodash3/prefer-filter": 1,
     "lodash3/no-unnecessary-bind": 1,
-    "lodash3/unwrap": 1
+    "lodash3/unwrap": 1,
+    "lodash3/prefer-compact": 1
   }
 }
 ```
@@ -53,7 +54,8 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-reject](docs/rules/prefer-reject.md): Prefer `_.reject` over filter with `!(expression)` or `x.prop1 !== value`
 * [prefer-filter](docs/rules/prefer-filter.md): Prefer `_.filter` over `_.forEach` with an `if` statement inside.
 * [no-unnecessary-bind](docs/rules/no-unnecessary-bind.md): Prefer passing `thisArg` over binding.
-* [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.
+* [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
+* [prefer-compact](docs/rules/prefer-compact.md): Prefer `_.compact` over `_.filter` for only truthy values.
 
 
 # License

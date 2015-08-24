@@ -26,6 +26,8 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map([], function (i) { return i[0]; });'
     }, {
         code: 'var ids = _.map([], function (i) { return i[k]; });'
+    }, {
+        code: 'var r = _.map([], function() { return React.PropTypes.object; })'
     }],
     invalid: [{
         code: 'var ids = _(users).map(function (i) { return i.id; });',

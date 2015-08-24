@@ -23,6 +23,6 @@ module.exports = {
         'prefer-filter': 0,
         'no-unnecessary-bind': 0,
         unwrap: 0,
-        'prefer-compact': 1
+        'prefer-compact': 0
     }
 };

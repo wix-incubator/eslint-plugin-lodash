@@ -37,7 +37,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/no-single-chain": 1,
     "lodash3/prefer-reject": 1,
     "lodash3/prefer-filter": 1,
-    "lodash3/no-unnecessary-bind": 1
+    "lodash3/no-unnecessary-bind": 1,
+    "lodash3/unwrap": 1
   }
 }
 ```

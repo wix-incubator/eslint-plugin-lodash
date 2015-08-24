@@ -20,6 +20,8 @@ ruleTester.run('prefer-filter', rule, {
         code: '_.forEach(arr, function(x) { if (x.a) {} else {}})'
     }, {
         code: '_.forEach(arr, function(x) {if (y) {}})'
+    }, {
+        code: '_.forEach(arr, function(x, y) { if (x){} })'
     }],
     invalid: [{
         code: '_(arr).forEach(function(x) { if (x.a) {}})',

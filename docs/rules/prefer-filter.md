@@ -11,13 +11,18 @@ The following patterns are considered warnings:
 ```js
 
 _(arr).forEach(function(x) { 
-  if (x) {
+  if (x.a) {
+  // ...
+  }
+});
+
+  if (!x.a) {
   // ...
   }
 });
 
 _.forEach(arr, function(x) { 
-  if (x) {
+  if (x.a === b) {
   // ...
   }
 });

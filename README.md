@@ -1,6 +1,7 @@
 ESLint-plugin-lodash3
 ===================
 
+[![NPM version][npm-image]][npm-url]
 
 Lodash3 specific linting rules for ESLint
 
@@ -61,4 +62,22 @@ Finally, enable all of the rules that you would like to use.
 # License
 
 ESLint-plugin-lodash3 is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
+
+[npm-url]: https://npmjs.org/package/eslint-plugin-lodash3
+[npm-image]: http://img.shields.io/npm/v/eslint-plugin-lodash3.svg?style=flat-square
+
+[travis-url]: https://travis-ci.org/wix/eslint-plugin-lodash3
+[travis-image]: http://img.shields.io/travis/wix/eslint-plugin-lodash3/master.svg?style=flat-square
+
+[deps-url]: https://david-dm.org/wix/eslint-plugin-lodash3
+[deps-image]: https://img.shields.io/david/dev/wix/eslint-plugin-lodash3.svg?style=flat-square
+
+[coverage-url]: https://coveralls.io/r/wix/eslint-plugin-lodash3?branch=master
+[coverage-image]: http://img.shields.io/coveralls/wix/eslint-plugin-lodash3/master.svg?style=flat-square
+
+[climate-url]: https://codeclimate.com/github/wix/eslint-plugin-lodash3
+[climate-image]: http://img.shields.io/codeclimate/github/wix/eslint-plugin-lodash3.svg?style=flat-square
+
+[status-url]: https://github.com/wix/eslint-plugin-lodash3/pulse
+[status-image]: http://img.shields.io/badge/status-maintained-brightgreen.svg?style=flat-square
 

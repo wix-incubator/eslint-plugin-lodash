@@ -1,7 +1,7 @@
 ESLint-plugin-lodash3
 ===================
 
-[![NPM version][npm-image]][npm-url]
+[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Build Status][travis-image]][travis-url] [![Coverage Status][coverage-image]][coverage-url]
 
 Lodash3 specific linting rules for ESLint
 

@@ -17,7 +17,7 @@ If you installed `ESLint` globally, you have to install lodash3 plugin globally 
 
 # Configuration
 
-Add `plugins` section and specify ESLint-plugin-React as a plugin.
+Add `plugins` section and specify ESLint-plugin-lodash3 as a plugin.
 
 ```json
 {

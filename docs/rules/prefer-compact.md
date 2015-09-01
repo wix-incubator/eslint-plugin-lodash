@@ -1,4 +1,4 @@
-# Prefer reject
+# Prefer compact
 
 When using _.filter with an identity or boolean casting , it could improve readability by switching to _.compact
 

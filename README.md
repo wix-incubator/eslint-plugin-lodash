@@ -41,6 +41,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/no-unnecessary-bind": 1,
     "lodash3/unwrap": 1,
     "lodash3/prefer-compact": 1
+    "lodash3/no-double-unwrap": 1
   }
 }
 ```
@@ -57,6 +58,7 @@ Finally, enable all of the rules that you would like to use.
 * [no-unnecessary-bind](docs/rules/no-unnecessary-bind.md): Prefer passing `thisArg` over binding.
 * [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
 * [prefer-compact](docs/rules/prefer-compact.md): Prefer `_.compact` over `_.filter` for only truthy values.
+* [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`)
 
 
 # License

@@ -41,7 +41,10 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/no-unnecessary-bind": 1,
     "lodash3/unwrap": 1,
     "lodash3/prefer-compact": 1,
-    "lodash3/no-double-unwrap": 1
+    "lodash3/no-double-unwrap": 1,
+    "lodash3/prefer-map": 1,
+    "lodash3/prefer-wrapper-methods": 1,
+    "lodash3/prefer-invoke": 1
   }
 }
 ```
@@ -59,6 +62,9 @@ Finally, enable all of the rules that you would like to use.
 * [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
 * [prefer-compact](docs/rules/prefer-compact.md): Prefer `_.compact` over `_.filter` for only truthy values.
 * [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`)
+* [prefer-map](docs/rules/prefer-map.md): Prefer `_.map` over `_.forEach` with a `push` inside.
+* [prefer-wrapper-methods](docs/rules/prefer-wrapper-methods.md): Prefer using array and string methods in the chain and not the initial value, e.g. `_(str).split(' ')...`
+* [prefer-invoke](docs/rules/prefer-invoke.md): Prefer using `_.invoke` over `_.map` with a method call inside.
 
 
 # License

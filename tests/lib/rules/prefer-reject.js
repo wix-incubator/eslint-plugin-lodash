@@ -29,5 +29,9 @@ ruleTester.run('prefer-reject', rule, {
     }, {
         code: '_.filter(arr, function(x) {return !x.isSomething})',
         errors: [ruleError]
+    }, {
+        code: '_.filter(arr, x => !x.isSomething)',
+        ecmaFeatures: {arrowFunctions: true},
+        errors: [ruleError]
     }]
 });

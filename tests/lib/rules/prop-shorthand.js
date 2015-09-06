@@ -28,6 +28,8 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map([], function (i) { return i[k]; });'
     }, {
         code: 'var r = _.map([], function() { return React.PropTypes.object; })'
+    }, {
+        code: 'var r = _.map([])'
     }],
     invalid: [{
         code: 'var ids = _(users).map(function (i) { return i.id; });',
@@ -40,6 +42,10 @@ ruleTester.run('prop-shorthand', rule, {
         errors: errors
     }, {
         code: 'var ids = _.map([], function (i) { return i["id"]; });',
+        errors: errors
+    }, {
+        code: 'var ids = _.map([], i => i.id);',
+        ecmaFeatures: {arrowFunctions: true},
         errors: errors
     }]
 });

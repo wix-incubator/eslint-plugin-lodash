@@ -28,4 +28,4 @@ _.chain(str).split(' ').map(f).reduce(g).value();
 
 ## When Not To Use It
 
-If you do not want to enforce using `map`, you should not use this rule.
+If you do not want to enforce using wrapper methods, you should not use this rule.

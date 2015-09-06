@@ -1,4 +1,4 @@
-# Prefer wrapper methods
+# Prefer wrapper method
 
 When starting a chain with an initial value that contains a call to an array or string method, it could be better to move that method to the chain itself.
 

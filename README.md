@@ -40,7 +40,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-filter": 1,
     "lodash3/no-unnecessary-bind": 1,
     "lodash3/unwrap": 1,
-    "lodash3/prefer-compact": 1
+    "lodash3/prefer-compact": 1,
     "lodash3/no-double-unwrap": 1
   }
 }

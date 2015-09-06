@@ -44,7 +44,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/no-double-unwrap": 1,
     "lodash3/prefer-map": 1,
     "lodash3/prefer-wrapper-methods": 1,
-    "lodash3/prefer-invoke": 1
+    "lodash3/prefer-invoke": 1,
+    "lodash3/prefer-thru": 1
   }
 }
 ```
@@ -65,6 +66,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-map](docs/rules/prefer-map.md): Prefer `_.map` over `_.forEach` with a `push` inside.
 * [prefer-wrapper-methods](docs/rules/prefer-wrapper-methods.md): Prefer using array and string methods in the chain and not the initial value, e.g. `_(str).split(' ')...`
 * [prefer-invoke](docs/rules/prefer-invoke.md): Prefer using `_.invoke` over `_.map` with a method call inside.
+* [prefer-thru](docs/rules/prefer-thru.md): Prefer using `_.prototype.thru` in the chain and not call functions in the initial value, e.g. `_(x).thru(f).map(g)...`
 
 
 # License

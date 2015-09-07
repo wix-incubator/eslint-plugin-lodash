@@ -43,7 +43,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-compact": 1,
     "lodash3/no-double-unwrap": 1,
     "lodash3/prefer-map": 1,
-    "lodash3/prefer-wrapper-methods": 1,
+    "lodash3/prefer-wrapper-method": 1,
     "lodash3/prefer-invoke": 1,
     "lodash3/prefer-thru": 1
   }

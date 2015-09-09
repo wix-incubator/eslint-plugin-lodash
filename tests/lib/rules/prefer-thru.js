@@ -18,6 +18,8 @@ ruleTester.run('prefer-thru', rule, {
         code: 'var x = _(str).thru(f).map(g).reduce(h);'
     }, {
         code: 'var x = _(f(a,b)).map(g).reduce(h);'
+    }, {
+        code: 'var x = _(f("img")).map(g).reduce(h);'
     }],
     invalid: [{
         code: '_(f(str)).map(g).reduce(h)',

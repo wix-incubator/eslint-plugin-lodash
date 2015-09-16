@@ -20,6 +20,8 @@ ruleTester.run('unwrap', rule, {
         code: 'var x = _(a).map(f).filter(g).value()'
     }, {
         code: 'var x = _.chain(a).map(f).value()'
+    }, {
+        code: 'var stillWrapped = _(a).forEach(f).commit();'
     }],
     invalid: [{
         code: 'var x = _(a).map(f);',

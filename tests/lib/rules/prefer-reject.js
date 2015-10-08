@@ -14,9 +14,9 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 var ruleError = {message: 'Prefer _.reject over negative condition'};
 ruleTester.run('prefer-reject', rule, {
-    valid: [{
-        code: 'var x = _.filter(arr, function(x) {return !x.a && p})'
-    }],
+    valid: [
+        'var x = _.filter(arr, function(x) {return !x.a && p})'
+    ],
     invalid: [{
         code: '_(arr).map(f).filter(function(x) {return !x.isSomething})',
         errors: [ruleError]

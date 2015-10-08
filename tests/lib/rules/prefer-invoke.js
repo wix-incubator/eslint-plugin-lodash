@@ -14,11 +14,10 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 var errors = [{message: 'Prefer _.invoke over map to a method call.'}];
 ruleTester.run('prefer-invoke', rule, {
-    valid: [{
-        code: 'var x = _.invoke(arr, "f")'
-    }, {
-        code: 'var x = _.invoke(arr, "split", " ")'
-    }],
+    valid: [
+        'var x = _.invoke(arr, "f")',
+        'var x = _.invoke(arr, "split", " ")'
+    ],
     invalid: [{
         code: '_.map(a, function(x) {return x.f()});',
         errors: errors

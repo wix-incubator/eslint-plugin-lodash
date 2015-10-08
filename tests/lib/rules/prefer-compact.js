@@ -14,11 +14,10 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 var ruleError = {message: 'Prefer _.compact over filtering of Boolean casting'};
 ruleTester.run('prefer-compact', rule, {
-    valid: [{
-        code: 'var x = _.filter(arr, function(x) {return f(x) || g(x)})'
-    }, {
-        code: 'var x = _.filter(arr, function(x) {var a = 1; return f(x, a);})'
-    }],
+    valid: [
+        'var x = _.filter(arr, function(x) {return f(x) || g(x)})',
+        'var x = _.filter(arr, function(x) {var a = 1; return f(x, a);})'
+    ],
     invalid: [{
         code: '_(arr).map(f).filter(function(x) {return x})',
         errors: [ruleError]

@@ -14,15 +14,12 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 
 ruleTester.run('no-double-unwrap', rule, {
-    valid: [{
-        code: 'var x = _(a).map(f).reduce(g)'
-    }, {
-        code: 'var x = _(a).map(f).value()'
-    }, {
-        code: 'var x = _.chain(a).reduce(f).value()'
-    }, {
-        code: 'var x = something.value()'
-    }],
+    valid: [
+        'var x = _(a).map(f).reduce(g)',
+        'var x = _(a).map(f).value()',
+        'var x = _.chain(a).reduce(f).value()',
+        'var x = something.value()'
+    ],
     invalid: [{
         code: 'var x = _(a).reduce(f).value();',
         errors: [{message: 'Do not use .value() after chain-ending method reduce'}]

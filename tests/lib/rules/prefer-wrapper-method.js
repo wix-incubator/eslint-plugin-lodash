@@ -14,9 +14,9 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 var errors = [{message: 'Prefer split with wrapper method over inside the chain start.'}];
 ruleTester.run('prefer-wrapper-method', rule, {
-    valid: [{
-        code: 'var x = _(str).split(c).map(f).reduce(g)'
-    }],
+    valid: [
+        'var x = _(str).split(c).map(f).reduce(g)'
+    ],
     invalid: [{
         code: '_(str.split(c)).map(f).reduce(g)',
         errors: errors

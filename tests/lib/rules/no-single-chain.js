@@ -12,18 +12,17 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var ruleError = {message: 'Do not use chain syntax for single method'};
+var errors = [{message: 'Do not use chain syntax for single method'}];
 ruleTester.run('no-single-chain', rule, {
-    valid: [{
-        code: 'var x = _.map(arr, f)'
-    }, {
-        code: 'var x = _(arr).map(f).filter(g).value()'
-    }],
+    valid: [
+        'var x = _.map(arr, f)',
+        'var x = _(arr).map(f).filter(g).value()'
+    ],
     invalid: [{
         code: 'var x = _(arr).map(f).value()',
-        errors: [ruleError]
+        errors: errors
     }, {
         code: 'var x = _(arr).reduce(f, i)',
-        errors: [ruleError]
+        errors: errors
     }]
 });

@@ -14,13 +14,11 @@ var RuleTester = require('eslint').RuleTester;
 var ruleTester = new RuleTester();
 var ruleError = {message: 'Prefer _.map over a _.forEach with a push to an array inside'};
 ruleTester.run('prefer-map', rule, {
-    valid: [{
-        code: 'var x = _.map(arr, function(x) {return x + 7})'
-    }, {
-        code: '_.forEach(arr, function(x) { if (x.a) {a.push(x)}})'
-    }, {
-        code: '_.forEach(arr, function (x){ a.push(x); if (f(x)) {a.push(b)}});'
-    }],
+    valid: [
+        'var x = _.map(arr, function(x) {return x + 7})',
+        '_.forEach(arr, function(x) { if (x.a) {a.push(x)}})',
+        '_.forEach(arr, function (x){ a.push(x); if (f(x)) {a.push(b)}});'
+    ],
     invalid: [{
         code: '_(arr).forEach(function(x) { a.push(x)})',
         errors: [ruleError]

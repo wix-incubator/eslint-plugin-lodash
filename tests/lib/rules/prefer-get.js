@@ -18,7 +18,8 @@ ruleTester.run('prefer-get', rule, {
         'var x = _.get(a, "b.c");',
         'var x = _.has(a, "b.c");',
         'var x = a && a.b',
-        'a && a.b && f()'
+        'a && a.b && f()',
+        'a && a[v] && a[v].c'
     ],
     invalid: [{
         code: 'x = a && a.b && a.b.c === 8',

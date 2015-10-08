@@ -1,6 +1,6 @@
 {
   "name": "eslint-plugin-lodash3",
-  "version": "0.1.10",
+  "version": "0.1.11",
   "author": "IdoK <?+npm@gmail.com>",
   "description": "Lodash specific linting rules for ESLint",
   "main": "index.js",

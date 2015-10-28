@@ -20,7 +20,8 @@ ruleTester.run('prefer-lodash-typecheck', rule, {
     valid: [
         'var x = a instanceof B',
         'var x = a > b ? a : b',
-        'var x = typeof a === typeof b'
+        'var x = typeof a === typeof b',
+        'var x = typeof y === "undefined"'
     ],
     invalid: [{
         code: 'var x = typeof a === "number"',

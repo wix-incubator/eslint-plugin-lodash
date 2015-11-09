@@ -20,7 +20,8 @@ ruleTester.run('prefer-get', rule, {
         'var x = a && a.b',
         'a && a.b && f()',
         'a && a[v] && a[v].c',
-        'a && a.b && typeof a.b === "number"'
+        'a && a.b && typeof a.b === "number"',
+        'a && a.b && a.b.c + a.b.d'
     ],
     invalid: [{
         code: 'x = a && a.b && a.b.c === 8',

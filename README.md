@@ -49,6 +49,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-lodash-method": 1,
     "lodash3/prefer-lodash-typecheck": 1,
     "lodash3/no-commit": 1
+    "lodash3/prefer-get": 1,
+    "lodash3/collection-return": 1
   }
 }
 ```
@@ -74,6 +76,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-lodash-typecheck](docs/rules/prefer-lodash-typecheck.md): Prefer using `_.is*` methods over `typeof` and `instanceof` checks when applicable.
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`
 * [prefer-get](docs/rules/prefer-get.md): Prefer using `_.get` or `_.has` over expression chains like `a && a.b && a.b.c`.
+* [collection-return](docs/rules/collection-return.md): Always return a value in iteratees of lodash collection methods that aren't `forEach`.
 
 
 # License

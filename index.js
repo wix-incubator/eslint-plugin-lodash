@@ -10,5 +10,5 @@ module.exports = {
     rules: _.zipObject(rules, rules.map(function (rule) {
         return require('./lib/rules/' + rule);
     })),
-    rulesConfig: _.zipObject(rules, _.fill(Array(rules.length), 0)) //eslint-disable-line new-cap
+    rulesConfig: _.zipObject(rules, _.times(rules.length, _.constant(0)))
 };

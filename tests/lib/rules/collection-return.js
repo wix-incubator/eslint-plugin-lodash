@@ -20,7 +20,9 @@ ruleTester.run('collection-return', rule, {
             ecmaFeatures: {arrowFunctions: true},
             code: '_.map(arr, a => a + 1)'
         },
-        '_.map(arr, function(a) {return a.some(function(x) {})})'
+        '_.map(arr, function(a) {return a.some(function(x) {})})',
+        '_(a).transform(function(acc, item) {acc[item] = f(item);}, {}).mapValues(g).value()',
+        'function x(a) {return a;}'
     ],
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',
@@ -35,5 +37,8 @@ ruleTester.run('collection-return', rule, {
         code: '_.reduce(arr, a => {f(a)})',
         errors: [{message: 'Do not use _.reduce without returning a value'}],
         ecmaFeatures: {arrowFunctions: true}
+    }, {
+        code: '_.map(arr, function x(a) {arr2.push(a)})',
+        errors: [{message: 'Do not use _.map without returning a value'}]
     }]
 });

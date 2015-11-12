@@ -48,9 +48,9 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-thru": 1,
     "lodash3/prefer-lodash-method": 1,
     "lodash3/prefer-lodash-typecheck": 1,
-    "lodash3/no-commit": 1
+    "lodash3/no-commit": 1,
     "lodash3/prefer-get": 1,
-    "lodash3/collection-return": 1
+    "lodash3/collection-return": 1,
     "lodash3/prefer-matches": 1
   }
 }
@@ -102,4 +102,3 @@ ESLint-plugin-lodash3 is licensed under the [MIT License](http://www.opensource.
 
 [status-url]: https://github.com/wix/eslint-plugin-lodash3/pulse
 [status-image]: http://img.shields.io/badge/status-maintained-brightgreen.svg?style=flat-square
-

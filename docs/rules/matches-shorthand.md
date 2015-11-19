@@ -4,7 +4,7 @@ When using certain method in lodash such as filter, code can be shorter and more
 
 ## Rule Details
 
-This rule takes no arguments.
+This rule takes one argument, maximum path length.
 
 The following patterns are considered warnings:
 

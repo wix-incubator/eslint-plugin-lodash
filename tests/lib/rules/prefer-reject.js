@@ -15,22 +15,20 @@ var ruleTester = new RuleTester();
 var ruleError = {message: 'Prefer _.reject over negative condition'};
 ruleTester.run('prefer-reject', rule, {
     valid: [
-        'var x = _.filter(arr, function(x) {return !x.a && p})'
+        '_.filter(users, function(user) {return !user.active && isSomething;});',
+        '_.filter(users, function(user) {return !f(user);});'
     ],
     invalid: [{
-        code: '_(arr).map(f).filter(function(x) {return !x.isSomething})',
+        code: '_(users).map(t).filter(function(user) {return !user.name.givenName})',
         errors: [ruleError]
     }, {
-        code: '_.filter(arr, function(x) { return x.a !== b})',
+        code: '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
         errors: [ruleError]
     }, {
-        code: '_.filter(arr, function(x) { return b !== x.a})',
+        code: '_.filter(users, function(user) {return !user.isSomething;});',
         errors: [ruleError]
     }, {
-        code: '_.filter(arr, function(x) {return !x.isSomething})',
-        errors: [ruleError]
-    }, {
-        code: '_.filter(arr, x => !x.isSomething)',
+        code: '_.filter(arr, user => !user.active)',
         ecmaFeatures: {arrowFunctions: true},
         errors: [ruleError]
     }]

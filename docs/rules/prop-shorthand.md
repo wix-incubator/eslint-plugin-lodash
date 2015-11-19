@@ -9,13 +9,15 @@ This rule takes no arguments.
 The following patterns are considered warnings:
 
 ```js
-var ids = _.map([], function (i) { return i.id; });
+var ids = _.map([], function (user) {
+  return user.name.familyName;
+});
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-var ids = _.map([], 'id');
+var ids = _.map([], 'name.familyName');
 ```
 
 

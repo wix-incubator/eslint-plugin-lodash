@@ -4,25 +4,25 @@ When using _.forEach with a single `if` statement, you should probably use `_.fi
 
 ## Rule Details
 
-This rule takes no arguments.
+This rule takes one argument, maximum path length (default is 3).
 
 The following patterns are considered warnings:
 
 ```js
-
-_(arr).forEach(function(x) { 
-  if (x.a) {
+_(users).forEach(function(user) { 
+  if (user.name.familyName) {
   // ...
   }
 });
 
-  if (!x.a) {
+_(users).forEach(function(user) { 
+  if (!user.active) {
   // ...
   }
 });
 
-_.forEach(arr, function(x) { 
-  if (x.a === b) {
+_.forEach(users, function(user) { 
+  if (user.name.givenName === 'Bob') {
   // ...
   }
 });
@@ -31,7 +31,8 @@ _.forEach(arr, function(x) {
 The following patterns are not considered warnings:
 
 ```js
-
-var x = _.filter(arr, function(x) {return !x.a && p});
+var x = _.filter(users, function(user) {
+  return !user.active && user.name.givenName === 'Bob'
+});
 
 ```

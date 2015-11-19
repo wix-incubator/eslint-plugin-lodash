@@ -4,24 +4,30 @@ When using _.filter with a negative condition, it could improve readability by s
 
 ## Rule Details
 
-This rule takes no arguments.
+This rule takes one argument, maximum path length (default is 3).
 
 The following patterns are considered warnings:
 
 ```js
+_.filter(users, function(user) {
+  return user.name.givenName !== 'Bob';
+});
 
-_.filter(arr, function(x) { return x.a !== b});
-
-_.filter(arr, function(x) {return !x.isSomething})
+_.filter(users, function(user) {
+  return !user.isSomething;
+});
 ```
 
 The following patterns are not considered warnings:
 
 ```js
+_.filter(users, function(user) {
+  return !user.active && isSomething;
+});
 
-var x = _.filter(arr, function(x) {return !x.a && p});
-
-var x = _.filter(arr, function(x) {return !f(x)}; // The function f could take multiple arguments, e.g. parseInt 
+_.filter(users, function(user) {
+  return !f(user);     // The function f could take multiple arguments, e.g. parseInt 
+}); 
 ```
 
 

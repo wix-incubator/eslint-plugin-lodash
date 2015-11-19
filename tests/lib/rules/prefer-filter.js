@@ -21,19 +21,19 @@ ruleTester.run('prefer-filter', rule, {
         '_.forEach(arr, function(x, y) { if (x){} })'
     ],
     invalid: [{
-        code: '_(arr).forEach(function(x) { if (x.a) {}})',
+        code: '_(arr).forEach(function(x) { if (x.a.b.c) {}})',
         errors: [ruleError]
     }, {
         code: '_(arr).forEach(function(x) { if (x) {}})',
         errors: [ruleError]
     }, {
-        code: '_.forEach(arr, function(x) { if (x.a === b) {}})',
+        code: '_.forEach(arr, function(x) { if (x.a.b.c === d) {}})',
         errors: [ruleError]
     }, {
-        code: '_.forEach(arr, function(x) { if (x.a !== b) {}})',
+        code: '_.forEach(arr, function(x) { if (x.a.b.c !== d) {}})',
         errors: [ruleError]
     }, {
-        code: '_.forEach(arr, function(x) { if (!x.a) {}})',
+        code: '_.forEach(arr, function(x) { if (!x.a.b.c) {}})',
         errors: [ruleError]
     }]
 });

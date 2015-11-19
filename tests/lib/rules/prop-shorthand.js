@@ -26,19 +26,19 @@ ruleTester.run('prop-shorthand', rule, {
         'var r = _.map([])'
     ],
     invalid: [{
-        code: 'var ids = _(users).map(function (i) { return i.id; });',
+        code: 'var ids = _(arr).map(function (i) { return i.a.b.c; });',
         errors: errors
     }, {
-        code: 'var ids = _.map([], function (i) { return i.id; });',
+        code: 'var ids = _.map([], function (i) { return i.a; });',
         errors: errors
     }, {
-        code: 'var ids = _(users).map("x").map("y").map(function (i) { return i.id; });',
+        code: 'var ids = _(arr).map("x").map("y").map(function (i) { return i.a.b; });',
         errors: errors
     }, {
-        code: 'var ids = _.map([], function (i) { return i["id"]; });',
+        code: 'var ids = _.map([], function (i) { return i["a"]; });',
         errors: errors
     }, {
-        code: 'var ids = _.map([], i => i.id);',
+        code: 'var ids = _.map([], i => i.a.b.c);',
         ecmaFeatures: {arrowFunctions: true},
         errors: errors
     }]

@@ -61,7 +61,7 @@ Finally, enable all of the rules that you would like to use.
 
 * [prop-shorthand](docs/rules/prop-shorthand.md): Prefer property shorthand syntax
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
-* [matches-prop-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
+* [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
 * [preferred-alias](docs/rules/preferred-alias.md): Preferred aliases
 * [prefer-chain](docs/rules/prefer-chain.md): Prefer chain over nested lodash calls
 * [no-single-chain](docs/rules/no-single-chain.md): Prevent chaining syntax for single method, e.g. `_(x).map().value()`

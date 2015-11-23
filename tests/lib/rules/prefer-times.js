@@ -21,7 +21,7 @@ ruleTester.run('prefer-times', rule, {
         'var x = _.map(a, "prop");',
         'var x = _.map(arr, function(a) {return _.map(a, function(b) {return b + 1});});',
         "var x = arr.map(function () {return str; }).join('')"
-],
+    ],
     invalid: [{
         code: '_(arr).map(function(){return g}).value()',
         errors: errors

@@ -33,7 +33,7 @@ Finally, enable all of the rules that you would like to use.
   "rules": {
     "lodash3/prop-shorthand": 1,
     "lodash3/matches-prop-shorthand": 1,
-    "lodash3/matches-shorthand": 1,
+    "lodash3/matches-shorthand": [1,3],
     "lodash3/prefer-chain": 1,
     "lodash3/preferred-alias": 1,
     "lodash3/no-single-chain": 1,
@@ -47,6 +47,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-wrapper-method": 1,
     "lodash3/prefer-invoke": 1,
     "lodash3/prefer-thru": 1,
+    "lodash3/prefer-lodash-chain": 1
     "lodash3/prefer-lodash-method": 1,
     "lodash3/prefer-lodash-typecheck": 1,
     "lodash3/no-commit": 1,
@@ -75,6 +76,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-wrapper-method](docs/rules/prefer-wrapper-method.md): Prefer using array and string methods in the chain and not the initial value, e.g. `_(str).split(' ')...`
 * [prefer-invoke](docs/rules/prefer-invoke.md): Prefer using `_.invoke` over `_.map` with a method call inside.
 * [prefer-thru](docs/rules/prefer-thru.md): Prefer using `_.prototype.thru` in the chain and not call functions in the initial value, e.g. `_(x).thru(f).map(g)...`
+* [prefer-lodash-chain](docs/rules/prefer-lodash-chain.md): Prefer using Lodash chains (e.g. `_.map`) over native and mixed chains.
 * [prefer-lodash-method](docs/rules/prefer-lodash-method.md): Prefer using Lodash collection methods (e.g. `_.map`) over native array methods.
 * [prefer-lodash-typecheck](docs/rules/prefer-lodash-typecheck.md): Prefer using `_.is*` methods over `typeof` and `instanceof` checks when applicable.
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`

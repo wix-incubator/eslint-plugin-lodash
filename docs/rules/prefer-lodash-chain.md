@@ -1,4 +1,4 @@
-# Consistent chain
+# Prefer lodash chain
 
 When chaining methods, it's often better to use only Lodash methods or wrappers.
 

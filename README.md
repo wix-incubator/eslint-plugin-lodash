@@ -32,8 +32,8 @@ Finally, enable all of the rules that you would like to use.
 {
   "rules": {
     "lodash3/prop-shorthand": 1,
-    "lodash3/matches-prop-shorthand": 1,
     "lodash3/matches-shorthand": [1,3],
+    "lodash3/matches-prop-shorthand": 1,
     "lodash3/prefer-chain": 1,
     "lodash3/preferred-alias": 1,
     "lodash3/no-single-chain": 1,
@@ -47,13 +47,14 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-wrapper-method": 1,
     "lodash3/prefer-invoke": 1,
     "lodash3/prefer-thru": 1,
-    "lodash3/prefer-lodash-chain": 1
+    "lodash3/prefer-lodash-chain": 1,
     "lodash3/prefer-lodash-method": 1,
     "lodash3/prefer-lodash-typecheck": 1,
     "lodash3/no-commit": 1,
     "lodash3/prefer-get": 1,
     "lodash3/collection-return": 1,
-    "lodash3/prefer-matches": 1
+    "lodash3/prefer-matches": 1,
+    "lodash3/prefer-times": 1
   }
 }
 ```

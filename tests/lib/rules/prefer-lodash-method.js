@@ -12,19 +12,22 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer \'_.map\' over the native function.'}];
 ruleTester.run('prefer-lodash-method', rule, {
     valid: [
         'var x = _.map(arr, f)',
         'var x = _(arr).map(f).reduce(g)',
-        'var x = _.chain(arr).map(f).reduce(g).value()'
+        'var x = _.chain(arr).map(f).reduce(g).value()',
+        'var x = _.keys(obj)'
     ],
     invalid: [{
         code: 'var x = a.map(function(x) {return x.f()});',
-        errors: errors
+        errors: [{message: 'Prefer \'_.map\' over the native function.'}]
     }, {
-        code: 'var x = arr.map(x => x.f())',
+        code: 'var x = arr.filter(x => x.f())',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors
+        errors: [{message: 'Prefer \'_.filter\' over the native function.'}]
+    }, {
+        code: 'var x = Object.keys(node)',
+        errors: [{message: "Prefer '_.keys' over the native function."}]
     }]
 });

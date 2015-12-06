@@ -12,7 +12,9 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var ruleError = {message: 'Prefer _.filter or _.some over an if statement inside a _.forEach'};
+var toErrorObject = require('../testUtil/toErrorObject')
+    .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach');
+
 ruleTester.run('prefer-filter', rule, {
     valid: [
         'var x = _.filter(arr, function(x) {return x + 7})',
@@ -20,20 +22,11 @@ ruleTester.run('prefer-filter', rule, {
         '_.forEach(arr, function(x) {if (y) {}})',
         '_.forEach(arr, function(x, y) { if (x){} })'
     ],
-    invalid: [{
-        code: '_(arr).forEach(function(x) { if (x.a.b.c) {}})',
-        errors: [ruleError]
-    }, {
-        code: '_(arr).forEach(function(x) { if (x) {}})',
-        errors: [ruleError]
-    }, {
-        code: '_.forEach(arr, function(x) { if (x.a.b.c === d) {}})',
-        errors: [ruleError]
-    }, {
-        code: '_.forEach(arr, function(x) { if (x.a.b.c !== d) {}})',
-        errors: [ruleError]
-    }, {
-        code: '_.forEach(arr, function(x) { if (!x.a.b.c) {}})',
-        errors: [ruleError]
-    }]
+    invalid: [
+        '_(arr).forEach(function(x) { if (x.a.b.c) {}})',
+        '_(arr).forEach(function(x) { if (x) {}})',
+        '_.forEach(arr, function(x) { if (x.a.b.c === d) {}})',
+        '_.forEach(arr, function(x) { if (x.a.b.c !== d) {}})',
+        '_.forEach(arr, function(x) { if (!x.a.b.c) {}})'
+    ].map(toErrorObject)
 });

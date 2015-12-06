@@ -13,26 +13,16 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
+var toErrorObject = require('../testUtil/toErrorObject').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'");
 ruleTester.run('preferred-alias', rule, {
     valid: [
         '_.forEach();',
         '_(users).map().value().each(function (i) { i.f(); });',
         'var x = _.map(y, function (i) { return i; });'
     ],
-    invalid: [{
-        code: '_.each(users, function (i) { i.f(); });',
-        errors: [{
-            message: "Method 'each' is an alias, for consistency prefer using 'forEach'"
-        }]
-    }, {
-        code: '_(users).each(function (i) { i.f(); });',
-        errors: [{
-            message: "Method 'each' is an alias, for consistency prefer using 'forEach'"
-        }]
-    }, {
-        code: '_(users).map(function (i) { return i; }).each(function (i) {});',
-        errors: [{
-            message: "Method 'each' is an alias, for consistency prefer using 'forEach'"
-        }]
-    }]
+    invalid: [
+        '_.each(users, function (i) { i.f(); });',
+        '_(users).each(function (i) { i.f(); });',
+        '_(users).map(function (i) { return i; }).each(function (i) {});'
+    ].map(toErrorObject)
 });

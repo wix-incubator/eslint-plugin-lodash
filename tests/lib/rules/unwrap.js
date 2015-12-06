@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var ruleError = {message: 'Missing unwrapping at end of chain'};
+var toErrorObject = require('../testUtil/toErrorObject').fromMessage('Missing unwrapping at end of chain');
 ruleTester.run('unwrap', rule, {
     valid: [
         'var x = _(a).map(f).reduce(g)',
@@ -20,14 +20,9 @@ ruleTester.run('unwrap', rule, {
         'var x = _.chain(a).map(f).value()',
         'var stillWrapped = _(a).forEach(f).commit();'
     ],
-    invalid: [{
-        code: 'var x = _(a).map(f);',
-        errors: [ruleError]
-    }, {
-        code: 'var x = _.chain(a).map(f)',
-        errors: [ruleError]
-    }, {
-        code: 'var x = _.chain(a).map(f).reduce(g)',
-        errors: [ruleError]
-    }]
+    invalid: [
+        'var x = _(a).map(f);',
+        'var x = _.chain(a).map(f)',
+        'var x = _.chain(a).map(f).reduce(g)'
+    ].map(toErrorObject)
 });

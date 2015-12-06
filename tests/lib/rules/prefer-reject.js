@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var ruleError = {message: 'Prefer _.reject over negative condition'};
+var errors = [{message: 'Prefer _.reject over negative condition'}];
 ruleTester.run('prefer-reject', rule, {
     valid: [
         '_.filter(users, function(user) {return !user.active && isSomething;});',
@@ -20,16 +20,16 @@ ruleTester.run('prefer-reject', rule, {
     ],
     invalid: [{
         code: '_(users).map(t).filter(function(user) {return !user.name.givenName})',
-        errors: [ruleError]
+        errors: errors
     }, {
         code: '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
-        errors: [ruleError]
+        errors: errors
     }, {
         code: '_.filter(users, function(user) {return !user.isSomething;});',
-        errors: [ruleError]
+        errors: errors
     }, {
         code: '_.filter(arr, user => !user.active)',
         ecmaFeatures: {arrowFunctions: true},
-        errors: [ruleError]
+        errors: errors
     }]
 });

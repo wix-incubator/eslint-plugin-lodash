@@ -13,6 +13,7 @@ var RuleTester = require('eslint').RuleTester;
 
 var ruleTester = new RuleTester();
 var errors = {
+    undefined: [{message: 'Prefer \'_.isUndefined\' over \'typeof\' comparison.'}],
     typeof: [{message: 'Prefer \'_.isNumber\' over \'typeof\' comparison.'}],
     instanceof: [{message: 'Prefer \'_.isArray\' over \'instanceof Array\'.'}]
 };
@@ -32,5 +33,8 @@ ruleTester.run('prefer-lodash-typecheck', rule, {
     }, {
         code: 'var x = a instanceof Array',
         errors: errors.instanceof
+    }, {
+        code: 'var x = typeof a.b === "undefined"',
+        errors: errors.undefined
     }]
 });

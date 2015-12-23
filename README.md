@@ -55,7 +55,9 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/collection-return": 1,
     "lodash3/prefer-matches": 1,
     "lodash3/prefer-times": 1,
-    "lodash3/prefer-startswith": 1
+    "lodash3/prefer-startswith": 1,
+    "lodash3/prefer-noop": 1,
+    "lodash3/prefer-constant": 1
   }
 }
 ```
@@ -88,6 +90,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-times](docs/rules/prefer-times.md): Prefer `_.times` over `_.map` without using the iteratee's arguments.
 * [prefer-startswth](docs/rules/prefer-startswith.md): Prefer `_.startsWith` over `a.indexOf(b) === 0`.
 * [prefer-noop](docs/rules/prefer-noop.md): Prefer `_.noop` over empty functions.
+* [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 
 # License
 

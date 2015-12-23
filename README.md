@@ -87,6 +87,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-matches](docs/rules/prefer-matches.md): Prefer `_.matches` over conditions like `a.foo === 1 && a.bar === 2 && a.baz === 3`.
 * [prefer-times](docs/rules/prefer-times.md): Prefer `_.times` over `_.map` without using the iteratee's arguments.
 * [prefer-startswth](docs/rules/prefer-startswith.md): Prefer `_.startsWith` over `a.indexOf(b) === 0`.
+* [prefer-noop](docs/rules/prefer-noop.md): Prefer `_.noop` over empty functions.
 
 # License
 

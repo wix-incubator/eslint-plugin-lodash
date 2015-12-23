@@ -55,6 +55,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/collection-return": 1,
     "lodash3/prefer-matches": 1,
     "lodash3/prefer-times": 1
+    "lodash3/prefer-startswith": 1
   }
 }
 ```
@@ -85,6 +86,7 @@ Finally, enable all of the rules that you would like to use.
 * [collection-return](docs/rules/collection-return.md): Always return a value in iteratees of lodash collection methods that aren't `forEach`.
 * [prefer-matches](docs/rules/prefer-matches.md): Prefer `_.matches` over conditions like `a.foo === 1 && a.bar === 2 && a.baz === 3`.
 * [prefer-times](docs/rules/prefer-times.md): Prefer `_.times` over `_.map` without using the iteratee's arguments.
+* [prefer-startswth](docs/rules/prefer-startswith.md): Prefer `_.startsWith` over `a.indexOf(b) === 0`.
 
 # License
 

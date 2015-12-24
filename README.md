@@ -54,7 +54,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-get": [1,3],
     "lodash3/collection-return": 1,
     "lodash3/prefer-matches": 1,
-    "lodash3/prefer-times": 1
+    "lodash3/prefer-times": 1,
     "lodash3/prefer-startswith": 1
   }
 }

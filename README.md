@@ -32,7 +32,7 @@ Finally, enable all of the rules that you would like to use.
 {
   "rules": {
     "lodash3/prop-shorthand": 1,
-    "lodash3/matches-shorthand": [1,3],
+    "lodash3/matches-shorthand": [1,"always", 3],
     "lodash3/matches-prop-shorthand": 1,
     "lodash3/prefer-chain": 1,
     "lodash3/preferred-alias": 1,

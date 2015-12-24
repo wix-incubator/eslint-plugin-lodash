@@ -57,6 +57,10 @@ ruleTester.run('matches-shorthand', rule, {
         ecmaFeatures: {arrowFunctions: true},
         errors: errors.always
     }, {
+        code: '_.findLastIndex(arr, function(i) { return i[b].c === compId; });',
+        options: ['always', 3, true],
+        errors: errors.always
+    }, {
         code: '_.findLastIndex(arr, function(i) { return i.b.c === compId; });',
         errors: errors.always
     }, {

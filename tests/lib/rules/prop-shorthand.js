@@ -23,7 +23,6 @@ ruleTester.run('prop-shorthand', rule, {
         'var ids = _.map([], function (i) { return x.id; });',
         'var ids = _.map([], function (i) { return i.id + "?"; });',
         'var publicModules = _(files).map(readModule).compact().value();',
-        'var ids = _.map([], function (i) { return i[0]; });',
         'var ids = _.map([], function (i) { return i[k]; });',
         'var r = _.map([], function() { return React.PropTypes.object; })',
         'var r = _.map([])',

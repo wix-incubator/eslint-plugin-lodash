@@ -17,15 +17,13 @@ var errors = {
     always: [{message: 'Prefer matches syntax'}],
     never: [{message: 'Do not use matches syntax'}]
 };
-ruleTester.run('matches-prop-shorthand', rule, {
+ruleTester.run('matches-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
         'var r = _.findIndex(this.packages, {name: name});',
         'var isPublic = _.map([], function (i) { return i.id + "?"; });',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3; });',
-        'var isPublic = _.select([], function (i) { return i[0] === 3; });',
-        {code: 'var isPublic = _.find([], i => i[0] === 3);', ecmaFeatures: {arrowFunctions: true}},
         {code: 'var isPublic = _.find([], function(i) { return i.id === 3});', options: ['never']}
     ],
     invalid: [{
@@ -52,6 +50,10 @@ ruleTester.run('matches-prop-shorthand', rule, {
         errors: errors.always
     }, {
         code: 'var isPublic = _.every(arr, (i) => {return i.id === b.id})',
+        ecmaFeatures: {arrowFunctions: true},
+        errors: errors.always
+    }, {
+        code: 'var isPublic = _.find([], i => i[0] === 3);',
         ecmaFeatures: {arrowFunctions: true},
         errors: errors.always
     }, {

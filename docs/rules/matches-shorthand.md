@@ -6,6 +6,7 @@ This rule will enforce using shorthand when possible to keep consistency in your
 ## Rule Details
 
 This rule takes two arguments:
+
 * The first, when to use the shorthand: `always` or `never` (default is `always`).
 * The second is the maximum path length (default is 3).
 

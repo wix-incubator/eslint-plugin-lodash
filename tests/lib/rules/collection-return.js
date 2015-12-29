@@ -22,7 +22,11 @@ ruleTester.run('collection-return', rule, {
         },
         '_.map(arr, function(a) {return a.some(function(x) {})})',
         '_(a).transform(function(acc, item) {acc[item] = f(item);}, {}).mapValues(g).value()',
-        'function x(a) {return a;}'
+        'function x(a) {return a;}',
+        {
+            code: 'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
+            ecmaFeatures: {arrowFunctions: true}
+        }
     ],
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',

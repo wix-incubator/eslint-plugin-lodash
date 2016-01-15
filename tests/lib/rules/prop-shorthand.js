@@ -13,9 +13,9 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var errors = {
-    always: [{message: 'Prefer property shorthand syntax'}],
-    never: [{message: 'Do not use property shorthand syntax'}]
+var messages = {
+    always: 'Prefer property shorthand syntax',
+    never: 'Do not use property shorthand syntax'
 };
 
 ruleTester.run('prop-shorthand', rule, {
@@ -38,23 +38,27 @@ ruleTester.run('prop-shorthand', rule, {
     ],
     invalid: [{
         code: 'var ids = _(arr).map(function (i) { return i.a.b.c; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 22}]
     }, {
         code: 'var ids = _.map([], function (i) { return i.a; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 21}]
+    }, {
+        code: 'var ids = _(arr).filter({id: 3}).map("i.a.b");',
+        options: ['never'],
+        errors: [{message: messages.never, column: 38}]
     }, {
         code: 'var ids = _(arr).map("x").map("y").map(function (i) { return i.a.b; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 40}]
     }, {
         code: 'var ids = _.map([], function (i) { return i["a"]; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var ids = _.map([], i => i.a.b.c);',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var ids = _.map(arr, "id");',
         options: ['never'],
-        errors: errors.never
+        errors: [{message: messages.never, column: 22}]
     }]
 });

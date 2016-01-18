@@ -13,9 +13,9 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var errors = {
-    always: [{message: 'Prefer matches syntax'}],
-    never: [{message: 'Do not use matches syntax'}]
+var messages = {
+    always: 'Prefer matches syntax',
+    never: 'Do not use matches syntax'
 };
 ruleTester.run('matches-shorthand', rule, {
     valid: [
@@ -28,44 +28,44 @@ ruleTester.run('matches-shorthand', rule, {
     ],
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 27}]
     }, {
         code: 'var isPublic = _.detect([], function (i) { return i.id === 3 && i.a === "string" && {a: 10} === i.b;});',
-        errors: errors.always
+        errors: [{message: messages.always, column: 29}]
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 30}]
     }, {
         code: 'var isPublic = _.select(arr, i => i.id === 3 && i.a === "string" && {a: 10} === i.b)',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 30}]
     }, {
         code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === 3})',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 33}]
     }, {
         code: 'var isPublic = _.some(arr, (i) => {return i.id === 3 && i.a === "string" && {a: 10} === i.b})',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 28}]
     }, {
         code: 'var isPublic = _.every(arr, (i) => {return i.id === b.id})',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 29}]
     }, {
         code: 'var isPublic = _.find([], i => i[0] === 3);',
         ecmaFeatures: {arrowFunctions: true},
-        errors: errors.always
+        errors: [{message: messages.always, column: 27}]
     }, {
         code: '_.findLastIndex(arr, function(i) { return i[b].c === compId; });',
         options: ['always', 3, true],
-        errors: errors.always
+        errors: [{message: messages.always, column: 22}]
     }, {
         code: '_.findLastIndex(arr, function(i) { return i.b.c === compId; });',
-        errors: errors.always
+        errors: [{message: messages.always, column: 22}]
     }, {
         code: '_.findLastIndex(arr, {b: {c: compId}});',
         options: ['never'],
-        errors: errors.never
+        errors: [{message: messages.never, column: 22}]
     }]
 });

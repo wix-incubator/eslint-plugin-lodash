@@ -49,5 +49,9 @@ ruleTester.run('chain-style', rule, {
         code: '_.chain(a).map(f).max(g).value()',
         errors: errors.implicit,
         options: ['implicit']
+    }, {
+        code: 'lo.chain(a).map(f).filter(g).value()',
+        errors: errors.asNeeded,
+        settings: {lodash: {pragma: 'lo'}}
     }]
 });

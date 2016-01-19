@@ -21,7 +21,8 @@ ruleTester.run('prefer-lodash-chain', rule, {
         'var userNames = users.map(cb1).filter(cb2);',
         'var userNames = _(users).map(cb1).reduce(cb2).map(cb3);',
         'var userNames = _(users).map("name.givenName").join(" ");',
-        'var userNames = _.map(users, "name.givenName").join(" ");'
+        'var userNames = _.map(users, "name.givenName").join(" ");',
+        'var userNames = _(users).filter("active").map("name.givenName").value().toString();'
     ],
     invalid: [
         'var userNames = _.filter(users, cb1).map(cb2);',

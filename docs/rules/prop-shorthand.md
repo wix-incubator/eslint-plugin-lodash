@@ -18,18 +18,14 @@ var ids = _.map(users, function (user) {
 
 ```js
 /*eslint lodash3/prop-shorthand: [2, "never"]
-var ids = _.map(users, function (user) {
-  return user.name.familyName;
-});
+var ids = _.map(users, 'name.familyName');
 ```
 
 The following patterns are not considered warnings:
 
 ```js
 /*eslint lodash3/prop-shorthand: [2, "always"]
-var ids = _.map(users, function (user) {
-  return user.name.familyName;
-});
+var ids = _.map(users, 'name.familyName');
 ```
 
 ```js

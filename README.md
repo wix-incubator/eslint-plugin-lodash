@@ -58,7 +58,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/prefer-startswith": 2,
     "lodash3/prefer-noop": 2,
     "lodash3/prefer-constant": 2,
-    "lodash3/chain-style": [2, "as-needed"]
+    "lodash3/chain-style": [2, "as-needed"],
+    "lodash3/prefer-is-nil": 2
   }
 }
 ```
@@ -93,7 +94,7 @@ Finally, enable all of the rules that you would like to use.
 * [prefer-noop](docs/rules/prefer-noop.md): Prefer `_.noop` over empty functions.
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
-
+* [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.
 # License
 
 ESLint-plugin-lodash3 is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).

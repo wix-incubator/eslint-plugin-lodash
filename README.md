@@ -18,10 +18,26 @@ If you installed `ESLint` globally, you have to install lodash3 plugin globally 
 # Configuration
 
 Add `plugins` section and specify ESLint-plugin-lodash3 as a plugin.
+You can additionally add settings for the plugin.
+ 
+### Shared Rule Settings
+ 
+#### Pragma
+Specifies the name you use for the Lodash variable in your code. Default is `_`.
+ 
+#### Version
+Specifies the major Lodash Version you are using (default is `4`). 
+If you wish to use this plugin with Lodash v3, change this value to 3.
 
 ```json
 {
-  "plugins": ["lodash3"]
+  "plugins": ["lodash3"],
+  "settings": {
+    "lodash": {
+      "version": 4,
+      "pragma": "_"
+    }
+  }
 }
 ```
 
@@ -39,7 +55,7 @@ Finally, enable all of the rules that you would like to use.
     "lodash3/no-single-chain": 2,
     "lodash3/prefer-reject": [2, 3],
     "lodash3/prefer-filter": [2, 3],
-    "lodash3/no-unnecessary-bind": 2,
+    "lodash3/callback-binding": 2,
     "lodash3/unwrap": 2,
     "lodash3/prefer-compact": 2,
     "lodash3/no-double-unwrap": 2,
@@ -74,7 +90,7 @@ Finally, enable all of the rules that you would like to use.
 * [no-single-chain](docs/rules/no-single-chain.md): Prevent chaining syntax for single method, e.g. `_(x).map().value()`
 * [prefer-reject](docs/rules/prefer-reject.md): Prefer `_.reject` over filter with `!(expression)` or `x.prop1 !== value`
 * [prefer-filter](docs/rules/prefer-filter.md): Prefer `_.filter` over `_.forEach` with an `if` statement inside.
-* [no-unnecessary-bind](docs/rules/no-unnecessary-bind.md): Prefer passing `thisArg` over binding.
+* [callback-binding](docs/rules/callback-binding.md): Use or avoid `thisArg` for Lodash method callbacks, depending on major version.
 * [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
 * [prefer-compact](docs/rules/prefer-compact.md): Prefer `_.compact` over `_.filter` for only truthy values.
 * [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`)

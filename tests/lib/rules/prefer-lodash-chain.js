@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject').fromMessage('Prefer lodash chain');
+var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer lodash chain');
 ruleTester.run('prefer-lodash-chain', rule, {
     valid: [
         'var userNames = users.map(function(user) { return user.name; });',

@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject').fromMessage('Do not use chain syntax for single method');
+var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Do not use chain syntax for single method');
 
 ruleTester.run('no-single-chain', rule, {
     valid: [

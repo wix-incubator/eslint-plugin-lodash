@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject').fromMessage('Prefer isNil over checking for undefined or null.');
+var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer isNil over checking for undefined or null.');
 ruleTester.run('prefer-is-nil', rule, {
     valid: [
         'if (x === undefined) {}',

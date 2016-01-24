@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject').fromMessage('Prefer using thru instead of function call in chain start.');
+var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer using thru instead of function call in chain start.');
 ruleTester.run('prefer-thru', rule, {
     valid: [
         'var x = _(str).thru(f).map(g).reduce(h);',

@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject')
+var toErrorObject = require('../testUtil/optionsUtil')
     .fromMessage('Prefer _.startsWith instead of comparing indexOf() to 0');
 
 ruleTester.run('prefer-startswith', rule, {

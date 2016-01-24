@@ -12,7 +12,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject')
+var toErrorObject = require('../testUtil/optionsUtil')
     .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach');
 
 ruleTester.run('prefer-filter', rule, {

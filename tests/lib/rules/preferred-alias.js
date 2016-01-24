@@ -13,7 +13,7 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/toErrorObject').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'");
+var toErrorObject = require('../testUtil/optionsUtil').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'");
 ruleTester.run('preferred-alias', rule, {
     valid: [
         '_.forEach();',

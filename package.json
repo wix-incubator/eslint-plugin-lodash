@@ -23,7 +23,7 @@
   "homepage": "https://github.com/wix/eslint-plugin-lodash3",
   "bugs": "https://github.com/wix/eslint-plugin-lodash3/issues",
   "dependencies": {
-    "lodash": "^3.10.1"
+    "lodash": "4.0.0"
   },
   "devDependencies": {
     "coveralls": "2.11.4",

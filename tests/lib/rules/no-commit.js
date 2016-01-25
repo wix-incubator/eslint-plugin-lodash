@@ -12,12 +12,11 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var errors = [{message: 'Do not end chain with commit, except for side effects.'}];
+var errors = [{message: 'Do not end chain with commit.'}];
 ruleTester.run('prefer-map', rule, {
     valid: [
         'var x = _(a).map(f).value();',
-        '_(a).filter(f).forEach(g).value()',
-        '_(a).filter(f).forEach(g).commit()'
+        '_(a).filter(f).forEach(g);'
     ],
     invalid: [{
         code: '_(arr).map(f).commit();',

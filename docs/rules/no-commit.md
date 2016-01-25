@@ -2,7 +2,6 @@
 
 Using `_.prototype.commit()` at the end of the chain executes the chain but doesn't unwrap the value.
 In most cases, this means that `_.prototype.value()` would be preferable. 
-However, in cases of running `forEach`, the chain could be executed only for the side effect.
 
 ## Rule Details
 
@@ -19,8 +18,6 @@ _(a).map(f).filter(g).commit();
 The following patterns are not considered warnings:
 
 ```js
-
-_(a).map(f).forEach(g).commit();
 
 _(a).map(f).filter(g).value();
  

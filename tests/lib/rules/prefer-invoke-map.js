@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-invoke');
+var rule = require('../../../lib/rules/prefer-invoke-map');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
@@ -12,11 +12,11 @@ var RuleTester = require('eslint').RuleTester;
 // ------------------------------------------------------------------------------
 
 var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.invoke over map to a method call.'}];
-ruleTester.run('prefer-invoke', rule, {
+var errors = [{message: 'Prefer _.invokeMap over map to a method call.'}];
+ruleTester.run('prefer-invoke-map', rule, {
     valid: [
-        'var x = _.invoke(arr, "f")',
-        'var x = _.invoke(arr, "split", " ")'
+        'var x = _.invokeMap(arr, "f")',
+        'var x = _.invokeMap(arr, "split", " ")'
     ],
     invalid: [{
         code: '_.map(a, function(x) {return x.f()});',

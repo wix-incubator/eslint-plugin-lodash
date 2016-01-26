@@ -1,7 +1,7 @@
 {
-  "name": "eslint-plugin-lodash3",
+  "name": "eslint-plugin-lodash",
   "version": "0.6.0",
-  "author": "IdoK <?+npm@gmail.com>",
+  "author": "Omer Ganim <ganimomer@gmail.com>",
   "description": "Lodash specific linting rules for ESLint",
   "main": "index.js",
   "scripts": {
@@ -18,10 +18,10 @@
   ],
   "repository": {
     "type": "git",
-    "url": "https://github.com/wix/eslint-plugin-lodash3"
+    "url": "https://github.com/wix/eslint-plugin-lodash"
   },
-  "homepage": "https://github.com/wix/eslint-plugin-lodash3",
-  "bugs": "https://github.com/wix/eslint-plugin-lodash3/issues",
+  "homepage": "https://github.com/wix/eslint-plugin-lodash",
+  "bugs": "https://github.com/wix/eslint-plugin-lodash/issues",
   "dependencies": {
     "lodash": "4.0.0"
   },

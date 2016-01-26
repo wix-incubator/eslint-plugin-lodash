@@ -21,7 +21,9 @@ ruleTester.run('callback-binding', rule, {
     ].map(optionsUtil.fromVersion3).concat([
         'var x = _.map(arr, f.bind(this))',
         'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));',
-        'var t = _.isArray(x)'
+        'var t = _.isArray(x)',
+        'var t = _.assign(a, b, c);',
+        'var i = _.sortedIndex(arr, val, f);'
     ]),
     invalid: [
         'var r = _.find(users, function (user) { return user.age > this.age; }.bind(this));',

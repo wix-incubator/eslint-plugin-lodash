@@ -20,7 +20,8 @@ ruleTester.run('callback-binding', rule, {
         'var r = _.find(arr, function (i) { return this.x; }.bind(this, x));'
     ].map(optionsUtil.fromVersion3).concat([
         'var x = _.map(arr, f.bind(this))',
-        'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));'
+        'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));',
+        'var t = _.isArray(x)'
     ]),
     invalid: [
         'var r = _.find(users, function (user) { return user.age > this.age; }.bind(this));',

@@ -23,45 +23,35 @@ ruleTester.run('matches-shorthand', rule, {
         'var r = _.findIndex(this.packages, {name: name});',
         'var isPublic = _.map([], function (i) { return i.id + "?"; });',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
-        'var isPublic = _.findLastIndex([], function (i) { return i.id == 3; });',
+        'var isPublic = _.findLastIndex([], function (i) { return i.id == 3 && f(i); });',
         {code: 'var isPublic = _.find([], function(i) { return i.id === 3});', options: ['never']}
     ],
     invalid: [{
-        code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
+        code: 'var isPublic = _.find([], function (i) { return i.id === id; });',
+        errors: [{message: messages.always, column: 27}],
+        ecmaFeatures: {objectLiteralShorthandProperties: true}
+    }, {
+        code: 'var isPublic = _.find([], function (i) { return id === i.id; });',
+        errors: [{message: messages.always, column: 27}],
+        ecmaFeatures: {objectLiteralShorthandProperties: true}
+    }, {
+        code: 'var isPublic = _.find([], function (i) { return i.id === 3 && i.a === "string" && {a: 10} === i.b;});',
         errors: [{message: messages.always, column: 27}]
     }, {
-        code: 'var isPublic = _.detect([], function (i) { return i.id === 3 && i.a === "string" && {a: 10} === i.b;});',
-        errors: [{message: messages.always, column: 29}]
-    }, {
-        code: 'var isPublic = _.filter(arr, i => i.id === 3)',
+        code: 'var isPublic = _.filter(arr, i => i.id === 3 && i.name === name)',
         ecmaFeatures: {arrowFunctions: true},
         errors: [{message: messages.always, column: 30}]
     }, {
-        code: 'var isPublic = _.select(arr, i => i.id === 3 && i.a === "string" && {a: 10} === i.b)',
-        ecmaFeatures: {arrowFunctions: true},
-        errors: [{message: messages.always, column: 30}]
-    }, {
-        code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === 3})',
-        ecmaFeatures: {arrowFunctions: true},
+        code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === id})',
+        ecmaFeatures: {arrowFunctions: true, objectLiteralShorthandProperties: true},
         errors: [{message: messages.always, column: 33}]
     }, {
         code: 'var isPublic = _.some(arr, (i) => {return i.id === 3 && i.a === "string" && {a: 10} === i.b})',
         ecmaFeatures: {arrowFunctions: true},
         errors: [{message: messages.always, column: 28}]
     }, {
-        code: 'var isPublic = _.every(arr, (i) => {return i.id === b.id})',
-        ecmaFeatures: {arrowFunctions: true},
-        errors: [{message: messages.always, column: 29}]
-    }, {
-        code: 'var isPublic = _.find([], i => i[0] === 3);',
-        ecmaFeatures: {arrowFunctions: true},
-        errors: [{message: messages.always, column: 27}]
-    }, {
-        code: '_.findLastIndex(arr, function(i) { return i[b].c === compId; });',
+        code: '_.findLastIndex(arr, function(i) { return i[b].c === compId && i[b].d === x});',
         options: ['always', 3, true],
-        errors: [{message: messages.always, column: 22}]
-    }, {
-        code: '_.findLastIndex(arr, function(i) { return i.b.c === compId; });',
         errors: [{message: messages.always, column: 22}]
     }, {
         code: '_.findLastIndex(arr, {b: {c: compId}});',

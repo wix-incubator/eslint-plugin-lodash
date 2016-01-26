@@ -34,9 +34,16 @@ ruleTester.run('matches-prop-shorthand', rule, {
         ecmaFeatures: {arrowFunctions: true},
         errors: errors.always
     }, {
-        code: 'var isPublic = _.filter(arr, "id", 3)',
+        code: 'var isPublic = _.filter(arr, ["id", 3])',
         options: ['never'],
         errors: errors.never
+    }, {
+        code: 'var isPublic = _.filter(arr, "id", 3)',
+        options: ['never'],
+        errors: errors.never,
+        settings: {
+            lodash: {version: 3}
+        }
     }, {
         code: 'var isPublic = _.find([], i => i[0] === 3);',
         ecmaFeatures: {arrowFunctions: true},

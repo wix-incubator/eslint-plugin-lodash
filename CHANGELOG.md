@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.1...HEAD
+
+## [1.0.1] - 2016-01-27
+### Fixed
+- Fixed error in rule matches-shorthand which caused crashes. ([`599e8e7`][599e8e7])
+- Fixed error in rule callback-binding which caused crashes in some cases ([`c985ba9`][c985ba9])
+
+[599e8e7]: https://github.com/wix/eslint-plugin-lodash/commit/599e8e7b57aa6d5cafcaef3a5467cabb8f30d451
+[c985ba9]: https://github.com/wix/eslint-plugin-lodash/commit/c985ba90addefb856e0fa7af65d6d46b20a48c30
+[1.0.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.1...v1.0.0
 
 ## [1.0.0] - 2016-01-27
 ### Added

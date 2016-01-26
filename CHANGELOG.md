@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.2...HEAD
+
+## [1.0.2] - 2016-01-27
+### Fixed
+- Fixed error where rules assume second arg is iteratee when it isn't (e.g. `callback-binding`) ([`b3bd896`][b3bd896]
+
+[b3bd896]: https://github.com/wix/eslint-plugin-lodash/commit/b3bd89614fb4db86f819ca95e351466da6083419
+[1.0.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.2...v1.0.1
 
 ## [1.0.1] - 2016-01-27
 ### Fixed

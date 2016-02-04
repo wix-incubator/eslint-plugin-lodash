@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.3...HEAD
+
+## [1.0.3] - 2016-01-31
+### Added
+- Added support for ESLint 2 ecmaFeatures syntax ([`7a68c45`][7a68c45]
+
+[7a68c45]: https://github.com/wix/eslint-plugin-lodash/commit/7a68c455c5f28c29fe2a01089df0db5ee82b98a0
+[1.0.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.3...v1.0.2
+
 
 ## [1.0.2] - 2016-01-27
 ### Fixed

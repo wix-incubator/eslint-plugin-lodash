@@ -8,11 +8,18 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.4...HEAD
+
+## [1.0.4] - 2016-02-04
+### Added
+- Fixed error with rule `prefer-filter` when `_` isn't lodash ([`95c3d46`][95c3d46])
+
+[95c3d46]: https://github.com/wix/eslint-plugin-lodash/commit/95c3d46470a7c922cde355f2dd3a3e4b6983fcc3
+[1.0.4]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.4...v1.0.3
 
 ## [1.0.3] - 2016-01-31
 ### Added
-- Added support for ESLint 2 ecmaFeatures syntax ([`7a68c45`][7a68c45]
+- Added support for ESLint 2 ecmaFeatures syntax ([`7a68c45`][7a68c45])
 
 [7a68c45]: https://github.com/wix/eslint-plugin-lodash/commit/7a68c455c5f28c29fe2a01089df0db5ee82b98a0
 [1.0.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.3...v1.0.2
@@ -20,7 +27,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ## [1.0.2] - 2016-01-27
 ### Fixed
-- Fixed error where rules assume second arg is iteratee when it isn't (e.g. `callback-binding`) ([`b3bd896`][b3bd896]
+- Fixed error where rules assume second arg is iteratee when it isn't (e.g. `callback-binding`) ([`b3bd896`][b3bd896])
 
 [b3bd896]: https://github.com/wix/eslint-plugin-lodash/commit/b3bd89614fb4db86f819ca95e351466da6083419
 [1.0.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.2...v1.0.1

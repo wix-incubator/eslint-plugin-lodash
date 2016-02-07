@@ -8,10 +8,17 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.5...HEAD
+
+## [1.0.5] - 2016-02-07
+### Fixed
+- Fixed error with rule `prefer-map` when `_` isn't lodash ([`8892139`][8892139])
+
+[8892139]: https://github.com/wix/eslint-plugin-lodash/commit/8892139ea438dba68118bfa2fbadecb32aac2762
+[1.0.5]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.5...v1.0.4
 
 ## [1.0.4] - 2016-02-04
-### Added
+### Fixed
 - Fixed error with rule `prefer-filter` when `_` isn't lodash ([`95c3d46`][95c3d46])
 
 [95c3d46]: https://github.com/wix/eslint-plugin-lodash/commit/95c3d46470a7c922cde355f2dd3a3e4b6983fcc3

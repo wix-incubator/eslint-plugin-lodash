@@ -14,28 +14,28 @@ This rule takes three arguments:
 The following patterns are considered warnings:
 
 ```js
-/* eslint lodash3/matches-shorthand: [2, "always"] */
+/* eslint lodash/matches-shorthand: [2, "always"] */
 var result = _.filter(users, function (user) { return user.age === 30 && user.name === 'Bob'; });
 ```
 
 ```js
-/* eslint lodash3/matches-shorthand: [2, "never"] */
+/* eslint lodash/matches-shorthand: [2, "never"] */
 var result = _.filter(users, {age: 30, name: 'Bob'}));
 ```
 
 ```js
-/* eslint lodash3/matches-shorthand: [2, "always", true] */
+/* eslint lodash/matches-shorthand: [2, "always", true] */
 var result = _.filter(users, user => user.age === 30 && user[prop] === value)); // can be _.filter(users, {age: 30, [prop]: value})
 ```
 The following patterns are not considered warnings:
 
 ```js
-/* eslint lodash3/matches-shorthand: [2, "never"] */
+/* eslint lodash/matches-shorthand: [2, "never"] */
 var result = _.filter(users, function (user) { return user.age === 30 && user.name === 'Bob'; });
 ```
 
 ```js
-/* eslint lodash3/matches-shorthand: [2, "always"] */
+/* eslint lodash/matches-shorthand: [2, "always"] */
 var result = _.filter(users, {age: 30, name: 'Bob'}));
 ```
 

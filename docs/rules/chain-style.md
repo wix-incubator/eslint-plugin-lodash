@@ -22,7 +22,7 @@ This rule takes one argument, the preferred style: `implicit`, `explicit` or `as
 The following patterns are considered problems:
 
 ```js
-/*eslint lodash3/chain-style: [2, "as-needed"]*/
+/*eslint lodash/chain-style: [2, "as-needed"]*/
 
 _.chain(val).map(f).filter(g).value(); // Unnecessary explicit chaining
 
@@ -31,7 +31,7 @@ _.chain(val).map(f).join(c).value(); // Unnecessary explicit chaining, the chain
 ```
 
 ```js
-/*eslint lodash3/chain-style: [2, "implicit"]*/
+/*eslint lodash/chain-style: [2, "implicit"]*/
 
 _.chain(val).map(f).filter(g).value(); // Do not use explicit chaining
 
@@ -40,7 +40,7 @@ _.chain(val).map(f).first().assign(obj).value(); // Do not use explicit chaining
 ```
 
 ```js
-/*eslint lodash3/chain-style: [2, "explicit"]*/
+/*eslint lodash/chain-style: [2, "explicit"]*/
 
 _(val).map(f).filter(g).value(); // Do not use implicit chaining
 
@@ -52,7 +52,7 @@ _(val).map(f).filter(g).value(); // Do not use implicit chaining
 The following patterns are not considered warnings:
 
 ```js
-/*eslint lodash3/chain-style: [2, "as-needed"]*/
+/*eslint lodash/chain-style: [2, "as-needed"]*/
 
 _(val).map(f).filter(g).value(); 
 
@@ -61,14 +61,14 @@ _.chain(val).map(f).first().assign(obj).value();
 ```
 
 ```js
-/*eslint lodash3/chain-style: [2, "implicit"]*/
+/*eslint lodash/chain-style: [2, "implicit"]*/
 
 _(val).map(f).filter(g).value();
 
 ```
 
 ```js
-/*eslint lodash3/chain-style: [2, "explicit"]*/
+/*eslint lodash/chain-style: [2, "explicit"]*/
 
 _.chain(val).map(f).filter(g).value(); 
 

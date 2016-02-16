@@ -10,26 +10,26 @@ This rule takes one argument, when to use shorthand: `always` or `never` (defaul
 The following patterns are considered warnings:
 
 ```js
-/*eslint lodash3/prop-shorthand: [2, "always"]
+/*eslint lodash/prop-shorthand: [2, "always"]
 var ids = _.map(users, function (user) {
   return user.name.familyName;
 });
 ```
 
 ```js
-/*eslint lodash3/prop-shorthand: [2, "never"]
+/*eslint lodash/prop-shorthand: [2, "never"]
 var ids = _.map(users, 'name.familyName');
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-/*eslint lodash3/prop-shorthand: [2, "always"]
+/*eslint lodash/prop-shorthand: [2, "always"]
 var ids = _.map(users, 'name.familyName');
 ```
 
 ```js
-/*eslint lodash3/prop-shorthand: [2, "never"]
+/*eslint lodash/prop-shorthand: [2, "never"]
 var ids = _.map(users, function (user) {
   return user.name.familyName;
 });

@@ -10,24 +10,24 @@ This rule takes one argument, when to use the code: `always` or `never` (default
 The following patterns are considered warnings:
 
 ```js
-/* eslint lodash3/matches-prop-shorthand: [2, "always"] */
+/* eslint lodash/matches-prop-shorthand: [2, "always"] */
 var result = _.filter(users, function (i) { return i.id === 3; });
 ```
 
 ```js
-/* eslint lodash3/matches-prop-shorthand: [2, "never"] */
+/* eslint lodash/matches-prop-shorthand: [2, "never"] */
 var result = _.filter(users, 'id', 3);
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-/* eslint lodash3/matches-prop-shorthand: [2, "always"] */
+/* eslint lodash/matches-prop-shorthand: [2, "always"] */
 var result = _.filter(users, 'id', 3);
 ```
 
 ```js
-/* eslint lodash3/matches-prop-shorthand: [2, "never"] */
+/* eslint lodash/matches-prop-shorthand: [2, "never"] */
 var result = _.filter(users, function (i) { return i.id === 3; });
 ```
 

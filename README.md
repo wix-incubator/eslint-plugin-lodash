@@ -62,7 +62,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash/prefer-constant": 2,
     "lodash/chain-style": [2, "as-needed"],
     "lodash/prefer-is-nil": 2,
-    "lodash/prefer-over-quantifier": 2
+    "lodash/prefer-over-quantifier": 2,
+    "lodash/path-style": [2, "as-needed"]
   }
 }
 ```
@@ -103,7 +104,8 @@ Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3
     "lodash/prefer-startswith": 2,
     "lodash/prefer-noop": 2,
     "lodash/prefer-constant": 2,
-    "lodash/chain-style": [2, "as-needed"]
+    "lodash/chain-style": [2, "as-needed"],
+    "lodash/path-style": [2, "as-needed"]
   }
 }
 ```
@@ -136,6 +138,7 @@ These rules are purely matters of style and are quite subjective.
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
 * [prefer-flat-map](docs/rules/prefer-flat-map.md) Prefer `_.flatMap` over consecutive `map` and `flatten`.
+* [path-style](docs/rules/path-style.md) Enforce a specific path style for methods like `get` and `property`: array, string, or arrays only for deep paths.
 
 #### Preference over native
 These rules are also stylistic choices, but they also recommend using Lodash instead of native functions and constructs.

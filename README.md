@@ -63,7 +63,8 @@ Finally, enable all of the rules that you would like to use.
     "lodash/chain-style": [2, "as-needed"],
     "lodash/prefer-is-nil": 2,
     "lodash/prefer-over-quantifier": 2,
-    "lodash/path-style": [2, "as-needed"]
+    "lodash/path-style": [2, "as-needed"],
+    "lodash/no-extra-args": 2
   }
 }
 ```
@@ -105,7 +106,8 @@ Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3
     "lodash/prefer-noop": 2,
     "lodash/prefer-constant": 2,
     "lodash/chain-style": [2, "as-needed"],
-    "lodash/path-style": [2, "as-needed"]
+    "lodash/path-style": [2, "as-needed"],
+    "lodash/no-extra-args": 2
   }
 }
 ```
@@ -119,6 +121,7 @@ The following rules point out areas where you might have made mistakes.
 * [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
 * [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`)
 * [collection-return](docs/rules/collection-return.md): Always return a value in iteratees of Lodash collection methods that aren't `forEach`.
+* [no-extra-args](docs/rules/no-extra-args.md): Do not use superfluous arguments on Lodash methods with a specified arity.
 
 ### Stylistic Issues
 These rules are purely matters of style and are quite subjective.

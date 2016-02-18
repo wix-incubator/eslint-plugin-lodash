@@ -21,7 +21,8 @@ ruleTester.run('no-double-unwrap', rule, {
         'var x = something.value()'
     ],
     invalid: [{
-        code: 'var x = _(a).reduce(f).value();',
-        errors: [{message: 'Do not use .value() after chain-ending method reduce'}]
+        code: 'var x = _(a).some(f).value();',
+        errors: [{message: 'Do not use .value() after chain-ending method some'}],
+        output: 'var x = _(a).some(f);'
     }]
 });

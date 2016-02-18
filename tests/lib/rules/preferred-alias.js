@@ -21,7 +21,7 @@ ruleTester.run('preferred-alias', rule, {
         'var x = _.map(y, function (i) { return i; });'
     ],
     invalid: [
-        '_.each(users, function (i) { i.f(); });',
+        {code: '_.each(users, function (i) { i.f(); });', output: '_.forEach(users, function (i) { i.f(); });'},
         '_(users).each(function (i) { i.f(); });',
         '_(users).map(function (i) { return i; }).each(function (i) {});'
     ].map(toErrorObject)

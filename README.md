@@ -128,7 +128,7 @@ These rules are purely matters of style and are quite subjective.
 * [prop-shorthand](docs/rules/prop-shorthand.md): Use/forbid property shorthand syntax.
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
-* [preferred-alias](docs/rules/preferred-alias.md): Prefer using main method names instead of aliases
+* [preferred-alias](docs/rules/preferred-alias.md): Prefer using main method names instead of aliases. (fixable)
 * [prefer-chain](docs/rules/prefer-chain.md): Prefer a Lodash chain over nested Lodash calls
 * [no-single-chain](docs/rules/no-single-chain.md): Prevent chaining syntax for single method, e.g. `_(x).map().value()`
 * [prefer-reject](docs/rules/prefer-reject.md): Prefer `_.reject` over filter with `!(expression)` or `x.prop1 !== value`

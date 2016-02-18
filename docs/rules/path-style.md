@@ -15,7 +15,7 @@ You can `get` the value `4` by using `_.get(x, ['b', 'c', 2, 'd'])` (array synta
 
 The array syntax is quicker when accessing deep paths within objects, but not necessarily when using a shallow path (e.g. `_.get(x, 'a');`).
 
-For more information, check out the [Lodash documentation for `_.property`](https://lodash.com/docs#property), or [this example of JSPerf](http://jsperf.com/lodash-get-vs-monster-method/5) that illustrates the difference
+For more information, check out the [Lodash documentation for `_.property`](https://lodash.com/docs#property), or [this example of JSPerf](http://jsperf.com/lodash-get-vs-monster-method/5) that illustrates the difference.
 
 ## Rule Details
 

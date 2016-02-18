@@ -8,7 +8,21 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.6...HEAD
+
+## [1.0.6] - 2016-02-18
+### Added
+- Added rule [`path-style`][path-style]. ([`7166adc`][7166adc]
+- Added rule [`no-extra-args`][no-extra-args]. ([`b11e566`][b11e566])
+
+### Changed
+- Moved CONTRIBUTING.md to new .github directory. ([`d86bde2`][d86bde2])
+
+[7166adc]: https://github.com/wix/eslint-plugin-lodash/commit/7166adc55734fda866720950c7b4ce9739c7cb4d
+[b11e566]: https://github.com/wix/eslint-plugin-lodash/commit/b11e5665b2b08598045957370d1d7bfd931906b2
+[d86bde2]: https://github.com/wix/eslint-plugin-lodash/commit/d86bde2d6a72d53908ac63e91e041559d407b124
+
+[1.0.6]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.6...v1.0.5
 
 ## [1.0.5] - 2016-02-07
 ### Fixed
@@ -86,6 +100,8 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [prefer-invoke-map]: docs/rules/prefer-invoke-map.md
 [matches-shorthand]: docs/rules/matches-shorthand.md
 [matches-prop-shorthand]: docs/rules/matches-prop-shorthand.md
+[path-style]: docs/rules/path-style.md
+[no-extra-args]: docs/rules/no-extra-args.md
 
 <!--
 ### Added

@@ -5,7 +5,7 @@ This rule will enforce whether or not to use shorthand when possible to keep con
 
 ## Rule Details
 
-This rule takes one argument, when to use shorthand: `always` or `never` (default is always`).
+This rule takes one argument, when to use shorthand: `always` or `never` (default is always).
 
 The following patterns are considered warnings:
 

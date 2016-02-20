@@ -81,6 +81,7 @@ Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3
   "rules": {
     "lodash/prop-shorthand": [2, "always"],
     "lodash/matches-shorthand": [2, "always", 3],
+    "lodash/identity-shorthand": [2, "always"],
     "lodash/matches-prop-shorthand": [2, "always"],
     "lodash/prefer-chain": [2, 3],
     "lodash/preferred-alias": 2,
@@ -128,6 +129,7 @@ These rules are purely matters of style and are quite subjective.
 * [prop-shorthand](docs/rules/prop-shorthand.md): Use/forbid property shorthand syntax.
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
+* [identity-shorthand](docs/rules/identity-shorthand.md): Prefer identity shorthand syntax
 * [preferred-alias](docs/rules/preferred-alias.md): Prefer using main method names instead of aliases. (fixable)
 * [prefer-chain](docs/rules/prefer-chain.md): Prefer a Lodash chain over nested Lodash calls
 * [no-single-chain](docs/rules/no-single-chain.md): Prevent chaining syntax for single method, e.g. `_(x).map().value()`

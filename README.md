@@ -79,7 +79,7 @@ Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3
     }
   },
   "rules": {
-    "lodash/prop-shorthand": 2,
+    "lodash/prop-shorthand": [2, "always"],
     "lodash/matches-shorthand": [2, "always", 3],
     "lodash/matches-prop-shorthand": [2, "always"],
     "lodash/prefer-chain": [2, 3],

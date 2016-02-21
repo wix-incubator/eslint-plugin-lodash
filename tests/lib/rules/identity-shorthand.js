@@ -39,6 +39,10 @@ ruleTester.run('identity-shorthand', rule, {
         }, {
             code: 'var x = _(a).filter(f).pick("prop").value()',
             options: ['never']
+        }, {
+            code: 'var x = _.uniq(a, x => x)',
+            options: ['never'],
+            ecmaFeatures: {arrowFunctions: true}
         }
     ],
     invalid: [{

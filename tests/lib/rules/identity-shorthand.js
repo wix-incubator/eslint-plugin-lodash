@@ -59,6 +59,9 @@ ruleTester.run('identity-shorthand', rule, {
         code: 'var ids = _([]).map(function (i) { return i; });',
         errors: [{message: messages.always, column: 21}]
     }, {
+        code: 'var ids = _([]).map(_.identity).value();',
+        errors: [{message: messages.always, column: 21}]
+    }, {
         code: 'var ids = _.map(arr);',
         options: ['never'],
         errors: [{message: messages.never, column: 13}]

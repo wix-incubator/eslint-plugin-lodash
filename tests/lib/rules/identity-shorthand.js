@@ -31,7 +31,8 @@ ruleTester.run('identity-shorthand', rule, {
             code: 'var r = _.map([], x => x)',
             options: ['never'],
             ecmaFeatures: {arrowFunctions: true}
-        }
+        },
+        'var twos = _.mapValues(a, function() { return 2; });'
     ],
     invalid: [{
         code: 'var ids = _.map([], function (i) { return i; });',

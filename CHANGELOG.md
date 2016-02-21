@@ -8,11 +8,24 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.0.6...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.0...HEAD
+
+## [1.1.0] - 2016-02-21
+### Added
+- Added rule [`identity-shorthand`][identity-shorthand]. ([`e1e5ee3`][e1e5ee3])
+- Added fixer for rule `preferred-alias`. ([`0ea186e`][0ea186e])
+- Added fixer for rule `no-double-unwrap`. ([`105e873`][105e873])
+
+[0ea186e]: https://github.com/wix/eslint-plugin-lodash/commit/0ea186e90c5cdac73a64813167761e5ee0ea6f91
+[105e873]: https://github.com/wix/eslint-plugin-lodash/commit/105e8739f23fd32be5cc3d3c042d44deca259ecd
+[e1e5ee3]: https://github.com/wix/eslint-plugin-lodash/commit/e1e5ee310a473f92ef19391a4cd9793cd10dbf6b
+
+
+[1.1.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.0...v1.0.6
 
 ## [1.0.6] - 2016-02-18
 ### Added
-- Added rule [`path-style`][path-style]. ([`7166adc`][7166adc]
+- Added rule [`path-style`][path-style]. ([`7166adc`][7166adc])
 - Added rule [`no-extra-args`][no-extra-args]. ([`b11e566`][b11e566])
 
 ### Changed
@@ -102,6 +115,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [matches-prop-shorthand]: docs/rules/matches-prop-shorthand.md
 [path-style]: docs/rules/path-style.md
 [no-extra-args]: docs/rules/no-extra-args.md
+[identity-shorthand]: docs/rules/identity-shorthand.md
 
 <!--
 ### Added

@@ -20,7 +20,10 @@ ruleTester.run('prefer-times', rule, {
         'var results = _.times(arr.length, function() {return Math.random();})',
         'var x = _.map(a, "prop");',
         'var x = _.map(arr, function(a) {return _.map(a, function(b) {return b + 1});});',
-        "var x = arr.map(function () {return str; }).join('')"
+        "var x = arr.map(function () {return str; }).join('')",
+        {code: 'var x = _.map(a, ({x}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}},
+        {code: 'var x = _.map(a, ({f: x}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}},
+        {code: 'var x = _.map(a, ({f: {x}}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}}
     ],
     invalid: [{
         code: '_(arr).map(function(){return g}).value()',

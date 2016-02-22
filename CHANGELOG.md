@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.1...HEAD
+
+## [1.1.1] - 2016-02-22
+### Fixed
+- Fixed error where `prefer-times` crashes when using destructuring. ([`926a449`][926a449])
+
+[926a449]: https://github.com/wix/eslint-plugin-lodash/commit/926a449043a074ec906854f4c6b3981702e91882
+
+
+[1.1.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.1...v1.1.0
 
 ## [1.1.0] - 2016-02-21
 ### Added

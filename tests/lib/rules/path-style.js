@@ -25,6 +25,9 @@ ruleTester.run('path-style', rule, {
         code: "var t = _.get(x, 'a.b');",
         errors: [{message: 'Use an array for deep paths', column: 18}]
     }, {
+        code: "var t = _.matchesProperty('a.b', val);",
+        errors: [{message: 'Use an array for deep paths', column: 27}]
+    }, {
         code: "var t = _.has(x, ['a']);",
         errors: [{message: 'Use a string for single-level paths', column: 18}]
     }, {

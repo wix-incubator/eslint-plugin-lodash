@@ -38,6 +38,9 @@ ruleTester.run('matches-shorthand', rule, {
         code: 'var isPublic = _.find([], function (i) { return i.id === 3 && i.a === "string" && {a: 10} === i.b;});',
         errors: [{message: messages.always, column: 27}]
     }, {
+        code: 'var isPublic = _.find([], _.matches({id: id}));',
+        errors: [{message: messages.always, column: 27}]
+    }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3 && i.name === name)',
         ecmaFeatures: {arrowFunctions: true},
         errors: [{message: messages.always, column: 30}]

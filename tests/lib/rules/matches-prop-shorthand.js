@@ -21,13 +21,15 @@ ruleTester.run('matches-prop-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
         'var r = _.findIndex(this.packages, {name: name});',
-        'var isPublic = _.map([], function (i) { return i.id === 3; });',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3; });',
         {code: 'var isPublic = _.find([], function(i) { return i.id === 3});', options: ['never']}
     ],
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
+        errors: errors.always
+    }, {
+        code: 'var isPublic = _.find([], _.matchesProperty("id", 3));',
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',

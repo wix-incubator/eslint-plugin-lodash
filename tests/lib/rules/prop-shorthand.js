@@ -40,6 +40,9 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _(arr).map(function (i) { return i.a.b.c; });',
         errors: [{message: messages.always, column: 22}]
     }, {
+        code: 'var ids = _(arr).map(_.property("a.b.c"));',
+        errors: [{message: messages.always, column: 22}]
+    }, {
         code: 'var ids = _.map([], function (i) { return i.a; });',
         errors: [{message: messages.always, column: 21}]
     }, {

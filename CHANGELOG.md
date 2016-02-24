@@ -8,7 +8,18 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.1.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.0...HEAD
+
+## [1.2.0] - 2016-02-24
+### Fixed
+- Fixed `path-style` to report for calls to `matchesProperty`. ([`24d2ba6`][24d2ba6])
+- Fixed shorthand rules to report on more methods and on iteratees that call the shorthand methods (e.g. `_.property`). ([`e42d364`][e42d364]) 
+
+[24d2ba6]: https://github.com/wix/eslint-plugin-lodash/commit/24d2ba6e154b8d00691536846e95699380de45bf
+[e42d364]: https://github.com/wix/eslint-plugin-lodash/commit/e42d364d82d5e2a4e3b4b2c2c92d4330c9137958
+
+
+[1.2.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.0...v1.1.1
 
 ## [1.1.1] - 2016-02-22
 ### Fixed

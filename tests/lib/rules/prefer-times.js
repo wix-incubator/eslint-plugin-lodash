@@ -21,9 +21,9 @@ ruleTester.run('prefer-times', rule, {
         'var x = _.map(a, "prop");',
         'var x = _.map(arr, function(a) {return _.map(a, function(b) {return b + 1});});',
         "var x = arr.map(function () {return str; }).join('')",
-        {code: 'var x = _.map(a, ({x}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}},
-        {code: 'var x = _.map(a, ({f: x}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}},
-        {code: 'var x = _.map(a, ({f: {x}}) => x);', ecmaFeatures: {arrowFunctions: true, destructuring: true}}
+        {code: 'var x = _.map(a, ({x}) => x);', parserOptions: {ecmaVersion: 6}},
+        {code: 'var x = _.map(a, ({f: x}) => x);', parserOptions: {ecmaVersion: 6}},
+        {code: 'var x = _.map(a, ({f: {x}}) => x);', parserOptions: {ecmaVersion: 6}}
     ],
     invalid: [{
         code: '_(arr).map(function(){return g}).value()',
@@ -33,15 +33,15 @@ ruleTester.run('prefer-times', rule, {
         errors: errors
     }, {
         code: '_(arr).map(() => a.push(f()))',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }, {
         code: '_.map(arr, function(a, c = 1) {return b})',
-        ecmaFeatures: {defaultParams: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }, {
         code: '_(arr).map(() => a.push(f()))',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }]
 });

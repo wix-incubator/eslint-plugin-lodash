@@ -32,7 +32,7 @@ ruleTester.run('prefer-compact', rule, {
         errors: [ruleError]
     }, {
         code: '_.filter(arr, x => !!x)',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: [ruleError]
     }]
 });

@@ -33,7 +33,7 @@ ruleTester.run('matches-prop-shorthand', rule, {
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, ["id", 3])',
@@ -48,12 +48,12 @@ ruleTester.run('matches-prop-shorthand', rule, {
         }
     }, {
         code: 'var isPublic = _.find([], i => i[0] === 3);',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
 
         code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }]
 });

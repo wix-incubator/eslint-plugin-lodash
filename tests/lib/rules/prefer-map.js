@@ -27,7 +27,7 @@ ruleTester.run('prefer-map', rule, {
         errors: errors
     }, {
         code: '_(arr).forEach(x => a.push(f(x)))',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }]
 });

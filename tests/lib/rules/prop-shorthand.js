@@ -33,7 +33,7 @@ ruleTester.run('prop-shorthand', rule, {
         {
             code: 'var r = _.map([], x => x.id)',
             options: ['never'],
-            ecmaFeatures: {arrowFunctions: true}
+            parserOptions: {ecmaVersion: 6}
         }
     ],
     invalid: [{
@@ -57,7 +57,7 @@ ruleTester.run('prop-shorthand', rule, {
         errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var ids = _.map([], i => i.a.b.c);',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var ids = _.map(arr, "id");',

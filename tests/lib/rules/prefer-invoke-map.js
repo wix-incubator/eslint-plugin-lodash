@@ -26,7 +26,7 @@ ruleTester.run('prefer-invoke-map', rule, {
         errors: errors
     }, {
         code: '_.map(arr, x => x.f())',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }]
 });

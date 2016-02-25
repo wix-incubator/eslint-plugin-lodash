@@ -17,7 +17,7 @@ ruleTester.run('prefer-noop', rule, {
     valid: [
         'x = function() { return 2}',
         'x = function(x) {return x}',
-        {code: 'x = a => a.b', ecmaFeatures: {arrowFunctions: true}}
+        {code: 'x = a => a.b', parserOptions: {ecmaVersion: 6}}
     ],
     invalid: [{
         code: 'functionWithCb(function() {})',
@@ -27,7 +27,7 @@ ruleTester.run('prefer-noop', rule, {
         errors: errors
     }, {
         code: 'CallCb(()=> {})',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }]
 });

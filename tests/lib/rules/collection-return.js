@@ -17,7 +17,7 @@ ruleTester.run('collection-return', rule, {
         '_.forEach(arr, function(a) { console.log(a)})',
         '_.map(arr, function(a) { return a*a})',
         {
-            ecmaFeatures: {arrowFunctions: true},
+            parserOptions: {ecmaVersion: 6},
             code: '_.map(arr, a => a + 1)'
         },
         '_.map(arr, function(a) {return a.some(function(x) {})})',
@@ -25,7 +25,7 @@ ruleTester.run('collection-return', rule, {
         'function x(a) {return a;}',
         {
             code: 'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
-            ecmaFeatures: {arrowFunctions: true}
+            parserOptions: {ecmaVersion: 6}
         }
     ],
     invalid: [{
@@ -40,7 +40,7 @@ ruleTester.run('collection-return', rule, {
     }, {
         code: '_.reduce(arr, a => {f(a)})',
         errors: [{message: 'Do not use _.reduce without returning a value'}],
-        ecmaFeatures: {arrowFunctions: true}
+        parserOptions: {ecmaVersion: 6}
     }, {
         code: '_.map(arr, function x(a) {arr2.push(a)})',
         errors: [{message: 'Do not use _.map without returning a value'}]

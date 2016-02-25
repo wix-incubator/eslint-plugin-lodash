@@ -21,8 +21,8 @@ ruleTester.run('prefer-over-quantifier', rule, {
         'var t = _.filter(a, f)',
         'var t = _.filter(a, function(x) { return f(x)})',
         'var t = _.filter(a, function(x) { return f(x) && (g(x) || h(x))})',
-        {code: 'var t = _.filter(a, x => x % 2)', ecmaFeatures: {arrowFunctions: true}},
-        {code: 'var t = _.filter(a, x => f(x) && x % 2)', ecmaFeatures: {arrowFunctions: true}}
+        {code: 'var t = _.filter(a, x => x % 2)', parserOptions: {ecmaVersion: 6}},
+        {code: 'var t = _.filter(a, x => f(x) && x % 2)', parserOptions: {ecmaVersion: 6}}
     ],
     invalid: [{
         code: 'var t = _.filter(a, function(x) { return f(x) && g(x); })',
@@ -38,11 +38,11 @@ ruleTester.run('prefer-over-quantifier', rule, {
         errors: errors.every
     }, {
         code: 'var t = _(arr).map("subObject").filter(x => f(x) && g(x) && h(x)).value();',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors.every
     }, {
         code: 'var t = _.filter(a, x => f(x) || g(x) || h(x))',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors.some
     }]
 });

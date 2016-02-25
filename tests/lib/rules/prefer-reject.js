@@ -29,7 +29,7 @@ ruleTester.run('prefer-reject', rule, {
         errors: errors
     }, {
         code: '_.filter(arr, user => !user.active)',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: errors
     }]
 });

@@ -30,7 +30,7 @@ ruleTester.run('identity-shorthand', rule, {
         }, {
             code: 'var r = _.map([], x => x)',
             options: ['never'],
-            ecmaFeatures: {arrowFunctions: true}
+            parserOptions: {ecmaVersion: 6}
         },
         'var twos = _.mapValues(a, function() { return 2; });',
         {
@@ -42,7 +42,7 @@ ruleTester.run('identity-shorthand', rule, {
         }, {
             code: 'var x = _.uniq(a, x => x)',
             options: ['never'],
-            ecmaFeatures: {arrowFunctions: true}
+            parserOptions: {ecmaVersion: 6}
         }
     ],
     invalid: [{
@@ -50,7 +50,7 @@ ruleTester.run('identity-shorthand', rule, {
         errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var r = _.map([], x => x);',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 19}]
     }, {
         code: 'var ids = _.chain([]).map(function (i) { return i; }).value();',

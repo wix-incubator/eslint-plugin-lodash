@@ -25,7 +25,7 @@ ruleTester.run('prefer-lodash-method', rule, {
         errors: [{message: 'Prefer \'_.map\' over the native function.'}]
     }, {
         code: 'var x = arr.filter(x => x.f())',
-        ecmaFeatures: {arrowFunctions: true},
+        parserOptions: {ecmaVersion: 6},
         errors: [{message: 'Prefer \'_.filter\' over the native function.'}]
     }, {
         code: 'var x = Object.keys(node)',

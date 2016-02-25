@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.1...HEAD
+
+## [1.2.1] - 2016-02-25
+### Fixed
+- Fixed rules `prefer-get`, `prefer-matches`, and `prefer-is-nil` that stopped reporting in ESLint v2. ([`5054431`][5054431]); 
+
+[5054431]: https://github.com/wix/eslint-plugin-lodash/commit/50544315414c01980cf1580b8f28f3d1324287a7
+
+
+[1.2.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.1...v1.2.0
 
 ## [1.2.0] - 2016-02-24
 ### Fixed

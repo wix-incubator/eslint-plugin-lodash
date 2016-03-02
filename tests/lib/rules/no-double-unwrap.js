@@ -18,7 +18,8 @@ ruleTester.run('no-double-unwrap', rule, {
         'var x = _(a).map(f).reduce(g)',
         'var x = _(a).map(f).value()',
         'var x = _.chain(a).reduce(f).value()',
-        'var x = something.value()'
+        'var x = something.value()',
+        '_(a).filter(f).forEach(g);'
     ],
     invalid: [{
         code: 'var x = _(a).some(f).value();',

@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.2...HEAD
+
+## [1.2.2] - 2016-03-02
+### Fixed
+- Fixed an error where `forEach`, `forIn`, `forOwn`, and their right counterparts were considered chainable. ([`92e4b47`][92e4b47])
+
+[92e4b47]: https://github.com/wix/eslint-plugin-lodash/commit/92e4b47f6d613a39980cce939cbbbab2b7da33eb
+
+
+[1.2.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.2...v1.2.1
 
 ## [1.2.1] - 2016-02-25
 ### Fixed

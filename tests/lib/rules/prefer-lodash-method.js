@@ -18,7 +18,11 @@ ruleTester.run('prefer-lodash-method', rule, {
         'var x = _(arr).map(f).reduce(g)',
         'var x = _.chain(arr).map(f).reduce(g).value()',
         'var x = _.keys(obj)',
-        'var x = arr.indexOf(item)'
+        'var x = arr.indexOf(item)',
+        {
+            code: 'var x = a.map(f)',
+            options: [{except: ['map']}]
+        }
     ],
     invalid: [{
         code: 'var x = a.map(function(x) {return x.f()});',

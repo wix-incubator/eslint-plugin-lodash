@@ -8,7 +8,22 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.2.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.3.0...HEAD
+
+## [1.3.0] - 2016-03-10
+### Added
+- Added option for exceptions to the rule `prefer-lodash-method`. ([`6a3e2cc`][6a3e2cc])
+### Fixed
+- Fixed a false-positive for `prefer-lodash-chain` where the callback uses lodash. ([`ed42798`][ed42798])
+- Misc. Documentation fixes. ([`262c942`][262c942], [`f896337`][f896337])
+
+[6a3e2cc]: https://github.com/wix/eslint-plugin-lodash/commit/6a3e2cc6f49e6d907316d7659de09bc1c6f95665
+[ed42798]: https://github.com/wix/eslint-plugin-lodash/commit/ed4279898b40b8f9f12552d89b2ec61aa2ca6c12
+[262c942]: https://github.com/wix/eslint-plugin-lodash/commit/262c942cc6b131f78b85aa7c8afddf85f14406e5
+[f896337]: https://github.com/wix/eslint-plugin-lodash/commit/f8963378b76cfbe76967ce91260eb1c4d78a0118
+
+
+[1.3.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.3.0...v1.2.2
 
 ## [1.2.2] - 2016-03-02
 ### Fixed

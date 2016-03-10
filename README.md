@@ -33,38 +33,40 @@ Finally, enable all of the rules that you would like to use.
 {
   "plugins": ["lodash"],
   "rules": {
-    "lodash/prop-shorthand": 2,
-    "lodash/matches-shorthand": [2, "always", 3],
-    "lodash/matches-prop-shorthand": [2, "always"],
-    "lodash/prefer-chain": [2, 3],
-    "lodash/preferred-alias": 2,
-    "lodash/no-single-chain": 2,
-    "lodash/prefer-reject": [2, 3],
-    "lodash/prefer-filter": [2, 3],
     "lodash/callback-binding": 2,
-    "lodash/unwrap": 2,
-    "lodash/prefer-compact": 2,
+    "lodash/chain-style": [2, "as-needed"],
+    "lodash/collection-return": 2,
+    "lodash/identity-shorthand": [2, "always"],
+    "lodash/matches-prop-shorthand": [2, "always"],
+    "lodash/matches-shorthand": [2, "always", 3],
+    "lodash/no-commit": 2,
     "lodash/no-double-unwrap": 2,
-    "lodash/prefer-map": 2,
-    "lodash/prefer-wrapper-method": 2,
+    "lodash/no-extra-args": 2,
+    "lodash/no-single-chain": 2,
+    "lodash/path-style": [2, "as-needed"],
+    "lodash/prefer-chain": [2, 3],
+    "lodash/prefer-compact": 2,
+    "lodash/prefer-constant": 2,
+    "lodash/prefer-filter": [2, 3],
+    "lodash/prefer-flat-map": "2",
+    "lodash/prefer-get": [2, 3],
     "lodash/prefer-invoke-map": 2,
-    "lodash/prefer-thru": 2,
+    "lodash/prefer-is-nil": 2,
     "lodash/prefer-lodash-chain": 2,
     "lodash/prefer-lodash-method": 2,
     "lodash/prefer-lodash-typecheck": 2,
-    "lodash/no-commit": 2,
-    "lodash/prefer-get": [2, 3],
-    "lodash/collection-return": 2,
+    "lodash/prefer-map": 2,
     "lodash/prefer-matches": [2, 3],
-    "lodash/prefer-times": 2,
-    "lodash/prefer-startswith": 2,
     "lodash/prefer-noop": 2,
-    "lodash/prefer-constant": 2,
-    "lodash/chain-style": [2, "as-needed"],
-    "lodash/prefer-is-nil": 2,
     "lodash/prefer-over-quantifier": 2,
-    "lodash/path-style": [2, "as-needed"],
-    "lodash/no-extra-args": 2
+    "lodash/prefer-reject": [2, 3],
+    "lodash/prefer-startswith": 2,
+    "lodash/prefer-thru": 2,
+    "lodash/prefer-times": 2,
+    "lodash/prefer-wrapper-method": 2,
+    "lodash/preferred-alias": 2,
+    "lodash/prop-shorthand": [2, "always"],
+    "lodash/unwrap": 2
   }
 }
 ```
@@ -79,36 +81,36 @@ Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3
     }
   },
   "rules": {
-    "lodash/prop-shorthand": [2, "always"],
-    "lodash/matches-shorthand": [2, "always", 3],
+    "lodash/callback-binding": 2,
+    "lodash/chain-style": [2, "as-needed"],
+    "lodash/collection-return": 2,
     "lodash/identity-shorthand": [2, "always"],
     "lodash/matches-prop-shorthand": [2, "always"],
-    "lodash/prefer-chain": [2, 3],
-    "lodash/preferred-alias": 2,
-    "lodash/no-single-chain": 2,
-    "lodash/prefer-reject": [2, 3],
-    "lodash/prefer-filter": [2, 3],
-    "lodash/callback-binding": 2,
-    "lodash/unwrap": 2,
-    "lodash/prefer-compact": 2,
+    "lodash/matches-shorthand": [2, "always", 3],
+    "lodash/no-commit": 2,
     "lodash/no-double-unwrap": 2,
-    "lodash/prefer-map": 2,
-    "lodash/prefer-wrapper-method": 2,
-    "lodash/prefer-thru": 2,
+    "lodash/no-extra-args": 2,
+    "lodash/no-single-chain": 2,
+    "lodash/path-style": [2, "as-needed"],
+    "lodash/prefer-chain": [2, 3],
+    "lodash/prefer-compact": 2,
+    "lodash/prefer-constant": 2,
+    "lodash/prefer-filter": [2, 3],
+    "lodash/prefer-get": [2, 3],
     "lodash/prefer-lodash-chain": 2,
     "lodash/prefer-lodash-method": 2,
     "lodash/prefer-lodash-typecheck": 2,
-    "lodash/no-commit": 2,
-    "lodash/prefer-get": [2, 3],
-    "lodash/collection-return": 2,
+    "lodash/prefer-map": 2,
     "lodash/prefer-matches": [2, 3],
-    "lodash/prefer-times": 2,
-    "lodash/prefer-startswith": 2,
     "lodash/prefer-noop": 2,
-    "lodash/prefer-constant": 2,
-    "lodash/chain-style": [2, "as-needed"],
-    "lodash/path-style": [2, "as-needed"],
-    "lodash/no-extra-args": 2
+    "lodash/prefer-reject": [2, 3],
+    "lodash/prefer-startswith": 2,
+    "lodash/prefer-thru": 2,
+    "lodash/prefer-times": 2,
+    "lodash/prefer-wrapper-method": 2,
+    "lodash/preferred-alias": 2,
+    "lodash/prop-shorthand": [2, "always"],
+    "lodash/unwrap": 2
   }
 }
 ```
@@ -142,8 +144,8 @@ These rules are purely matters of style and are quite subjective.
 * [prefer-thru](docs/rules/prefer-thru.md): Prefer using `_.prototype.thru` in the chain and not call functions in the initial value, e.g. `_(x).thru(f).map(g)...`
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
-* [prefer-flat-map](docs/rules/prefer-flat-map.md) Prefer `_.flatMap` over consecutive `map` and `flatten`.
-* [path-style](docs/rules/path-style.md) Enforce a specific path style for methods like `get` and `property`: array, string, or arrays only for deep paths.
+* [prefer-flat-map](docs/rules/prefer-flat-map.md): Prefer `_.flatMap` over consecutive `map` and `flatten`.
+* [path-style](docs/rules/path-style.md): Enforce a specific path style for methods like `get` and `property`: array, string, or arrays only for deep paths.
 
 #### Preference over native
 These rules are also stylistic choices, but they also recommend using Lodash instead of native functions and constructs.
@@ -157,7 +159,7 @@ These rules are also stylistic choices, but they also recommend using Lodash ins
 * [prefer-noop](docs/rules/prefer-noop.md): Prefer `_.noop` over empty functions.
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.
-* [prefer-over-quantifier](docs/rules/prefer-over-quantifier.md) Prefer `_.overSome` and `_.overEvery` instead of checks with `&&` and `||` for methods that have a boolean check iteratee.
+* [prefer-over-quantifier](docs/rules/prefer-over-quantifier.md): Prefer `_.overSome` and `_.overEvery` instead of checks with `&&` and `||` for methods that have a boolean check iteratee.
 
 # Contributing
 Contributions are always welcome! For more info, read our [contribution guide](/CONTRIBUTING.md).

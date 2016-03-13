@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.1...HEAD
+
+## [1.4.1] - 2016-03-13
+### Fixed
+- Fixed `recommended` configuration. ([`25499be0`][25499be0])
+
+
+[25499be0]: https://github.com/wix/eslint-plugin-lodash/commit/25499be0851b6f17d09e6e848bdb39db5e2edbcd
+[1.4.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.1...v1.4.0
 
 ## [1.4.0] - 2016-03-13
 ### Added
@@ -44,7 +52,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ## [1.2.1] - 2016-02-25
 ### Fixed
-- Fixed rules `prefer-get`, `prefer-matches`, and `prefer-is-nil` that stopped reporting in ESLint v2. ([`5054431`][5054431]); 
+- Fixed rules `prefer-get`, `prefer-matches`, and `prefer-is-nil` that stopped reporting in ESLint v2. ([`5054431`][5054431]);
 
 [5054431]: https://github.com/wix/eslint-plugin-lodash/commit/50544315414c01980cf1580b8f28f3d1324287a7
 
@@ -54,7 +62,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ## [1.2.0] - 2016-02-24
 ### Fixed
 - Fixed `path-style` to report for calls to `matchesProperty`. ([`24d2ba6`][24d2ba6])
-- Fixed shorthand rules to report on more methods and on iteratees that call the shorthand methods (e.g. `_.property`). ([`e42d364`][e42d364]) 
+- Fixed shorthand rules to report on more methods and on iteratees that call the shorthand methods (e.g. `_.property`). ([`e42d364`][e42d364])
 
 [24d2ba6]: https://github.com/wix/eslint-plugin-lodash/commit/24d2ba6e154b8d00691536846e95699380de45bf
 [e42d364]: https://github.com/wix/eslint-plugin-lodash/commit/e42d364d82d5e2a4e3b4b2c2c92d4330c9137958

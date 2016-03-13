@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.3.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.0...HEAD
+
+## [1.4.0] - 2016-03-13
+### Added
+- Added `recommended` and `v3` plugin configurations. ([`a1da5a4`][a1da5a4])
+
+
+[a1da5a4]: https://github.com/wix/eslint-plugin-lodash/commit/a1da5a404fadc38b072292b7bc296f908b5a6576
+[1.4.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.0...v1.3.0
 
 ## [1.3.0] - 2016-03-10
 ### Added

@@ -17,7 +17,7 @@ If you installed `ESLint` globally, you have to install the Lodash plugin global
 
 # Configuration
 
-Add `plugins` section and specify ESLint-Plugin-Lodash as a plugin.
+Add a `plugins` section and specify ESLint-Plugin-Lodash as a plugin.
 You can additionally add settings for the plugin.
 
 ### Shared Rule Settings
@@ -25,93 +25,27 @@ These are settings that can be shared by all of the rules. All settings are unde
 
 * __pragma__: specifies the name you use for the Lodash variable in your code. Default is `_`.
 * __version__: specifies the major Lodash Version you are using (default is `4`).
-If you wish to use this plugin with Lodash v3, change this value to 3.
+If you wish to use this plugin with Lodash v3, this value should be `3`. (on by default in the config `v3`)
 
 
 Finally, enable all of the rules that you would like to use.
+## Recommended configuration
+This plugin exports a `recommended` configuration that enforces all the rules. You can configure the plugin as follows:
+
 ```json
 {
   "plugins": ["lodash"],
-  "rules": {
-    "lodash/callback-binding": 2,
-    "lodash/chain-style": [2, "as-needed"],
-    "lodash/collection-return": 2,
-    "lodash/identity-shorthand": [2, "always"],
-    "lodash/matches-prop-shorthand": [2, "always"],
-    "lodash/matches-shorthand": [2, "always", 3],
-    "lodash/no-commit": 2,
-    "lodash/no-double-unwrap": 2,
-    "lodash/no-extra-args": 2,
-    "lodash/no-single-chain": 2,
-    "lodash/path-style": [2, "as-needed"],
-    "lodash/prefer-chain": [2, 3],
-    "lodash/prefer-compact": 2,
-    "lodash/prefer-constant": 2,
-    "lodash/prefer-filter": [2, 3],
-    "lodash/prefer-flat-map": "2",
-    "lodash/prefer-get": [2, 3],
-    "lodash/prefer-invoke-map": 2,
-    "lodash/prefer-is-nil": 2,
-    "lodash/prefer-lodash-chain": 2,
-    "lodash/prefer-lodash-method": 2,
-    "lodash/prefer-lodash-typecheck": 2,
-    "lodash/prefer-map": 2,
-    "lodash/prefer-matches": [2, 3],
-    "lodash/prefer-noop": 2,
-    "lodash/prefer-over-quantifier": 2,
-    "lodash/prefer-reject": [2, 3],
-    "lodash/prefer-startswith": 2,
-    "lodash/prefer-thru": 2,
-    "lodash/prefer-times": 2,
-    "lodash/prefer-wrapper-method": 2,
-    "lodash/preferred-alias": 2,
-    "lodash/prop-shorthand": [2, "always"],
-    "lodash/unwrap": 2
-  }
+  "extends": ["plugin:lodash/recommended"]
 }
 ```
-
 ## Configuration for Using with Lodash v3
-Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3, the config needs to specify the version in the `settings`, and can't use some rules:
+Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3, the config needs to specify the version in the `settings`, and can't use some rules.
+The plugin also exports a `v3` config for ease of use.
+
 ```json
 {
-  "settings": {
-    "lodash": {
-      "version": 3
-    }
-  },
-  "rules": {
-    "lodash/callback-binding": 2,
-    "lodash/chain-style": [2, "as-needed"],
-    "lodash/collection-return": 2,
-    "lodash/identity-shorthand": [2, "always"],
-    "lodash/matches-prop-shorthand": [2, "always"],
-    "lodash/matches-shorthand": [2, "always", 3],
-    "lodash/no-commit": 2,
-    "lodash/no-double-unwrap": 2,
-    "lodash/no-extra-args": 2,
-    "lodash/no-single-chain": 2,
-    "lodash/path-style": [2, "as-needed"],
-    "lodash/prefer-chain": [2, 3],
-    "lodash/prefer-compact": 2,
-    "lodash/prefer-constant": 2,
-    "lodash/prefer-filter": [2, 3],
-    "lodash/prefer-get": [2, 3],
-    "lodash/prefer-lodash-chain": 2,
-    "lodash/prefer-lodash-method": 2,
-    "lodash/prefer-lodash-typecheck": 2,
-    "lodash/prefer-map": 2,
-    "lodash/prefer-matches": [2, 3],
-    "lodash/prefer-noop": 2,
-    "lodash/prefer-reject": [2, 3],
-    "lodash/prefer-startswith": 2,
-    "lodash/prefer-thru": 2,
-    "lodash/prefer-times": 2,
-    "lodash/prefer-wrapper-method": 2,
-    "lodash/preferred-alias": 2,
-    "lodash/prop-shorthand": [2, "always"],
-    "lodash/unwrap": 2
-  }
+  "plugins": ["lodash"],
+  "extends": ["plugin:lodash/v3"]
 }
 ```
 
@@ -155,7 +89,7 @@ These rules are also stylistic choices, but they also recommend using Lodash ins
 * [prefer-get](docs/rules/prefer-get.md): Prefer using `_.get` or `_.has` over expression chains like `a && a.b && a.b.c`.
 * [prefer-matches](docs/rules/prefer-matches.md): Prefer `_.matches` over conditions like `a.foo === 1 && a.bar === 2 && a.baz === 3`.
 * [prefer-times](docs/rules/prefer-times.md): Prefer `_.times` over `_.map` without using the iteratee's arguments.
-* [prefer-startswth](docs/rules/prefer-startswith.md): Prefer `_.startsWith` over `a.indexOf(b) === 0`.
+* [prefer-startswith](docs/rules/prefer-startswith.md): Prefer `_.startsWith` over `a.indexOf(b) === 0`.
 * [prefer-noop](docs/rules/prefer-noop.md): Prefer `_.noop` over empty functions.
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.

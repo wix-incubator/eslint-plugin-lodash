@@ -23,12 +23,12 @@
   "homepage": "https://github.com/wix/eslint-plugin-lodash",
   "bugs": "https://github.com/wix/eslint-plugin-lodash/issues",
   "dependencies": {
-    "lodash": "4.5.1"
+    "lodash": "4.6.1"
   },
   "devDependencies": {
-    "coveralls": "2.11.6",
-    "eslint": "2.2.0",
-    "eslint-config-wix-editor": "0.2.2",
+    "coveralls": "2.11.8",
+    "eslint": "2.4.0",
+    "eslint-config-wix-editor": "0.2.3",
     "istanbul": "0.4.2",
     "mocha": "2.4.5"
   },

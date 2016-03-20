@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.2...HEAD
+
+## [1.4.2] - 2016-03-20
+### Fixed
+- Fixed interations on method `sortedLastIndexBy`. ([`76b42b9`][76b42b9])
+
+
+[76b42b9]: https://github.com/wix/eslint-plugin-lodash/commit/76b42b944ff4c5043aae24d4b1edaed7ceff0cec
+[1.4.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.2...v1.4.1
 
 ## [1.4.1] - 2016-03-13
 ### Fixed

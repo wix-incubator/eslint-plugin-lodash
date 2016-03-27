@@ -16,14 +16,14 @@ var result = _.filter(users, function (i) { return i.id === 3; });
 
 ```js
 /* eslint lodash/matches-prop-shorthand: [2, "never"] */
-var result = _.filter(users, 'id', 3);
+var result = _.filter(users, ['id', 3]);
 ```
 
 The following patterns are not considered warnings:
 
 ```js
 /* eslint lodash/matches-prop-shorthand: [2, "always"] */
-var result = _.filter(users, 'id', 3);
+var result = _.filter(users, ['id', 3]);
 ```
 
 ```js

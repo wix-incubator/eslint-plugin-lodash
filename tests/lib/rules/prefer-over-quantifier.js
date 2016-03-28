@@ -1,21 +1,21 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-over-quantifier');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-over-quantifier')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = {
+const ruleTester = new RuleTester()
+const errors = {
     every: [{message: 'Prefer _.overEvery instead of a conjunction'}],
     some: [{message: 'Prefer _.overSome instead of a disjunction'}]
-};
+}
 ruleTester.run('prefer-over-quantifier', rule, {
     valid: [
         'var t = _.filter(a, f)',
@@ -45,4 +45,4 @@ ruleTester.run('prefer-over-quantifier', rule, {
         parserOptions: {ecmaVersion: 6},
         errors: errors.some
     }]
-});
+})

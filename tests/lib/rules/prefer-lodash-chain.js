@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-lodash-chain');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-lodash-chain')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 ruleTester.run('prefer-lodash-chain', rule, {
     valid: [
         'var userNames = _.map(users, "name.givenName").join(" ");',
@@ -31,4 +31,4 @@ ruleTester.run('prefer-lodash-chain', rule, {
             errors: [{message: "Do not break chain before method 'join'."}]
         }
     ]
-});
+})

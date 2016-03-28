@@ -1,8 +1,5 @@
 {
-    "env": {
-        "node": true
-    },
-    "extends": "wix-editor",
+    "extends": "wix-editor/node",
     "rules": {
         "strict": [2, "global"],
         "no-extra-parens": 0,

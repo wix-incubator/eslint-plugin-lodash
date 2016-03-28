@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-startswith');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-startswith')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil')
-    .fromMessage('Prefer _.startsWith instead of comparing indexOf() to 0');
+const ruleTester = new RuleTester()
+const toErrorObject = require('../testUtil/optionsUtil')
+    .fromMessage('Prefer _.startsWith instead of comparing indexOf() to 0')
 
 ruleTester.run('prefer-startswith', rule, {
     valid: [
@@ -30,4 +30,4 @@ ruleTester.run('prefer-startswith', rule, {
         'var x = 0 !== a.indexOf(b)',
         'if(a.indexOf(b) != 0) {}'
     ].map(toErrorObject)
-});
+})

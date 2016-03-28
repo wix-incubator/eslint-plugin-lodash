@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/unwrap');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/unwrap')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Missing unwrapping at end of chain');
+const ruleTester = new RuleTester()
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Missing unwrapping at end of chain')
 ruleTester.run('unwrap', rule, {
     valid: [
         'var x = _(a).map(f).reduce(g)',
@@ -25,4 +25,4 @@ ruleTester.run('unwrap', rule, {
         'var x = _.chain(a).map(f)',
         'var x = _.chain(a).map(f).reduce(g)'
     ].map(toErrorObject)
-});
+})

@@ -4,15 +4,15 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-filter');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-filter');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil')
+const ruleTester = new RuleTester();
+const toErrorObject = require('../testUtil/optionsUtil')
     .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach');
 
 ruleTester.run('prefer-filter', rule, {

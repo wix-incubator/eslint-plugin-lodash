@@ -1,15 +1,15 @@
 /**
  * @fileoverview Rule to check if a call to _.indexOf === 0 should be a call to _.startsWith
  */
-'use strict';
+'use strict'
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    var astUtil = require('../util/astUtil');
-    var comparisonOperators = ['==', '!=', '===', '!=='];
+    const astUtil = require('../util/astUtil');
+    const comparisonOperators = ['==', '!=', '===', '!=='];
 
     function getExpressionComparedToZero(node) {
         if (comparisonOperators.indexOf(node.operator) !== -1) {
@@ -27,10 +27,10 @@ module.exports = function (context) {
     }
 
     return {
-        BinaryExpression: function (node) {
+        BinaryExpression(node) {
             if (isIndexOfCall(getExpressionComparedToZero(node))) {
                 context.report(node, 'Prefer _.startsWith instead of comparing indexOf() to 0');
             }
         }
-    };
-};
+    }
+}

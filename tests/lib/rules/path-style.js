@@ -4,14 +4,14 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/path-style');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/path-style');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 ruleTester.run('path-style', rule, {
     valid: [
         "var aProp = _.property('a')",

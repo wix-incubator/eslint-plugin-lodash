@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-is-nil');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-is-nil')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer isNil over checking for undefined or null.');
+const ruleTester = new RuleTester()
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer isNil over checking for undefined or null.')
 ruleTester.run('prefer-is-nil', rule, {
     valid: [
         'if (x === undefined) {}',
@@ -30,4 +30,4 @@ ruleTester.run('prefer-is-nil', rule, {
         'var t = _.isUndefined(x) || _.isNull(x)',
         'var t = !_.isNull(x) && !_.isUndefined(x)'
     ].map(toErrorObject)
-});
+})

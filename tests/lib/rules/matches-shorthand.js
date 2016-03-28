@@ -4,16 +4,16 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/matches-shorthand');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/matches-shorthand');
+const RuleTester = require('eslint').RuleTester;
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var messages = {
+const ruleTester = new RuleTester();
+const messages = {
     always: 'Prefer matches syntax',
     never: 'Do not use matches syntax'
 };

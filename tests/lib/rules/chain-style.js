@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/chain-style');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/chain-style')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = {
+const ruleTester = new RuleTester()
+const errors = {
     asNeeded: [{message: 'Unnecessary explicit chaining'}],
     implicit: [{message: 'Do not use explicit chaining'}],
     explicit: [{message: 'Do not use implicit chaining'}]
-};
+}
 
 ruleTester.run('chain-style', rule, {
     valid: [
@@ -54,4 +54,4 @@ ruleTester.run('chain-style', rule, {
         errors: errors.asNeeded,
         settings: {lodash: {pragma: 'lo'}}
     }]
-});
+})

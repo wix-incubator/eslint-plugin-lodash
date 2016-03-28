@@ -4,16 +4,16 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/identity-shorthand');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/identity-shorthand');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 
-var messages = {
+const messages = {
     always: 'Prefer omitting the iteratee over a function that returns its argument',
     never: 'Do not use the identity shorthand syntax'
 };

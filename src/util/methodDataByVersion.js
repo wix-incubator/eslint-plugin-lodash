@@ -1,4 +1,4 @@
-'use strict';
+'use strict'
 module.exports = {
     3: {
         aliases: {
@@ -857,4 +857,4 @@ module.exports = {
             uniqueId: 1
         }
     }
-};
+}

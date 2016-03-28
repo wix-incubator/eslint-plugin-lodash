@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-flat-map');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-flat-map')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.flatMap over consecutive map and flatten.'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.flatMap over consecutive map and flatten.'}]
 ruleTester.run('prefer-flat-map', rule, {
     valid: [
         't = _.map(a, f);',
@@ -20,9 +20,7 @@ ruleTester.run('prefer-flat-map', rule, {
     ],
     invalid: [{
         code: '_(a).map(f).flatten().value',
-        errors: errors
-    }, {
+        errors    }, {
         code: 't = _.flatten(_.map(a, f));',
-        errors: errors
-    }]
-});
+        errors    }]
+})

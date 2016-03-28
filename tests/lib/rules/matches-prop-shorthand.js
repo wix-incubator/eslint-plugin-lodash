@@ -4,16 +4,16 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/matches-prop-shorthand');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/matches-prop-shorthand');
+const RuleTester = require('eslint').RuleTester;
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = {
+const ruleTester = new RuleTester();
+const errors = {
     always: [{message: 'Prefer matches property syntax'}],
     never: [{message: 'Do not use matches property syntax'}]
 };

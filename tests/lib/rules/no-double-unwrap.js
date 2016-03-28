@@ -4,14 +4,14 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/no-double-unwrap');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/no-double-unwrap');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 
 ruleTester.run('no-double-unwrap', rule, {
     valid: [

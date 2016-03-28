@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-reject');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-reject')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.reject over negative condition'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.reject over negative condition'}]
 ruleTester.run('prefer-reject', rule, {
     valid: [
         '_.filter(users, function(user) {return !user.active && isSomething;});',
@@ -20,16 +20,12 @@ ruleTester.run('prefer-reject', rule, {
     ],
     invalid: [{
         code: '_(users).map(t).filter(function(user) {return !user.name.givenName})',
-        errors: errors
-    }, {
+        errors    }, {
         code: '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
-        errors: errors
-    }, {
+        errors    }, {
         code: '_.filter(users, function(user) {return !user.isSomething;});',
-        errors: errors
-    }, {
+        errors    }, {
         code: '_.filter(arr, user => !user.active)',
         parserOptions: {ecmaVersion: 6},
-        errors: errors
-    }]
-});
+        errors    }]
+})

@@ -1,50 +1,50 @@
 /**
  * @fileoverview Rule to check if the macthesProperty shorthand can be used
  */
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------
 module.exports = function (context) {
-    var lodashUtil = require('../util/lodashUtil');
-    var astUtil = require('../util/astUtil');
-    var settings = require('../util/settingsUtil').getSettings(context);
+    const lodashUtil = require('../util/lodashUtil')
+    const astUtil = require('../util/astUtil')
+    const settings = require('../util/settingsUtil').getSettings(context)
 
     function isFunctionDeclarationThatCanUseShorthand(func) {
-        return astUtil.isEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Infinity);
+        return astUtil.isEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Infinity)
     }
 
     function canUseShorthand(iteratee) {
-        return isFunctionDeclarationThatCanUseShorthand(iteratee) || lodashUtil.isLodashCallToMethod(iteratee, settings, 'matchesProperty');
+        return isFunctionDeclarationThatCanUseShorthand(iteratee) || lodashUtil.isLodashCallToMethod(iteratee, settings, 'matchesProperty')
     }
 
     function callHasExtraParamAfterIteratee(node, iteratee) {
-        return node.arguments[node.arguments.indexOf(iteratee) + 1];
+        return node.arguments[node.arguments.indexOf(iteratee) + 1]
     }
 
-    var matchesPropertyChecks = {
-        3: function (node, iteratee) {
-            return iteratee && iteratee.type === 'Literal' && callHasExtraParamAfterIteratee(node, iteratee);
+    const matchesPropertyChecks = {
+        3(node, iteratee) {
+            return iteratee && iteratee.type === 'Literal' && callHasExtraParamAfterIteratee(node, iteratee)
         },
-        4: function (node, iteratee) {
-            return iteratee && iteratee.type === 'ArrayExpression';
+        4(node, iteratee) {
+            return iteratee && iteratee.type === 'ArrayExpression'
         }
-    };
+    }
 
     return {
         CallExpression: lodashUtil.getShorthandVisitor(context, settings, {
-            canUseShorthand: canUseShorthand,
+            canUseShorthand,
             usesShorthand: matchesPropertyChecks[settings.version]
         }, {
             always: 'Prefer matches property syntax',
             never: 'Do not use matches property syntax'
         })
-    };
-};
+    }
+}
 
 module.exports.schema = [
     {
         enum: ['always', 'never']
     }
-];
+]

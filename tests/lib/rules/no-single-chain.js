@@ -4,15 +4,15 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/no-single-chain');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/no-single-chain');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil').fromMessage('Do not use chain syntax for single method');
+const ruleTester = new RuleTester();
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Do not use chain syntax for single method');
 
 ruleTester.run('no-single-chain', rule, {
     valid: [

@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-lodash-method');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-lodash-method')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 ruleTester.run('prefer-lodash-method', rule, {
     valid: [
         'var x = _.map(arr, f)',
@@ -35,4 +35,4 @@ ruleTester.run('prefer-lodash-method', rule, {
         code: 'var x = Object.keys(node)',
         errors: [{message: "Prefer '_.keys' over the native function."}]
     }]
-});
+})

@@ -4,14 +4,14 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/no-extra-args');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/no-extra-args');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 ruleTester.run('no-extra-args', rule, {
     valid: [
         'var x = _.uniq(arr);',

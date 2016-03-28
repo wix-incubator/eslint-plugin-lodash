@@ -4,14 +4,14 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-chain');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-chain');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester();
 ruleTester.run('prefer-chain', rule, {
     valid: [{
         code: 'var isPublic = _.map([], function (i) { return x.id; });',

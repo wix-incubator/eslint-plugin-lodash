@@ -1,50 +1,50 @@
 /**
  * @fileoverview Rule to check if an "&&" experssion should be a call to _.get or _.has
  */
-'use strict';
+'use strict'
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    var DEFAULT_LENGTH = 3;
-    var astUtil = require('../util/astUtil');
-    var ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH;
+    const DEFAULT_LENGTH = 3
+    const astUtil = require('../util/astUtil')
+    const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
 
-    var expStates = [];
+    const expStates = []
     function getState() {
-        return expStates[expStates.length - 1] || {depth: 0};
+        return expStates[expStates.length - 1] || {depth: 0}
     }
 
     function shouldCheckDeeper(node, nodeRight, toCompare) {
-        return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !astUtil.isComputed(nodeRight) && (!toCompare || astUtil.isEquivalentExp(nodeRight, toCompare));
+        return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !astUtil.isComputed(nodeRight) && (!toCompare || astUtil.isEquivalentExp(nodeRight, toCompare))
     }
 
     return {
-        LogicalExpression: function (node) {
-            var state = getState();
-            var rightMemberExp = astUtil.isEqEqEq(node.right) && state.depth === 0 ? node.right.left : node.right;
+        LogicalExpression(node) {
+            const state = getState()
+            const rightMemberExp = astUtil.isEqEqEq(node.right) && state.depth === 0 ? node.right.left : node.right
 
             if (shouldCheckDeeper(node, rightMemberExp, state.node)) {
-                expStates.push({depth: state.depth + 1, node: rightMemberExp.object});
+                expStates.push({depth: state.depth + 1, node: rightMemberExp.object})
                 if (astUtil.isEquivalentExp(node.left, rightMemberExp.object) && state.depth >= ruleDepth - 2) {
-                    context.report(node, "Prefer _.get or _.has over an '&&' chain");
+                    context.report(node, "Prefer _.get or _.has over an '&&' chain")
                 }
             }
         },
-        'LogicalExpression:exit': function (node) {
-            var state = getState();
+        'LogicalExpression:exit'(node) {
+            const state = getState()
             if (state && state.node === node.right.object) {
-                expStates.pop();
+                expStates.pop()
             }
         }
-    };
-};
+    }
+}
 
 module.exports.schema = [
     {
         type: 'integer',
         minimum: 2
     }
-];
+]

@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-times');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-times')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.times over _.map without using arguments'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.times over _.map without using arguments'}]
 ruleTester.run('prefer-times', rule, {
     valid: [
         'var a = _.map(arr, function(x) {return x + 1});',
@@ -27,21 +27,21 @@ ruleTester.run('prefer-times', rule, {
     ],
     invalid: [{
         code: '_(arr).map(function(){return g}).value()',
-        errors: errors
+        errors
     }, {
         code: '_.map(arr, function() {return Math.random()});',
-        errors: errors
+        errors
     }, {
         code: '_(arr).map(() => a.push(f()))',
         parserOptions: {ecmaVersion: 6},
-        errors: errors
+        errors
     }, {
         code: '_.map(arr, function(a, c = 1) {return b})',
         parserOptions: {ecmaVersion: 6},
-        errors: errors
+        errors
     }, {
         code: '_(arr).map(() => a.push(f()))',
         parserOptions: {ecmaVersion: 6},
-        errors: errors
+        errors
     }]
-});
+})

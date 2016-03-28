@@ -4,15 +4,15 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-constant');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-constant');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.constant over a function returning a literal'}];
+const ruleTester = new RuleTester();
+const errors = [{message: 'Prefer _.constant over a function returning a literal'}];
 ruleTester.run('prefer-constant', rule, {
     valid: [
         'var x = function() { return f();}',
@@ -25,17 +25,17 @@ ruleTester.run('prefer-constant', rule, {
     ],
     invalid: [{
         code: 'var x = function() { return 1; }',
-        errors: errors
+        errors
     }, {
         code: 'var x = function() { return 1 + 1; }',
-        errors: errors
+        errors
     }, {
         code: 'var x = function() { return typeof 1; }',
-        errors: errors
+        errors
     }, {
         code: 'var x = () => 1',
         parserOptions: {ecmaVersion: 6},
         options: [true],
-        errors: errors
+        errors
     }]
 });

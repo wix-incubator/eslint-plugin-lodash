@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/callback-binding');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/callback-binding')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var optionsUtil = require('../testUtil/optionsUtil');
+const ruleTester = new RuleTester()
+const optionsUtil = require('../testUtil/optionsUtil')
 ruleTester.run('callback-binding', rule, {
     valid: [
         'var x = _.map(arr, f)',
@@ -32,4 +32,4 @@ ruleTester.run('callback-binding', rule, {
         'var t = _.find(users, function(user) { return this.x === user}, this);',
         'var t = _.reduce(users, func, initial, this);'
     ].map(optionsUtil.fromMessage('Do not use Lodash 3 thisArg, use binding instead')))
-});
+})

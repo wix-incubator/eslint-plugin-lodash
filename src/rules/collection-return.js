@@ -1,64 +1,64 @@
 /**
  * @fileoverview Rule to check that iteratees for all collection functions except forEach return a value;
  */
-'use strict';
+'use strict'
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    var _ = require('lodash');
-    var astUtil = require('../util/astUtil');
-    var lodashUtil = require('../util/lodashUtil');
-    var settings = require('../util/settingsUtil').getSettings(context);
-    var callStack = [];
+    const _ = require('lodash')
+    const astUtil = require('../util/astUtil')
+    const lodashUtil = require('../util/lodashUtil')
+    const settings = require('../util/settingsUtil').getSettings(context)
+    const callStack = []
 
     function handleExitOfFunctionWithBlock(node) {
-        var functionNode = callStack.pop();
-        var last = _.last(callStack);
+        const functionNode = callStack.pop()
+        const last = _.last(callStack)
         if (!functionNode.found && _.get(last, 'node.type') === 'CallExpression') {
-            context.report(node, 'Do not use _.' + astUtil.getMethodName(last.node) + ' without returning a value');
+            context.report(node, `Do not use _.${astUtil.getMethodName(last.node)} without returning a value`)
         }
         if (last && last.node === node.parent) {
-            callStack.pop();
+            callStack.pop()
         }
     }
     function addToCallStackIfCollectionMethod(node) {
         if (node.parent.type === 'CallExpression' && lodashUtil.isLodashCollectionMethod(node.parent, settings.pragma, settings.version)) {
-            callStack.push({node: node.parent});
+            callStack.push({node: node.parent})
         }
     }
 
     return {
-        FunctionExpression: function (node) {
-            addToCallStackIfCollectionMethod(node);
-            callStack.push({node: node, found: false});
+        FunctionExpression(node) {
+            addToCallStackIfCollectionMethod(node)
+            callStack.push({node, found: false})
         },
         'FunctionExpression:exit': handleExitOfFunctionWithBlock,
-        ArrowFunctionExpression: function (node) {
-            addToCallStackIfCollectionMethod(node);
+        ArrowFunctionExpression(node) {
+            addToCallStackIfCollectionMethod(node)
             if (node.body.type === 'BlockStatement') {
-                callStack.push({node: node, found: false});
+                callStack.push({node, found: false})
             }
         },
-        'ArrowFunctionExpression:exit': function (node) {
-            var last = _.last(callStack);
+        'ArrowFunctionExpression:exit'(node) {
+            const last = _.last(callStack)
             if (last && last.node === node) {
-                handleExitOfFunctionWithBlock(node);
+                handleExitOfFunctionWithBlock(node)
             }
         },
-        ReturnStatement: function () {
-            var last = _.last(callStack);
+        ReturnStatement() {
+            const last = _.last(callStack)
             if (last) {
-                last.found = true;
+                last.found = true
             }
         },
-        'CallExpression:exit': function (node) {
-            var last = _.last(callStack);
+        'CallExpression:exit'(node) {
+            const last = _.last(callStack)
             if (last && last.node === node) {
-                callStack.pop();
+                callStack.pop()
             }
         }
-    };
-};
+    }
+}

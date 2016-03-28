@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-matches');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-matches')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.matches over conditions on the same object'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.matches over conditions on the same object'}]
 ruleTester.run('prefer-matches', rule, {
     valid: [
         'foo = bar.a === 1 && bar.b == 2',
@@ -20,13 +20,11 @@ ruleTester.run('prefer-matches', rule, {
     ],
     invalid: [{
         code: 'x = a.foo === 1 && a.bar === 2 && a.baz === 3',
-        errors: errors
-    }, {
+        errors    }, {
         code: 'x = a["foo"] === 1 && a["bar"] === 2 && a.baz === 3',
-        errors: errors
-    }, {
+        errors    }, {
         code: 'x = a.foo === 1 && a.bar === 2',
-        errors: errors,
+        errors,
         options: [2]
     }]
-});
+})

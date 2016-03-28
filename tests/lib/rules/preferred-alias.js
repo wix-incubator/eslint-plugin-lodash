@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/preferred-alias');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/preferred-alias')
+const RuleTester = require('eslint').RuleTester
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var toErrorObject = require('../testUtil/optionsUtil').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'");
+const ruleTester = new RuleTester()
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'")
 ruleTester.run('preferred-alias', rule, {
     valid: [
         '_.forEach();',
@@ -25,4 +25,4 @@ ruleTester.run('preferred-alias', rule, {
         '_(users).each(function (i) { i.f(); });',
         '_(users).map(function (i) { return i; }).each(function (i) {});'
     ].map(toErrorObject)
-});
+})

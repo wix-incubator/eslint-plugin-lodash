@@ -1,50 +1,50 @@
 /**
  * @fileoverview Rule to enforce a specific chain style
  */
-'use strict';
+'use strict'
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 module.exports = function (context) {
-    var lodashUtil = require('../util/lodashUtil');
-    var astUtil = require('../util/astUtil');
-    var settings = require('../util/settingsUtil').getSettings(context);
-    var callExpressionVisitors = {
-        'as-needed': function (node) {
+    const lodashUtil = require('../util/lodashUtil')
+    const astUtil = require('../util/astUtil')
+    const settings = require('../util/settingsUtil').getSettings(context)
+    const callExpressionVisitors = {
+        'as-needed'(node) {
             if (lodashUtil.isExplicitChainStart(node, settings.pragma)) {
-                var curr = node.parent.parent;
-                var needed = false;
+                let curr = node.parent.parent
+                let needed = false
                 while (astUtil.isMethodCall(curr) && !lodashUtil.isChainBreaker(curr, settings.version)) {
                     if (!lodashUtil.isChainable(curr, settings.version) && !lodashUtil.isChainBreaker(curr.parent.parent, settings.version)) {
-                        needed = true;
+                        needed = true
                     }
-                    curr = curr.parent.parent;
+                    curr = curr.parent.parent
                 }
                 if (astUtil.isMethodCall(curr) && !needed) {
-                    context.report(node, 'Unnecessary explicit chaining');
+                    context.report(node, 'Unnecessary explicit chaining')
                 }
             }
         },
-        implicit: function (node) {
+        implicit(node) {
             if (lodashUtil.isExplicitChainStart(node, settings.pragma)) {
-                context.report(node, 'Do not use explicit chaining');
+                context.report(node, 'Do not use explicit chaining')
             }
         },
-        explicit: function (node) {
+        explicit(node) {
             if (lodashUtil.isImplicitChainStart(node, settings.pragma)) {
-                context.report(node, 'Do not use implicit chaining');
+                context.report(node, 'Do not use implicit chaining')
             }
         }
-    };
+    }
 
     return {
         CallExpression: callExpressionVisitors[context.options[0] || 'as-needed']
-    };
-};
+    }
+}
 
 module.exports.schema = [
     {
         enum: ['as-needed', 'implicit', 'explicit']
     }
-];
+]

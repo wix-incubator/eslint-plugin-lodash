@@ -1,24 +1,24 @@
 /**
  * @fileoverview Rule to check if there's a method in the chain start that can be in the chain
  */
-'use strict';
+'use strict'
 
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    var lodashUtil = require('../util/lodashUtil');
-    var settings = require('../util/settingsUtil').getSettings(context);
+    const lodashUtil = require('../util/lodashUtil')
+    const settings = require('../util/settingsUtil').getSettings(context)
     function isSingleArgumentFunctionCall(node) {
-        return node && node.type === 'CallExpression' && node.arguments.length === 1 && node.arguments[0].type !== 'Literal';
+        return node && node.type === 'CallExpression' && node.arguments.length === 1 && node.arguments[0].type !== 'Literal'
     }
 
     return {
-        CallExpression: function (node) {
+        CallExpression(node) {
             if (lodashUtil.isLodashChainStart(node, settings.pragma) && isSingleArgumentFunctionCall(node.arguments[0])) {
-                context.report(node, 'Prefer using thru instead of function call in chain start.');
+                context.report(node, 'Prefer using thru instead of function call in chain start.')
             }
         }
-    };
-};
+    }
+}

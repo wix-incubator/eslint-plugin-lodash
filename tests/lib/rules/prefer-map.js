@@ -4,15 +4,15 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prefer-map');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-map');
+const RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var errors = [{message: 'Prefer _.map over a _.forEach with a push to an array inside'}];
+const ruleTester = new RuleTester();
+const errors = [{message: 'Prefer _.map over a _.forEach with a push to an array inside'}];
 ruleTester.run('prefer-map', rule, {
     valid: [
         'var x = _.map(arr, function(x) {return x + 7})',
@@ -21,13 +21,13 @@ ruleTester.run('prefer-map', rule, {
     ],
     invalid: [{
         code: '_(arr).forEach(function(x) { a.push(x)})',
-        errors: errors
+        errors
     }, {
         code: '_(arr).forEach(function(x) { a.push(f(x))})',
-        errors: errors
+        errors
     }, {
         code: '_(arr).forEach(x => a.push(f(x)))',
         parserOptions: {ecmaVersion: 6},
-        errors: errors
+        errors
     }]
 });

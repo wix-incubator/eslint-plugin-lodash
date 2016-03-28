@@ -1,11 +1,11 @@
-'use strict';
+'use strict'
 
-var _ = require('lodash');
+const _ = require('lodash')
 
 /**
  * @type {VersionInfo}
  */
-var methodDataByVersion = require('./methodDataByVersion');
+const methodDataByVersion = require('./methodDataByVersion')
 
 /**
  * Gets a major version number and method name and returns all its aliases including itself.
@@ -14,8 +14,8 @@ var methodDataByVersion = require('./methodDataByVersion');
  * @returns {[String]}
  */
 function expandAlias(version, method) {
-    var methodData = methodDataByVersion[version];
-    return [method].concat(methodData.aliases[method] || methodData.wrapperAliases[method] || []);
+    const methodData = methodDataByVersion[version]
+    return [method].concat(methodData.aliases[method] || methodData.wrapperAliases[method] || [])
 }
 
 /**
@@ -25,7 +25,7 @@ function expandAlias(version, method) {
  * @returns {Array}
  */
 function expandAliases(version, methods) {
-    return _.flatMap(methods, expandAlias.bind(null, version));
+    return _.flatMap(methods, expandAlias.bind(null, version))
 }
 
 /**
@@ -34,7 +34,7 @@ function expandAliases(version, methods) {
  * @returns {Aliases}
  */
 function getAliasesByVersion(version) {
-    return methodDataByVersion[version].aliases;
+    return methodDataByVersion[version].aliases
 }
 
 /**
@@ -43,7 +43,7 @@ function getAliasesByVersion(version) {
  * @returns {[string]}
  */
 function getChainableAliases(version) {
-    return expandAliases(version, methodDataByVersion[version].chainable);
+    return expandAliases(version, methodDataByVersion[version].chainable)
 }
 
 /**
@@ -52,7 +52,7 @@ function getChainableAliases(version) {
  * @returns {[string]}
  */
 function getCollectionMethods(version) {
-    return expandAliases(version, methodDataByVersion[version].shorthand.concat(['reduce', 'reduceRight']));
+    return expandAliases(version, methodDataByVersion[version].shorthand.concat(['reduce', 'reduceRight']))
 }
 
 /**
@@ -61,7 +61,7 @@ function getCollectionMethods(version) {
  * @returns {[string]}
  */
 function getShorthandMethods(version) {
-    return expandAliases(version, methodDataByVersion[version].shorthand);
+    return expandAliases(version, methodDataByVersion[version].shorthand)
 }
 
 /**
@@ -70,7 +70,7 @@ function getShorthandMethods(version) {
  * @returns {[string]}
  */
 function getWrapperMethods(version) {
-    return methodDataByVersion[version].wrapper;
+    return methodDataByVersion[version].wrapper
 }
 
 /**
@@ -81,7 +81,7 @@ function getWrapperMethods(version) {
  * @returns {boolean}
  */
 function isAliasOfMethod(version, method, suspect) {
-    return _.includes(expandAlias(version, method), suspect);
+    return _.includes(expandAlias(version, method), suspect)
 }
 
 /**
@@ -92,11 +92,9 @@ function isAliasOfMethod(version, method, suspect) {
  */
 function getMainAlias(version, method) {
     if (methodDataByVersion[version].aliases[method]) {
-        return method;
+        return method
     }
-    return _.findKey(methodDataByVersion[version].aliases, function (aliases) {
-        return _.includes(aliases, method);
-    }) || method;
+    return _.findKey(methodDataByVersion[version].aliases, aliases => _.includes(aliases, method)) || method
 }
 
 /**
@@ -106,15 +104,15 @@ function getMainAlias(version, method) {
  * @returns {number}
  */
 function getIterateeIndex(version, method) {
-    var mainAlias = getMainAlias(version, method);
-    var iteratees = methodDataByVersion[version].iteratee;
+    const mainAlias = getMainAlias(version, method)
+    const iteratees = methodDataByVersion[version].iteratee
     if (_.has(iteratees.differentIndex, mainAlias)) {
-        return iteratees.differentIndex[mainAlias];
+        return iteratees.differentIndex[mainAlias]
     }
     if (_.includes(iteratees.any, mainAlias)) {
-        return 1;
+        return 1
     }
-    return -1;
+    return -1
 }
 
 /**
@@ -124,20 +122,20 @@ function getIterateeIndex(version, method) {
  * @returns {number}
  */
 function getFunctionMaxArity(version, name) {
-    return methodDataByVersion[version].args[name] || Infinity;
+    return methodDataByVersion[version].args[name] || Infinity
 }
 
 module.exports = {
-    isAliasOfMethod: isAliasOfMethod,
-    getAliasesByVersion: getAliasesByVersion,
-    getChainableAliases: getChainableAliases,
-    getShorthandMethods: getShorthandMethods,
-    getWrapperMethods: getWrapperMethods,
-    getCollectionMethods: getCollectionMethods,
-    getMainAlias: getMainAlias,
-    getIterateeIndex: getIterateeIndex,
-    getFunctionMaxArity: getFunctionMaxArity
-};
+    isAliasOfMethod,
+    getAliasesByVersion,
+    getChainableAliases,
+    getShorthandMethods,
+    getWrapperMethods,
+    getCollectionMethods,
+    getMainAlias,
+    getIterateeIndex,
+    getFunctionMaxArity
+}
 
 /**
  * A hash of all aliases for a Lodash method

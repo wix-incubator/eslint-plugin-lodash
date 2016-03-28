@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/collection-return');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/collection-return')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 ruleTester.run('collection-return', rule, {
     valid: [
         '_.forEach(arr, function(a) { console.log(a)})',
@@ -45,4 +45,4 @@ ruleTester.run('collection-return', rule, {
         code: '_.map(arr, function x(a) {arr2.push(a)})',
         errors: [{message: 'Do not use _.map without returning a value'}]
     }]
-});
+})

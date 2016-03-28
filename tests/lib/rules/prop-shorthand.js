@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../src/rules/prop-shorthand');
-var RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prop-shorthand')
+const RuleTester = require('eslint').RuleTester
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-var ruleTester = new RuleTester();
-var messages = {
+const ruleTester = new RuleTester()
+const messages = {
     always: 'Prefer property shorthand syntax',
     never: 'Do not use property shorthand syntax'
-};
+}
 
 ruleTester.run('prop-shorthand', rule, {
     valid: [
@@ -31,7 +31,7 @@ ruleTester.run('prop-shorthand', rule, {
             options: ['never']
         },
         {
-            code: 'var r = _.map([], x => x.id)',
+            code: 'const r = _.map([], x => x.id)',
             options: ['never'],
             parserOptions: {ecmaVersion: 6}
         }
@@ -64,4 +64,4 @@ ruleTester.run('prop-shorthand', rule, {
         options: ['never'],
         errors: [{message: messages.never, column: 22}]
     }]
-});
+})

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/preferred-alias');
+var rule = require('../../../src/rules/preferred-alias');
 var RuleTester = require('eslint').RuleTester;
 
 

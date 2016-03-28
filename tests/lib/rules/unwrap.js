@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/unwrap');
+var rule = require('../../../src/rules/unwrap');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

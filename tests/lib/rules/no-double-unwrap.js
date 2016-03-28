@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-double-unwrap');
+var rule = require('../../../src/rules/no-double-unwrap');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

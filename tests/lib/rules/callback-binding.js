@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/callback-binding');
+var rule = require('../../../src/rules/callback-binding');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-extra-args');
+var rule = require('../../../src/rules/no-extra-args');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

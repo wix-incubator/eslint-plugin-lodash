@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prop-shorthand');
+var rule = require('../../../src/rules/prop-shorthand');
 var RuleTester = require('eslint').RuleTester;
 
 

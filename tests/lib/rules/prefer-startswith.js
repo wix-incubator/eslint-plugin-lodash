@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-startswith');
+var rule = require('../../../src/rules/prefer-startswith');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-noop');
+var rule = require('../../../src/rules/prefer-noop');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

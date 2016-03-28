@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-over-quantifier');
+var rule = require('../../../src/rules/prefer-over-quantifier');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

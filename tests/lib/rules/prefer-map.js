@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-map');
+var rule = require('../../../src/rules/prefer-map');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

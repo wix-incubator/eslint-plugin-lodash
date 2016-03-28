@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-wrapper-method');
+var rule = require('../../../src/rules/prefer-wrapper-method');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

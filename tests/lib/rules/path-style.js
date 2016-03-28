@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/path-style');
+var rule = require('../../../src/rules/path-style');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-times');
+var rule = require('../../../src/rules/prefer-times');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

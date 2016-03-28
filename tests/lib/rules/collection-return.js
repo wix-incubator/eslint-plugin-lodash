@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/collection-return');
+var rule = require('../../../src/rules/collection-return');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

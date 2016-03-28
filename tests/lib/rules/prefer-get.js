@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-get');
+var rule = require('../../../src/rules/prefer-get');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

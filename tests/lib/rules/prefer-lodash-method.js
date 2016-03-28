@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-lodash-method');
+var rule = require('../../../src/rules/prefer-lodash-method');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

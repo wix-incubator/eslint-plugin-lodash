@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/identity-shorthand');
+var rule = require('../../../src/rules/identity-shorthand');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

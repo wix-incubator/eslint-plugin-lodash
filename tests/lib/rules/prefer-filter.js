@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-filter');
+var rule = require('../../../src/rules/prefer-filter');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-chain');
+var rule = require('../../../src/rules/prefer-chain');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

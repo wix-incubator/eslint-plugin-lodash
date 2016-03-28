@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-lodash-typecheck');
+var rule = require('../../../src/rules/prefer-lodash-typecheck');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

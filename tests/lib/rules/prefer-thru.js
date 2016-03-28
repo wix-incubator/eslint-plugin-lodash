@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-thru');
+var rule = require('../../../src/rules/prefer-thru');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/chain-style');
+var rule = require('../../../src/rules/chain-style');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

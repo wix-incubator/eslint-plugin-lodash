@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/matches-shorthand');
+var rule = require('../../../src/rules/matches-shorthand');
 var RuleTester = require('eslint').RuleTester;
 
 

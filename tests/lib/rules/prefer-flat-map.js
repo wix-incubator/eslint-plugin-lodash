@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-flat-map');
+var rule = require('../../../src/rules/prefer-flat-map');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

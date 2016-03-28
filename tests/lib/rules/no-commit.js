@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-commit');
+var rule = require('../../../src/rules/no-commit');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

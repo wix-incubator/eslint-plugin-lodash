@@ -17,3 +17,4 @@ npm-debug.log
 sftp-config.json
 .idea
 *.iml
+/lib

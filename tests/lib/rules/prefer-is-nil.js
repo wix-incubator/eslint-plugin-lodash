@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-is-nil');
+var rule = require('../../../src/rules/prefer-is-nil');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

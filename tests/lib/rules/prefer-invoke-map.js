@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-invoke-map');
+var rule = require('../../../src/rules/prefer-invoke-map');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

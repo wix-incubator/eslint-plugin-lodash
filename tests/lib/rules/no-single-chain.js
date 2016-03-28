@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/no-single-chain');
+var rule = require('../../../src/rules/no-single-chain');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

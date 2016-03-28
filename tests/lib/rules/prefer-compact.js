@@ -4,7 +4,7 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
-var rule = require('../../../lib/rules/prefer-compact');
+var rule = require('../../../src/rules/prefer-compact');
 var RuleTester = require('eslint').RuleTester;
 
 // ------------------------------------------------------------------------------

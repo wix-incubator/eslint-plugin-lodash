@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.1...HEAD
+
+## [1.5.1] - 2016-03-28
+### Fixed
+- Fixed error where plugin crashes ESLint [`prefer-includes`][prefer-includes]. ([`d619539`][d619539])
+
+[19b27dd]: https://github.com/wix/eslint-plugin-lodash/commit/19b27dd00e0d99067122c413d904b15c0687ce1c
+[1.5.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.1...v1.5.0
 
 ## [1.5.0] - 2016-03-28
 ### Added

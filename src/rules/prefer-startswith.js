@@ -9,26 +9,9 @@
 
 module.exports = function (context) {
     const astUtil = require('../util/astUtil');
-    const comparisonOperators = ['==', '!=', '===', '!=='];
-
-    function getExpressionComparedToZero(node) {
-        if (comparisonOperators.indexOf(node.operator) !== -1) {
-            if (node.right.value === 0) {
-                return node.left;
-            }
-            if (node.left.value === 0) {
-                return node.right;
-            }
-        }
-    }
-
-    function isIndexOfCall(node) {
-        return astUtil.isMethodCall(node) && astUtil.getMethodName(node) === 'indexOf';
-    }
-
     return {
         BinaryExpression(node) {
-            if (isIndexOfCall(getExpressionComparedToZero(node))) {
+            if (astUtil.isIndexOfCall(astUtil.getExpressionComparedToValue(node, 0))) {
                 context.report(node, 'Prefer _.startsWith instead of comparing indexOf() to 0');
             }
         }

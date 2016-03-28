@@ -213,6 +213,35 @@ function isEquivalentExp(a, b) {
  */
 const isEqEqEq = _.matches({type: 'BinaryExpression', operator: '==='})
 
+const comparisonOperators = ['==', '!=', '===', '!=='];
+
+const isMinus = node => node.type === 'UnaryExpression' && node.operator === '-'
+
+/**
+ * Returns the expression compared to the value in a binary expression, or undefined if there isn't one 
+ * @param {Object} node
+ * @param {number} value
+ * @returns {Object|undefined}
+ */
+function getExpressionComparedToValue(node, value) {
+    if (_.includes(comparisonOperators, node.operator)) {
+        const isValue = value < 0 ? _.overEvery(isMinus, _.matches({argument: {value: -value}})) : _.matches({value})
+        if (isValue(node.right)) {
+            return node.left;
+        }
+        if (isValue(node.left)) {
+            return node.right;
+        }
+    }
+}
+
+/**
+ * Returns whether the node is a call to indexOf
+ * @param {Object} node
+ * @returns {boolean}
+ */
+const isIndexOfCall = node => isMethodCall(node) && getMethodName(node) === 'indexOf'
+
 module.exports = {
     getCaller,
     getMethodName,
@@ -231,5 +260,7 @@ module.exports = {
     isCallFromObject,
     isComputed,
     isEquivalentExp,
-    isEqEqEq
+    isEqEqEq,
+    getExpressionComparedToValue,
+    isIndexOfCall
 }

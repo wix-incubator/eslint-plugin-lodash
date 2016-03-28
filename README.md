@@ -50,7 +50,7 @@ The plugin also exports a `v3` config for ease of use.
 ```
 
 # List of provided rules
-Rules are divided into categories for your convenience. All rules are off by default, unless you use one of the plugin's configurations which turn all relevant rules on. 
+Rules are divided into categories for your convenience. All rules are off by default, unless you use one of the plugin's configurations which turn all relevant rules on.
 ### Possible Errors
 The following rules point out areas where you might have made mistakes.
 
@@ -94,6 +94,7 @@ These rules are also stylistic choices, but they also recommend using Lodash ins
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.
 * [prefer-over-quantifier](docs/rules/prefer-over-quantifier.md): Prefer `_.overSome` and `_.overEvery` instead of checks with `&&` and `||` for methods that have a boolean check iteratee.
+* [prefer-includes](docs/rules/perfer-includes.md): Prefer `_.includes` over comparing `indexOf` to 1-11.
 
 # Contributing
 Contributions are always welcome! For more info, read our [contribution guide](.github/CONTRIBUTING.md).

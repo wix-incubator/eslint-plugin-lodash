@@ -3,7 +3,7 @@
   "version": "1.5.0",
   "author": "Omer Ganim <ganimomer@gmail.com>",
   "description": "Lodash specific linting rules for ESLint",
-  "main": "index.js",
+  "main": "lib/index.js",
   "scripts": {
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "lint": "eslint ./",

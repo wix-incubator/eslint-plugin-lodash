@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.4.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.0...HEAD
+
+## [1.5.0] - 2016-03-28
+### Added
+- Added rule [`prefer-includes`][prefer-includes]. ([`d619539`][d619539])
+
+[d619539]: https://github.com/wix/eslint-plugin-lodash/commit/d619539e98f6f5e4d0c7f13012e8f92b49431636
+[1.5.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.0...v1.4.2
 
 ## [1.4.2] - 2016-03-20
 ### Fixed
@@ -193,6 +200,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [path-style]: docs/rules/path-style.md
 [no-extra-args]: docs/rules/no-extra-args.md
 [identity-shorthand]: docs/rules/identity-shorthand.md
+[prefer-includes]: docs/rules/prefer-includes.md
 
 <!--
 ### Added

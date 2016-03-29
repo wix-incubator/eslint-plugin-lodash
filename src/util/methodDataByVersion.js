@@ -861,7 +861,10 @@ module.exports = {
             runInContext: 1,
             times: 2,
             toPath: 1,
-            uniqueId: 1
+            uniqueId: 1,
+            pullAllWith: 3,
+            update: 3,
+            updateWith: 4
         }
     }
 }

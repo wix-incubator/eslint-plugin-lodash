@@ -8,7 +8,18 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.2...HEAD
+
+## [1.5.2] - 2016-03-29
+### Fixed
+- Added chainable methods introducted since lodash v4.0. ([`f2ab08a`][f2ab08a])
+- Added fixed argument numbers for methods introduced since lodash v4.0 ([`7cb7e51`][7cb7e51])
+- Fixed case where [`prefer-lodash-method`][prefer-lodash-method] didn't consider explicit chaining ([`c9ec558`][c9ec558])
+
+[f2ab08a]: https://github.com/wix/eslint-plugin-lodash/commit/f2ab08ae0c575ccd6d4e5637adea47531bcceed1
+[7cb7e51]: https://github.com/wix/eslint-plugin-lodash/commit/7cb7e5118a7fccfb3c73cd1e29fa4269ac223927
+[c9ec558]: https://github.com/wix/eslint-plugin-lodash/commit/c9ec558f8b1187479016ab5ace51826869315ff6
+[1.5.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.2...v1.5.1
 
 ## [1.5.1] - 2016-03-28
 ### Fixed
@@ -208,6 +219,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [no-extra-args]: docs/rules/no-extra-args.md
 [identity-shorthand]: docs/rules/identity-shorthand.md
 [prefer-includes]: docs/rules/prefer-includes.md
+[prefer-lodash-method]: docs/rules/prefer-lodash-method.md
 
 <!--
 ### Added

@@ -213,7 +213,7 @@ function isEquivalentExp(a, b) {
  */
 const isEqEqEq = _.matches({type: 'BinaryExpression', operator: '==='})
 
-const comparisonOperators = ['==', '!=', '===', '!=='];
+const comparisonOperators = ['==', '!=', '===', '!==']
 
 const isMinus = node => node.type === 'UnaryExpression' && node.operator === '-'
 
@@ -227,10 +227,10 @@ function getExpressionComparedToValue(node, value) {
     if (_.includes(comparisonOperators, node.operator)) {
         const isValue = value < 0 ? _.overEvery(isMinus, _.matches({argument: {value: -value}})) : _.matches({value})
         if (isValue(node.right)) {
-            return node.left;
+            return node.left
         }
         if (isValue(node.left)) {
-            return node.right;
+            return node.right
         }
     }
 }

@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/no-double-unwrap');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/no-double-unwrap')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 
 ruleTester.run('no-double-unwrap', rule, {
     valid: [
@@ -26,4 +26,4 @@ ruleTester.run('no-double-unwrap', rule, {
         errors: [{message: 'Do not use .value() after chain-ending method some'}],
         output: 'var x = _(a).some(f);'
     }]
-});
+})

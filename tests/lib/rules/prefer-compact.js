@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/prefer-compact');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-compact')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
-const ruleError = {message: 'Prefer _.compact over filtering of Boolean casting'};
+const ruleTester = new RuleTester()
+const ruleError = {message: 'Prefer _.compact over filtering of Boolean casting'}
 ruleTester.run('prefer-compact', rule, {
     valid: [
         'var x = _.filter(arr, function(x) {return f(x) || g(x)})',
@@ -35,4 +35,4 @@ ruleTester.run('prefer-compact', rule, {
         parserOptions: {ecmaVersion: 6},
         errors: [ruleError]
     }]
-});
+})

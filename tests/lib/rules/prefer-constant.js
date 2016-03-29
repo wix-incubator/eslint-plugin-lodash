@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/prefer-constant');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-constant')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
-const errors = [{message: 'Prefer _.constant over a function returning a literal'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.constant over a function returning a literal'}]
 ruleTester.run('prefer-constant', rule, {
     valid: [
         'var x = function() { return f();}',
@@ -38,4 +38,4 @@ ruleTester.run('prefer-constant', rule, {
         options: [true],
         errors
     }]
-});
+})

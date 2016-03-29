@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/prefer-chain');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-chain')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 ruleTester.run('prefer-chain', rule, {
     valid: [{
         code: 'var isPublic = _.map([], function (i) { return x.id; });',
@@ -35,4 +35,4 @@ ruleTester.run('prefer-chain', rule, {
         }],
         options: [2]
     }]
-});
+})

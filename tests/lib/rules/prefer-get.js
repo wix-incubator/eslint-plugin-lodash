@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/prefer-get');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-get')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
-const errors = [{message: 'Prefer _.get or _.has over an \'&&\' chain'}];
+const ruleTester = new RuleTester()
+const errors = [{message: 'Prefer _.get or _.has over an \'&&\' chain'}]
 ruleTester.run('prefer-get', rule, {
     valid: [
         'var x = _.get(a, "b.c");',
@@ -38,4 +38,4 @@ ruleTester.run('prefer-get', rule, {
         errors,
         options: [2]
     }]
-});
+})

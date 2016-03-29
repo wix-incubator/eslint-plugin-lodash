@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/matches-prop-shorthand');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/matches-prop-shorthand')
+const RuleTester = require('eslint').RuleTester
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 const errors = {
     always: [{message: 'Prefer matches property syntax'}],
     never: [{message: 'Do not use matches property syntax'}]
-};
+}
 ruleTester.run('matches-prop-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
@@ -56,4 +56,4 @@ ruleTester.run('matches-prop-shorthand', rule, {
         parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }]
-});
+})

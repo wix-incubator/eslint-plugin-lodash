@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/identity-shorthand');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/identity-shorthand')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 
 const messages = {
     always: 'Prefer omitting the iteratee over a function that returns its argument',
     never: 'Do not use the identity shorthand syntax'
-};
+}
 
 ruleTester.run('identity-shorthand', rule, {
     valid: [
@@ -69,4 +69,4 @@ ruleTester.run('identity-shorthand', rule, {
         code: 'var ids = _(arr).map("x").map("y").map(function (i) { return i; });',
         errors: [{message: messages.always, column: 40}]
     }]
-});
+})

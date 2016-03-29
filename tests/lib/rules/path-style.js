@@ -1,17 +1,17 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/path-style');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/path-style')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 ruleTester.run('path-style', rule, {
     valid: [
         "var aProp = _.property('a')",
@@ -45,4 +45,4 @@ ruleTester.run('path-style', rule, {
         errors: [{message: 'Use a string for paths', column: 18}],
         options: ['string']
     }]
-});
+})

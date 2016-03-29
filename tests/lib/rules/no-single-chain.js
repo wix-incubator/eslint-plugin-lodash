@@ -1,18 +1,18 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/no-single-chain');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/no-single-chain')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
-const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Do not use chain syntax for single method');
+const ruleTester = new RuleTester()
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Do not use chain syntax for single method')
 
 ruleTester.run('no-single-chain', rule, {
     valid: [
@@ -23,4 +23,4 @@ ruleTester.run('no-single-chain', rule, {
         'var x = _(arr).map(f).value()',
         'var x = _(arr).reduce(f, i)'
     ].map(toErrorObject)
-});
+})

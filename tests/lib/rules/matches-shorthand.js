@@ -1,22 +1,22 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/matches-shorthand');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/matches-shorthand')
+const RuleTester = require('eslint').RuleTester
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 const messages = {
     always: 'Prefer matches syntax',
     never: 'Do not use matches syntax'
-};
+}
 ruleTester.run('matches-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
@@ -61,4 +61,4 @@ ruleTester.run('matches-shorthand', rule, {
         options: ['never'],
         errors: [{message: messages.never, column: 22}]
     }]
-});
+})

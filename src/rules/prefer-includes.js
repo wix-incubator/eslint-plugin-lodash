@@ -14,7 +14,7 @@ module.exports = function (context) {
     const settings = require('../util/settingsUtil').getSettings(context)
     return {
         BinaryExpression(node) {
-            const callExp = astUtil.getExpressionComparedToValue(node, -1);
+            const callExp = astUtil.getExpressionComparedToValue(node, -1)
             if (astUtil.isIndexOfCall(callExp) && (includeNative || lodashUtil.isLodashCall(callExp, settings.pragma))) {
                 context.report(node, 'Prefer _.includes over indexOf comparison to -1')
             }

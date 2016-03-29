@@ -1,19 +1,19 @@
-'use strict';
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
 // ------------------------------------------------------------------------------
 
-const rule = require('../../../src/rules/prefer-filter');
-const RuleTester = require('eslint').RuleTester;
+const rule = require('../../../src/rules/prefer-filter')
+const RuleTester = require('eslint').RuleTester
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester();
+const ruleTester = new RuleTester()
 const toErrorObject = require('../testUtil/optionsUtil')
-    .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach');
+    .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach')
 
 ruleTester.run('prefer-filter', rule, {
     valid: [
@@ -29,4 +29,4 @@ ruleTester.run('prefer-filter', rule, {
         '_.forEach(arr, function(x) { if (x.a.b.c !== d) {}})',
         '_.forEach(arr, function(x) { if (!x.a.b.c) {}})'
     ].map(toErrorObject)
-});
+})

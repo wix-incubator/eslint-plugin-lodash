@@ -22,10 +22,14 @@ ruleTester.run('prefer-lodash-method', rule, {
         {
             code: 'var x = a.map(f)',
             options: [{except: ['map']}]
-        }
+        },
+        '_.chain(a).get(p).map(f).value()'
     ],
     invalid: [{
         code: 'var x = a.map(function(x) {return x.f()});',
+        errors: [{message: 'Prefer \'_.map\' over the native function.'}]
+    }, {
+        code: 'var x = _(arr).map(f).filter(g).value().map(h);',
         errors: [{message: 'Prefer \'_.map\' over the native function.'}]
     }, {
         code: 'var x = arr.filter(x => x.f())',

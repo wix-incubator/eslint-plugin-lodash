@@ -86,16 +86,20 @@ function isExplicitMethodChaining(node, version) {
  */
 function isLodashWrapper(node, pragma, version) {
     let currentNode = node
+    let chainable = true
     while (astUtil.isMethodCall(currentNode)) {
         if (isLodashChainStart(currentNode, pragma)) {
             return true
         }
-        if (!isChainable(currentNode, version)) {
+        if (isChainBreaker(currentNode, version)) {
             return false
+        }
+        if (!isChainable(currentNode, version)) {
+            chainable = false
         }
         currentNode = astUtil.getCaller(currentNode)
     }
-    return isLodashChainStart(currentNode, pragma)
+    return chainable ? isLodashChainStart(currentNode, pragma) : isExplicitChainStart(currentNode, pragma)
 }
 
 /**

@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.3...HEAD
+
+## [1.5.3] - 2016-04-03
+### Fixed
+- Added missed cases in `prefer-includes`. ([`ef9058f`][ef9058f])
+
+[ef9058f]: https://github.com/wix/eslint-plugin-lodash/commit/ef9058fbb32cfdfb9b1eb7b7350dcf5f2635e3e8
+[1.5.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.3...v1.5.2
 
 ## [1.5.2] - 2016-03-29
 ### Fixed

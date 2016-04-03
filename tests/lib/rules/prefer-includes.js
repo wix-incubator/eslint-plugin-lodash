@@ -23,6 +23,11 @@ ruleTester.run('prefer-includes', rule, {
     invalid: [
         'x = _.indexOf(a, b) === -1',
         'if (_.indexOf(a, b) !== -1) {}',
-        {code: 'x = a.indexOf(b) !== -1', options: [{includeNative: true}]}
+        {code: 'x = a.indexOf(b) !== -1', options: [{includeNative: true}]},
+        'x = _.indexOf(a, b) > -1',
+        'x = _.indexOf(a, b) >= 0',
+        'x = _.indexOf(a, b) < 0',
+        'x = -1 < _.indexOf(a, b)',
+        'x = 0 <= _.indexOf(a, b)'
     ].map(toErrorMessage)
 })

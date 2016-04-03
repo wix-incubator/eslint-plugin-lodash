@@ -11,7 +11,7 @@ module.exports = function (context) {
     const astUtil = require('../util/astUtil')
     return {
         BinaryExpression(node) {
-            if (astUtil.isIndexOfCall(astUtil.getExpressionComparedToValue(node, 0))) {
+            if (astUtil.isIndexOfCall(astUtil.getExpressionComparedToInt(node, 0))) {
                 context.report(node, 'Prefer _.startsWith instead of comparing indexOf() to 0')
             }
         }

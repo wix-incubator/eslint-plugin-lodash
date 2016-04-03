@@ -213,23 +213,56 @@ function isEquivalentExp(a, b) {
  */
 const isEqEqEq = _.matches({type: 'BinaryExpression', operator: '==='})
 
-const comparisonOperators = ['==', '!=', '===', '!==']
+
 
 const isMinus = node => node.type === 'UnaryExpression' && node.operator === '-'
+
+/**
+ * Enum for type of comparison to int literal
+ * @readonly
+ * @enum {number}
+ */
+const comparisonType = {
+    exact: 0,
+    over: 1,
+    under: 2,
+    any: 3
+}
+const comparisonOperators = ['==', '!=', '===', '!==']
+
+function getIsValue(value) {
+    return value < 0 ? _.overEvery(isMinus, _.matches({argument: {value: -value}})) : _.matches({value})
+}
 
 /**
  * Returns the expression compared to the value in a binary expression, or undefined if there isn't one 
  * @param {Object} node
  * @param {number} value
+ * @param {boolean} [checkOver=false]
  * @returns {Object|undefined}
  */
-function getExpressionComparedToValue(node, value) {
+function getExpressionComparedToInt(node, value, checkOver) {
+    const isValue = getIsValue(value);
     if (_.includes(comparisonOperators, node.operator)) {
-        const isValue = value < 0 ? _.overEvery(isMinus, _.matches({argument: {value: -value}})) : _.matches({value})
         if (isValue(node.right)) {
             return node.left
         }
         if (isValue(node.left)) {
+            return node.right
+        }
+    }
+    if (checkOver) {
+        if (node.operator === '>' && isValue(node.right)) {
+            return node.left
+        }
+        if (node.operator === '<' && isValue(node.left)) {
+            return node.right
+        }
+        const isNext = getIsValue(value + 1)
+        if ((node.operator === '>=' || node.operator === '<') && isNext(node.right)) {
+            return node.left
+        }
+        if ((node.operator === '<=' || node.operator === '>') && isNext(node.left)) {
             return node.right
         }
     }
@@ -261,6 +294,7 @@ module.exports = {
     isComputed,
     isEquivalentExp,
     isEqEqEq,
-    getExpressionComparedToValue,
+    comparisonType,
+    getExpressionComparedToInt,
     isIndexOfCall
 }

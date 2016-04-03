@@ -230,7 +230,7 @@ function isLodashCallToMethod(node, settings, method) {
  * @returns {boolean}
  */
 function isSideEffectIterationMethod(node, version) {
-    return _.includes(methodDataUtil.getSideEffectIterationMethods(version), astUtil.getMethodName(node));
+    return _.includes(methodDataUtil.getSideEffectIterationMethods(version), astUtil.getMethodName(node))
 }
 
 module.exports = {

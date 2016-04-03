@@ -12,7 +12,7 @@ module.exports = function (context) {
     const settings = require('../util/settingsUtil').getSettings(context)
 
     function parentUsesValue(node, isChain) {
-        const isBeforeChainBreaker = isChain && lodashUtil.isChainBreaker(node.parent.parent, settings.version);
+        const isBeforeChainBreaker = isChain && lodashUtil.isChainBreaker(node.parent.parent, settings.version)
         return (isBeforeChainBreaker ? node.parent.parent : node).parent.type !== 'ExpressionStatement'
     }
 

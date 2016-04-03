@@ -23,7 +23,14 @@ ruleTester.run('matches-prop-shorthand', rule, {
         'var r = _.findIndex(this.packages, {name: name});',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3; });',
-        {code: 'var isPublic = _.find([], function(i) { return i.id === 3});', options: ['never']}
+        {
+            code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
+            options: ['never']
+        }, {
+          code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
+          parserOptions: {ecmaVersion: 6},
+          options: ['always', { onlyLiterals: true }]
+        }
     ],
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
@@ -51,8 +58,12 @@ ruleTester.run('matches-prop-shorthand', rule, {
         parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
-
         code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
+        parserOptions: {ecmaVersion: 6},
+        errors: errors.always
+    }, {
+        code: 'var isPublic = _.filter(arr, i => i.id === 3)',
+        options: ['always', { onlyLiterals: true }],
         parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }]

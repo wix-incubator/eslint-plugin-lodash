@@ -104,18 +104,29 @@ function isObjectOfMethodCall(node) {
 }
 
 /**
+ * Returns whether the node is a literal
+ * @param {Object} node
+ * @returns {boolean}
+ */
+function isLiteral(node) {
+    return node.type === 'Literal'
+}
+
+/**
  * Returns whether the expression specified is a binary expression with the specified operator and one of its sides is a member expression of the specified object name
  * @param {string} operator
  * @param {Object} exp
  * @param {string} objectName
  * @param {number} maxPropertyPathLength
  * @param {boolean} allowComputed
+ * @param {boolean} onlyLiterals
  * @returns {boolean|undefined}
  */
-function isBinaryExpWithMemberOf(operator, exp, objectName, maxPropertyPathLength, allowComputed) {
+function isBinaryExpWithMemberOf(operator, exp, objectName, maxPropertyPathLength, allowComputed, onlyLiterals) {
     return exp && exp.type === 'BinaryExpression' && exp.operator === operator &&
           (isMemberExpOf(exp.left, objectName, maxPropertyPathLength, allowComputed) ||
-          isMemberExpOf(exp.right, objectName, maxPropertyPathLength, allowComputed))
+          isMemberExpOf(exp.right, objectName, maxPropertyPathLength, allowComputed)) &&
+          (!onlyLiterals || (isLiteral(exp.left) || isLiteral(exp.right)))
 }
 
 
@@ -235,7 +246,7 @@ function getIsValue(value) {
 }
 
 /**
- * Returns the expression compared to the value in a binary expression, or undefined if there isn't one 
+ * Returns the expression compared to the value in a binary expression, or undefined if there isn't one
  * @param {Object} node
  * @param {number} value
  * @param {boolean} [checkOver=false]

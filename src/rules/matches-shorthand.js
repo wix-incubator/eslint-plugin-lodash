@@ -14,6 +14,7 @@ module.exports = function (context) {
     const settingsUtil = require('../util/settingsUtil')
     const settings = settingsUtil.getSettings(context)
     const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
+    const onlyLiterals = context.options[3] && context.options[3].onlyLiterals
 
     const isConjunction = _.matches({type: 'LogicalExpression', operator: '&&'})
 
@@ -33,7 +34,7 @@ module.exports = function (context) {
             while (curr) {
                 if (isConjunction(curr)) {
                     checkStack.push(curr.left, curr.right)
-                } else if (!astUtil.isEqEqEqToMemberOf(curr, paramName, maxPropertyPathLength, allowComputed)) {
+                } else if (!astUtil.isEqEqEqToMemberOf(curr, paramName, maxPropertyPathLength, allowComputed, onlyLiterals)) {
                     allParamMemberEq = false
                 }
                 curr = checkStack.pop()
@@ -70,11 +71,17 @@ module.exports = function (context) {
 module.exports.schema = [
     {
         enum: ['always', 'never']
-    },
-    {
+    }, {
         type: 'integer',
         minimum: 1
     }, {
         type: 'boolean'
+    }, {
+      type: 'object',
+      properties: {
+          onlyLiterals: {
+              type: 'boolean'
+          }
+      }
     }
 ]

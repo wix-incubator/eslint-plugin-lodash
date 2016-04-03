@@ -24,7 +24,13 @@ ruleTester.run('matches-shorthand', rule, {
         'var isPublic = _.map([], function (i) { return i.id + "?"; });',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3 && f(i); });',
-        {code: 'var isPublic = _.find([], function(i) { return i.id === 3});', options: ['never']}
+        {
+            code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
+            options: ['never']
+        }, {
+          code: 'var b = 1; var isPublic = _.find([], function(i) { return i.id === 3 && i.a === b; });',
+          options: ['always', 1, true, { onlyLiterals: true }]
+        }
     ],
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === id; });',
@@ -60,5 +66,9 @@ ruleTester.run('matches-shorthand', rule, {
         code: '_.findLastIndex(arr, {b: {c: compId}});',
         options: ['never'],
         errors: [{message: messages.never, column: 22}]
+    }, {
+      code: 'var isPublic = _.find([], function(i) { return i.id === 3 && i.a === "b"; });',
+      options: ['always', 1, true, { onlyLiterals: true }],
+      errors: [{message: messages.always, column: 27}]
     }]
 })

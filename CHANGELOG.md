@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...HEAD
+
+## [1.6.0] - 2016-04-03
+### Fixed
+- Stopped rule `collection-method-value` from reporting on mutating method `remove`. ([`05bff20`][05bff20])
+
+[05bff20]: https://github.com/wix/eslint-plugin-lodash/commit/05bff20eb09187c7959470c99bd8c5405a255847
+[1.6.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...v1.6.0
 
 ## [1.6.0] - 2016-04-03
 ### Added

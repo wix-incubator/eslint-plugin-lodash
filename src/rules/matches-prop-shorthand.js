@@ -10,9 +10,10 @@ module.exports = function (context) {
     const lodashUtil = require('../util/lodashUtil')
     const astUtil = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
+    const onlyLiterals = context.options[1] && context.options[1].onlyLiterals
 
     function isFunctionDeclarationThatCanUseShorthand(func) {
-        return astUtil.isEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Infinity)
+        return astUtil.isEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Infinity, false, onlyLiterals)
     }
 
     function canUseShorthand(iteratee) {
@@ -46,5 +47,12 @@ module.exports = function (context) {
 module.exports.schema = [
     {
         enum: ['always', 'never']
+    }, {
+      type: 'object',
+      properties: {
+          onlyLiterals: {
+              type: 'boolean'
+          }
+      }
     }
 ]

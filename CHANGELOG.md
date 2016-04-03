@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.5.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.0...HEAD
+
+## [1.6.0] - 2016-04-03
+### Added
+- Added rule [`collection-method-value`][collection-method-value]. ([`bc73ec8`][bc73ec8])
+
+[bc73ec8]: https://github.com/wix/eslint-plugin-lodash/commit/bc73ec8a542577b3655818818887988e5fdb5770
+[1.6.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.0...v1.5.3
 
 ## [1.5.3] - 2016-04-03
 ### Fixed
@@ -227,6 +234,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [identity-shorthand]: docs/rules/identity-shorthand.md
 [prefer-includes]: docs/rules/prefer-includes.md
 [prefer-lodash-method]: docs/rules/prefer-lodash-method.md
+[collection-method-value]: docs/rules/collection-method-value.md
 
 <!--
 ### Added

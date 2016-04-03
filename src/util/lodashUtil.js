@@ -156,15 +156,11 @@ function isNativeCollectionMethodCall(node) {
 /**
  * Returns whether or not the node is a call to a lodash collection method in the specified version
  * @param {Object} node
- * @param {string} pragma
  * @param {number} version
  * @returns {boolean}
  */
-function isLodashCollectionMethod(node, pragma, version) {
-    if (!isLodashWrapper(node, pragma, version) && !isLodashCall(node, pragma)) {
-        return false
-    }
-    return _.includes(methodDataUtil.getCollectionMethods(version), astUtil.getMethodName(node))
+function isLodashCollectionMethod(node, version) {
+    return node.type === 'CallExpression' && _.includes(methodDataUtil.getCollectionMethods(version), astUtil.getMethodName(node))
 }
 
 /**
@@ -227,6 +223,16 @@ function isLodashCallToMethod(node, settings, method) {
     return isLodashCall(node, settings.pragma) && isCallToMethod(node, settings.version, method)
 }
 
+/**
+ * Returns whether the node is a side effect iteration method call (e.g forEach)
+ * @param node
+ * @param version
+ * @returns {boolean}
+ */
+function isSideEffectIterationMethod(node, version) {
+    return _.includes(methodDataUtil.getSideEffectIterationMethods(version), astUtil.getMethodName(node));
+}
+
 module.exports = {
     isLodashCall,
     isLodashChainStart,
@@ -245,7 +251,8 @@ module.exports = {
     isExplicitChainStart,
     getLodashMethodVisitor,
     methodSupportsShorthand,
-    getShorthandVisitor
+    getShorthandVisitor,
+    isSideEffectIterationMethod
 }
 
 /**

@@ -11,6 +11,7 @@ module.exports = {
             rules: {
                 'lodash/callback-binding': 2,
                 'lodash/chain-style': [2, 'as-needed'],
+                'lodash/collection-method-value': 2,
                 'lodash/collection-return': 2,
                 'lodash/identity-shorthand': [2, 'always'],
                 'lodash/matches-prop-shorthand': [2, 'always'],
@@ -55,6 +56,7 @@ module.exports = {
             rules: {
                 'lodash/callback-binding': 2,
                 'lodash/chain-style': [2, 'as-needed'],
+                'lodash/collection-method-value': 2,
                 'lodash/collection-return': 2,
                 'lodash/identity-shorthand': [2, 'always'],
                 'lodash/matches-prop-shorthand': [2, 'always'],

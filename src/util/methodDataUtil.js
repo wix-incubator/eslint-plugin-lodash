@@ -10,8 +10,8 @@ const methodDataByVersion = require('./methodDataByVersion')
 /**
  * Gets a major version number and method name and returns all its aliases including itself.
  * @param {Number} version
- * @param {String} method
- * @returns {[String]}
+ * @param {string} method
+ * @returns {string[]}
  */
 function expandAlias(version, method) {
     const methodData = methodDataByVersion[version]
@@ -22,7 +22,7 @@ function expandAlias(version, method) {
  * Gets a major version number and a list of methods and returns a list of methods and all their aliases
  * @param version
  * @param methods
- * @returns {Array}
+ * @returns {string[]}
  */
 function expandAliases(version, methods) {
     return _.flatMap(methods, expandAlias.bind(null, version))
@@ -125,6 +125,17 @@ function getFunctionMaxArity(version, name) {
     return methodDataByVersion[version].args[name] || Infinity
 }
 
+const sideEffectIterationMethods = ['forEach', 'forEachRight', 'forIn', 'forInRight', 'forOwn', 'forOwnRight']
+
+/**
+ * Gets a list of side effect iteration methods by version
+ * @param {number} version
+ * @returns {string[]}
+ */
+function getSideEffectIterationMethods(version) {
+    return expandAliases(version, sideEffectIterationMethods)
+}
+
 module.exports = {
     isAliasOfMethod,
     getAliasesByVersion,
@@ -134,7 +145,8 @@ module.exports = {
     getCollectionMethods,
     getMainAlias,
     getIterateeIndex,
-    getFunctionMaxArity
+    getFunctionMaxArity,
+    getSideEffectIterationMethods
 }
 
 /**

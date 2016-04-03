@@ -59,6 +59,7 @@ The following rules point out areas where you might have made mistakes.
 * [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`) (fixable)
 * [collection-return](docs/rules/collection-return.md): Always return a value in iteratees of Lodash collection methods that aren't `forEach`.
 * [no-extra-args](docs/rules/no-extra-args.md): Do not use superfluous arguments on Lodash methods with a specified arity.
+* [collection-method-value](docs/rules/collection-method-value.md): Use value returned from collection methods properly.
 
 ### Stylistic Issues
 These rules are purely matters of style and are quite subjective.

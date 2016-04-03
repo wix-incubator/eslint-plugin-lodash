@@ -25,7 +25,8 @@ module.exports = function (context) {
         }
     }
     function addToCallStackIfCollectionMethod(node) {
-        if (node.parent.type === 'CallExpression' && lodashUtil.isLodashCollectionMethod(node.parent, settings.pragma, settings.version)) {
+        if (lodashUtil.isLodashCollectionMethod(node.parent, settings.version) && 
+            (lodashUtil.isLodashCall(node.parent, settings.pragma) || lodashUtil.isLodashWrapper(node.parent, settings.pragma, settings.version))) {
             callStack.push({node: node.parent})
         }
     }

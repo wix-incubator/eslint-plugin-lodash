@@ -448,6 +448,7 @@ module.exports = {
             'differenceBy',
             'dropRightWhile',
             'dropWhile',
+            'remove',
             'every',
             'filter',
             'find',

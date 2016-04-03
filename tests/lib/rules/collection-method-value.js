@@ -19,7 +19,10 @@ ruleTester.run('collection-method-value', rule, {
         '_.forEach(arr, g)',
         'if (_.some(arr, h)) {i()}',
         'x = _(arr).filter(p).map(q).value()',
-        '_(arr).filter(p).forEach(g)'
+        '_(arr).filter(p).forEach(g)',
+        {
+            code: '_.remove(arr, f)', settings: {lodash: {version: 3}}
+        }
     ],
     invalid: [
         'x = _.forEach(arr, g)',

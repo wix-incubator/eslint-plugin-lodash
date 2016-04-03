@@ -16,8 +16,12 @@ module.exports = function (context) {
         return (isBeforeChainBreaker ? node.parent.parent : node).parent.type !== 'ExpressionStatement'
     }
 
+    function isPureLodashCollectionMethod(node) {
+        return lodashUtil.isLodashCollectionMethod(node, settings.version) && !lodashUtil.isCallToMethod(node, settings.version, 'remove')
+    }
+
     function reportIfMisused(node, isChain) {
-        if (lodashUtil.isLodashCollectionMethod(node, settings.version) && !parentUsesValue(node, isChain)) {
+        if (isPureLodashCollectionMethod(node) && !parentUsesValue(node, isChain)) {
             context.report(node, `Use value returned from _.${astUtil.getMethodName(node)}`)
         } else if (lodashUtil.isSideEffectIterationMethod(node, settings.version) && parentUsesValue(node, isChain)) {
             context.report(node, `Do not use value returned from _.${astUtil.getMethodName(node)}`)

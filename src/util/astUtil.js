@@ -242,7 +242,7 @@ function getIsValue(value) {
  * @returns {Object|undefined}
  */
 function getExpressionComparedToInt(node, value, checkOver) {
-    const isValue = getIsValue(value);
+    const isValue = getIsValue(value)
     if (_.includes(comparisonOperators, node.operator)) {
         if (isValue(node.right)) {
             return node.left

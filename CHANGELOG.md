@@ -10,7 +10,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 [unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...HEAD
 
-## [1.6.0] - 2016-04-03
+## [1.6.2] - 2016-04-06
+### Added
+- Added options object with `onlyLiterals` option to `matches-prop-shorthand` and `matches-shorthand`. ([`fc4b346`][fc4b346])
+
+[fc4b346]: https://github.com/wix/eslint-plugin-lodash/commit/fc4b3465211191609e1bbb9a430a719cb65fc072
+[1.6.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...v1.6.0
+
+## [1.6.1] - 2016-04-03
 ### Fixed
 - Stopped rule `collection-method-value` from reporting on mutating method `remove`. ([`05bff20`][05bff20])
 

@@ -8,14 +8,21 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.3...HEAD
+
+## [1.6.3] - 2016-04-07
+### Fixed
+- Added `slice` as a native collection method for `prefer-lodash-chain` and `prefer-lodash-method`([`a68c606`][a68c606])
+
+[a68c606]: https://github.com/wix/eslint-plugin-lodash/commit/a68c6062d4ceb6ffcb1256a3ecbd3458098c2cfa
+[1.6.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.3...v1.6.2
 
 ## [1.6.2] - 2016-04-06
 ### Added
 - Added options object with `onlyLiterals` option to `matches-prop-shorthand` and `matches-shorthand`. ([`fc4b346`][fc4b346])
 
 [fc4b346]: https://github.com/wix/eslint-plugin-lodash/commit/fc4b3465211191609e1bbb9a430a719cb65fc072
-[1.6.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.1...v1.6.0
+[1.6.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.2...v1.6.1
 
 ## [1.6.1] - 2016-04-03
 ### Fixed

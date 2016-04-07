@@ -150,7 +150,7 @@ function getIsTypeMethod(name) {
  * @returns {boolean}
  */
 function isNativeCollectionMethodCall(node) {
-    return _.includes(['every', 'fill', 'filter', 'find', 'findIndex', 'forEach', 'includes', 'map', 'reduce', 'reduceRight', 'some'], astUtil.getMethodName(node))
+    return _.includes(['every', 'fill', 'filter', 'find', 'findIndex', 'forEach', 'includes', 'map', 'reduce', 'reduceRight', 'some', 'slice'], astUtil.getMethodName(node))
 }
 
 /**

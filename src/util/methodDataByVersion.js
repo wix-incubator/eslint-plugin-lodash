@@ -486,6 +486,7 @@ module.exports = {
             'bind',
             'bindAll',
             'bindKey',
+            'castArray',
             'chain',
             'chunk',
             'commit',

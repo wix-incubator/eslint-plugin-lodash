@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.4...HEAD
+
+## [1.6.4] - 2016-04-10
+### Fixed
+- Added `castArray` to the list of chainable methods ([`4359077`][4359077])
+- Required `lodash` by major version to prevent double installation ([`a2568a9`][a2568a9])
+
+[4359077]: https://github.com/wix/eslint-plugin-lodash/commit/4359077546644b5a1ce0b5653b72b47e12592978
+[a2568a9]: https://github.com/wix/eslint-plugin-lodash/commit/a2568a9f59094aaf471dbe2b4354e31fd912b70a
+[1.6.4]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.4...v1.6.3
 
 ## [1.6.3] - 2016-04-07
 ### Fixed

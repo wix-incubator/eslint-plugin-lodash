@@ -13,15 +13,21 @@ const x = {
 ```
 You can `get` the value `4` by using `_.get(x, ['b', 'c', 2, 'd'])` (array syntax) or by using `_.get(x, 'b.c[2].d')` (string syntax).
 
-The array syntax is quicker when accessing deep paths within objects, but not necessarily when using a shallow path (e.g. `_.get(x, 'a');`).
-
-For more information, check out the [Lodash documentation for `_.property`](https://lodash.com/docs#property), or [this example of JSPerf](http://jsperf.com/lodash-get-vs-monster-method/5) that illustrates the difference.
+For more information, check out the [Lodash documentation for `_.property`](https://lodash.com/docs#property).
 
 ## Rule Details
 
-This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `as-needed`).
+This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `string`, where `as-needed` means strings for shallow paths and arrays for deeps paths).
 
 The following patterns are considered problems:
+
+```js
+/*eslint lodash/path-style: [2, "string"]*/
+
+var hasABIn = _.hasIn(x, ['a', 'b']); // Use a string for paths
+
+var val = _.get(x, ['a']); // Use a string for paths
+```
 
 ```js
 /*eslint lodash/path-style: [2, "as-needed"]*/
@@ -41,17 +47,16 @@ var getA = _.property('a'); // Use an array for paths
 
 ```
 
+The following patterns are not considered warnings:
+
 ```js
 /*eslint lodash/path-style: [2, "string"]*/
 
-var hasABIn = _.hasIn(x, ['a', 'b']); // Use a string for paths
+_.set(x, 'a.b', val);
 
-var val = _.get(x, ['a']); // Use a string for paths
+var getA = _.property('a');
+
 ```
-
-
-
-The following patterns are not considered warnings:
 
 ```js
 /*eslint lodash/path-style: [2, "as-needed"]*/
@@ -68,15 +73,6 @@ hasA = _.has(x, 'a');
 var hasABIn = _.hasIn(x, ['a', 'b']);
 
 var val = _.get(x, ['a']);
-
-```
-
-```js
-/*eslint lodash/path-style: [2, "string"]*/
-
-_.set(x, 'a.b', val);
-
-var getA = _.property('a');
 
 ```
 

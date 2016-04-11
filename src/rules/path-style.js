@@ -60,7 +60,7 @@ module.exports = function (context) {
         CallExpression: lodashUtil.getLodashMethodVisitor(settings, node => {
             const propertyPathNode = getPropertyPathNode(node)
             if (propertyPathNode) {
-                reportIfViolates[context.options[0] || 'as-needed'](propertyPathNode)
+                reportIfViolates[context.options[0] || 'string'](propertyPathNode)
             }
         })
     }

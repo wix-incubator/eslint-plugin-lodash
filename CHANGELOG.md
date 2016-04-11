@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.5...HEAD
+
+## [1.6.5] - 2016-04-11
+### Fixed
+- Changed default config of `path-style` to `string` and removed jsPerf from docs. ([`14b8d05`][14b8d05])
+- Changed recommended `path-style` to `string`. ([`66f8053`][66f8053])
+
+[14b8d05]: https://github.com/wix/eslint-plugin-lodash/commit/14b8d05f060c496848fad8a8e05b9218134d0865
+[66f8053]: https://github.com/wix/eslint-plugin-lodash/commit/66f8053fc82ea96a4446a77cc0387a3f9c18a062
+[1.6.5]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.5...v1.6.4
 
 ## [1.6.4] - 2016-04-10
 ### Fixed

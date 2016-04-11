@@ -17,7 +17,7 @@ For more information, check out the [Lodash documentation for `_.property`](http
 
 ## Rule Details
 
-This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `string`, where `as-needed` means strings for shallow paths and arrays for deeps paths).
+This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `string`, where `as-needed` means strings for shallow paths and arrays for deep paths).
 
 The following patterns are considered problems:
 

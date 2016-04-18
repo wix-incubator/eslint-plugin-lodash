@@ -18,7 +18,7 @@ module.exports = function (context) {
         const returnValue = astUtil.getValueReturnedInFirstLine(func)
         const firstParamName = astUtil.getFirstParamName(func)
         return astUtil.isNegationOfMemberOf(returnValue, firstParamName, maxPropertyPathLength) ||
-            astUtil.isNotEqEqToMemberOf(returnValue, firstParamName, maxPropertyPathLength)
+            astUtil.isNotEqEqToMemberOf(returnValue, firstParamName, maxPropertyPathLength) || lodashUtil.isLodashCallToMethod(func, settings, 'negate')
     }
 
     return {

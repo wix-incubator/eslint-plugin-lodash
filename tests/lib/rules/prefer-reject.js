@@ -18,14 +18,23 @@ ruleTester.run('prefer-reject', rule, {
         '_.filter(users, function(user) {return !user.active && isSomething;});',
         '_.filter(users, function(user) {return !f(user);});'
     ],
-    invalid: [{
-        code: '_(users).map(t).filter(function(user) {return !user.name.givenName})',
-        errors    }, {
-        code: '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
-        errors    }, {
-        code: '_.filter(users, function(user) {return !user.isSomething;});',
-        errors    }, {
-        code: '_.filter(arr, user => !user.active)',
-        parserOptions: {ecmaVersion: 6},
-        errors    }]
+    invalid: [
+        {
+            code: '_(users).map(t).filter(function(user) {return !user.name.givenName})',
+            errors
+        }, {
+            code: '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
+            errors
+        }, {
+            code: '_.filter(users, function(user) {return !user.isSomething;});',
+            errors
+        }, {
+            code: '_.filter(arr, user => !user.active)',
+            parserOptions: {ecmaVersion: 6},
+            errors
+        }, {
+            code: `_.filter(arr, _.negate(f));`,
+            errors
+        }
+    ]
 })

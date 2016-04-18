@@ -17,7 +17,8 @@ ruleTester.run('callback-binding', rule, {
     valid: [
         'var x = _.map(arr, f)',
         'var r = _.find(themeStyleList, function (themeStyle) { return this.x; }, this);',
-        'var r = _.find(arr, function (i) { return this.x; }.bind(this, x));'
+        'var r = _.find(arr, function (i) { return this.x; }.bind(this, x));',
+        'var r = _.zipWith([1],[2],[3], f);'
     ].map(optionsUtil.fromVersion3).concat([
         'var x = _.map(arr, f.bind(this))',
         'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));',

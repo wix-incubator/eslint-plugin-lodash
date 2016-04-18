@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.6...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.7...HEAD
+
+## [1.6.7] - 2016-04-18
+### Fixed
+- Fixed case where `callback-binding` erronously reports on `zipWith` when there are multiple arguments. ([`23e7430`][23e7430])
+
+[23e7430]: https://github.com/wix/eslint-plugin-lodash/commit/23e74300dc59cfbec12d6586e3e56c09caa52e1f
+[1.6.7]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.7...v1.6.6
 
 ## [1.6.6] - 2016-04-18
 ### Fixed

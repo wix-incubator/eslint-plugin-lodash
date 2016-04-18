@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.7...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.8...HEAD
+
+## [1.6.8] - 2016-04-18
+### Fixed
+- Fixed case where `no-extra-args` erronously reports on `attempt` when passing arguments. ([`5cd8950`][5cd8950])
+
+[5cd8950]: https://github.com/wix/eslint-plugin-lodash/commit/5cd89503f3b7bde658db870161b37a3f8f7e2ef1
+[1.6.8]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.8...v1.6.7
 
 ## [1.6.7] - 2016-04-18
 ### Fixed

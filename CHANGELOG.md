@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.6...HEAD
+
+## [1.6.6] - 2016-04-18
+### Fixed
+- Added `_.filter(a, _.negate(f))` as a negative condition in `prefer-reject` ([`6092e28`][6092e28])
+- Removed `Array.prototype.slice` as a native collection method because of `String.prototype.slice` ([`9476886`][9476886])
+
+[6092e28]: https://github.com/wix/eslint-plugin-lodash/commit/6092e2843d884ef5467402f9e9f41efc2dcf1b38
+[9476886]: https://github.com/wix/eslint-plugin-lodash/commit/9476886168a9c77919a0768e61a47f873a072d3e
+[1.6.6]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.6...v1.6.5
 
 ## [1.6.5] - 2016-04-11
 ### Fixed

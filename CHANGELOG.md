@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.8...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.9...HEAD
+
+## [1.6.9] - 2016-04-19
+### Fixed
+- Stopped `prefer-noop` from reporting on empty method definitions. ([`3d35bdf`][3d35bdf])
+
+[3d35bdf]: https://github.com/wix/eslint-plugin-lodash/commit/3d35bdf50d0b6d473e565a1755bc36800ffed184
+[1.6.9]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.9...v1.6.8
 
 ## [1.6.8] - 2016-04-18
 ### Fixed

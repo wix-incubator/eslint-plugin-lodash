@@ -14,6 +14,7 @@ const RuleTester = require('eslint').RuleTester
 const ruleTester = new RuleTester()
 ruleTester.run('no-extra-args', rule, {
     valid: [
+        {code: `obj.constant(foo => _(foo).reduce(bar, []));`, parserOptions: {ecmaVersion: 6}},
         'var x = _.uniq(arr);',
         'var x = _.assign(a, b, c, d, e);'
     ],

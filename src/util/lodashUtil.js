@@ -173,10 +173,12 @@ function getLodashMethodVisitor(settings, reporter) {
     return function (node) {
         let iterateeIndex
         if (isLodashChainStart(node, settings.pragma)) {
+            let prevNode = node
             node = node.parent.parent
-            while (astUtil.isMethodCall(node) && !isChainBreaker(node, settings.version)) {
+            while (astUtil.getCaller(node) === prevNode && astUtil.isMethodCall(node) && !isChainBreaker(node, settings.version)) {
                 iterateeIndex = methodDataUtil.getIterateeIndex(settings.version, astUtil.getMethodName(node))
                 reporter(node, node.arguments[iterateeIndex - 1])
+                prevNode = node
                 node = node.parent.parent
             }
         } else if (isLodashCall(node, settings.pragma)) {

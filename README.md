@@ -1,11 +1,11 @@
 ESLint-Plugin-Lodash
 ===================
 
-[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url]
+[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Dependencies][deps-image]][deps-url]
 
 Lodash-specific linting rules for ESLint.
 
-# Installation
+# InstallationM
 
 Install [ESLint](https://www.github.com/eslint/eslint) either locally or globally.
 

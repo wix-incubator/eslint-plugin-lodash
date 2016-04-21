@@ -22,6 +22,9 @@ ruleTester.run('prefer-lodash-method', rule, {
         {
             code: 'var x = a.map(f)',
             options: [{except: ['map']}]
+        }, {
+            code: 'var x = fp.map(f, a)',
+            options: [{ignoreObjects: ['fp']}]
         },
         '_.chain(a).get(p).map(f).value()'
     ],

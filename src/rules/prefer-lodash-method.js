@@ -14,6 +14,7 @@ module.exports = function (context) {
     const settings = require('../util/settingsUtil').getSettings(context)
     const REPORT_MESSAGE = 'Prefer \'_.{{method}}\' over the native function.'
     const exceptions = _.get(context, ['options', 0, 'except'], [])
+    const ignoredObjects = _.get(context, ['options', 0, 'ignoreObjects'], [])
 
     function isStaticNativeMethodCall(node) {
         const staticMethods = {
@@ -32,13 +33,18 @@ module.exports = function (context) {
         return lodashUtil.isNativeCollectionMethodCall(node) || isStaticNativeMethodCall(node)
     }
 
+    function isIgnoredObject(node) {
+        const caller = astUtil.getCaller(node)
+        return caller && caller.type === 'Identifier' && _.includes(ignoredObjects, caller.name)
+    }
+
     function isRuleException(node) {
-        return _.includes(exceptions, astUtil.getMethodName(node))
+        return _.includes(exceptions, astUtil.getMethodName(node)) || _.includes(ignoredObjects, astUtil.getCallerName)
     }
 
     return {
         CallExpression(node) {
-            if (!isRuleException(node) && canUseLodash(node) && !isUsingLodash(node)) {
+            if (!isRuleException(node) && !isIgnoredObject(node) && canUseLodash(node) && !isUsingLodash(node)) {
                 context.report(node, REPORT_MESSAGE, {method: astUtil.getMethodName(node)})
             }
         }
@@ -50,6 +56,12 @@ module.exports.schema = [
         type: 'object',
         properties: {
             except: {
+                type: 'array',
+                items: {
+                    type: 'string'
+                }
+            },
+            ignoreObjects: {
                 type: 'array',
                 items: {
                     type: 'string'

@@ -4,13 +4,24 @@ When using native functions like forEach and map, it's often better to use the L
 
 ## Rule Details
 
-This rule takes one argument - an options object with exceptions.
+This rule takes one argument - an optional options object. This object can have two keys: `except` and `ignoreObjects`, both optional.
+
+- `except` contains an array of methods that should not be reported on.
+- `ignoreObjects` contains an array of objects that should not be reported on.
 
 For instance, if you do not wish to use `_.keys` but prefer `Object.keys`, the config would be:
 ```json
 {
   "rules": {
     "lodash/prefer-lodash-method": [2, {"except": ["keys"]}]
+  }
+}
+```
+And if you do not with the rule to work on any object named `fp`:
+```js
+{
+  "rules": {
+    "lodash/prefer-lodash-method": [2, {"ignoreObjects": ["fp"]}]
   }
 }
 ```

@@ -8,7 +8,17 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.6.9...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.7.0...HEAD
+
+## [1.7.0] - 2016-04-21
+### Added
+- Added option `ignoreObjects` to options object of `prefer-lodash-method` ([`3fc85bd`][3fc85bd])
+### Fixed
+- Fixed false positive reporting of `no-extra-args` when a lodash chain was within a non-lodash chain. ([`de02121`][de02121])
+
+[3fc85bd]: https://github.com/wix/eslint-plugin-lodash/commit/3fc85bdd3f499bd59d9d6e9f667ee7264a76bf14
+[de02121]: https://github.com/wix/eslint-plugin-lodash/commit/de021216e8a8d5e91f62654deefebd20f0263299
+[1.7.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.7.0...v1.6.9
 
 ## [1.6.9] - 2016-04-19
 ### Fixed

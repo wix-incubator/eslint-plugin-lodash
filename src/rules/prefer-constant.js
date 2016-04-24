@@ -10,6 +10,7 @@
 module.exports = function (context) {
     const astUtil = require('../util/astUtil')
     const shouldCheckArrowFunctions = context.options[0] !== undefined ? context.options[0] : true
+    const shouldCheckFunctionDeclarations = context.options[1] !== undefined ? context.options[1] : false
 
     function isCompletelyLiteral(node) {
         switch (node.type) {
@@ -26,24 +27,36 @@ module.exports = function (context) {
         }
     }
 
-    function handleFunctionExpression(node) {
-        const valueReturnedInFirstLine = astUtil.getValueReturnedInFirstLine(node)
+    function reportIfLikeConstant(func, node) {
+        const valueReturnedInFirstLine = func(node)
         if (valueReturnedInFirstLine && isCompletelyLiteral(valueReturnedInFirstLine)) {
             context.report(node, 'Prefer _.constant over a function returning a literal')
         }
     }
 
+    function handleFunctionDefinition(node) {
+        reportIfLikeConstant(astUtil.getValueReturnedInFirstLine, node)
+    }
+
     return {
-        FunctionExpression: handleFunctionExpression,
+        FunctionExpression: handleFunctionDefinition,
+        FunctionDeclaration(node) {
+            if (shouldCheckFunctionDeclarations) {
+                handleFunctionDefinition(node)
+            }
+        },
         ArrowFunctionExpression(node) {
             if (shouldCheckArrowFunctions) {
-                handleFunctionExpression(node)
+                handleFunctionDefinition(node)
             }
         }
     }
 }
 
 module.exports.schema = [
+    {
+        type: 'boolean'
+    },
     {
         type: 'boolean'
     }

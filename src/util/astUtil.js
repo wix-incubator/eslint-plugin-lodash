@@ -29,6 +29,7 @@ const isMethodCall = _.matches({type: 'CallExpression', callee: {type: 'MemberEx
  */
 const isFunctionDefinitionWithBlock = _.overSome(
     _.matchesProperty('type', 'FunctionExpression'),
+    _.matchesProperty('type', 'FunctionDeclaration'),
     _.matches({type: 'ArrowFunctionExpression', body: {type: 'BlockStatement'}})
 )
 

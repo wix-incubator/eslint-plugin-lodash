@@ -5,7 +5,7 @@ ESLint-Plugin-Lodash
 
 Lodash-specific linting rules for ESLint.
 
-# InstallationM
+# Installation
 
 Install [ESLint](https://www.github.com/eslint/eslint) either locally or globally.
 

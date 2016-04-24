@@ -21,7 +21,8 @@ ruleTester.run('prefer-constant', rule, {
         'var x = function() {return y ? 1 : 2}',
         'var x = function() {return true ? 1 : x}',
         {code: 'var x = function() { return {[y]: 1}}', parserOptions: {ecmaVersion: 6}},
-        {code: 'var x = () => 1', parserOptions: {ecmaVersion: 6}, options: [false]}
+        {code: 'var x = () => 1', parserOptions: {ecmaVersion: 6}, options: [false]},
+        'function one() { return 1; }'
     ],
     invalid: [{
         code: 'var x = function() { return 1; }',
@@ -36,6 +37,10 @@ ruleTester.run('prefer-constant', rule, {
         code: 'var x = () => 1',
         parserOptions: {ecmaVersion: 6},
         options: [true],
+        errors
+    }, {
+        code: 'function one() { return 1; }',
+        options: [true, true],
         errors
     }]
 })

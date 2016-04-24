@@ -4,7 +4,9 @@ When you want a function that always returns the same value, it can be more conc
 
 ## Rule Details
 
-This rule takes one argument: whether or not to check arrow functions.
+This rule takes two arguments:
+- whether or not to check arrow functions
+- whether or not to check function declarations
 
 The following patterns are considered warnings:
 
@@ -14,6 +16,9 @@ var three = function() { return 3;}
 
 //When including arrow functions:
 var pi = () => 3.1415;
+
+//When including function declarations:
+function one() { return 1; }
 
 ```
 

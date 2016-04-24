@@ -32,13 +32,15 @@ const isFunctionDefinitionWithBlock = _.overSome(
     _.matches({type: 'ArrowFunctionExpression', body: {type: 'BlockStatement'}})
 )
 
+const getFirstBlockLine = _.property(['body', 'body', 0])
+
 /**
  * If the node specified is a function, returns the node corresponding with the first statement/expression in that function
  * @param {Object} node
  * @returns {node|undefined}
  */
 const getFirstFunctionLine = _.cond([
-    [isFunctionDefinitionWithBlock, _.property(['body', 'body', 0])],
+    [isFunctionDefinitionWithBlock, getFirstBlockLine],
     [_.matches({type: 'ArrowFunctionExpression'}), _.property('body')]
 ])
 
@@ -177,6 +179,19 @@ function getValueReturnedInFirstLine(func) {
 }
 
 /**
+ * Returns the node of the value returned in the first line, if any
+ * @param {Object} func
+ * @returns {Object|null}
+ */
+function getValueReturnedInFirstLineInFuncDecl(func) {
+    if (func && _.matchesProperty('type', 'FunctionDeclaration')(func)) {
+        const firstLine = getFirstBlockLine(func)
+        return isReturnStatement(firstLine) ? firstLine.argument : null
+    }
+    return null
+}
+
+/**
  * Returns whether the node is a call from the specified object name
  * @param {Object} node
  * @param {string} objName
@@ -301,6 +316,7 @@ module.exports = {
     isIdentifierOfParam,
     isNegationExpression,
     getValueReturnedInFirstLine,
+    getValueReturnedInFirstLineInFuncDecl,
     isCallFromObject,
     isComputed,
     isEquivalentExp,

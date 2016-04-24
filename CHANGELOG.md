@@ -6,9 +6,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 ## [Unreleased][unreleased]
 ### Added
-- Added option for `prefer-constant` to handle function declarations.
+- (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.7.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.0...HEAD
+
+## [1.8.0] - 2016-04-24
+### Added
+- Added option for `prefer-constant` to handle function declarations. ([`51ce13d`][51ce13d])
+
+[51ce13d]: https://github.com/wix/eslint-plugin-lodash/commit/51ce13d5f2c732460e99b93c99cebd0ca1e56df4
+[1.8.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.0...v1.7.0
 
 ## [1.7.0] - 2016-04-21
 ### Added

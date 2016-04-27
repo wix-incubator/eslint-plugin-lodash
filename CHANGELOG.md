@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.1...HEAD
+
+## [1.8.1] - 2016-04-27
+### Fixed
+- Fixed case where `prefer-times` falsely reports when parameter usage is nested. ([`ae8b626`][ae8b626])
+
+[ae8b626]: https://github.com/wix/eslint-plugin-lodash/commit/ae8b626cf59de5ddd52785a8822c83fbc6381a2e
+[1.8.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.1...v1.8.0
 
 ## [1.8.0] - 2016-04-24
 ### Added

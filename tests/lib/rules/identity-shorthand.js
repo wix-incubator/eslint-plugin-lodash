@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/identity-shorthand')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 
 const messages = {
     always: 'Prefer omitting the iteratee over a function that returns its argument',
@@ -29,8 +29,7 @@ ruleTester.run('identity-shorthand', rule, {
             options: ['never']
         }, {
             code: 'var r = _.map([], x => x)',
-            options: ['never'],
-            parserOptions: {ecmaVersion: 6}
+            options: ['never']
         },
         'var twos = _.mapValues(a, function() { return 2; });',
         {
@@ -41,8 +40,7 @@ ruleTester.run('identity-shorthand', rule, {
             options: ['never']
         }, {
             code: 'var x = _.uniq(a, x => x)',
-            options: ['never'],
-            parserOptions: {ecmaVersion: 6}
+            options: ['never']
         }
     ],
     invalid: [{
@@ -50,7 +48,6 @@ ruleTester.run('identity-shorthand', rule, {
         errors: [{message: messages.always, column: 21}]
     }, {
         code: 'var r = _.map([], x => x);',
-        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 19}]
     }, {
         code: 'var ids = _.chain([]).map(function (i) { return i; }).value();',

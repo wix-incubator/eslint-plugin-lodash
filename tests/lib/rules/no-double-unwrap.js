@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/no-double-unwrap')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 
 ruleTester.run('no-double-unwrap', rule, {
     valid: [

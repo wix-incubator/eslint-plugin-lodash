@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-invoke-map')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const errors = [{message: 'Prefer _.invokeMap over map to a method call.'}]
 ruleTester.run('prefer-invoke-map', rule, {
     valid: [
@@ -26,7 +26,6 @@ ruleTester.run('prefer-invoke-map', rule, {
         errors
     }, {
         code: '_.map(arr, x => x.f())',
-        parserOptions: {ecmaVersion: 6},
         errors
     }]
 })

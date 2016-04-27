@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/no-commit')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const errors = [{message: 'Do not end chain with commit.'}]
 ruleTester.run('no-commit', rule, {
     valid: [

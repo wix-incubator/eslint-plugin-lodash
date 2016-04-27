@@ -5,14 +5,14 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/matches-shorthand')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const messages = {
     always: 'Prefer matches syntax',
     never: 'Do not use matches syntax'
@@ -34,12 +34,10 @@ ruleTester.run('matches-shorthand', rule, {
     ],
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === id; });',
-        errors: [{message: messages.always, column: 27}],
-        parserOptions: {ecmaVersion: 6}
+        errors: [{message: messages.always, column: 27}]
     }, {
         code: 'var isPublic = _.find([], function (i) { return id === i.id; });',
-        errors: [{message: messages.always, column: 27}],
-        parserOptions: {ecmaVersion: 6}
+        errors: [{message: messages.always, column: 27}]
     }, {
         code: 'var isPublic = _.find([], function (i) { return i.id === 3 && i.a === "string" && {a: 10} === i.b;});',
         errors: [{message: messages.always, column: 27}]
@@ -48,15 +46,12 @@ ruleTester.run('matches-shorthand', rule, {
         errors: [{message: messages.always, column: 27}]
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3 && i.name === name)',
-        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 30}]
     }, {
         code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === id})',
-        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 33}]
     }, {
         code: 'var isPublic = _.some(arr, (i) => {return i.id === 3 && i.a === "string" && {a: 10} === i.b})',
-        parserOptions: {ecmaVersion: 6},
         errors: [{message: messages.always, column: 28}]
     }, {
         code: '_.findLastIndex(arr, function(i) { return i[b].c === compId && i[b].d === x});',

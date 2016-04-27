@@ -5,28 +5,22 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/collection-return')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 ruleTester.run('collection-return', rule, {
     valid: [
         '_.forEach(arr, function(a) { console.log(a)})',
         '_.map(arr, function(a) { return a*a})',
-        {
-            parserOptions: {ecmaVersion: 6},
-            code: '_.map(arr, a => a + 1)'
-        },
+        '_.map(arr, a => a + 1)',
         '_.map(arr, function(a) {return a.some(function(x) {})})',
         '_(a).transform(function(acc, item) {acc[item] = f(item);}, {}).mapValues(g).value()',
         'function x(a) {return a;}',
-        {
-            code: 'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
-            parserOptions: {ecmaVersion: 6}
-        }
+        'y = _.reject(x, p => p); _.forEach(t, s => {}).value();'
     ],
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',

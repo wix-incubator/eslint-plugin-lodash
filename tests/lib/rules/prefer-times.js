@@ -5,14 +5,14 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-times')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
-const errors = [{message: 'Prefer _.times over _.map without using arguments'}]
+const ruleTester = ruleTesterUtil.getRuleTester()
+const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer _.times over _.map without using arguments')
 ruleTester.run('prefer-times', rule, {
     valid: [
         'var a = _.map(arr, function(x) {return x + 1});',
@@ -21,27 +21,15 @@ ruleTester.run('prefer-times', rule, {
         'var x = _.map(a, "prop");',
         'var x = _.map(arr, function(a) {return _.map(a, function(b) {return b + 1});});',
         "var x = arr.map(function () {return str; }).join('')",
-        {code: 'var x = _.map(a, ({x}) => x);', parserOptions: {ecmaVersion: 6}},
-        {code: 'var x = _.map(a, ({f: x}) => x);', parserOptions: {ecmaVersion: 6}},
-        {code: 'var x = _.map(a, ({f: {x}}) => x);', parserOptions: {ecmaVersion: 6}}
+        'var x = _.map(a, ({x}) => x);',
+        'var x = _.map(a, ({f: x}) => x);',
+        'var x = _.map(a, ({f: {x}}) => x);'
     ],
-    invalid: [{
-        code: '_(arr).map(function(){return g}).value()',
-        errors
-    }, {
-        code: '_.map(arr, function() {return Math.random()});',
-        errors
-    }, {
-        code: '_(arr).map(() => a.push(f()))',
-        parserOptions: {ecmaVersion: 6},
-        errors
-    }, {
-        code: '_.map(arr, function(a, c = 1) {return b})',
-        parserOptions: {ecmaVersion: 6},
-        errors
-    }, {
-        code: '_(arr).map(() => a.push(f()))',
-        parserOptions: {ecmaVersion: 6},
-        errors
-    }]
+    invalid: [
+        '_(arr).map(function(){return g}).value()',
+        '_.map(arr, function() {return Math.random()});',
+        '_(arr).map(() => a.push(f()))',
+        '_.map(arr, function(a, c = 1) {return b})',
+        '_(arr).map(() => a.push(f()))'
+    ].map(toErrorObject)
 })

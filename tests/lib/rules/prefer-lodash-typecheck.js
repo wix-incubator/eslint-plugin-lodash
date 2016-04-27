@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-lodash-typecheck')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const errors = {
     undefined: [{message: 'Prefer \'_.isUndefined\' over \'typeof\' comparison.'}],
     typeof: [{message: 'Prefer \'_.isNumber\' over \'typeof\' comparison.'}],

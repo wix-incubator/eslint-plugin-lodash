@@ -5,14 +5,14 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/matches-prop-shorthand')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const errors = {
     always: [{message: 'Prefer matches property syntax'}],
     never: [{message: 'Do not use matches property syntax'}]
@@ -28,7 +28,6 @@ ruleTester.run('matches-prop-shorthand', rule, {
             options: ['never']
         }, {
           code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
-          parserOptions: {ecmaVersion: 6},
           options: ['always', { onlyLiterals: true }]
         }
     ],
@@ -40,7 +39,6 @@ ruleTester.run('matches-prop-shorthand', rule, {
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
-        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, ["id", 3])',
@@ -55,16 +53,13 @@ ruleTester.run('matches-prop-shorthand', rule, {
         }
     }, {
         code: 'var isPublic = _.find([], i => i[0] === 3);',
-        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
         code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
-        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
         options: ['always', { onlyLiterals: true }],
-        parserOptions: {ecmaVersion: 6},
         errors: errors.always
     }]
 })

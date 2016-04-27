@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-is-nil')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer isNil over checking for undefined or null.')
 ruleTester.run('prefer-is-nil', rule, {
     valid: [

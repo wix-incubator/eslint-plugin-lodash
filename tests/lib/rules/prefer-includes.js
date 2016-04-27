@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-includes')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const toErrorMessage = require('../testUtil/optionsUtil').fromMessage('Prefer _.includes over indexOf comparison to -1')
 ruleTester.run('prefer-includes', rule, {
     valid: [

@@ -5,21 +5,18 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-lodash-chain')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 ruleTester.run('prefer-lodash-chain', rule, {
     valid: [
         'var userNames = _.map(users, "name.givenName").join(" ");',
         'var userNames = _(users).filter("active").map("name.givenName").value().toString();',
-        {
-            code: 'var minAgePerName = _(users).groupBy("name").map(sameName => _.minBy(sameName, "age")).value()',
-            parserOptions: {ecmaVersion: 6}
-        }
+        'var minAgePerName = _(users).groupBy("name").map(sameName => _.minBy(sameName, "age")).value()'
     ],
     invalid: [
         {

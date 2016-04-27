@@ -5,16 +5,16 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/no-extra-args')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 ruleTester.run('no-extra-args', rule, {
     valid: [
-        {code: `obj.constant(foo => _(foo).reduce(bar, []));`, parserOptions: {ecmaVersion: 6}},
+        'obj.constant(foo => _(foo).reduce(bar, []));',
         'var x = _.uniq(arr);',
         'var x = _.assign(a, b, c, d, e);'
     ],

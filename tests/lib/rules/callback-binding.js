@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/callback-binding')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtils = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtils.getRuleTester()
 const optionsUtil = require('../testUtil/optionsUtil')
 ruleTester.run('callback-binding', rule, {
     valid: [

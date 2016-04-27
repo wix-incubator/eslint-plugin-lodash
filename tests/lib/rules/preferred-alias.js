@@ -5,14 +5,14 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/preferred-alias')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 const toErrorObject = require('../testUtil/optionsUtil').fromMessage("Method 'each' is an alias, for consistency prefer using 'forEach'")
 ruleTester.run('preferred-alias', rule, {
     valid: [

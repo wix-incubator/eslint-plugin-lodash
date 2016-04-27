@@ -5,13 +5,13 @@
 // ------------------------------------------------------------------------------
 
 const rule = require('../../../src/rules/prefer-lodash-method')
-const RuleTester = require('eslint').RuleTester
+const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
 
-const ruleTester = new RuleTester()
+const ruleTester = ruleTesterUtil.getRuleTester()
 ruleTester.run('prefer-lodash-method', rule, {
     valid: [
         'var x = _.map(arr, f)',
@@ -36,7 +36,6 @@ ruleTester.run('prefer-lodash-method', rule, {
         errors: [{message: 'Prefer \'_.map\' over the native function.'}]
     }, {
         code: 'var x = arr.filter(x => x.f())',
-        parserOptions: {ecmaVersion: 6},
         errors: [{message: 'Prefer \'_.filter\' over the native function.'}]
     }, {
         code: 'var x = Object.keys(node)',

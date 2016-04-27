@@ -47,17 +47,16 @@ module.exports = function (context) {
         }
     }
 
+    const isIterateeParamDefinition = (state, node) => state && (node.parent === state.func && _.includes(state.func.params, node)) ||
+        (node.parent.type === 'AssignmentPattern' && node.parent.parent === state.func)
+
     return {
         FunctionExpression: handleFunctionExpression,
         ArrowFunctionExpression: handleFunctionExpression,
         Identifier(node) {
-            const state = _.last(callStack)
-            if (state) {
-                const isIterateeParamDefinition = (node.parent === state.func && _.includes(node.parent.params, node)) ||
-                    (node.parent.type === 'AssignmentPattern' && node.parent.parent === state.func)
-                if (!isIterateeParamDefinition && _.includes(state.params, node.name)) {
-                    state.anyUsed = true
-                }
+            if (!isIterateeParamDefinition(_.last(callStack), node)) {
+                const usageContext = _.findLast(callStack, state => _.includes(state.params, node.name))
+                _.set(usageContext, 'anyUsed', true)
             }
         },
         'FunctionExpression:exit': handleExitFunctionExpression,

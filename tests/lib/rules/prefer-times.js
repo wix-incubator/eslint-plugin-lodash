@@ -23,7 +23,8 @@ ruleTester.run('prefer-times', rule, {
         "var x = arr.map(function () {return str; }).join('')",
         'var x = _.map(a, ({x}) => x);',
         'var x = _.map(a, ({f: x}) => x);',
-        'var x = _.map(a, ({f: {x}}) => x);'
+        'var x = _.map(a, ({f: {x}}) => x);',
+        '_.map(a, x => _.map(b, y => x.f(y)))'
     ],
     invalid: [
         '_(arr).map(function(){return g}).value()',

@@ -18,3 +18,4 @@ sftp-config.json
 .idea
 *.iml
 /lib
+.DS_Store

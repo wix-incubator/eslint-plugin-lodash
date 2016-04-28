@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.2...HEAD
+
+## [1.8.2] - 2016-04-28
+### Fixed
+- Fixed case where `prefer-times` crashes. ([`c199ed5`][c199ed5])
+
+[c199ed5]: https://github.com/wix/eslint-plugin-lodash/commit/c199ed5f3c055648791079142c9afdee666ffbed
+[1.8.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.2...v1.8.1
 
 ## [1.8.1] - 2016-04-27
 ### Fixed

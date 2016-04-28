@@ -47,8 +47,8 @@ module.exports = function (context) {
         }
     }
 
-    const isIterateeParamDefinition = (state, node) => state && (node.parent === state.func && _.includes(state.func.params, node)) ||
-        (node.parent.type === 'AssignmentPattern' && node.parent.parent === state.func)
+    const isIterateeParamDefinition = (state, node) => state && ((node.parent === state.func && _.includes(state.func.params, node)) ||
+        (node.parent.type === 'AssignmentPattern' && node.parent.parent === state.func))
 
     return {
         FunctionExpression: handleFunctionExpression,

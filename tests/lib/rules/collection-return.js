@@ -20,7 +20,8 @@ ruleTester.run('collection-return', rule, {
         '_.map(arr, function(a) {return a.some(function(x) {})})',
         '_(a).transform(function(acc, item) {acc[item] = f(item);}, {}).mapValues(g).value()',
         'function x(a) {return a;}',
-        'y = _.reject(x, p => p); _.forEach(t, s => {}).value();'
+        'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
+        '_.map(a, x => f(x).then(() => {g()}))'
     ],
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',

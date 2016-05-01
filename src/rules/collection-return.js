@@ -25,27 +25,26 @@ module.exports = function (context) {
         }
     }
     function addToCallStackIfCollectionMethod(node) {
-        if (lodashUtil.isLodashCollectionMethod(node.parent, settings.version) && 
-            (lodashUtil.isLodashCall(node.parent, settings.pragma) || lodashUtil.isLodashWrapper(node.parent, settings.pragma, settings.version))) {
-            callStack.push({node: node.parent})
+        if (lodashUtil.isLodashCollectionMethod(node, settings.version) &&
+            (lodashUtil.isLodashCall(node, settings.pragma) || lodashUtil.isLodashWrapper(node, settings.pragma, settings.version))) {
+            callStack.push({node})
         }
     }
 
     return {
         FunctionExpression(node) {
-            addToCallStackIfCollectionMethod(node)
+            addToCallStackIfCollectionMethod(node.parent)
             callStack.push({node, found: false})
         },
         'FunctionExpression:exit': handleExitOfFunctionWithBlock,
         ArrowFunctionExpression(node) {
-            addToCallStackIfCollectionMethod(node)
             if (node.body.type === 'BlockStatement') {
+                addToCallStackIfCollectionMethod(node.parent)
                 callStack.push({node, found: false})
             }
         },
         'ArrowFunctionExpression:exit'(node) {
-            const last = _.last(callStack)
-            if (last && last.node === node) {
+            if (node.body.type === 'BlockStatement') {
                 handleExitOfFunctionWithBlock(node)
             }
         },
@@ -53,12 +52,6 @@ module.exports = function (context) {
             const last = _.last(callStack)
             if (last) {
                 last.found = true
-            }
-        },
-        'CallExpression:exit'(node) {
-            const last = _.last(callStack)
-            if (last && last.node === node) {
-                callStack.pop()
             }
         }
     }

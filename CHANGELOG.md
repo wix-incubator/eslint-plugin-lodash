@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.3...HEAD
+
+## [1.8.3] - 2016-05-01
+### Fixed
+- Fixed case where `collection-return` reports false positive in nested arrow functions. ([`e59f507`][e59f507])
+
+[e59f507]: https://github.com/wix/eslint-plugin-lodash/commit/e59f50754bf9fa9463d98db9f0861fefbd3d2144
+[1.8.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.3...v1.8.2
 
 ## [1.8.2] - 2016-04-28
 ### Fixed

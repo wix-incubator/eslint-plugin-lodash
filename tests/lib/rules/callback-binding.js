@@ -24,7 +24,8 @@ ruleTester.run('callback-binding', rule, {
         'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));',
         'var t = _.isArray(x)',
         'var t = _.assign(a, b, c);',
-        'var i = _.sortedIndex(arr, val, f);'
+        'var i = _.sortedIndex(arr, val, f);',
+        'var i = _.sortedIndexBy(arr, val, obj)'
     ]),
     invalid: [
         'var r = _.find(users, function (user) { return user.age > this.age; }.bind(this));',

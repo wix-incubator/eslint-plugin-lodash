@@ -623,12 +623,13 @@ module.exports = {
             'zipWith'
         ],
         iteratee: {
-            any: ['dropRightWhile', 'dropWhile', 'findIndex', 'findLastIndex', 'flatMap', 'pullAllBy', 'remove', 'sortedIndexBy', 'sortedLastIndexBy', 'sortedUniqBy', 'takeRightWhile',
+            any: ['dropRightWhile', 'dropWhile', 'findIndex', 'findLastIndex', 'flatMap', 'pullAllBy', 'remove', 'sortedUniqBy', 'takeRightWhile',
                 'takeWhile', 'uniqBy', 'unzipWith', 'xorBy', 'countBy', 'every', 'filter', 'find', 'findLast', 'forEach', 'forEachRight', 'groupBy', 'indexBy', 'keyBy', 'map', 'partition', 'reduce',
                 'reduceRight', 'reject', 'some', 'tap', 'thru', 'maxBy', 'minBy', 'sumBy', 'findKey', 'findLastKey', 'forIn', 'forInRight', 'forOwn', 'forOwnRight', 'mapKeys',
                 'mapValues', 'omitBy', 'pickBy', 'transform', 'times', 'cloneDeepWith', 'cloneWith'],
             differentIndex: {
                 sortedIndex: 2,
+                sortedIndexBy: 2,
                 sortedLastIndex: 2,
                 sortedLastIndexBy: 2,
                 pullAllBy: 2

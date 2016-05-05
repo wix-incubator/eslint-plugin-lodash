@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.4...HEAD
+
+## [1.8.4] - 2016-05-05
+### Fixed
+- Fixed case where `callback-binding` reports false positive on `_.sortedIndexBy`. ([`4a04eed`][4a04eed])
+
+[4a04eed]: https://github.com/wix/eslint-plugin-lodash/commit/4a04eed61edfbc6e07c966e17501c16e319649b8
+[1.8.4]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.4...v1.8.3
 
 ## [1.8.3] - 2016-05-01
 ### Fixed

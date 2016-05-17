@@ -33,13 +33,18 @@ module.exports = function (context) {
         return lodashUtil.isNativeCollectionMethodCall(node) || isStaticNativeMethodCall(node)
     }
 
+    const getTextOfNode = _.cond([
+        [_.matches({type: 'Identifier'}), _.property('name')],
+        [_.property('type'), node => context.getSourceCode().getText(node)]
+    ])
+
     function isIgnoredObject(node) {
-        const caller = astUtil.getCaller(node)
-        return caller && caller.type === 'Identifier' && _.includes(ignoredObjects, caller.name)
+        const callerName = getTextOfNode(astUtil.getCaller(node))
+        return callerName && _.includes(ignoredObjects, callerName)
     }
 
     function isRuleException(node) {
-        return _.includes(exceptions, astUtil.getMethodName(node)) || _.includes(ignoredObjects, astUtil.getCallerName)
+        return _.includes(exceptions, astUtil.getMethodName(node))
     }
 
     return {

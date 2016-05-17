@@ -25,6 +25,9 @@ ruleTester.run('prefer-lodash-method', rule, {
         }, {
             code: 'var x = fp.map(f, a)',
             options: [{ignoreObjects: ['fp']}]
+        }, {
+            code: 'var x = React.Children.map(f)',
+            options: [{ignoreObjects: ['React.Children']}]
         },
         '_.chain(a).get(p).map(f).value()'
     ],

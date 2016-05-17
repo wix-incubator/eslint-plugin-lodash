@@ -12,7 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const errors = [{message: 'Prefer _.matches over conditions on the same object'}]
+const errors = [{message: 'Prefer _.isMatch over conditions on the same object'}]
 ruleTester.run('prefer-matches', rule, {
     valid: [
         'foo = bar.a === 1 && bar.b == 2',

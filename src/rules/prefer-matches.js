@@ -33,7 +33,7 @@ module.exports = function (context) {
             if (shouldCheckDeeper(node, state.node)) {
                 expStates.push({depth: state.depth + 1, node: node.right.left.object})
                 if (astUtil.isEquivalentExp(_.get(node, 'left.left.object'), _.get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
-                    context.report(node, 'Prefer _.matches over conditions on the same object')
+                    context.report(node, 'Prefer _.isMatch over conditions on the same object')
                 }
             }
         },

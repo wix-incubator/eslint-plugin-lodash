@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to check if a call to _.map should be a call to _.times
+ * @fileoverview Rule to check if a call to map should be a call to times
  */
 'use strict'
 
@@ -8,14 +8,15 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const _ = require('lodash')
+    const {isCallToMethod, isLodashCall, isLodashWrapper} = require('../util/lodashUtil')
+    const [flatMap, cond, matches, property, last, findLast, includes, set] = 
+        ['flatMap', 'cond', 'matches', 'property', 'last', 'findLast', 'includes', 'set'].map(m => require(`lodash/${m}`))
     const callStack = []
     const settings = require('../util/settingsUtil').getSettings(context)
 
 
     function getObjectPatternProperties(node) {
-        return _.flatMap(node.properties, prop => {
+        return flatMap(node.properties, prop => {
             if (prop.shorthand) {
                 return prop.key.name
             }
@@ -26,19 +27,19 @@ module.exports = function (context) {
         })
     }
 
-    const getParamNames = _.cond([
-        [_.matches({type: 'Identifier'}), _.property('name')],
-        [_.matches({type: 'ObjectPattern'}), getObjectPatternProperties]
+    const getParamNames = cond([
+        [matches({type: 'Identifier'}), property('name')],
+        [matches({type: 'ObjectPattern'}), getObjectPatternProperties]
     ])
 
     function handleFunctionExpression(node) {
-        if (lodashUtil.isCallToMethod(node.parent, settings.version, 'map') && (lodashUtil.isLodashCall(node.parent, settings.pragma) || lodashUtil.isLodashWrapper(node.parent, settings.pragma, settings.version))) {
-            callStack.push({func: node, params: _.flatMap(node.params, getParamNames), anyUsed: false})
+        if (isCallToMethod(node.parent, settings.version, 'map') && (isLodashCall(node.parent, settings.pragma) || isLodashWrapper(node.parent, settings.pragma, settings.version))) {
+            callStack.push({func: node, params: flatMap(node.params, getParamNames), anyUsed: false})
         }
     }
 
     function handleExitFunctionExpression(node) {
-        const state = _.last(callStack)
+        const state = last(callStack)
         if (state && state.func === node) {
             callStack.pop()
             if (!state.anyUsed) {
@@ -47,16 +48,16 @@ module.exports = function (context) {
         }
     }
 
-    const isIterateeParamDefinition = (state, node) => state && ((node.parent === state.func && _.includes(state.func.params, node)) ||
+    const isIterateeParamDefinition = (state, node) => state && ((node.parent === state.func && includes(state.func.params, node)) ||
         (node.parent.type === 'AssignmentPattern' && node.parent.parent === state.func))
 
     return {
         FunctionExpression: handleFunctionExpression,
         ArrowFunctionExpression: handleFunctionExpression,
         Identifier(node) {
-            if (!isIterateeParamDefinition(_.last(callStack), node)) {
-                const usageContext = _.findLast(callStack, state => _.includes(state.params, node.name))
-                _.set(usageContext, 'anyUsed', true)
+            if (!isIterateeParamDefinition(last(callStack), node)) {
+                const usageContext = findLast(callStack, state => includes(state.params, node.name))
+                set(usageContext, 'anyUsed', true)
             }
         },
         'FunctionExpression:exit': handleExitFunctionExpression,

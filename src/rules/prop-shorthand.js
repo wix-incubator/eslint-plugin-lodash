@@ -9,16 +9,16 @@
 
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
+    const {isMemberExpOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
 
     function isExplicitParamFunction(func) {
-        return astUtil.isMemberExpOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Number.MAX_VALUE, false)
+        return isMemberExpOf(getValueReturnedInFirstLine(func), getFirstParamName(func), Number.MAX_VALUE, false)
     }
 
     function canUseShorthand(iteratee) {
-        return lodashUtil.isLodashCallToMethod(iteratee, settings, 'property') || isExplicitParamFunction(iteratee)
+        return isLodashCallToMethod(iteratee, settings, 'property') || isExplicitParamFunction(iteratee)
     }
 
     function usesShorthand(node, iteratee) {
@@ -26,7 +26,7 @@ module.exports = function (context) {
     }
 
     return {
-        CallExpression: lodashUtil.getShorthandVisitor(context, settings, {
+        CallExpression: getShorthandVisitor(context, settings, {
             canUseShorthand,
             usesShorthand
         }, {

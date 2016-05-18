@@ -9,8 +9,8 @@
 
 module.exports = function (context) {
     const _ = require('lodash')
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {getLodashMethodVisitor} = require('../util/lodashUtil')
+    const {getMethodName} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const aliases = require('../util/methodDataUtil').getAliasesByVersion(settings.version)
 
@@ -23,8 +23,8 @@ module.exports = function (context) {
     }, {})
 
     return {
-        CallExpression: lodashUtil.getLodashMethodVisitor(settings, node => {
-            const methodName = astUtil.getMethodName(node)
+        CallExpression: getLodashMethodVisitor(settings, node => {
+            const methodName = getMethodName(node)
             if (_.has(expandedAliases, methodName)) {
                 context.report({
                     node: node.callee.property,

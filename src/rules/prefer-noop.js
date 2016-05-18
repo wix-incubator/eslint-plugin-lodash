@@ -8,10 +8,10 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const astUtil = require('../util/astUtil')
+    const {getFirstFunctionLine} = require('../util/astUtil')
 
     function reportIfEmptyFunction(node) {
-        if (!astUtil.getFirstFunctionLine(node) && node.parent.type !== 'MethodDefinition') {
+        if (!getFirstFunctionLine(node) && node.parent.type !== 'MethodDefinition') {
             context.report(node, 'Prefer _.noop over an empty function')
         }
     }

@@ -55,7 +55,7 @@ const isPropAccess = _.overSome(_.matches({computed: false}), _.matchesProperty(
  * @param {Object} node
  * @param {string} objectName
  * @param {number} maxPropertyPathLength
- * @param {boolean} allowComputed
+ * @param [boolean] allowComputed
  * @returns {boolean|undefined}
  */
 function isMemberExpOf(node, objectName, maxPropertyPathLength, allowComputed) {

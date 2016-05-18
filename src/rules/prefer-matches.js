@@ -9,9 +9,9 @@
 
 module.exports = function (context) {
     const DEFAULT_LENGTH = 3
-    const astUtil = require('../util/astUtil')
+    const {isComputed, isEquivalentExp, isEqEqEq} = require('../util/astUtil')
     const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
-    const _ = require('lodash')
+    const get = require('lodash/get')
 
     const expStates = []
     function getState() {
@@ -19,12 +19,12 @@ module.exports = function (context) {
     }
 
     function isMemberExpOfNodeOrRightmost(node, toCompare) {
-        return node.type === 'MemberExpression' && !astUtil.isComputed(node) &&
-        (!toCompare || astUtil.isEquivalentExp(node.object, toCompare))
+        return node.type === 'MemberExpression' && !isComputed(node) &&
+        (!toCompare || isEquivalentExp(node.object, toCompare))
     }
 
     function shouldCheckDeeper(node, toCompare) {
-        return node.operator === '&&' && astUtil.isEqEqEq(node.right) && isMemberExpOfNodeOrRightmost(node.right.left, toCompare)
+        return node.operator === '&&' && isEqEqEq(node.right) && isMemberExpOfNodeOrRightmost(node.right.left, toCompare)
     }
 
     return {
@@ -32,14 +32,14 @@ module.exports = function (context) {
             const state = getState()
             if (shouldCheckDeeper(node, state.node)) {
                 expStates.push({depth: state.depth + 1, node: node.right.left.object})
-                if (astUtil.isEquivalentExp(_.get(node, 'left.left.object'), _.get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
+                if (isEquivalentExp(get(node, 'left.left.object'), get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
                     context.report(node, 'Prefer _.isMatch over conditions on the same object')
                 }
             }
         },
         'LogicalExpression:exit'(node) {
             const state = getState()
-            if (state && state.node === _.get(node, 'right.left.object')) {
+            if (state && state.node === get(node, 'right.left.object')) {
                 expStates.pop()
             }
         }

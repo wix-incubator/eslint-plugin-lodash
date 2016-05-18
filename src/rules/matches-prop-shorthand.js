@@ -7,17 +7,17 @@
 // Rule Definition
 // ------------------------------------------------------------------------------
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
+    const {isEqEqEqToMemberOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const onlyLiterals = context.options[1] && context.options[1].onlyLiterals
 
     function isFunctionDeclarationThatCanUseShorthand(func) {
-        return astUtil.isEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), Infinity, false, onlyLiterals)
+        return isEqEqEqToMemberOf(getValueReturnedInFirstLine(func), getFirstParamName(func), Infinity, false, onlyLiterals)
     }
 
     function canUseShorthand(iteratee) {
-        return isFunctionDeclarationThatCanUseShorthand(iteratee) || lodashUtil.isLodashCallToMethod(iteratee, settings, 'matchesProperty')
+        return isFunctionDeclarationThatCanUseShorthand(iteratee) || isLodashCallToMethod(iteratee, settings, 'matchesProperty')
     }
 
     function callHasExtraParamAfterIteratee(node, iteratee) {
@@ -34,7 +34,7 @@ module.exports = function (context) {
     }
 
     return {
-        CallExpression: lodashUtil.getShorthandVisitor(context, settings, {
+        CallExpression: getShorthandVisitor(context, settings, {
             canUseShorthand,
             usesShorthand: matchesPropertyChecks[settings.version]
         }, {

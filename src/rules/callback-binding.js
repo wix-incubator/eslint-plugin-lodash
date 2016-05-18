@@ -8,13 +8,13 @@
 // ------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
+    const {getMethodName} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const transformerMethods = ['reduce', 'reduceRight', 'transform']
 
     function isBound(node) {
-        return node && node.type === 'CallExpression' && astUtil.getMethodName(node) === 'bind' && node.arguments.length === 1
+        return node && node.type === 'CallExpression' && getMethodName(node) === 'bind' && node.arguments.length === 1
     }
 
     const callExpressionReporters = {
@@ -24,7 +24,7 @@ module.exports = function (context) {
             }
         },
         4(node, iteratee) {
-            const isTransformerMethod = transformerMethods.some(lodashUtil.isCallToMethod.bind(null, node, settings.version))
+            const isTransformerMethod = transformerMethods.some(isCallToMethod.bind(null, node, settings.version))
             const iterateeIndex = node.arguments.indexOf(iteratee)
             if (iterateeIndex !== -1 && (isTransformerMethod && node.arguments[iterateeIndex + 2] || (!isTransformerMethod && node.arguments[iterateeIndex + 1]))) {
                 context.report(iteratee, 'Do not use Lodash 3 thisArg, use binding instead')
@@ -33,6 +33,6 @@ module.exports = function (context) {
     }
 
     return {
-        CallExpression: lodashUtil.getLodashMethodVisitor(settings, callExpressionReporters[settings.version])
+        CallExpression: getLodashMethodVisitor(settings, callExpressionReporters[settings.version])
     }
 }

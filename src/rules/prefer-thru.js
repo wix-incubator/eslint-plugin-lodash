@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
+    const {isLodashChainStart} = require('../util/lodashUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     function isSingleArgumentFunctionCall(node) {
         return node && node.type === 'CallExpression' && node.arguments.length === 1 && node.arguments[0].type !== 'Literal'
@@ -16,7 +16,7 @@ module.exports = function (context) {
 
     return {
         CallExpression(node) {
-            if (lodashUtil.isLodashChainStart(node, settings.pragma) && isSingleArgumentFunctionCall(node.arguments[0])) {
+            if (isLodashChainStart(node, settings.pragma) && isSingleArgumentFunctionCall(node.arguments[0])) {
                 context.report(node, 'Prefer using thru instead of function call in chain start.')
             }
         }

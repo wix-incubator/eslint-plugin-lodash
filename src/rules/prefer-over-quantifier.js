@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {isCallToMethod, getLodashMethodVisitor} = require('../util/lodashUtil')
+    const {getValueReturnedInFirstLine, getFirstParamName, isObjectOfMethodCall} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const conditionMethods = ['filter', 'reject', 'pickBy', 'omitBy', 'findIndex', 'findLastIndex', 'find', 'findLast', 'findKey', 'findLastKey']
     const message = 'Prefer _.{{method}} instead of a {{connective}}'
@@ -42,12 +42,12 @@ module.exports = function (context) {
     }
 
     function isCallToConditionMethod(node) {
-        return conditionMethods.some(lodashUtil.isCallToMethod.bind(null, node, settings.version))
+        return conditionMethods.some(isCallToMethod.bind(null, node, settings.version))
     }
 
     function reportIfConnectiveOfParamInvocations(node) {
-        const retVal = astUtil.getValueReturnedInFirstLine(node)
-        const paramName = astUtil.getFirstParamName(node)
+        const retVal = getValueReturnedInFirstLine(node)
+        const paramName = getFirstParamName(node)
         if (retVal && retVal.type === 'LogicalExpression' && (retVal.operator === '&&' || retVal.operator === '||')) {
             if (isOnlyParamInvocationsWithOperator(retVal, paramName, retVal.operator)) {
                 context.report(node, message, reportConstants[retVal.operator])
@@ -56,14 +56,14 @@ module.exports = function (context) {
     }
 
     function reportIfDoubleFilterLiteral(node) {
-        if (onlyPassesIdentifier(node) && astUtil.isObjectOfMethodCall(node) &&
+        if (onlyPassesIdentifier(node) && isObjectOfMethodCall(node) &&
             isCallToConditionMethod(node.parent.parent) && onlyPassesIdentifier(node.parent.parent)) {
             context.report(node, message, reportConstants['&&'])
         }
     }
 
     return {
-        CallExpression: lodashUtil.getLodashMethodVisitor(settings, (node, iteratee) => {
+        CallExpression: getLodashMethodVisitor(settings, (node, iteratee) => {
             if (isCallToConditionMethod(node)) {
                 reportIfConnectiveOfParamInvocations(iteratee)
                 reportIfDoubleFilterLiteral(node)

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const astUtil = require('../util/astUtil')
+    const {getValueReturnedInFirstLine} = require('../util/astUtil')
     const shouldCheckArrowFunctions = context.options[0] !== undefined ? context.options[0] : true
     const shouldCheckFunctionDeclarations = context.options[1] !== undefined ? context.options[1] : false
 
@@ -35,7 +35,7 @@ module.exports = function (context) {
     }
 
     function handleFunctionDefinition(node) {
-        reportIfLikeConstant(astUtil.getValueReturnedInFirstLine, node)
+        reportIfLikeConstant(getValueReturnedInFirstLine, node)
     }
 
     return {

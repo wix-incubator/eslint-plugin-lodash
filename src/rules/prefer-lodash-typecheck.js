@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
+    const {getIsTypeMethod} = require('../util/lodashUtil')
 
     const otherSides = {
         left: 'right',
@@ -43,11 +43,11 @@ module.exports = function (context) {
             const typeofCompareType = getTypeofCompareType(node)
             if (typeofCompareType) {
                 context.report(node, REPORT_MESSAGE, {
-                    method: lodashUtil.getIsTypeMethod(typeofCompareType),
+                    method: getIsTypeMethod(typeofCompareType),
                     actual: '\'typeof\' comparison'
                 })
             } else if (node.operator === 'instanceof') {
-                const lodashEquivalent = lodashUtil.getIsTypeMethod(node.right.name)
+                const lodashEquivalent = getIsTypeMethod(node.right.name)
                 if (node.right.type === 'Identifier' && lodashEquivalent) {
                     context.report(node, REPORT_MESSAGE, {method: lodashEquivalent, actual: `'instanceof ${node.right.name}'`})
                 }

@@ -8,7 +8,7 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
+    const {isCallToMethod, isLodashCall, getLodashMethodVisitor} = require('../util/lodashUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const objectPathMethods = {
         regular: {methods: ['get', 'has', 'hasIn', 'set', 'unset', 'invoke'], index: 1},
@@ -18,14 +18,14 @@ module.exports = function (context) {
 
 
     function getIndexByMethodName(node) {
-        return _.chain(objectPathMethods).find(type => type.methods.some(lodashUtil.isCallToMethod.bind(null, node, settings.version)))
+        return _.chain(objectPathMethods).find(type => type.methods.some(isCallToMethod.bind(null, node, settings.version)))
         .get('index', -1)
         .value()
     }
 
     function getPropertyPathNode(node) {
         const index = getIndexByMethodName(node)
-        return node.arguments[lodashUtil.isLodashCall(node, settings.pragma) ? index : index - 1]
+        return node.arguments[isLodashCall(node, settings.pragma) ? index : index - 1]
     }
 
     function isLiteralComplexPath(node) {
@@ -57,7 +57,7 @@ module.exports = function (context) {
 
 
     return {
-        CallExpression: lodashUtil.getLodashMethodVisitor(settings, node => {
+        CallExpression: getLodashMethodVisitor(settings, node => {
             const propertyPathNode = getPropertyPathNode(node)
             if (propertyPathNode) {
                 reportIfViolates[context.options[0] || 'string'](propertyPathNode)

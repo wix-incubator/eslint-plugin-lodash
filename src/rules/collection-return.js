@@ -8,25 +8,25 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const _ = require('lodash')
-    const astUtil = require('../util/astUtil')
-    const lodashUtil = require('../util/lodashUtil')
+    const [last, get] = ['last', 'get'].map(m => require(`lodash/${m}`))
+    const {getMethodName} = require('../util/astUtil')
+    const {isLodashCollectionMethod, isLodashCall, isLodashWrapper} = require('../util/lodashUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const callStack = []
 
     function handleExitOfFunctionWithBlock(node) {
         const functionNode = callStack.pop()
-        const last = _.last(callStack)
-        if (!functionNode.found && _.get(last, 'node.type') === 'CallExpression') {
-            context.report(node, `Do not use _.${astUtil.getMethodName(last.node)} without returning a value`)
+        const lastItem = last(callStack)
+        if (!functionNode.found && get(lastItem, 'node.type') === 'CallExpression') {
+            context.report(node, `Do not use _.${getMethodName(lastItem.node)} without returning a value`)
         }
-        if (last && last.node === node.parent) {
+        if (lastItem && lastItem.node === node.parent) {
             callStack.pop()
         }
     }
     function addToCallStackIfCollectionMethod(node) {
-        if (lodashUtil.isLodashCollectionMethod(node, settings.version) &&
-            (lodashUtil.isLodashCall(node, settings.pragma) || lodashUtil.isLodashWrapper(node, settings.pragma, settings.version))) {
+        if (isLodashCollectionMethod(node, settings.version) &&
+            (isLodashCall(node, settings.pragma) || isLodashWrapper(node, settings.pragma, settings.version))) {
             callStack.push({node})
         }
     }
@@ -49,9 +49,9 @@ module.exports = function (context) {
             }
         },
         ReturnStatement() {
-            const last = _.last(callStack)
-            if (last) {
-                last.found = true
+            const lastItem = last(callStack)
+            if (lastItem) {
+                lastItem.found = true
             }
         }
     }

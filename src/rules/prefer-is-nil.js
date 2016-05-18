@@ -8,8 +8,8 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const astUtil = require('../util/astUtil')
-    const lodashUtil = require('../util/lodashUtil')
+    const {isNegationExpression, isEquivalentExp} = require('../util/astUtil')
+    const {isLodashCallToMethod} = require('../util/lodashUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const _ = require('lodash')
     const nilChecks = {
@@ -25,7 +25,7 @@ module.exports = function (context) {
 
     function getLodashTypeCheckedBy(typecheck) {
         return function (node) {
-            return lodashUtil.isLodashCallToMethod(node, settings, typecheck) && node.arguments[0]
+            return isLodashCallToMethod(node, settings, typecheck) && node.arguments[0]
         }
     }
 
@@ -56,17 +56,17 @@ module.exports = function (context) {
     }
 
     function checkNegatedExpression(nil, node) {
-        return (astUtil.isNegationExpression(node) && checkExpression(nil, '===', node.argument)) || checkExpression(nil, '!==', node)
+        return (isNegationExpression(node) && checkExpression(nil, '===', node.argument)) || checkExpression(nil, '!==', node)
     }
 
     function isEquivalentExistingExpression(node, leftNil, rightNil) {
         const leftExp = checkExpression(leftNil, '===', node.left)
-        return leftExp && astUtil.isEquivalentExp(leftExp, checkExpression(rightNil, '===', node.right))
+        return leftExp && isEquivalentExp(leftExp, checkExpression(rightNil, '===', node.right))
     }
 
     function isEquivalentExistingNegation(node, leftNil, rightNil) {
         const leftExp = checkNegatedExpression(leftNil, node.left)
-        return leftExp && astUtil.isEquivalentExp(leftExp, checkNegatedExpression(rightNil, node.right))
+        return leftExp && isEquivalentExp(leftExp, checkNegatedExpression(rightNil, node.right))
     }
 
     return {

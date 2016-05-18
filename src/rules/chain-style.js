@@ -7,32 +7,32 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const {isChainable, isChainBreaker, isExplicitChainStart, isImplicitChainStart} = require('../util/lodashUtil')
+    const {isMethodCall} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     const callExpressionVisitors = {
         'as-needed'(node) {
-            if (lodashUtil.isExplicitChainStart(node, settings.pragma)) {
+            if (isExplicitChainStart(node, settings.pragma)) {
                 let curr = node.parent.parent
                 let needed = false
-                while (astUtil.isMethodCall(curr) && !lodashUtil.isChainBreaker(curr, settings.version)) {
-                    if (!lodashUtil.isChainable(curr, settings.version) && !lodashUtil.isChainBreaker(curr.parent.parent, settings.version)) {
+                while (isMethodCall(curr) && !isChainBreaker(curr, settings.version)) {
+                    if (!isChainable(curr, settings.version) && !isChainBreaker(curr.parent.parent, settings.version)) {
                         needed = true
                     }
                     curr = curr.parent.parent
                 }
-                if (astUtil.isMethodCall(curr) && !needed) {
+                if (isMethodCall(curr) && !needed) {
                     context.report(node, 'Unnecessary explicit chaining')
                 }
             }
         },
         implicit(node) {
-            if (lodashUtil.isExplicitChainStart(node, settings.pragma)) {
+            if (isExplicitChainStart(node, settings.pragma)) {
                 context.report(node, 'Do not use explicit chaining')
             }
         },
         explicit(node) {
-            if (lodashUtil.isImplicitChainStart(node, settings.pragma)) {
+            if (isImplicitChainStart(node, settings.pragma)) {
                 context.report(node, 'Do not use implicit chaining')
             }
         }

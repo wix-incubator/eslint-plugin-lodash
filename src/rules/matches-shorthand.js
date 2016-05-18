@@ -8,20 +8,20 @@
 // ------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const lodashUtil = require('../util/lodashUtil')
-    const _ = require('lodash')
-    const astUtil = require('../util/astUtil')
+    const matches = require('lodash/matches')
+    const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
+    const {isEqEqEq, isMemberExpOf, isEqEqEqToMemberOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
     const settingsUtil = require('../util/settingsUtil')
     const settings = settingsUtil.getSettings(context)
     const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
     const onlyLiterals = context.options[3] && context.options[3].onlyLiterals
 
-    const isConjunction = _.matches({type: 'LogicalExpression', operator: '&&'})
+    const isConjunction = matches({type: 'LogicalExpression', operator: '&&'})
 
     function canBeObjectLiteralWithShorthandProperty(node, paramName) {
-        return settingsUtil.isEcmaFeatureOn(context, 'objectLiteralShorthandProperties') && astUtil.isEqEqEq(node) &&
-            (astUtil.isMemberExpOf(node.left, paramName, 1) && node.left.property.type === 'Identifier' && node.right.type === 'Identifier' && node.left.property.name === node.right.name ||
-            astUtil.isMemberExpOf(node.right, paramName, 1) && node.right.property.type === 'Identifier' && node.left.type === 'Identifier' && node.right.property.name === node.left.name)
+        return settingsUtil.isEcmaFeatureOn(context, 'objectLiteralShorthandProperties') && isEqEqEq(node) &&
+            (isMemberExpOf(node.left, paramName, 1) && node.left.property.type === 'Identifier' && node.right.type === 'Identifier' && node.left.property.name === node.right.name ||
+            isMemberExpOf(node.right, paramName, 1) && node.right.property.type === 'Identifier' && node.left.type === 'Identifier' && node.right.property.name === node.left.name)
     }
 
     function isConjunctionOfEqEqEqToMemberOf(exp, paramName, maxPropertyPathLength) {
@@ -34,7 +34,7 @@ module.exports = function (context) {
             while (curr) {
                 if (isConjunction(curr)) {
                     checkStack.push(curr.left, curr.right)
-                } else if (!astUtil.isEqEqEqToMemberOf(curr, paramName, maxPropertyPathLength, allowComputed, onlyLiterals)) {
+                } else if (!isEqEqEqToMemberOf(curr, paramName, maxPropertyPathLength, allowComputed, onlyLiterals)) {
                     allParamMemberEq = false
                 }
                 curr = checkStack.pop()
@@ -45,11 +45,11 @@ module.exports = function (context) {
 
     function isFunctionDeclarationThatCanUseShorthand(func) {
         const maxPropertyPathLength = context.options[1] || DEFAULT_MAX_PROPERTY_PATH_LENGTH
-        return isConjunctionOfEqEqEqToMemberOf(astUtil.getValueReturnedInFirstLine(func), astUtil.getFirstParamName(func), maxPropertyPathLength)
+        return isConjunctionOfEqEqEqToMemberOf(getValueReturnedInFirstLine(func), getFirstParamName(func), maxPropertyPathLength)
     }
 
     function canUseShorthand(iteratee) {
-        return isFunctionDeclarationThatCanUseShorthand(iteratee) || lodashUtil.isLodashCallToMethod(iteratee, settings, 'matches')
+        return isFunctionDeclarationThatCanUseShorthand(iteratee) || isLodashCallToMethod(iteratee, settings, 'matches')
     }
 
     function usesShorthand(node, iteratee) {
@@ -58,7 +58,7 @@ module.exports = function (context) {
 
 
     return {
-        CallExpression: lodashUtil.getShorthandVisitor(context, settings, {
+        CallExpression: getShorthandVisitor(context, settings, {
             canUseShorthand,
             usesShorthand
         }, {

@@ -9,31 +9,31 @@
 
 
 module.exports = function (context) {
-    const _ = require('lodash')
-    const lodashUtil = require('../util/lodashUtil')
-    const astUtil = require('../util/astUtil')
+    const [get, matches, overSome] = ['get', 'matches', 'overSome'].map(m => require(`lodash/${m}`))
+    const {methodSupportsShorthand, getShorthandVisitor} = require('../util/lodashUtil')
+    const {getFirstParamName, getValueReturnedInFirstLine} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
 
 
     function isExplicitIdentityFunction(iteratee) {
-        const firstParamName = astUtil.getFirstParamName(iteratee)
-        return firstParamName && _.get(astUtil.getValueReturnedInFirstLine(iteratee), 'name') === firstParamName
+        const firstParamName = getFirstParamName(iteratee)
+        return firstParamName && get(getValueReturnedInFirstLine(iteratee), 'name') === firstParamName
     }
 
-    const isLodashIdentityFunction = _.matches({
+    const isLodashIdentityFunction = matches({
         type: 'MemberExpression',
         object: {name: settings.pragma},
         property: {name: 'identity'}
     })
 
-    const canUseShorthand = _.overSome(isExplicitIdentityFunction, isLodashIdentityFunction)
+    const canUseShorthand = overSome(isExplicitIdentityFunction, isLodashIdentityFunction)
 
     function usesShorthand(node, iteratee) {
-        return lodashUtil.methodSupportsShorthand(settings.version, node) && !iteratee
+        return methodSupportsShorthand(settings.version, node) && !iteratee
     }
 
     return {
-        CallExpression: lodashUtil.getShorthandVisitor(context, settings, {
+        CallExpression: getShorthandVisitor(context, settings, {
             canUseShorthand,
             usesShorthand
         }, {

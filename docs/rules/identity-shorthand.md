@@ -20,7 +20,7 @@ var topScore = _.max(scores, function (score) {
 The following patterns are not considered warnings:
 
 ```js
-/*eslint lodash/identity-shorthand: [2, "never"]
+/*eslint lodash/identity-shorthand: [2, "never"] */
 var topScore = _.max(scores);
 ```
 

@@ -64,6 +64,7 @@ The following rules point out areas where you might have made mistakes.
 ### Stylistic Issues
 These rules are purely matters of style and are quite subjective.
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
+* [consistent-compose](docs/rules/consistent-compose.md): Enforce a specific function composition direction: `flow` or `flowRight`.
 * [identity-shorthand](docs/rules/identity-shorthand.md): Prefer identity shorthand syntax
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax

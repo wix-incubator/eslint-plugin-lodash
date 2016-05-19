@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.8.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.0...HEAD
+
+## [1.9.0] - 2016-05-19
+### Added
+- Created rule [`consistent-compose`]. ([`1028c0d`][1028c0d])
+
+[1028c0d]: https://github.com/wix/eslint-plugin-lodash/commit/1028c0d744b1d51579246bb5736329f771d99b47
+[1.9.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.0...v1.8.5
 
 ## [1.8.5] - 2016-05-17
 ### Fixed
@@ -358,6 +365,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [prefer-includes]: docs/rules/prefer-includes.md
 [prefer-lodash-method]: docs/rules/prefer-lodash-method.md
 [collection-method-value]: docs/rules/collection-method-value.md
+[consistent-compose]: docs/rules/consistent-compose.md
 
 <!--
 ### Added

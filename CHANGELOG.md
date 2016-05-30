@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.1...HEAD
+
+## [1.9.1] - 2016-05-30
+### Fixed
+- Aligned method data to `v4.13.x` (argument counts and chainable methods). ([`565bad6`][565bad6])
+
+[565bad6]: https://github.com/wix/eslint-plugin-lodash/commit/565bad6f5e0c60c521700a41f7d1e1602fc77e88
+[1.9.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.1...v1.9.0
 
 ## [1.9.0] - 2016-05-19
 ### Added

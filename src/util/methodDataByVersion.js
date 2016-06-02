@@ -698,7 +698,7 @@ module.exports = {
             startCase: 1,
             startsWith: 3,
             stubArray: 0,
-            stabFalse: 0,
+            stubFalse: 0,
             stubObject: 0,
             stubString: 0,
             stubTrue: 0,

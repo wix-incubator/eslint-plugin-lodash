@@ -87,7 +87,7 @@ These rules are purely matters of style and are quite subjective.
 These rules are also stylistic choices, but they also recommend using Lodash instead of native functions and constructs.
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-get](docs/rules/prefer-get.md): Prefer using `_.get` or `_.has` over expression chains like `a && a.b && a.b.c`.
-* [prefer-includes](docs/rules/prefer-includes.md): Prefer `_.includes` over comparing `indexOf` to 1-11.
+* [prefer-includes](docs/rules/prefer-includes.md): Prefer `_.includes` over comparing `indexOf` to -1.
 * [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.
 * [prefer-lodash-chain](docs/rules/prefer-lodash-chain.md): Prefer using Lodash chains (e.g. `_.map`) over native and mixed chains.
 * [prefer-lodash-method](docs/rules/prefer-lodash-method.md): Prefer using Lodash collection methods (e.g. `_.map`) over native array methods.
@@ -106,7 +106,7 @@ Contributions are always welcome! For more info, read our [contribution guide](.
 ESLint-plugin-lodash is licensed under the [MIT License](http://www.opensource.org/licenses/mit-license.php).
 
 [npm-url]: https://npmjs.org/package/eslint-plugin-lodash
-[npm-image]: http://img.shields.io/npm/v/eslint-plugin-lodash.svg?style=flat-squarei
+[npm-image]: http://img.shields.io/npm/v/eslint-plugin-lodash.svg?style=flat-square
 
 [deps-url]: https://david-dm.org/wix/eslint-plugin-lodash
 [deps-image]: https://img.shields.io/david/dev/wix/eslint-plugin-lodash.svg?style=flat-square

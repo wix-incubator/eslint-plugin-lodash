@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.2...HEAD
+
+## [1.9.2] - 2016-06-02
+### Fixed
+- Fix typo in argument count for Lodash 4 method `stubFalse`. ([`7efc67c`][7efc67c])
+
+[7efc67c]: https://github.com/wix/eslint-plugin-lodash/commit/7efc67c9aa4b97f281b36beca584aff34bd1396f
+[1.9.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.2...v1.9.1
 
 ## [1.9.1] - 2016-05-30
 ### Fixed

@@ -8,14 +8,21 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.4...HEAD
+
+## [1.9.4] - 2016-07-05
+### Fixed
+- Add peerDependency for eslint >= 1.3.0 ([`4793496`][4793496])
+
+[4793496]: https://github.com/wix/eslint-plugin-lodash/commit/47934965306a5056b7614729801031627ba2fa64
+[1.9.4]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.4...v1.9.3
 
 ## [1.9.3] - 2016-07-05
 ### Fixed
 - Fix argument counts for `find`, `findIndex`, `findLast` and `findLastIndex`. ([`bc7023a`][bc7023a])
 
 [bc7023a]: https://github.com/wix/eslint-plugin-lodash/commit/bc7023a2f663d1895ba2c456c962ca6ccddf9f61
-[1.9.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.2...v1.9.1
+[1.9.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.3...v1.9.2
 
 ## [1.9.2] - 2016-06-02
 ### Fixed

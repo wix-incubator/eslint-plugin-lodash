@@ -29,6 +29,10 @@ ruleTester.run('prefer-lodash-method', rule, {
             code: 'var x = React.Children.map(f)',
             options: [{ignoreObjects: ['React.Children']}]
         },
+        {
+            code: 'var x = $el.filter(f)',
+            options: [{ignorePatterns: ['^\\$.+']}]
+        },
         '_.chain(a).get(p).map(f).value()'
     ],
     invalid: [{

@@ -8,14 +8,15 @@
 //------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    
+
     const {isLodashCall, isLodashWrapper, isNativeCollectionMethodCall} = require('../util/lodashUtil')
     const {getMethodName, getCaller} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
-    const [get, includes, cond, matches, property] = ['get', 'includes', 'cond', 'matches', 'property'].map(m => require(`lodash/${m}`))
+    const [get, includes, cond, matches, property, some, map] = ['get', 'includes', 'cond', 'matches', 'property', 'some', 'map'].map(m => require(`lodash/${m}`))
     const REPORT_MESSAGE = 'Prefer \'_.{{method}}\' over the native function.'
     const exceptions = get(context, ['options', 0, 'except'], [])
     const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
+    const ignoredPatterns = map(get(context, ['options', 0, 'ignorePatterns'], []), pattern => new RegExp(pattern))
 
     function isStaticNativeMethodCall(node) {
         const staticMethods = {
@@ -41,7 +42,13 @@ module.exports = function (context) {
 
     function isIgnoredObject(node) {
         const callerName = getTextOfNode(getCaller(node))
-        return callerName && includes(ignoredObjects, callerName)
+        if (!callerName) { return false }
+
+        if (includes(ignoredObjects, callerName)) { return true }
+
+        if (some(ignoredPatterns, pattern => callerName.match(pattern))) { return true }
+
+        return false
     }
 
     function isRuleException(node) {

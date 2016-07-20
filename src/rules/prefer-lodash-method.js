@@ -79,6 +79,12 @@ module.exports.schema = [
                 items: {
                     type: 'string'
                 }
+            },
+            ignorePatterns: {
+                type: 'array',
+                items: {
+                    type: 'string'
+                }
             }
         }
     }

@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.9.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.0...HEAD
+
+
+## [1.10.0] - 2016-07-20
+### Added
+- Add option `ignorePatterns` to config of rule `prefer-lodash-method`. ([`1c01a5f`][1c01a5f])
+
+[1c01a5f]: https://github.com/wix/eslint-plugin-lodash/commit/1c01a5f023a7b29f4825132086eec946db3569d2
+[1.10.0]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.0...v1.9.4
 
 ## [1.9.4] - 2016-07-05
 ### Fixed

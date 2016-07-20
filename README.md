@@ -85,6 +85,7 @@ These rules are purely matters of style and are quite subjective.
 
 #### Preference over native
 These rules are also stylistic choices, but they also recommend using Lodash instead of native functions and constructs.
+For example, Lodash collection methods (e.g. `map`, `forEach`) are generally faster than native collection methods.
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-get](docs/rules/prefer-get.md): Prefer using `_.get` or `_.has` over expression chains like `a && a.b && a.b.c`.
 * [prefer-includes](docs/rules/prefer-includes.md): Prefer `_.includes` over comparing `indexOf` to -1.

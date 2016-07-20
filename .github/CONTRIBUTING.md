@@ -18,10 +18,11 @@ if relevant.
 ## Creating a pull request
 
 * Please adhere to the style and formatting of the code.
-* Write tests for any changes.
+* Write tests for any changes. This project should always remain at 100% coverage!
 * Create purposeful and complete commits.
 
 ### Before committing
 
 * Make sure that `npm test` passes.
 * Pick a concise commit message.
+* If you make changes to rule configuration, make sure to include them in the rule's options schema and docs.

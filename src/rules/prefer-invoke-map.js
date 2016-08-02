@@ -12,7 +12,7 @@ module.exports = function (context) {
     const {isCallFromObject, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
     function isFunctionMethodCallOfParam(func) {
-        const firstParamName = getFirstParamName(func);
+        const firstParamName = getFirstParamName(func)
         return firstParamName && isCallFromObject(getValueReturnedInFirstLine(func), firstParamName)
     }
 

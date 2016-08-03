@@ -8,7 +8,7 @@
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "lint": "eslint ./",
     "test": "npm run lint && npm run unit-test",
-    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/**/*.js -- --reporter dot",
+    "unit-test": "istanbul cover --dir reports/coverage _mocha tests/**/*.js -- --compilers js:babel-core/register --reporter dot",
     "prepublish": "babel src -d lib"
   },
   "files": [
@@ -34,7 +34,7 @@
     "coveralls": "2.11.9",
     "eslint": "2.11.0",
     "eslint-config-wix-editor": "0.2.3",
-    "istanbul": "0.4.3",
+    "istanbul": "1.1.0-alpha.1",
     "mocha": "2.5.3"
   },
   "keywords": [

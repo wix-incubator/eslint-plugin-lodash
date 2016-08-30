@@ -8,18 +8,36 @@
 // ------------------------------------------------------------------------------
 
 module.exports = function (context) {
-    const {isExplicitMethodChaining, isChainBreaker, isCallToMethod, isChainable, isEndOfChain} = require('../util/lodashUtil')
+    const {isImplicitChainStart, isExplicitChainStart, isChainable, isCallToMethod, isChainBreaker} = require('../util/lodashUtil')
     const settings = require('../util/settingsUtil').getSettings(context)
-    function isExplicitChainWithoutBreaker(node) {
-        return isExplicitMethodChaining(node, settings.version) && !isChainBreaker(node, settings.version)
+    const {getCaller} = require('../util/astUtil')
+    const negate = require('lodash/negate')
+
+    function isCommit(node) {
+        return isCallToMethod(node, settings.version, 'commit')
     }
-    function isEvaluatedWhenLazy(node) {
-        return isCallToMethod(node, settings.version, 'commit') || !isChainable(node, settings.version)
+
+    function getEndOfChain(node, isExplicit) {
+        const stillInChain = isExplicit ? negate(isChainBreaker) : isChainable
+        let curr = node.parent.parent
+        while (curr === getCaller(curr.parent.parent) && stillInChain(curr, settings.version)) {
+            curr = curr.parent.parent
+        }
+        return curr
     }
+
     return {
         CallExpression(node) {
-            if (isEndOfChain(node, settings.pragma, settings.version) && (!isEvaluatedWhenLazy(node) || isExplicitChainWithoutBreaker(node))) {
-                context.report(node, 'Missing unwrapping at end of chain')
+            if (isImplicitChainStart(node, settings.pragma)) {
+                const end = getEndOfChain(node, false)
+                if (!isCommit(end) && isChainable(end, settings.version)) {
+                    context.report(end, 'Missing unwrapping at end of chain')
+                }
+            } else if (isExplicitChainStart(node, settings.pragma)) {
+                const end = getEndOfChain(node, true)
+                if (!isCommit(end) && !isChainBreaker(end, settings.version)) {
+                    context.report(end, 'Missing unwrapping at end of chain')
+                }
             }
         }
     }

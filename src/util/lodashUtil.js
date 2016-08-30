@@ -64,20 +64,6 @@ function isChainBreaker(node, version) {
 }
 
 /**
- * Returns whether or not the node is part of an explicit chain
- * @param {Object} node
- * @param {number} version
- * @returns {boolean}
- */
-function isExplicitMethodChaining(node, version) {
-    const methodName = astUtil.getMethodName(node)
-    if (methodName === 'chain') {
-        return true
-    }
-    return astUtil.isMethodCall(node) && !isChainBreaker(node, version) && isExplicitMethodChaining(node.callee.object, version)
-}
-
-/**
  * Returns whether the node is in a lodash chain
  * @param {Object} node
  * @param {string} pragma
@@ -100,17 +86,6 @@ function isLodashWrapper(node, pragma, version) {
         currentNode = astUtil.getCaller(currentNode)
     }
     return chainable ? isLodashChainStart(currentNode, pragma) : isExplicitChainStart(currentNode, pragma)
-}
-
-/**
- * Returns whether or not the node is the last call of a Lodash chain
- * @param {Object} node
- * @param {string} pragma
- * @param {number} version
- * @returns {boolean}
- */
-function isEndOfChain(node, pragma, version) {
-    return isLodashWrapper(astUtil.getCaller(node), pragma, version) && !astUtil.isObjectOfMethodCall(node)
 }
 
 /**
@@ -240,9 +215,7 @@ module.exports = {
     isLodashChainStart,
     isChainable,
     isLodashWrapper,
-    isEndOfChain,
     isChainBreaker,
-    isExplicitMethodChaining,
     isCallToMethod,
     isLodashCallToMethod,
     isLodashWrapperMethod,

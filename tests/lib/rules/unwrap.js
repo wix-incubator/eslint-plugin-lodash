@@ -18,7 +18,10 @@ ruleTester.run('unwrap', rule, {
         'var x = _(a).map(f).reduce(g)',
         'var x = _(a).map(f).filter(g).value()',
         'var x = _.chain(a).map(f).value()',
-        'var stillWrapped = _(a).forEach(f).commit();'
+        'var stillWrapped = _(a).remove(f).commit();',
+        'var stillWrapper = _.chain(a).remove(f).commit();',
+        'var unwrappedEarly = _(a).reduce(f, x).map(g)',
+        'var unwrappedEarly = _.chain(a).map(f).value().map(g)'
     ],
     invalid: [
         'var x = _(a).map(f);',

@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...HEAD
+
+## [1.10.2] - 2016-09-04
+### Fixed
+- Improved preformance for `unwrap`. ([`95be25a`][95be25a])
+- Added explanantion to docs for `prefer-lodash-method`. ([`1d57005`][1d57005])
+
+[95be25a]: https://github.com/wix/eslint-plugin-lodash/commit/95be25a5e73e72fda7616fc0853726cd1abf49b0
+[1d57005]: https://github.com/wix/eslint-plugin-lodash/commit/1d570057a19795a2eb3853a90826b1a318034967
+[1.10.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...v1.10.1
 
 ## [1.10.1] - 2016-07-27
 ### Fixed

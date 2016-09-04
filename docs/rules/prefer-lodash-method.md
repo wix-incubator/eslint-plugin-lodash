@@ -2,6 +2,8 @@
 
 When using native functions like forEach and map, it's often better to use the Lodash implementation.
 
+This can be for performance reasons, for implicit care of edge cases (e.g. `_.map` over a variable that might be undefined), or for use of Lodash's shorthands.
+
 ## Rule Details
 
 This rule takes one argument - an optional options object. This object can have two keys: `except` and `ignoreObjects`, both optional.

@@ -33,7 +33,8 @@ ruleTester.run('prefer-lodash-method', rule, {
             code: 'var x = $el.filter(f)',
             options: [{ignorePatterns: ['^\\$.+']}]
         },
-        '_.chain(a).get(p).map(f).value()'
+        '_.chain(a).get(p).map(f).value()',
+        'var x = Object.create(null)'
     ],
     invalid: [{
         code: 'var x = a.map(function(x) {return x.f()});',
@@ -47,5 +48,9 @@ ruleTester.run('prefer-lodash-method', rule, {
     }, {
         code: 'var x = Object.keys(node)',
         errors: [{message: "Prefer '_.keys' over the native function."}]
+    }, {
+        code: 'var x = Object.create(foo)',
+        errors: [{message: "Prefer '_.create' over the native function."}]
+
     }]
 })

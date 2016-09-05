@@ -10,6 +10,13 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 [unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...HEAD
 
+## [1.10.3] - 2016-09-05
+### Fixed
+- Made `prefer-lodash-method` not warn for `Object.create(null)`. ([`62f82fb`][62f82fb])
+
+[62f82fb]: https://github.com/wix/eslint-plugin-lodash/commit/62f82fb50a71f93ebe4d5834e818acdca22f6d22
+[1.10.3]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.3...v1.10.2
+
 ## [1.10.2] - 2016-09-04
 ### Fixed
 - Improved preformance for `unwrap`. ([`95be25a`][95be25a])
@@ -17,7 +24,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 [95be25a]: https://github.com/wix/eslint-plugin-lodash/commit/95be25a5e73e72fda7616fc0853726cd1abf49b0
 [1d57005]: https://github.com/wix/eslint-plugin-lodash/commit/1d570057a19795a2eb3853a90826b1a318034967
-[1.10.1]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...v1.10.1
+[1.10.2]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...v1.10.1
 
 ## [1.10.1] - 2016-07-27
 ### Fixed

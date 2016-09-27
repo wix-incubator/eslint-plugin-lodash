@@ -17,6 +17,7 @@ if relevant.
 
 ## Creating a pull request
 
+* Be advised that the tests use ES6 syntax and your node version should be 6 or higher.
 * Please adhere to the style and formatting of the code.
 * Write tests for any changes. This project should always remain at 100% coverage!
 * Create purposeful and complete commits.

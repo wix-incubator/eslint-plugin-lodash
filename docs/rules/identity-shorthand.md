@@ -11,7 +11,7 @@ This rule takes one argument, when to use shorthand: `always` or `never` (defaul
 The following patterns are considered warnings:
 
 ```js
-/*eslint lodash/identity-shorthand: [2, "always"]
+/*eslint lodash/identity-shorthand: [2, "always"] */
 var topScore = _.max(scores, function (score) {
   return score;
 });

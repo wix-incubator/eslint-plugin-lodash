@@ -12,6 +12,7 @@
 
 module.exports = {
     create(context) {
+        const some = require('lodash/some')
         const {getIsTypeMethod} = require('../util/lodashUtil')
 
         const otherSides = {
@@ -27,9 +28,14 @@ module.exports = {
             return node.operator === '===' || node.operator === '!=='
         }
 
+        function isDeclaredVariable(node) {
+            const definedVariables = context.getScope().variables
+            return some(definedVariables, {name: node.name})
+        }
+
         function getValueForSide(node, side) {
             const otherSide = otherSides[side]
-            if (isTypeOf(node[side]) && (node[otherSide].value !== 'undefined' || node[side].argument.type !== 'Identifier')) {
+            if (isTypeOf(node[side]) && (node[otherSide].value !== 'undefined' || node[side].argument.type !== 'Identifier' || isDeclaredVariable(node[side].argument))) {
                 return node[otherSide].value
             }
         }

@@ -36,5 +36,8 @@ ruleTester.run('prefer-lodash-typecheck', rule, {
     }, {
         code: 'var x = typeof a.b === "undefined"',
         errors: errors.undefined
+    }, {
+        code: 'var y; var x = typeof y === "undefined"',
+        errors: errors.undefined
     }]
 })

@@ -18,7 +18,9 @@ ruleTester.run('prefer-map', rule, {
     valid: [
         'var x = _.map(arr, function(x) {return x + 7})',
         '_.forEach(arr, function(x) { if (x.a) {a.push(x)}})',
-        '_.forEach(arr, function (x){ a.push(x); if (f(x)) {a.push(b)}});'
+        '_.forEach(arr, function (x){ a.push(x); if (f(x)) {a.push(b)}});',
+        '_.forEach(xs, (x, i) => {x.push(y[i])})',
+        '_.forEach(xs, ({x}) => {x.push(1)})'
     ].map(withDefaultPragma),
     invalid: [
         '_(arr).forEach(function(x) { a.push(x)})',

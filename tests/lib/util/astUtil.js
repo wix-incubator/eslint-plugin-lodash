@@ -392,7 +392,7 @@ describe('astUtil', () => {
                 })
         })
     })
-    describe('isIdentifierWithName',  () => {
+    describe('isIdentifierWithName', () => {
         it('should return true if the node is an identifier with the specified name', done => {
             traverse('var x')
                 .get('Identifier', node => {
@@ -657,5 +657,35 @@ describe('astUtil', () => {
                     done()
                 })
         })
+    })
+    describe('collectParameterValues', () => {
+        it('should return an array with a single string for an identifier', done => {
+            traverse('x => x')
+                .get('ArrowFunctionExpression', func => {
+                    const param = func.params[0]
+                    const paramNames = astUtil.collectParameterValues(param)
+                    assert.deepEqual(paramNames, ['x'])
+                    done()
+                })
+        })
+        it('should return an array with all values defined in an object pattern', done => {
+            traverse('({x, [y]: {z}}) => x')
+                .get('ArrowFunctionExpression', func => {
+                    const param = func.params[0]
+                    const paramNames = astUtil.collectParameterValues(param)
+                    assert.deepEqual(paramNames, ['x', 'z'])
+                    done()
+                })
+        })
+        it('should return an array all values from an array pattern', done => {
+            traverse('([x,,z]) => x + z')
+                .get('ArrowFunctionExpression', func => {
+                    const param = func.params[0]
+                    const paramNames = astUtil.collectParameterValues(param)
+                    assert.deepEqual(paramNames, ['x', 'z'])
+                    done()
+                })
+        })
+
     })
 })

@@ -13,13 +13,16 @@
 module.exports = {
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
-        const {getFirstFunctionLine, hasOnlyOneStatement, getMethodName, isFunctionDefinitionWithBlock} = require('../util/astUtil')
+        const {getFirstFunctionLine, hasOnlyOneStatement, getMethodName, isFunctionDefinitionWithBlock, collectParameterValues} = require('../util/astUtil')
         const {isAliasOfMethod} = require('../util/methodDataUtil')
+        const get = require('lodash/get')
+        const includes = require('lodash/includes')
 
         function onlyHasPush(func) {
             const firstLine = getFirstFunctionLine(func)
+            const firstParam = get(func, 'params[0]')
             const exp = func && !isFunctionDefinitionWithBlock(func) ? firstLine : firstLine && firstLine.expression
-            return func && hasOnlyOneStatement(func) && getMethodName(exp) === 'push'
+            return func && hasOnlyOneStatement(func) && getMethodName(exp) === 'push' && !includes(collectParameterValues(firstParam), get(exp, 'callee.object.name'))
         }
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {

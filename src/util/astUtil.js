@@ -126,9 +126,9 @@ function isLiteral(node) {
  */
 function isBinaryExpWithMemberOf(operator, exp, objectName, {maxLength, allowComputed, onlyLiterals} = {}) {
     return exp && exp.type === 'BinaryExpression' && exp.operator === operator &&
-          (isMemberExpOf(exp.left, objectName, {maxLength, allowComputed}) ||
-          isMemberExpOf(exp.right, objectName, {maxLength, allowComputed})) &&
-          (!onlyLiterals || (isLiteral(exp.left) || isLiteral(exp.right)))
+        (isMemberExpOf(exp.left, objectName, {maxLength, allowComputed}) ||
+        isMemberExpOf(exp.right, objectName, {maxLength, allowComputed})) &&
+        (!onlyLiterals || (isLiteral(exp.left) || isLiteral(exp.right)))
 }
 
 
@@ -227,7 +227,6 @@ function isEquivalentMemberExp(a, b) {
 const isEqEqEq = _.matches({type: 'BinaryExpression', operator: '==='})
 
 
-
 const isMinus = node => node.type === 'UnaryExpression' && node.operator === '-'
 
 /**
@@ -288,6 +287,24 @@ function getExpressionComparedToInt(node, value, checkOver) {
  */
 const isIndexOfCall = node => isMethodCall(node) && getMethodName(node) === 'indexOf'
 
+/**
+ * Returns an array of identifier names returned in a parameter or variable definition
+ * @param node an AST node which is a parameter or variable declaration
+ * @returns {string[]} List of names defined in the parameter
+ */
+function collectParameterValues(node) {
+    switch (node && node.type) {
+        case 'Identifier':
+            return [node.name]
+        case 'ObjectPattern':
+            return _.flatMap(node.properties, prop => collectParameterValues(prop.value))
+        case 'ArrayPattern':
+            return _.flatMap(node.elements, collectParameterValues)
+        default:
+            return []
+    }
+}
+
 module.exports = {
     getCaller,
     getMethodName,
@@ -310,5 +327,6 @@ module.exports = {
     comparisonType,
     getExpressionComparedToInt,
     isIndexOfCall,
-    isFunctionDefinitionWithBlock
+    isFunctionDefinitionWithBlock,
+    collectParameterValues
 }

@@ -2,11 +2,11 @@
 
 const _ = require('lodash')
 
-/**
- * @type {VersionInfo}
- */
-const methodDataByVersion = require('./methodDataByVersion')
-
+const _methodDataByVersion = {}
+function getMethodData(version) {
+    _methodDataByVersion[version] = _methodDataByVersion[version] || require(`./methodDataByVersion/${version}`)
+    return _methodDataByVersion[version]
+}
 /**
  * Gets a major version number and method name and returns all its aliases including itself.
  * @param {Number} version
@@ -14,7 +14,7 @@ const methodDataByVersion = require('./methodDataByVersion')
  * @returns {string[]}
  */
 function expandAlias(version, method) {
-    const methodData = methodDataByVersion[version]
+    const methodData = getMethodData(version)
     return [method].concat(methodData.aliases[method] || methodData.wrapperAliases[method] || [])
 }
 
@@ -34,7 +34,7 @@ function expandAliases(version, methods) {
  * @returns {Aliases}
  */
 function getAliasesByVersion(version) {
-    return methodDataByVersion[version].aliases
+    return getMethodData(version).aliases
 }
 
 /**
@@ -43,7 +43,7 @@ function getAliasesByVersion(version) {
  * @returns {[string]}
  */
 function getChainableAliases(version) {
-    return expandAliases(version, methodDataByVersion[version].chainable)
+    return expandAliases(version, getMethodData(version).chainable)
 }
 
 /**
@@ -52,7 +52,7 @@ function getChainableAliases(version) {
  * @returns {[string]}
  */
 function getCollectionMethods(version) {
-    return expandAliases(version, methodDataByVersion[version].shorthand.concat(['reduce', 'reduceRight']))
+    return expandAliases(version, getMethodData(version).shorthand.concat(['reduce', 'reduceRight']))
 }
 
 /**
@@ -61,7 +61,7 @@ function getCollectionMethods(version) {
  * @returns {[string]}
  */
 function getShorthandMethods(version) {
-    return expandAliases(version, methodDataByVersion[version].shorthand)
+    return expandAliases(version, getMethodData(version).shorthand)
 }
 
 /**
@@ -70,7 +70,7 @@ function getShorthandMethods(version) {
  * @returns {[string]}
  */
 function getWrapperMethods(version) {
-    return methodDataByVersion[version].wrapper
+    return getMethodData(version).wrapper
 }
 
 /**
@@ -91,10 +91,10 @@ function isAliasOfMethod(version, method, suspect) {
  * @returns {string}
  */
 function getMainAlias(version, method) {
-    if (methodDataByVersion[version].aliases[method]) {
+    if (getMethodData(version).aliases[method]) {
         return method
     }
-    return _.findKey(methodDataByVersion[version].aliases, aliases => _.includes(aliases, method)) || method
+    return _.findKey(getMethodData(version).aliases, aliases => _.includes(aliases, method)) || method
 }
 
 /**
@@ -105,7 +105,7 @@ function getMainAlias(version, method) {
  */
 function getIterateeIndex(version, method) {
     const mainAlias = getMainAlias(version, method)
-    const iteratees = methodDataByVersion[version].iteratee
+    const iteratees = getMethodData(version).iteratee
     if (_.has(iteratees.differentIndex, mainAlias)) {
         return iteratees.differentIndex[mainAlias]
     }
@@ -122,7 +122,7 @@ function getIterateeIndex(version, method) {
  * @returns {number}
  */
 function getFunctionMaxArity(version, name) {
-    return methodDataByVersion[version].args[name] || Infinity
+    return getMethodData(version).args[name] || Infinity
 }
 
 const sideEffectIterationMethods = ['forEach', 'forEachRight', 'forIn', 'forInRight', 'forOwn', 'forOwnRight']

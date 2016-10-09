@@ -434,7 +434,7 @@ describe('astUtil', () => {
                 })
         })
     })
-    describe('getValueReturnedInFirstLine', () => {
+    describe('getValueReturnedInFirstStatement', () => {
         it('should return a node if it is the returned in the first line', done => {
             traverse('function f() {return 1}')
                 .get('FunctionDeclaration', node => {
@@ -456,19 +456,22 @@ describe('astUtil', () => {
                     done()
                 })
         })
-        it('should return false if no value is returned in the first line', done => {
+        it('should return undefined if no value is returned in the first line', done => {
             traverse('f = () => {}')
                 .get('ArrowFunctionExpression', node => {
-                    assert(!astUtil.getValueReturnedInFirstStatement(node))
+                    assert.strictEqual(astUtil.getValueReturnedInFirstStatement(node), undefined, 'expected undefined when no value returned')
                     done()
                 })
         })
-        it('should return false if the return statement is in the second statement', done => {
+        it('should return undefined if the return statement is in the second statement', done => {
             traverse('f = () => {const t = 3; return t}')
                 .get('ArrowFunctionExpression', node => {
-                    assert(!astUtil.getValueReturnedInFirstStatement(node))
+                    assert.strictEqual(astUtil.getValueReturnedInFirstStatement(node), undefined)
                     done()
                 })
+        })
+        it('should return undefined when the function is not defined', () => {
+            assert.strictEqual(astUtil.getValueReturnedInFirstStatement(), undefined)
         })
     })
     describe('isCallFromObject', () => {

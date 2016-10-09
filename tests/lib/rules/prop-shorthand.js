@@ -26,6 +26,7 @@ ruleTester.run('prop-shorthand', rule, {
         'var ids = _.map([], function (i) { return i[k]; });',
         'var r = _.map([], function() { return React.PropTypes.object; })',
         'var r = _.map([])',
+        'var r = _.map(results, result => result[result.length - 1]);',
         {
             code: 'var r = _.map([], function(x) { return x.id})',
             options: ['never']

@@ -64,11 +64,15 @@ function isMemberExpOf(node, objectName, {maxLength = Number.MAX_VALUE, allowCom
         let curr = node
         let depth = maxLength
         while (curr && depth) {
-            if (curr.type === 'MemberExpression' && curr.object.name === objectName) {
-                return allowComputed || isPropAccess(node)
+            if (allowComputed || isPropAccess(curr)) {
+                if (curr.type === 'MemberExpression' && curr.object.name === objectName) {
+                    return true
+                }
+                curr = curr.object
+                depth--
+            } else {
+                return false
             }
-            curr = curr.object
-            depth--
         }
     }
 }
@@ -163,19 +167,18 @@ function isIdentifierWithName(exp, paramName) {
 /**
  * Returns the node of the value returned in the first line, if any
  * @param {Object} func
- * @returns {Object|null}
+ * @returns {Object|undefined}
  */
 function getValueReturnedInFirstStatement(func) {
     const firstLine = getFirstFunctionLine(func)
     if (func) {
         if (isFunctionDefinitionWithBlock(func)) {
-            return isReturnStatement(firstLine) ? firstLine.argument : null
+            return isReturnStatement(firstLine) ? firstLine.argument : undefined
         }
         if (func.type === 'ArrowFunctionExpression') {
             return firstLine
         }
     }
-    return null
 }
 
 /**

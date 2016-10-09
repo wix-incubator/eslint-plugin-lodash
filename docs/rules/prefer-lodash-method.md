@@ -6,25 +6,42 @@ This can be for performance reasons, for implicit care of edge cases (e.g. `_.ma
 
 ## Rule Details
 
-This rule takes one argument - an optional options object. This object can have two keys: `except` and `ignoreObjects`, both optional.
+This rule takes one argument - an optional options object. This object can have any of these keys:
+- `ignoreMethods`: contains an array of regular expressions of methods that should not be reported on
+- `ignoreObjects`: contains an array of regular expressions for objects that should not be reported on
 
-- `except` contains an array of methods that should not be reported on.
-- `ignoreObjects` contains an array of objects that should not be reported on.
-- `ignorePatterns` contains an array of regular expressions for objects that should not be reported on
 
-For instance, if you do not wish to use `_.keys` but prefer `Object.keys`, the config would be:
+Examples: 
+
+If you do not wish to use `_.keys` but prefer `Object.keys`, the config would be:
 ```json
 {
   "rules": {
-    "lodash/prefer-lodash-method": [2, {"except": ["keys"]}]
+    "lodash/prefer-lodash-method": [2, {"ignoreMethods": ["keys"]}]
   }
 }
 ```
-If you do not with the rule to work on any object named `fp`:
-```js
+If you do not wish to use `_.reduce` or `_.reduceRight`:
+```json
+{
+  "rules": {
+    "lodash/prefer-lodash-method": [2, {"ignoreMethods": ["reduce(Right)?"]}]
+  }
+}
+```
+If you do not want the rule to work on any object named `fp`:
+```json
 {
   "rules": {
     "lodash/prefer-lodash-method": [2, {"ignoreObjects": ["fp"]}]
+  }
+}
+```
+If you do not want the rule to work on `React.Children`:
+```json
+{
+  "rules": {
+    "lodash/prefer-lodash-method": [2, {"ignoreObjects": ["React\\.Children"]}]
   }
 }
 ```

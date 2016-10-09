@@ -17,12 +17,12 @@ ruleTester.run('prefer-lodash-method', rule, {
     valid: [
         'var x = _.map(arr, f)',
         'var x = _(arr).map(f).reduce(g)',
-        'var x = _.chain(arr).map(f).reduce(g).value()',
+        'var x = _.chain(arr).map(f).reduce(g).map(h).value()',
         'var x = _.keys(obj)',
         'var x = arr.indexOf(item)',
         {
             code: 'var x = a.map(f)',
-            options: [{except: ['map']}]
+            options: [{ignoreMethods: ['map']}]
         }, {
             code: 'var x = fp.map(f, a)',
             options: [{ignoreObjects: ['fp']}]
@@ -32,7 +32,7 @@ ruleTester.run('prefer-lodash-method', rule, {
         },
         {
             code: 'var x = $el.filter(f)',
-            options: [{ignorePatterns: ['^\\$.+']}]
+            options: [{ignoreObjects: ['^\\$.+']}]
         },
         '_.chain(a).get(p).map(f).value()',
         'var x = Object.create(null)'

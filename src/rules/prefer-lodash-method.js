@@ -12,19 +12,13 @@ module.exports = {
         schema: [{
             type: 'object',
             properties: {
-                except: {
+                methods: {
                     type: 'array',
                     items: {
                         type: 'string'
                     }
                 },
-                ignoreObjects: {
-                    type: 'array',
-                    items: {
-                        type: 'string'
-                    }
-                },
-                ignorePatterns: {
+                objects: {
                     type: 'array',
                     items: {
                         type: 'string'
@@ -36,13 +30,12 @@ module.exports = {
 
     create(context) {
 
-        const {isNativeCollectionMethodCall, getLodashMethodCallExpVisitor, getLodashImportVisitors} = require('../util/lodashUtil')
+        const {isNativeCollectionMethodCall, getLodashImportVisitors, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {combineVisitorObjects} = require('../util/ruleUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
         const [get, includes, cond, matches, property, some, map] = ['get', 'includes', 'cond', 'matches', 'property', 'some', 'map'].map(m => require(`lodash/${m}`))
-        const exceptions = get(context, ['options', 0, 'except'], [])
+        const ignoredMethods = get(context, ['options', 0, 'ignoreMethods'], [])
         const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
-        const ignoredPatterns = map(get(context, ['options', 0, 'ignorePatterns'], []), pattern => new RegExp(pattern))
         const usingLodash = new Set()
 
         function isNonNullObjectCreate(callerName, methodName, arg) {
@@ -68,23 +61,12 @@ module.exports = {
             [property('type'), node => context.getSourceCode().getText(node)]
         ])
 
-        function isRuleException(node) {
-            return includes(exceptions, getMethodName(node))
-        }
-
-        function isIgnoredObject(node) {
-            const callerName = getTextOfNode(getCaller(node))
-            if (!callerName) { return false }
-
-            if (includes(ignoredObjects, callerName)) { return true }
-
-            if (some(ignoredPatterns, pattern => callerName.match(pattern))) { return true }
-
-            return false
+        function someMatch(patterns, str) {
+            return str && some(patterns, pattern => str.match(pattern))
         }
 
         function shouldIgnore(node) {
-            return isRuleException(node) || isIgnoredObject(node)
+            return someMatch(ignoredMethods, getMethodName(node)) || someMatch(ignoredObjects, getTextOfNode(getCaller(node)))
         }
 
         return combineVisitorObjects({

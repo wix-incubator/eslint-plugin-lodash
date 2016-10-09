@@ -14,12 +14,12 @@ module.exports = {
 
     create(context) {
         const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
-        const {isCallFromObject, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
+        const {isCallFromObject, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
 
         function isFunctionMethodCallOfParam(func) {
             const firstParamName = getFirstParamName(func)
-            return firstParamName && isCallFromObject(getValueReturnedInFirstLine(func), firstParamName)
+            return firstParamName && isCallFromObject(getValueReturnedInFirstStatement(func), firstParamName)
         }
 
         return {

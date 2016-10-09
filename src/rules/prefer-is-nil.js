@@ -12,7 +12,7 @@
 
 module.exports = {
     create(context) {
-        const {isNegationExpression, isEquivalentExp} = require('../util/astUtil')
+        const {isNegationExpression, isEquivalentMemberExp} = require('../util/astUtil')
         const {isLodashCallToMethod} = require('../util/lodashUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const _ = require('lodash')
@@ -65,12 +65,12 @@ module.exports = {
 
         function isEquivalentExistingExpression(node, leftNil, rightNil) {
             const leftExp = checkExpression(leftNil, '===', node.left)
-            return leftExp && isEquivalentExp(leftExp, checkExpression(rightNil, '===', node.right))
+            return leftExp && isEquivalentMemberExp(leftExp, checkExpression(rightNil, '===', node.right))
         }
 
         function isEquivalentExistingNegation(node, leftNil, rightNil) {
             const leftExp = checkNegatedExpression(leftNil, node.left)
-            return leftExp && isEquivalentExp(leftExp, checkNegatedExpression(rightNil, node.right))
+            return leftExp && isEquivalentMemberExp(leftExp, checkNegatedExpression(rightNil, node.right))
         }
 
         return {

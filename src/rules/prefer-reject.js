@@ -19,16 +19,16 @@ module.exports = {
 
     create(context) {
         const {isLodashCallToMethod, getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
-        const {getValueReturnedInFirstLine, getFirstParamName, isNegationOfMemberOf, isNotEqEqToMemberOf} = require('../util/astUtil')
+        const {getValueReturnedInFirstStatement, getFirstParamName, isNegationOfMemberOf, isNotEqEqToMemberOf} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
-        const maxPropertyPathLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
+        const maxLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
 
         function isNegativeExpressionFunction(func) {
-            const returnValue = getValueReturnedInFirstLine(func)
+            const returnValue = getValueReturnedInFirstStatement(func)
             const firstParamName = getFirstParamName(func)
-            return isNegationOfMemberOf(returnValue, firstParamName, maxPropertyPathLength) ||
-                isNotEqEqToMemberOf(returnValue, firstParamName, maxPropertyPathLength) || isLodashCallToMethod(func, settings, 'negate')
+            return isNegationOfMemberOf(returnValue, firstParamName, {maxLength}) ||
+                isNotEqEqToMemberOf(returnValue, firstParamName, {maxLength}) || isLodashCallToMethod(func, settings, 'negate')
         }
 
         return {

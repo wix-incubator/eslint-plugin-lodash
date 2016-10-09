@@ -20,7 +20,7 @@ module.exports = {
 
     create(context) {
         const DEFAULT_LENGTH = 3
-        const {isComputed, isEquivalentExp, isEqEqEq} = require('../util/astUtil')
+        const {isComputed, isEquivalentMemberExp, isEqEqEq} = require('../util/astUtil')
         const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
 
         const expStates = []
@@ -29,7 +29,7 @@ module.exports = {
         }
 
         function shouldCheckDeeper(node, nodeRight, toCompare) {
-            return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !isComputed(nodeRight) && (!toCompare || isEquivalentExp(nodeRight, toCompare))
+            return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !isComputed(nodeRight) && (!toCompare || isEquivalentMemberExp(nodeRight, toCompare))
         }
 
         return {
@@ -39,7 +39,7 @@ module.exports = {
 
                 if (shouldCheckDeeper(node, rightMemberExp, state.node)) {
                     expStates.push({depth: state.depth + 1, node: rightMemberExp.object})
-                    if (isEquivalentExp(node.left, rightMemberExp.object) && state.depth >= ruleDepth - 2) {
+                    if (isEquivalentMemberExp(node.left, rightMemberExp.object) && state.depth >= ruleDepth - 2) {
                         context.report(node, "Prefer _.get or _.has over an '&&' chain")
                     }
                 }

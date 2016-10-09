@@ -54,14 +54,15 @@ const isPropAccess = _.overSome(_.matches({computed: false}), _.matchesProperty(
  * Returns whether the node is a member expression starting with the same object, up to the specified length
  * @param {Object} node
  * @param {string} objectName
- * @param {number} maxPropertyPathLength
- * @param [boolean] allowComputed
+ * @param {Object} [options]
+ * @param {number} [options.maxLength]
+ * @param {boolean} [options.allowComputed]
  * @returns {boolean|undefined}
  */
-function isMemberExpOf(node, objectName, maxPropertyPathLength, allowComputed) {
+function isMemberExpOf(node, objectName, {maxLength = Number.MAX_VALUE, allowComputed} = {}) {
     if (objectName) {
         let curr = node
-        let depth = maxPropertyPathLength
+        let depth = maxLength
         while (curr && depth) {
             if (curr.type === 'MemberExpression' && curr.object.name === objectName) {
                 return allowComputed || isPropAccess(node)
@@ -92,7 +93,7 @@ const isReturnStatement = _.matchesProperty('type', 'ReturnStatement')
  * @returns {boolean}
  */
 function hasOnlyOneStatement(func) {
-    return func.type === 'ArrowFunctionExpression' ? !_.get(func, 'body.body') : _.get(func, 'body.body.length') === 1
+    return isFunctionDefinitionWithBlock(func) ? _.get(func, 'body.body.length') === 1 : !_.get(func, 'body.body')
 }
 
 /**
@@ -118,15 +119,15 @@ function isLiteral(node) {
  * @param {string} operator
  * @param {Object} exp
  * @param {string} objectName
- * @param {number} maxPropertyPathLength
+ * @param {number} maxLength
  * @param {boolean} allowComputed
  * @param {boolean} onlyLiterals
  * @returns {boolean|undefined}
  */
-function isBinaryExpWithMemberOf(operator, exp, objectName, maxPropertyPathLength, allowComputed, onlyLiterals) {
+function isBinaryExpWithMemberOf(operator, exp, objectName, {maxLength, allowComputed, onlyLiterals} = {}) {
     return exp && exp.type === 'BinaryExpression' && exp.operator === operator &&
-          (isMemberExpOf(exp.left, objectName, maxPropertyPathLength, allowComputed) ||
-          isMemberExpOf(exp.right, objectName, maxPropertyPathLength, allowComputed)) &&
+          (isMemberExpOf(exp.left, objectName, {maxLength, allowComputed}) ||
+          isMemberExpOf(exp.right, objectName, {maxLength, allowComputed})) &&
           (!onlyLiterals || (isLiteral(exp.left) || isLiteral(exp.right)))
 }
 
@@ -142,11 +143,11 @@ const isNegationExpression = _.matches({type: 'UnaryExpression', operator: '!'})
  * Returns whether the expression is a negation of a member of objectName, in the specified depth.
  * @param {Object} exp
  * @param {string} objectName
- * @param {number} maxPropertyPathLength
+ * @param {number} maxLength
  * @returns {boolean|undefined}
  */
-function isNegationOfMemberOf(exp, objectName, maxPropertyPathLength) {
-    return isNegationExpression(exp) && isMemberExpOf(exp.argument, objectName, maxPropertyPathLength, false)
+function isNegationOfMemberOf(exp, objectName, {maxLength} = {}) {
+    return isNegationExpression(exp) && isMemberExpOf(exp.argument, objectName, {maxLength, allowComputed: false})
 }
 
 /**
@@ -155,7 +156,7 @@ function isNegationOfMemberOf(exp, objectName, maxPropertyPathLength) {
  * @param {string} paramName
  * @returns {boolean|undefined}
  */
-function isIdentifierOfParam(exp, paramName) {
+function isIdentifierWithName(exp, paramName) {
     return exp && paramName && exp.type === 'Identifier' && exp.name === paramName
 }
 
@@ -164,7 +165,7 @@ function isIdentifierOfParam(exp, paramName) {
  * @param {Object} func
  * @returns {Object|null}
  */
-function getValueReturnedInFirstLine(func) {
+function getValueReturnedInFirstStatement(func) {
     const firstLine = getFirstFunctionLine(func)
     if (func) {
         if (isFunctionDefinitionWithBlock(func)) {
@@ -184,7 +185,7 @@ function getValueReturnedInFirstLine(func) {
  * @returns {boolean|undefined}
  */
 function isCallFromObject(node, objName) {
-    return node && node.type === 'CallExpression' && _.get(node, 'callee.object.name') === objName
+    return node && objName && node.type === 'CallExpression' && _.get(node, 'callee.object.name') === objName
 }
 
 /**
@@ -202,9 +203,9 @@ function isComputed(node) {
  * @param {Object} b
  * @returns {boolean}
  */
-function isEquivalentExp(a, b) {
+function isEquivalentMemberExp(a, b) {
     return _.isEqualWith(a, b, (left, right, key) => {
-        if (_.includes(['loc', 'range', 'computed', 'start', 'end'], key)) {
+        if (_.includes(['loc', 'range', 'computed', 'start', 'end', 'parent'], key)) {
             return true
         }
         if (isComputed(left) || isComputed(right)) {
@@ -299,12 +300,12 @@ module.exports = {
     isEqEqEqToMemberOf: isBinaryExpWithMemberOf.bind(null, '==='),
     isNotEqEqToMemberOf: isBinaryExpWithMemberOf.bind(null, '!=='),
     isNegationOfMemberOf,
-    isIdentifierOfParam,
+    isIdentifierWithName,
     isNegationExpression,
-    getValueReturnedInFirstLine,
+    getValueReturnedInFirstStatement,
     isCallFromObject,
     isComputed,
-    isEquivalentExp,
+    isEquivalentMemberExp,
     isEqEqEq,
     comparisonType,
     getExpressionComparedToInt,

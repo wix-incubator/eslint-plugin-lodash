@@ -25,12 +25,12 @@ module.exports = {
 
     create(context) {
         const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
-        const {isEqEqEqToMemberOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
+        const {isEqEqEqToMemberOf, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const onlyLiterals = context.options[1] && context.options[1].onlyLiterals
 
         function isFunctionDeclarationThatCanUseShorthand(func) {
-            return isEqEqEqToMemberOf(getValueReturnedInFirstLine(func), getFirstParamName(func), Infinity, false, onlyLiterals)
+            return isEqEqEqToMemberOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), {onlyLiterals})
         }
 
         function canUseShorthand(iteratee) {

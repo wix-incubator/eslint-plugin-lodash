@@ -20,7 +20,7 @@ module.exports = {
 
     create(context) {
         const DEFAULT_LENGTH = 3
-        const {isComputed, isEquivalentExp, isEqEqEq} = require('../util/astUtil')
+        const {isComputed, isEquivalentMemberExp, isEqEqEq} = require('../util/astUtil')
         const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
         const get = require('lodash/get')
 
@@ -31,7 +31,7 @@ module.exports = {
 
         function isMemberExpOfNodeOrRightmost(node, toCompare) {
             return node.type === 'MemberExpression' && !isComputed(node) &&
-            (!toCompare || isEquivalentExp(node.object, toCompare))
+            (!toCompare || isEquivalentMemberExp(node.object, toCompare))
         }
 
         function shouldCheckDeeper(node, toCompare) {
@@ -43,7 +43,7 @@ module.exports = {
                 const state = getState()
                 if (shouldCheckDeeper(node, state.node)) {
                     expStates.push({depth: state.depth + 1, node: node.right.left.object})
-                    if (isEquivalentExp(get(node, 'left.left.object'), get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
+                    if (isEquivalentMemberExp(get(node, 'left.left.object'), get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
                         context.report(node, 'Prefer _.isMatch over conditions on the same object')
                     }
                 }

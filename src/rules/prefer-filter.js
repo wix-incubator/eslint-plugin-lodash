@@ -20,7 +20,7 @@ module.exports = {
     create(context) {
         const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
         const {
-            isIdentifierOfParam,
+            isIdentifierWithName,
             isMemberExpOf,
             isNegationOfMemberOf,
             isEqEqEqToMemberOf,
@@ -31,16 +31,16 @@ module.exports = {
         } = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
-        const maxPropertyPathLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
+        const maxLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
 
         function isIfWithoutElse(statement) {
             return statement && statement.type === 'IfStatement' && !statement.alternate
         }
 
         function canBeShorthand(exp, paramName) {
-            return isIdentifierOfParam(exp, paramName) ||
-                isMemberExpOf(exp, paramName, maxPropertyPathLength) || isNegationOfMemberOf(exp, paramName, maxPropertyPathLength) ||
-                isEqEqEqToMemberOf(exp, paramName, maxPropertyPathLength) || isNotEqEqToMemberOf(exp, paramName, maxPropertyPathLength)
+            return isIdentifierWithName(exp, paramName) ||
+                isMemberExpOf(exp, paramName, {maxLength}) || isNegationOfMemberOf(exp, paramName, {maxLength}) ||
+                isEqEqEqToMemberOf(exp, paramName, {maxLength}) || isNotEqEqToMemberOf(exp, paramName, {maxLength})
         }
 
         function onlyHasSimplifiableIf(func) {

@@ -21,13 +21,13 @@ module.exports = {
     create(context) {
         const [get, matches, overSome] = ['get', 'matches', 'overSome'].map(m => require(`lodash/${m}`))
         const {methodSupportsShorthand, getShorthandVisitor} = require('../util/lodashUtil')
-        const {getFirstParamName, getValueReturnedInFirstLine} = require('../util/astUtil')
+        const {getFirstParamName, getValueReturnedInFirstStatement} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
 
 
         function isExplicitIdentityFunction(iteratee) {
             const firstParamName = getFirstParamName(iteratee)
-            return firstParamName && get(getValueReturnedInFirstLine(iteratee), 'name') === firstParamName
+            return firstParamName && get(getValueReturnedInFirstStatement(iteratee), 'name') === firstParamName
         }
 
         const isLodashIdentityFunction = matches({

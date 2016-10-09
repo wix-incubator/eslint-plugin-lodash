@@ -13,21 +13,21 @@
 module.exports = {
     create(context) {
         const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
-        const {isNegationExpression, isIdentifierOfParam, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
+        const {isNegationExpression, isIdentifierWithName, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         function isDoubleNegationOfParam(exp, paramName) {
-            return isNegationExpression(exp) && isNegationExpression(exp.argument) && isIdentifierOfParam(exp.argument.argument, paramName)
+            return isNegationExpression(exp) && isNegationExpression(exp.argument) && isIdentifierWithName(exp.argument.argument, paramName)
         }
 
         function isCallToBooleanCastOfParam(exp, paramName) {
-            return exp && exp.type === 'CallExpression' && exp.callee.name === 'Boolean' && isIdentifierOfParam(exp.arguments[0], paramName)
+            return exp && exp.type === 'CallExpression' && exp.callee.name === 'Boolean' && isIdentifierWithName(exp.arguments[0], paramName)
         }
 
         function isBooleanCastingFunction(func) {
-            const returnValue = getValueReturnedInFirstLine(func)
+            const returnValue = getValueReturnedInFirstStatement(func)
             const paramName = getFirstParamName(func)
             return func && func.type === 'Identifier' && func.name === 'Boolean' ||
-                (isIdentifierOfParam(returnValue, paramName) ||
+                (isIdentifierWithName(returnValue, paramName) ||
                 isDoubleNegationOfParam(returnValue, paramName) || isCallToBooleanCastOfParam(returnValue, paramName))
         }
 

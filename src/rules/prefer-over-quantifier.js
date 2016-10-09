@@ -13,7 +13,7 @@
 module.exports = {
     create(context) {
         const {isCallToMethod, getLodashMethodVisitor} = require('../util/lodashUtil')
-        const {getValueReturnedInFirstLine, getFirstParamName, isObjectOfMethodCall} = require('../util/astUtil')
+        const {getValueReturnedInFirstStatement, getFirstParamName, isObjectOfMethodCall} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const conditionMethods = ['filter', 'reject', 'pickBy', 'omitBy', 'findIndex', 'findLastIndex', 'find', 'findLast', 'findKey', 'findLastKey']
         const message = 'Prefer _.{{method}} instead of a {{connective}}'
@@ -50,7 +50,7 @@ module.exports = {
         }
 
         function reportIfConnectiveOfParamInvocations(node) {
-            const retVal = getValueReturnedInFirstLine(node)
+            const retVal = getValueReturnedInFirstStatement(node)
             const paramName = getFirstParamName(node)
             if (retVal && retVal.type === 'LogicalExpression' && (retVal.operator === '&&' || retVal.operator === '||')) {
                 if (isOnlyParamInvocationsWithOperator(retVal, paramName, retVal.operator)) {

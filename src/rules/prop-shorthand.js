@@ -20,11 +20,11 @@ module.exports = {
 
     create(context) {
         const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
-        const {isMemberExpOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
+        const {isMemberExpOf, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
 
         function isExplicitParamFunction(func) {
-            return isMemberExpOf(getValueReturnedInFirstLine(func), getFirstParamName(func), Number.MAX_VALUE, false)
+            return isMemberExpOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), {allowComputed: false})
         }
 
         function canUseShorthand(iteratee) {

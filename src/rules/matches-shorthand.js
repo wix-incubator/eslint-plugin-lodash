@@ -32,7 +32,7 @@ module.exports = {
     create(context) {
         const matches = require('lodash/matches')
         const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
-        const {isEqEqEq, isMemberExpOf, isEqEqEqToMemberOf, getValueReturnedInFirstLine, getFirstParamName} = require('../util/astUtil')
+        const {isEqEqEq, isMemberExpOf, isEqEqEqToMemberOf, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const settingsUtil = require('../util/settingsUtil')
         const settings = settingsUtil.getSettings(context)
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
@@ -42,11 +42,11 @@ module.exports = {
 
         function canBeObjectLiteralWithShorthandProperty(node, paramName) {
             return settingsUtil.isEcmaFeatureOn(context, 'objectLiteralShorthandProperties') && isEqEqEq(node) &&
-                (isMemberExpOf(node.left, paramName, 1) && node.left.property.type === 'Identifier' && node.right.type === 'Identifier' && node.left.property.name === node.right.name ||
-                isMemberExpOf(node.right, paramName, 1) && node.right.property.type === 'Identifier' && node.left.type === 'Identifier' && node.right.property.name === node.left.name)
+                (isMemberExpOf(node.left, paramName, {maxLength: 1}) && node.left.property.type === 'Identifier' && node.right.type === 'Identifier' && node.left.property.name === node.right.name ||
+                isMemberExpOf(node.right, paramName, {maxLength: 1}) && node.right.property.type === 'Identifier' && node.left.type === 'Identifier' && node.right.property.name === node.left.name)
         }
 
-        function isConjunctionOfEqEqEqToMemberOf(exp, paramName, maxPropertyPathLength) {
+        function isConjunctionOfEqEqEqToMemberOf(exp, paramName, maxLength) {
             const allowComputed = context.options[2] && settingsUtil.isEcmaFeatureOn(context, 'objectLiteralComputedProperties')
             if (isConjunction(exp) || canBeObjectLiteralWithShorthandProperty(exp, paramName)) {
                 const checkStack = [exp]
@@ -56,7 +56,7 @@ module.exports = {
                 while (curr) {
                     if (isConjunction(curr)) {
                         checkStack.push(curr.left, curr.right)
-                    } else if (!isEqEqEqToMemberOf(curr, paramName, maxPropertyPathLength, allowComputed, onlyLiterals)) {
+                    } else if (!isEqEqEqToMemberOf(curr, paramName, {maxLength, allowComputed, onlyLiterals})) {
                         allParamMemberEq = false
                     }
                     curr = checkStack.pop()
@@ -67,7 +67,7 @@ module.exports = {
 
         function isFunctionDeclarationThatCanUseShorthand(func) {
             const maxPropertyPathLength = context.options[1] || DEFAULT_MAX_PROPERTY_PATH_LENGTH
-            return isConjunctionOfEqEqEqToMemberOf(getValueReturnedInFirstLine(func), getFirstParamName(func), maxPropertyPathLength)
+            return isConjunctionOfEqEqEqToMemberOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), maxPropertyPathLength)
         }
 
         function canUseShorthand(iteratee) {

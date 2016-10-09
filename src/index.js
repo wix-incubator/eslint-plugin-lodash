@@ -7,6 +7,7 @@ const recommended = {
     rules: {
         'lodash/callback-binding': 2,
         'lodash/chain-style': [2, 'as-needed'],
+        'lodash/chaining': 2,
         'lodash/collection-method-value': 2,
         'lodash/collection-return': 2,
         'lodash/consistent-compose': [2, "flow"],
@@ -16,9 +17,7 @@ const recommended = {
         'lodash/no-commit': 2,
         'lodash/no-double-unwrap': 2,
         'lodash/no-extra-args': 2,
-        'lodash/no-single-chain': 2,
         'lodash/path-style': [2, 'string'],
-        'lodash/prefer-chain': [2, 3],
         'lodash/prefer-compact': 2,
         'lodash/prefer-constant': 2,
         'lodash/prefer-filter': [2, 3],
@@ -59,6 +58,7 @@ module.exports = {
             rules: {
                 'lodash/callback-binding': 2,
                 'lodash/chain-style': [2, 'as-needed'],
+                'lodash/chaining': [2, 'always'],
                 'lodash/collection-method-value': 2,
                 'lodash/collection-return': 2,
                 'lodash/consistent-compose': [2, "flow"],
@@ -68,9 +68,8 @@ module.exports = {
                 'lodash/no-commit': 2,
                 'lodash/no-double-unwrap': 2,
                 'lodash/no-extra-args': 2,
-                'lodash/no-single-chain': 2,
                 'lodash/path-style': [2, 'string'],
-                'lodash/prefer-chain': [2, 3],
+
                 'lodash/prefer-compact': 2,
                 'lodash/prefer-constant': 2,
                 'lodash/prefer-filter': [2, 3],

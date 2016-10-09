@@ -3,48 +3,53 @@
  */
 'use strict'
 
+/**
+ * @fileoverview Rule to check if an "&&" experssion should be a call to _.get or _.has
+ */
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
 
-module.exports = function (context) {
-    const DEFAULT_LENGTH = 3
-    const {isComputed, isEquivalentExp, isEqEqEq} = require('../util/astUtil')
-    const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
+module.exports = {
+    meta: {
+        schema: [{
+            type: 'integer',
+            minimum: 2
+        }]
+    },
 
-    const expStates = []
-    function getState() {
-        return expStates[expStates.length - 1] || {depth: 0}
-    }
+    create(context) {
+        const DEFAULT_LENGTH = 3
+        const {isComputed, isEquivalentExp, isEqEqEq} = require('../util/astUtil')
+        const ruleDepth = parseInt(context.options[0], 10) || DEFAULT_LENGTH
 
-    function shouldCheckDeeper(node, nodeRight, toCompare) {
-        return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !isComputed(nodeRight) && (!toCompare || isEquivalentExp(nodeRight, toCompare))
-    }
+        const expStates = []
+        function getState() {
+            return expStates[expStates.length - 1] || {depth: 0}
+        }
 
-    return {
-        LogicalExpression(node) {
-            const state = getState()
-            const rightMemberExp = isEqEqEq(node.right) && state.depth === 0 ? node.right.left : node.right
+        function shouldCheckDeeper(node, nodeRight, toCompare) {
+            return node.operator === '&&' && nodeRight && nodeRight.type === 'MemberExpression' && !isComputed(nodeRight) && (!toCompare || isEquivalentExp(nodeRight, toCompare))
+        }
 
-            if (shouldCheckDeeper(node, rightMemberExp, state.node)) {
-                expStates.push({depth: state.depth + 1, node: rightMemberExp.object})
-                if (isEquivalentExp(node.left, rightMemberExp.object) && state.depth >= ruleDepth - 2) {
-                    context.report(node, "Prefer _.get or _.has over an '&&' chain")
+        return {
+            LogicalExpression(node) {
+                const state = getState()
+                const rightMemberExp = isEqEqEq(node.right) && state.depth === 0 ? node.right.left : node.right
+
+                if (shouldCheckDeeper(node, rightMemberExp, state.node)) {
+                    expStates.push({depth: state.depth + 1, node: rightMemberExp.object})
+                    if (isEquivalentExp(node.left, rightMemberExp.object) && state.depth >= ruleDepth - 2) {
+                        context.report(node, "Prefer _.get or _.has over an '&&' chain")
+                    }
                 }
-            }
-        },
-        'LogicalExpression:exit'(node) {
-            const state = getState()
-            if (state && state.node === node.right.object) {
-                expStates.pop()
+            },
+            'LogicalExpression:exit'(node) {
+                const state = getState()
+                if (state && state.node === node.right.object) {
+                    expStates.pop()
+                }
             }
         }
     }
 }
-
-module.exports.schema = [
-    {
-        type: 'integer',
-        minimum: 2
-    }
-]

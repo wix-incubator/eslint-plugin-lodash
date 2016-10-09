@@ -23,7 +23,7 @@ You can additionally add settings for the plugin.
 ### Shared Rule Settings
 These are settings that can be shared by all of the rules. All settings are under the `lodash` inside the general `settings` object. For more info about shared settings, read the [ESLint Configuration Guide](http://eslint.org/docs/user-guide/configuring#adding-shared-settings).
 
-* __pragma__: specifies the name you use for the Lodash variable in your code. Default is `_`.
+* __pragma__: specifies the name you use for the Lodash variable in your code. If none is specified, the plugin checks what was `import`ed in ES6 modules or `require`d in commonjs.
 * __version__: specifies the major Lodash Version you are using (default is `4`).
 If you wish to use this plugin with Lodash v3, this value should be `3`. (on by default in the config `v3`)
 
@@ -38,6 +38,15 @@ This plugin exports a `recommended` configuration that enforces all the rules. Y
   "extends": ["plugin:lodash/recommended"]
 }
 ```
+## Configuration for use with the full Lodash object
+If you work with the full Lodash object with the same variable name every time, you can use the `canonical` for faster execution:
+```json
+{
+  "plugins": ["lodash"],
+  "extends": ["plugin:lodash/canonical"]
+}
+```
+
 ## Configuration for Using with Lodash v3
 Out of the box, this plugin supports the use of Lodash v4. To use with Lodash v3, the config needs to specify the version in the `settings`, and can't use some rules.
 The plugin also exports a `v3` config for ease of use.

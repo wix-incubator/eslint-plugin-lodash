@@ -9,11 +9,11 @@
 
 module.exports = {
     create(context) {
-        const {isImplicitChainStart, isExplicitChainStart, isChainable, isCallToMethod, isChainBreaker} = require('../util/lodashUtil')
+        const {isImplicitChainStart, isExplicitChainStart, isChainable, isCallToMethod, isChainBreaker, getLodashImportVisitors} = require('../util/lodashUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const {getCaller} = require('../util/astUtil')
         const negate = require('lodash/negate')
-
+        const {combineVisitorObjects} = require('../util/ruleUtil')
         function isCommit(node) {
             return isCallToMethod(node, settings.version, 'commit')
         }
@@ -27,20 +27,20 @@ module.exports = {
             return curr
         }
 
-        return {
+        return combineVisitorObjects({
             CallExpression(node) {
-                if (isImplicitChainStart(node, settings.pragma)) {
+                if (isImplicitChainStart(node, settings.pragma, context)) {
                     const end = getEndOfChain(node, false)
                     if (!isCommit(end) && isChainable(end, settings.version)) {
                         context.report(end, 'Missing unwrapping at end of chain')
                     }
-                } else if (isExplicitChainStart(node, settings.pragma)) {
+                } else if (isExplicitChainStart(node, settings.pragma, context)) {
                     const end = getEndOfChain(node, true)
                     if (!isCommit(end) && !isChainBreaker(end, settings.version)) {
                         context.report(end, 'Missing unwrapping at end of chain')
                     }
                 }
             }
-        }
+        }, getLodashImportVisitors(context))
     }
 }

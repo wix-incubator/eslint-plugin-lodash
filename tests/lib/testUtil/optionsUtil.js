@@ -7,12 +7,14 @@ function fromMessage(message) {
 
 function fromOptions(options) {
     return function (testCase) {
-        return _.isString(testCase) ? _.assign({code: testCase}, options) : _.assign(testCase, options)
+        return _.isString(testCase) ? _.assign({code: testCase}, options) : _.defaultsDeep(testCase, options)
     }
 }
 
 module.exports = {
     fromMessage,
     fromVersion3: fromOptions({settings: {lodash: {version: 3}}}),
+    fromVersion3WithDefaultPragma: fromOptions({settings: {lodash: {version: 3, pragma: '_'}}}),
     fromOptions,
+    withDefaultPragma: fromOptions({settings: {lodash: {pragma: '_'}}})
 }

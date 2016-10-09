@@ -12,9 +12,9 @@
 
 module.exports = {
     create(context) {
-        const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {version} = require('../util/settingsUtil').getSettings(context)
         const transformerMethods = ['reduce', 'reduceRight', 'transform']
 
         function isBound(node) {
@@ -27,8 +27,8 @@ module.exports = {
                     context.report(iteratee.callee.property, 'Unnecessary bind, pass `thisArg` to lodash method instead')
                 }
             },
-            4(node, iteratee) {
-                const isTransformerMethod = transformerMethods.some(isCallToMethod.bind(null, node, settings.version))
+            4(node, iteratee, {method}) {
+                const isTransformerMethod = transformerMethods.includes(method)
                 const iterateeIndex = node.arguments.indexOf(iteratee)
                 if (iterateeIndex !== -1 && (isTransformerMethod && node.arguments[iterateeIndex + 2] || (!isTransformerMethod && node.arguments[iterateeIndex + 1]))) {
                     context.report(iteratee, 'Do not use Lodash 3 thisArg, use binding instead')
@@ -36,8 +36,6 @@ module.exports = {
             }
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, callExpressionReporters[settings.version])
-        }
+        return getLodashMethodVisitors(context, callExpressionReporters[version])
     }
 }

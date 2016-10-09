@@ -10,7 +10,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------
-
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 const ruleTester = ruleTesterUtil.getRuleTester()
 ruleTester.run('prefer-chain', rule, {
     valid: [{
@@ -27,12 +27,12 @@ ruleTester.run('prefer-chain', rule, {
         options: [3]
     }, {
         code: 'var isPublic = _.find(_.map(users, "id"), 3)'
-    }],
+    }].map(withDefaultPragma),
     invalid: [{
         code: "var user = _.find(_.map(users, 'id'), 3)",
         errors: [{
             message: 'Prefer chaining to composition'
         }],
         options: [2]
-    }]
+    }].map(withDefaultPragma)
 })

@@ -12,9 +12,9 @@
 
 module.exports = {
     create(context) {
-        const {isCallToMethod, getLodashMethodVisitor} = require('../util/lodashUtil')
-        const {getValueReturnedInFirstStatement, getFirstParamName, isObjectOfMethodCall} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {getValueReturnedInFirstStatement, getFirstParamName, isObjectOfMethodCall, getMethodName} = require('../util/astUtil')
+        const {isAliasOfMethod} = require('../util/methodDataUtil')
         const conditionMethods = ['filter', 'reject', 'pickBy', 'omitBy', 'findIndex', 'findLastIndex', 'find', 'findLast', 'findKey', 'findLastKey']
         const message = 'Prefer _.{{method}} instead of a {{connective}}'
 
@@ -45,8 +45,8 @@ module.exports = {
             }
         }
 
-        function isCallToConditionMethod(node) {
-            return conditionMethods.some(isCallToMethod.bind(null, node, settings.version))
+        function isCallToConditionMethod(method, version) {
+            return conditionMethods.some(m => isAliasOfMethod(version, m, method))
         }
 
         function reportIfConnectiveOfParamInvocations(node) {
@@ -59,20 +59,18 @@ module.exports = {
             }
         }
 
-        function reportIfDoubleFilterLiteral(node) {
-            if (onlyPassesIdentifier(node) && isObjectOfMethodCall(node) &&
-                isCallToConditionMethod(node.parent.parent) && onlyPassesIdentifier(node.parent.parent)) {
+        function reportIfDoubleFilterLiteral(callType, iteratee, node, version) {
+            if (callType === 'chained' && iteratee.type === 'Identifier' && isObjectOfMethodCall(node) &&
+                isCallToConditionMethod(getMethodName(node.parent.parent), version) && onlyPassesIdentifier(node.parent.parent)) {
                 context.report(node, message, reportConstants['&&'])
             }
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, (node, iteratee) => {
-                if (isCallToConditionMethod(node)) {
-                    reportIfConnectiveOfParamInvocations(iteratee)
-                    reportIfDoubleFilterLiteral(node)
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
+            if (isCallToConditionMethod(method, version)) {
+                reportIfConnectiveOfParamInvocations(iteratee)
+                reportIfDoubleFilterLiteral(callType, iteratee, node, version)
+            }
+        })
     }
 }

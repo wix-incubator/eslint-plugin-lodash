@@ -12,15 +12,20 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const errors = [{message: 'Prefer _.flatMap over consecutive map and flatten.'}]
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.flatMap over consecutive map and flatten.')
 ruleTester.run('prefer-flat-map', rule, {
     valid: [
         't = _.map(a, f);',
         't = _.flatMap(a, f);'
-    ],
-    invalid: [{
-        code: '_(a).map(f).flatten().value',
-        errors    }, {
-        code: 't = _.flatten(_.map(a, f));',
-        errors    }]
+    ].map(withDefaultPragma),
+    invalid: [
+        '_(a).map(f).flatten().value',
+        't = _.flatten(_.map(a, f));'
+    ].map(withDefaultPragma).concat([{
+        code: 'import f from "lodash/flatten"; import m from "lodash/map"; f(m(x, g))',
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }]).map(toErrorObject)
 })

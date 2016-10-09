@@ -17,6 +17,7 @@ const errors = {
     always: [{message: 'Prefer matches property syntax'}],
     never: [{message: 'Do not use matches property syntax'}]
 }
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('matches-prop-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
@@ -30,7 +31,7 @@ ruleTester.run('matches-prop-shorthand', rule, {
           code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
           options: ['always', { onlyLiterals: true }]
         }
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
         errors: errors.always
@@ -61,5 +62,5 @@ ruleTester.run('matches-prop-shorthand', rule, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
         options: ['always', { onlyLiterals: true }],
         errors: errors.always
-    }]
+    }].map(withDefaultPragma)
 })

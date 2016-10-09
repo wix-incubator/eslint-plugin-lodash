@@ -17,6 +17,8 @@ const messages = {
     always: 'Prefer matches syntax',
     never: 'Do not use matches syntax'
 }
+
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('matches-shorthand', rule, {
     valid: [
         'var isPublic = _.find([], function (i) { return x.id; });',
@@ -31,7 +33,7 @@ ruleTester.run('matches-shorthand', rule, {
           code: 'var b = 1; var isPublic = _.find([], function(i) { return i.id === 3 && i.a === b; });',
           options: ['always', 1, true, { onlyLiterals: true }]
         }
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === id; });',
         errors: [{message: messages.always, column: 27}]
@@ -65,5 +67,5 @@ ruleTester.run('matches-shorthand', rule, {
       code: 'var isPublic = _.find([], function(i) { return i.id === 3 && i.a === "b"; });',
       options: ['always', 1, true, { onlyLiterals: true }],
       errors: [{message: messages.always, column: 27}]
-    }]
+    }].map(withDefaultPragma)
 })

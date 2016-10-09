@@ -12,7 +12,8 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer _.times over _.map without using arguments')
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.times over _.map without using arguments')
 ruleTester.run('prefer-times', rule, {
     valid: [
         'var a = _.map(arr, function(x) {return x + 1});',
@@ -24,13 +25,13 @@ ruleTester.run('prefer-times', rule, {
         'var x = _.map(a, ({x}) => x);',
         'var x = _.map(a, ({f: x}) => x);',
         'var x = _.map(a, ({f: {x}}) => x);',
-        '_.map(a, x => _.map(b, y => x.f(y)))'
-    ],
+        '_.map(a, x => _.map(b, y => x.f(y)))',
+        '_.map(arr, function(a, c = 1) {return b})',
+    ].map(withDefaultPragma),
     invalid: [
         '_(arr).map(function(){return g}).value()',
         '_.map(arr, function() {return Math.random()});',
         '_(arr).map(() => a.push(f()))',
-        '_.map(arr, function(a, c = 1) {return b})',
         '_(arr).map(() => a.push(f()))'
-    ].map(toErrorObject)
+    ].map(withDefaultPragma).map(toErrorObject)
 })

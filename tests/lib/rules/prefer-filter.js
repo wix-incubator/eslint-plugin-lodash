@@ -12,8 +12,8 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const toErrorObject = require('../testUtil/optionsUtil')
-    .fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach')
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.filter or _.some over an if statement inside a _.forEach')
 
 ruleTester.run('prefer-filter', rule, {
     valid: [
@@ -21,12 +21,17 @@ ruleTester.run('prefer-filter', rule, {
         '_.forEach(arr, function(x) { if (x.a) {} else {}})',
         '_.forEach(arr, function(x) {if (y) {}})',
         '_.forEach(arr, function(x, y) { if (x){} })'
-    ],
+    ].map(withDefaultPragma),
     invalid: [
         '_(arr).forEach(function(x) { if (x.a.b.c) {}})',
         '_(arr).forEach(function(x) { if (x) {}})',
         '_.forEach(arr, function(x) { if (x.a.b.c === d) {}})',
         '_.forEach(arr, function(x) { if (x.a.b.c !== d) {}})',
         '_.forEach(arr, function(x) { if (!x.a.b.c) {}})'
-    ].map(toErrorObject)
+    ].map(withDefaultPragma).concat([{
+        code: 'import f from "lodash/forEach"; f(arr, (x) => { if (x) {}})',
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }]).map(toErrorObject)
 })

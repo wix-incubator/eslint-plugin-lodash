@@ -20,7 +20,7 @@ module.exports = {
 
     create(context) {
         const [get, matches, overSome] = ['get', 'matches', 'overSome'].map(m => require(`lodash/${m}`))
-        const {methodSupportsShorthand, getShorthandVisitor} = require('../util/lodashUtil')
+        const {methodSupportsShorthand, getShorthandVisitors} = require('../util/lodashUtil')
         const {getFirstParamName, getValueReturnedInFirstStatement} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
 
@@ -38,18 +38,17 @@ module.exports = {
 
         const canUseShorthand = overSome(isExplicitIdentityFunction, isLodashIdentityFunction)
 
-        function usesShorthand(node, iteratee) {
-            return methodSupportsShorthand(settings.version, node) && !iteratee
+        function usesShorthand(node, iteratee, method) {
+            return methodSupportsShorthand(settings.version, method) && !iteratee
         }
 
-        return {
-            CallExpression: getShorthandVisitor(context, settings, {
-                canUseShorthand,
-                usesShorthand
-            }, {
-                always: 'Prefer omitting the iteratee over a function that returns its argument',
-                never: 'Do not use the identity shorthand syntax'
-            })
-        }
+        return getShorthandVisitors(context, {
+            canUseShorthand,
+            usesShorthand
+        }, {
+            always: 'Prefer omitting the iteratee over a function that returns its argument',
+            never: 'Do not use the identity shorthand syntax'
+        })
+
     }
 }

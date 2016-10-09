@@ -2,6 +2,70 @@
 const _ = require('lodash')
 const methodDataUtil = require('./methodDataUtil')
 const astUtil = require('./astUtil')
+const settingsUtil = require('./settingsUtil')
+const contextsWithLodash = new WeakMap()
+
+function getNameFromCjsRequire(init) {
+    if (_.get(init, 'callee.name') === 'require' && _.get(init, 'arguments.length') === 1 && init.arguments[0].type === 'Literal') {
+        return init.arguments[0].value
+    }
+}
+
+function getLodashImportVisitors(context) {
+    return {
+        ImportDeclaration({source, specifiers}) {
+            if (source.value === 'lodash') {
+                contextsWithLodash.set(context, _.reduce(specifiers, ({general, methods}, spec) => {
+                    switch (spec.type) {
+                        case 'ImportNamespaceSpecifier':
+                        case 'ImportDefaultSpecifier':
+                            return {general: _.assign(general, {[spec.local.name]: true}), methods}
+                        case 'ImportSpecifier':
+                            return {general, methods: _.assign(methods, {[spec.local.name]: spec.imported.name})}
+                    }
+                }, contextsWithLodash.get(context) || {}))
+            } else {
+                const match = /^lodash\/(\w+)/.exec(source.value)
+                if (match) {
+                    const {general, methods} = contextsWithLodash.get(context) || {}
+                    contextsWithLodash.set(context, {
+                        general,
+                        methods: _.assign(methods, {[_.get(specifiers, '[0].local.name')]: match[1]})
+                    })
+                }
+            }
+        },
+        VariableDeclarator({init, id}) {
+            const required = getNameFromCjsRequire(init)
+            if (required === 'lodash') {
+                if (id.type === 'Identifier') {
+                    const {general, methods} = contextsWithLodash.get(context) || {}
+                    contextsWithLodash.set(context, {general: _.assign(general, {[id.name]: true}, methods)})
+                } else if (id.type === 'ObjectPattern') {
+                    const allImports = contextsWithLodash.get(context) || {}
+                    const imports = _.reduce(id.properties, ({general, methods}, prop) => ({general, methods: _.assign(methods, {[prop.value.name]: prop.key.name})}), allImports)
+                    contextsWithLodash.set(context, imports)
+                }
+            } else if (required) {
+                const match = /^lodash\/(\w+)/.exec(required)
+                if (match) {
+                    const {general, methods} = contextsWithLodash.get(context) || {}
+                    contextsWithLodash.set(context, {
+                        general,
+                        methods: _.assign(methods, {[id.name]: match[1]})
+                    })
+                }
+            }
+        }
+    }
+}
+
+function isImportedLodash(node, context) {
+    if (context && node && node.type === 'Identifier') {
+        const contextData = contextsWithLodash.get(context)
+        return _.get(contextData, ['general', node.name])
+    }
+}
 
 /**
  * Returns whether the node is a lodash call with the specified pragma
@@ -9,8 +73,8 @@ const astUtil = require('./astUtil')
  * @param {string} pragma
  * @returns {boolean}
  */
-function isLodashCall(node, pragma) {
-    return astUtil.isCallFromObject(node, pragma)
+function isLodashCall(node, pragma, context) {
+    return (pragma && astUtil.isCallFromObject(node, pragma)) || isImportedLodash(astUtil.getCaller(node), context)
 }
 
 /**
@@ -29,8 +93,8 @@ function isChainable(node, version) {
  * @param {string} pragma
  * @returns {boolean}
  */
-function isImplicitChainStart(node, pragma) {
-    return node.callee.name === pragma
+function isImplicitChainStart(node, pragma, context) {
+    return (pragma && node.callee.name === pragma) || isImportedLodash(node.callee, context)
 }
 
 /**
@@ -39,8 +103,8 @@ function isImplicitChainStart(node, pragma) {
  * @param {string} pragma
  * @returns {boolean}
  */
-function isExplicitChainStart(node, pragma) {
-    return isLodashCall(node, pragma) && astUtil.getMethodName(node) === 'chain'
+function isExplicitChainStart(node, pragma, context) {
+    return isLodashCall(node, pragma, context) && astUtil.getMethodName(node) === 'chain'
 }
 
 /**
@@ -49,8 +113,8 @@ function isExplicitChainStart(node, pragma) {
  * @param {string} pragma
  * @returns {undefined|boolean}
  */
-function isLodashChainStart(node, pragma) {
-    return node && node.type === 'CallExpression' && (isImplicitChainStart(node, pragma) || isExplicitChainStart(node, pragma))
+function isLodashChainStart(node, pragma, context) {
+    return node && node.type === 'CallExpression' && (isImplicitChainStart(node, pragma, context) || isExplicitChainStart(node, pragma, context))
 }
 
 /**
@@ -61,31 +125,6 @@ function isLodashChainStart(node, pragma) {
  */
 function isChainBreaker(node, version) {
     return methodDataUtil.isAliasOfMethod(version, 'value', astUtil.getMethodName(node))
-}
-
-/**
- * Returns whether the node is in a lodash chain
- * @param {Object} node
- * @param {string} pragma
- * @param {number} version
- * @returns {*}
- */
-function isLodashWrapper(node, pragma, version) {
-    let currentNode = node
-    let chainable = true
-    while (astUtil.isMethodCall(currentNode)) {
-        if (isLodashChainStart(currentNode, pragma)) {
-            return true
-        }
-        if (isChainBreaker(currentNode, version)) {
-            return false
-        }
-        if (!isChainable(currentNode, version)) {
-            chainable = false
-        }
-        currentNode = astUtil.getCaller(currentNode)
-    }
-    return chainable ? isLodashChainStart(currentNode, pragma) : isExplicitChainStart(currentNode, pragma)
 }
 
 /**
@@ -128,37 +167,42 @@ function isNativeCollectionMethodCall(node) {
     return _.includes(['every', 'fill', 'filter', 'find', 'findIndex', 'forEach', 'includes', 'map', 'reduce', 'reduceRight', 'some'], astUtil.getMethodName(node))
 }
 
-/**
- * Returns whether or not the node is a call to a lodash collection method in the specified version
- * @param {Object} node
- * @param {number} version
- * @returns {boolean}
- */
-function isLodashCollectionMethod(node, version) {
-    return node.type === 'CallExpression' && _.includes(methodDataUtil.getCollectionMethods(version), astUtil.getMethodName(node))
+function getImportedLodashMethod(context, node) {
+    const contextData = contextsWithLodash.get(context)
+    if (!astUtil.isMethodCall(node) && contextData && contextData.methods) {
+        return contextData.methods[node.callee.name]
+    }
 }
-
 /**
  * Gets the context's Lodash settings and a function and returns a visitor that calls the function for every Lodash or chain call
- * @param {LodashSettings} settings
+ * @param {RuleContext} context
  * @param {LodashReporter} reporter
  * @returns {NodeTypeVisitor}
  */
-function getLodashMethodVisitor(settings, reporter) {
+function getLodashMethodCallExpVisitor(context, reporter) {
+    const {pragma, version} = require('./settingsUtil').getSettings(context)
     return function (node) {
         let iterateeIndex
-        if (isLodashChainStart(node, settings.pragma)) {
+        if (isLodashChainStart(node, pragma, context)) {
             let prevNode = node
             node = node.parent.parent
-            while (astUtil.getCaller(node) === prevNode && astUtil.isMethodCall(node) && !isChainBreaker(node, settings.version)) {
-                iterateeIndex = methodDataUtil.getIterateeIndex(settings.version, astUtil.getMethodName(node))
-                reporter(node, node.arguments[iterateeIndex - 1])
+            while (astUtil.getCaller(node) === prevNode && astUtil.isMethodCall(node) && !isChainBreaker(node, version)) {
+                const method = astUtil.getMethodName(node)
+                iterateeIndex = methodDataUtil.getIterateeIndex(version, method)
+                reporter(node, node.arguments[iterateeIndex - 1], {callType: 'chained', method, version})
                 prevNode = node
                 node = node.parent.parent
             }
-        } else if (isLodashCall(node, settings.pragma)) {
-            iterateeIndex = methodDataUtil.getIterateeIndex(settings.version, astUtil.getMethodName(node))
-            reporter(node, node.arguments[iterateeIndex])
+        } else if (isLodashCall(node, pragma, context)) {
+            const method = astUtil.getMethodName(node)
+            iterateeIndex = methodDataUtil.getIterateeIndex(version, method)
+            reporter(node, node.arguments[iterateeIndex], {callType: 'method', method, version})
+        } else if (version !== 3) {
+            const method = getImportedLodashMethod(context, node)
+            if (method) {
+                iterateeIndex = methodDataUtil.getIterateeIndex(version, method)
+                reporter(node, node.arguments[iterateeIndex], {method, callType: 'single', version})
+            }
         }
     }
 }
@@ -169,71 +213,71 @@ function getLodashMethodVisitor(settings, reporter) {
  * @param {object} node
  * @returns {boolean}
  */
-function methodSupportsShorthand(version, node) {
-    return _.includes(methodDataUtil.getShorthandMethods(version), astUtil.getMethodName(node))
+function methodSupportsShorthand(version, method) {
+    return _.includes(methodDataUtil.getShorthandMethods(version), method)
 }
 
-/**
- * Gets the context, settings, checks whether shorthand is used and can be used, and messages, and returns a visitor
- * @param {RuleContext} context
- * @param {LodashSettings} settings
- * @param {ShorthandChecks} checks
- * @param {ShorthandMessages} messages
- * @returns {NodeTypeVisitor}
- */
-function getShorthandVisitor(context, settings, checks, messages) {
-    return getLodashMethodVisitor(settings, {
-        always(node, iteratee) {
-            if (methodSupportsShorthand(settings.version, node) && checks.canUseShorthand(iteratee)) {
+function isLodashCallToMethod(node, settings, method, context) {
+    return isLodashCall(node, settings.pragma, context) && isCallToMethod(node, settings.version, method)
+}
+
+function isCallToLodashMethod(node, method, context) {
+    if (!node) {
+        return false
+    }
+    const settings = settingsUtil.getSettings(context)
+    return isLodashCallToMethod(node, settings, method, context) ||
+        methodDataUtil.isAliasOfMethod(settings.version, method, getImportedLodashMethod(context, node))
+}
+
+function getLodashMethodVisitors(context, lodashCallExpVisitor) {
+    const visitors = getLodashImportVisitors(context)
+    visitors.CallExpression = getLodashMethodCallExpVisitor(context, lodashCallExpVisitor)
+    return visitors
+}
+
+function getShorthandVisitors(context, checks, messages) {
+    const importVisitors = getLodashImportVisitors(context)
+    importVisitors.CallExpression = getLodashMethodCallExpVisitor(context, {
+        always(node, iteratee, {method, version}) {
+            if (methodSupportsShorthand(version, method) && checks.canUseShorthand(iteratee)) {
                 context.report(iteratee, messages.always)
             }
         },
-        never(node, iteratee) {
-            if (checks.usesShorthand(node, iteratee)) {
+        never(node, iteratee, {method}) {
+            if (checks.usesShorthand(node, iteratee, method)) {
                 context.report(iteratee || node.callee.property, messages.never)
             }
         }
     }[context.options[0] || 'always'])
-}
-
-function isLodashCallToMethod(node, settings, method) {
-    return isLodashCall(node, settings.pragma) && isCallToMethod(node, settings.version, method)
-}
-
-/**
- * Returns whether the node is a side effect iteration method call (e.g forEach)
- * @param node
- * @param version
- * @returns {boolean}
- */
-function isSideEffectIterationMethod(node, version) {
-    return _.includes(methodDataUtil.getSideEffectIterationMethods(version), astUtil.getMethodName(node))
+    return importVisitors
 }
 
 module.exports = {
     isLodashCall,
     isLodashChainStart,
     isChainable,
-    isLodashWrapper,
     isChainBreaker,
     isCallToMethod,
-    isLodashCallToMethod,
     isLodashWrapperMethod,
     getIsTypeMethod,
-    isLodashCollectionMethod,
     isNativeCollectionMethodCall,
     isImplicitChainStart,
     isExplicitChainStart,
-    getLodashMethodVisitor,
+    getLodashMethodCallExpVisitor,
     methodSupportsShorthand,
-    getShorthandVisitor,
-    isSideEffectIterationMethod
+    getImportedLodashMethod,
+    isCallToLodashMethod,
+    getLodashImportVisitors,
+    getShorthandVisitors,
+    getLodashMethodVisitors
 }
 
 /**
  @callback LodashReporter
  @param {Object} node
  @param {Object} iteratee
+ @param {Object?} options
  */
 
 /**

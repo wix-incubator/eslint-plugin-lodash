@@ -12,6 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('collection-return', rule, {
     valid: [
         '_.forEach(arr, function(a) { console.log(a)})',
@@ -22,7 +23,7 @@ ruleTester.run('collection-return', rule, {
         'function x(a) {return a;}',
         'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
         '_.map(a, x => f(x).then(() => {g()}))'
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',
         errors: [{message: 'Do not use _.map without returning a value'}]
@@ -39,5 +40,11 @@ ruleTester.run('collection-return', rule, {
     }, {
         code: '_.map(arr, function x(a) {arr2.push(a)})',
         errors: [{message: 'Do not use _.map without returning a value'}]
-    }]
+    }].map(withDefaultPragma).concat([{
+        code: 'import m from "lodash/map"; m(arr, x => {})',
+        errors: [{message: 'Do not use _.map without returning a value'}],
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }])
 })

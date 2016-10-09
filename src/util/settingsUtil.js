@@ -11,7 +11,6 @@ module.exports = {
             .get(['settings', 'lodash'])
             .clone()
             .defaults({
-                pragma: '_',
                 version: 4
             })
             .value()

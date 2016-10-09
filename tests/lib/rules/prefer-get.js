@@ -12,7 +12,8 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const errors = [{message: 'Prefer _.get or _.has over an \'&&\' chain'}]
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.get or _.has over an \'&&\' chain')
 ruleTester.run('prefer-get', rule, {
     valid: [
         'var x = _.get(a, "b.c");',
@@ -22,20 +23,15 @@ ruleTester.run('prefer-get', rule, {
         'a && a[v] && a[v].c',
         'a && a.b && typeof a.b === "number"',
         'a && a.b && a.b.c + a.b.d'
-    ],
-    invalid: [{
-        code: 'x = a && a.b && a.b.c === 8',
-        errors
-    }, {
-        code: 'x = a && a.b && a["b"].c && a.b.c.d',
-        errors
-    }, {
-        code: 'x = a && a.b',
-        errors,
-        options: [2]
-    }, {
-        code: 'x = a && a.b && a.b.c && a.b.c.d',
-        errors,
-        options: [2]
-    }]
+    ].map(withDefaultPragma),
+    invalid: [
+        'x = a && a.b && a.b.c === 8',
+        'x = a && a.b && a["b"].c && a.b.c.d',
+        {
+            code: 'x = a && a.b',
+            options: [2]
+        }, {
+            code: 'x = a && a.b && a.b.c && a.b.c.d',
+            options: [2]
+        }].map(toErrorObject).map(withDefaultPragma)
 })

@@ -309,5 +309,6 @@ module.exports = {
     isEqEqEq,
     comparisonType,
     getExpressionComparedToInt,
-    isIndexOfCall
+    isIndexOfCall,
+    isFunctionDefinitionWithBlock
 }

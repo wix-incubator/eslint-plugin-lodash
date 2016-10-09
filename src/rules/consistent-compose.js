@@ -17,27 +17,24 @@ module.exports = {
 
     create(context) {
         const includes = require('lodash/includes')
-        const {getLodashMethodVisitor} = require('../util/lodashUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
-        const {getMethodName} = require('../util/astUtil')
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {version} = require('../util/settingsUtil').getSettings(context)
         const {getMainAlias} = require('../util/methodDataUtil')
-        
-        const direction = context.options[0] || 'flow'
-        const mainDirectionMethod = getMainAlias(settings.version, direction)
 
-        function isOtherDirection(methodName) {
-            if (includes(possibleDirections, methodName)) {
-                const methodDirection = getMainAlias(settings.version, methodName)
+        const direction = context.options[0] || 'flow'
+        const mainDirectionMethod = getMainAlias(version, direction)
+
+        function isOtherDirection(method) {
+            if (includes(possibleDirections, method)) {
+                const methodDirection = getMainAlias(version, method)
                 return methodDirection !== mainDirectionMethod
             }
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, node => {
-                if (isOtherDirection(getMethodName(node))) {
-                    context.report(node, `Use _.${direction} for composition`)
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
+            if (isOtherDirection(method)) {
+                context.report(node, `Use _.${direction} for composition`)
+            }
+        })
     }
 }

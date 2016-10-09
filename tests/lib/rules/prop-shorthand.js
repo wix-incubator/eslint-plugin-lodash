@@ -17,7 +17,7 @@ const messages = {
     always: 'Prefer property shorthand syntax',
     never: 'Do not use property shorthand syntax'
 }
-
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('prop-shorthand', rule, {
     valid: [
         'var ids = _.map([], function (i) { return x.id; });',
@@ -34,7 +34,7 @@ ruleTester.run('prop-shorthand', rule, {
             code: 'const r = _.map([], x => x.id)',
             options: ['never']
         }
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var ids = _(arr).map(function (i) { return i.a.b.c; });',
         errors: [{message: messages.always, column: 22}]
@@ -61,5 +61,5 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map(arr, "id");',
         options: ['never'],
         errors: [{message: messages.never, column: 22}]
-    }]
+    }].map(withDefaultPragma)
 })

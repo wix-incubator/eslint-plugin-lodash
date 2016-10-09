@@ -17,6 +17,7 @@ const errors = {
     implicit: [{message: 'Do not use explicit chaining'}],
     explicit: [{message: 'Do not use implicit chaining'}]
 }
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 
 ruleTester.run('chain-style', rule, {
     valid: [
@@ -26,7 +27,7 @@ ruleTester.run('chain-style', rule, {
         {code: '_(a).map(f).filter(g).value();', options: ['as-needed']},
         {code: '_(a).map(f).join(" ")', options: ['implicit']},
         {code: '_.chain(a).map(f).filter(b).value()', options: ['explicit']}
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: '_.chain(a).map(f).filter(g).value()',
         errors: errors.asNeeded
@@ -53,5 +54,5 @@ ruleTester.run('chain-style', rule, {
         code: 'lo.chain(a).map(f).filter(g).value()',
         errors: errors.asNeeded,
         settings: {lodash: {pragma: 'lo'}}
-    }]
+    }].map(withDefaultPragma)
 })

@@ -12,21 +12,23 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const errors = [{message: 'Prefer _.invokeMap over map to a method call.'}]
+
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.invokeMap over map to a method call.')
 ruleTester.run('prefer-invoke-map', rule, {
     valid: [
         'var x = _.invokeMap(arr, "f")',
         'var x = _.invokeMap(arr, "split", " ")',
         'const x = _.map(arr, ({a}) => f(a))'
-    ],
-    invalid: [{
-        code: '_.map(a, function(x) {return x.f()});',
-        errors
-    }, {
-        code: '_(a).filter(f).map(function(x) { return x.split(" ")})',
-        errors
-    }, {
-        code: '_.map(arr, x => x.f())',
-        errors
-    }]
+    ].map(withDefaultPragma),
+    invalid: [
+        '_.map(a, function(x) {return x.f()});',
+        '_(a).filter(f).map(function(x) { return x.split(" ")})',
+        '_.map(arr, x => x.f())'
+    ].map(withDefaultPragma).concat([{
+        code: 'import m from "lodash/map"; m(a, x => x.f())',
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }]).map(toErrorObject)
 })

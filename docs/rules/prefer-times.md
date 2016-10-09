@@ -1,6 +1,6 @@
 # Prefer _.times
 
-When using `_.map` in which the iteratee does not use its arguments, it's better to use `_.times`.
+When using `_.map` in which the iteratee does not have any arguments, it's better to use `_.times`.
 
 ## Rule Details
 
@@ -14,7 +14,9 @@ _.map(arr, function() { return 7});
 
 _(a).map(() => 7).value();
 
-_.map(Array(10), function(x) {return f(y)});
+_.map(Array(10), function() {return f(y)});
+
+import f from 'lodash/map'; f(arr, () => 0)
 
 ```
 

@@ -18,7 +18,7 @@ module.exports = {
     },
 
     create(context) {
-        const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {
             isIdentifierWithName,
             isMemberExpOf,
@@ -29,7 +29,7 @@ module.exports = {
             hasOnlyOneStatement,
             getFirstParamName
         } = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {isAliasOfMethod} = require('../util/methodDataUtil')
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
         const maxLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
 
@@ -48,12 +48,10 @@ module.exports = {
             return func && hasOnlyOneStatement(func) && func.params.length === 1 && isIfWithoutElse(firstLine) && canBeShorthand(firstLine.test, getFirstParamName(func))
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, (node, iteratee) => {
-                if (isCallToMethod(node, settings.version, 'forEach') && onlyHasSimplifiableIf(iteratee)) {
-                    context.report(node, 'Prefer _.filter or _.some over an if statement inside a _.forEach')
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
+            if (isAliasOfMethod(version, 'forEach', method) && onlyHasSimplifiableIf(iteratee)) {
+                context.report(node, 'Prefer _.filter or _.some over an if statement inside a _.forEach')
+            }
+        })
     }
 }

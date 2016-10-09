@@ -15,12 +15,13 @@ module.exports = {
         fixable: "code"
     },
     create(context) {
-        const {isImplicitChainStart, isChainBreaker, isChainable} = require('../util/lodashUtil')
+        const {isImplicitChainStart, isChainBreaker, isChainable, getLodashImportVisitors} = require('../util/lodashUtil')
         const {isMethodCall, getCaller, getMethodName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
-        return {
+        const {combineVisitorObjects} = require('../util/ruleUtil')
+        return combineVisitorObjects({
             CallExpression(node) {
-                if (isImplicitChainStart(node, settings.pragma)) {
+                if (isImplicitChainStart(node, settings.pragma, context)) {
                     do {
                         node = node.parent.parent
                     } while (isMethodCall(node) && !isChainBreaker(node, settings.version))
@@ -37,6 +38,6 @@ module.exports = {
                     }
                 }
             }
-        }
+        }, getLodashImportVisitors(context))
     }
 }

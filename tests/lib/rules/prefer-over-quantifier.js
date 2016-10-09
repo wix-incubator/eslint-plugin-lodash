@@ -16,6 +16,7 @@ const errors = {
     every: [{message: 'Prefer _.overEvery instead of a conjunction'}],
     some: [{message: 'Prefer _.overSome instead of a disjunction'}]
 }
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('prefer-over-quantifier', rule, {
     valid: [
         'var t = _.filter(a, f)',
@@ -23,7 +24,7 @@ ruleTester.run('prefer-over-quantifier', rule, {
         'var t = _.filter(a, function(x) { return f(x) && (g(x) || h(x))})',
         'var t = _.filter(a, x => x % 2)',
         'var t = _.filter(a, x => f(x) && x % 2)'
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var t = _.filter(a, function(x) { return f(x) && g(x); })',
         errors: errors.every
@@ -42,5 +43,11 @@ ruleTester.run('prefer-over-quantifier', rule, {
     }, {
         code: 'var t = _.filter(a, x => f(x) || g(x) || h(x))',
         errors: errors.some
-    }]
+    }].map(withDefaultPragma).concat([{
+        code: 'import f from "lodash/filter"; var t = f(a, x => g(x) || h(x))',
+        errors: errors.some,
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }])
 })

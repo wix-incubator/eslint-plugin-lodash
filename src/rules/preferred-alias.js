@@ -11,13 +11,11 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
-    meta: {
-        fixable: "code"
-    },
+    meta: {},
 
     create(context) {
         const _ = require('lodash')
-        const {getLodashMethodVisitor} = require('../util/lodashUtil')
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
         const aliases = require('../util/methodDataUtil').getAliasesByVersion(settings.version)
@@ -30,24 +28,19 @@ module.exports = {
             return _.assign(result, mapToMainKey)
         }, {})
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, node => {
-                const methodName = getMethodName(node)
-                if (_.has(expandedAliases, methodName)) {
-                    context.report({
-                        node: node.callee.property,
-                        message: "Method '{{old}}' is an alias, for consistency prefer using '{{new}}'",
-                        data: {
-                            old: methodName,
-                            new: expandedAliases[methodName]
-                        },
-                        fix(fixer) {
-                            return fixer.replaceText(node.callee.property, expandedAliases[methodName])
-                        }
-                    })
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, node => {
+            const methodName = getMethodName(node)
+            if (_.has(expandedAliases, methodName)) {
+                context.report({
+                    node: node.callee.property,
+                    message: "Method '{{old}}' is an alias, for consistency prefer using '{{new}}'",
+                    data: {
+                        old: methodName,
+                        new: expandedAliases[methodName]
+                    }
+                })
+            }
+        })
     }
 }
 

@@ -31,23 +31,22 @@ module.exports = {
 
     create(context) {
         const matches = require('lodash/matches')
-        const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
+        const {isCallToLodashMethod, getShorthandVisitors} = require('../util/lodashUtil')
         const {isEqEqEq, isMemberExpOf, isEqEqEqToMemberOf, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
-        const settingsUtil = require('../util/settingsUtil')
-        const settings = settingsUtil.getSettings(context)
+        const {isEcmaFeatureOn} = require('../util/settingsUtil')
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
         const onlyLiterals = context.options[3] && context.options[3].onlyLiterals
 
         const isConjunction = matches({type: 'LogicalExpression', operator: '&&'})
 
         function canBeObjectLiteralWithShorthandProperty(node, paramName) {
-            return settingsUtil.isEcmaFeatureOn(context, 'objectLiteralShorthandProperties') && isEqEqEq(node) &&
+            return isEcmaFeatureOn(context, 'objectLiteralShorthandProperties') && isEqEqEq(node) &&
                 (isMemberExpOf(node.left, paramName, {maxLength: 1}) && node.left.property.type === 'Identifier' && node.right.type === 'Identifier' && node.left.property.name === node.right.name ||
                 isMemberExpOf(node.right, paramName, {maxLength: 1}) && node.right.property.type === 'Identifier' && node.left.type === 'Identifier' && node.right.property.name === node.left.name)
         }
 
         function isConjunctionOfEqEqEqToMemberOf(exp, paramName, maxLength) {
-            const allowComputed = context.options[2] && settingsUtil.isEcmaFeatureOn(context, 'objectLiteralComputedProperties')
+            const allowComputed = context.options[2] && isEcmaFeatureOn(context, 'objectLiteralComputedProperties')
             if (isConjunction(exp) || canBeObjectLiteralWithShorthandProperty(exp, paramName)) {
                 const checkStack = [exp]
                 let curr
@@ -71,7 +70,7 @@ module.exports = {
         }
 
         function canUseShorthand(iteratee) {
-            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isLodashCallToMethod(iteratee, settings, 'matches')
+            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isCallToLodashMethod(iteratee, 'matches', context)
         }
 
         function usesShorthand(node, iteratee) {
@@ -79,14 +78,12 @@ module.exports = {
         }
 
 
-        return {
-            CallExpression: getShorthandVisitor(context, settings, {
-                canUseShorthand,
-                usesShorthand
-            }, {
-                always: 'Prefer matches syntax',
-                never: 'Do not use matches syntax'
-            })
-        }
+        return getShorthandVisitors(context, {
+            canUseShorthand,
+            usesShorthand
+        }, {
+            always: 'Prefer matches syntax',
+            never: 'Do not use matches syntax'
+        })
     }
 }

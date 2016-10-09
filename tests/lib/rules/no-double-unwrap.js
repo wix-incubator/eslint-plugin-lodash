@@ -12,7 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('no-double-unwrap', rule, {
     valid: [
         'var x = _(a).map(f).reduce(g)',
@@ -20,10 +20,10 @@ ruleTester.run('no-double-unwrap', rule, {
         'var x = _.chain(a).reduce(f).value()',
         'var x = something.value()',
         '_(a).filter(f).forEach(g);'
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var x = _(a).some(f).value();',
         errors: [{message: 'Do not use .value() after chain-ending method some'}],
         output: 'var x = _(a).some(f);'
-    }]
+    }].map(withDefaultPragma)
 })

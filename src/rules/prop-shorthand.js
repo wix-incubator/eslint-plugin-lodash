@@ -19,30 +19,27 @@ module.exports = {
     },
 
     create(context) {
-        const {isLodashCallToMethod, getShorthandVisitor} = require('../util/lodashUtil')
+        const {isCallToLodashMethod, getShorthandVisitors} = require('../util/lodashUtil')
         const {isMemberExpOf, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
 
         function isExplicitParamFunction(func) {
             return isMemberExpOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), {allowComputed: false})
         }
 
         function canUseShorthand(iteratee) {
-            return isLodashCallToMethod(iteratee, settings, 'property') || isExplicitParamFunction(iteratee)
+            return isCallToLodashMethod(iteratee, 'property', context) || isExplicitParamFunction(iteratee)
         }
 
         function usesShorthand(node, iteratee) {
             return iteratee && iteratee.type === 'Literal' && !node.arguments[node.arguments.indexOf(iteratee) + 1]
         }
 
-        return {
-            CallExpression: getShorthandVisitor(context, settings, {
-                canUseShorthand,
-                usesShorthand
-            }, {
-                always: 'Prefer property shorthand syntax',
-                never: 'Do not use property shorthand syntax'
-            })
-        }
+        return getShorthandVisitors(context, {
+            canUseShorthand,
+            usesShorthand
+        }, {
+            always: 'Prefer property shorthand syntax',
+            never: 'Do not use property shorthand syntax'
+        })
     }
 }

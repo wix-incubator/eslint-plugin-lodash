@@ -12,21 +12,20 @@
 
 module.exports = {
     create(context) {
-        const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
-        const {getFirstFunctionLine, hasOnlyOneStatement, getMethodName} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {getFirstFunctionLine, hasOnlyOneStatement, getMethodName, isFunctionDefinitionWithBlock} = require('../util/astUtil')
+        const {isAliasOfMethod} = require('../util/methodDataUtil')
+
         function onlyHasPush(func) {
             const firstLine = getFirstFunctionLine(func)
-            const exp = func && func.type === 'ArrowFunctionExpression' ? firstLine : firstLine && firstLine.expression
+            const exp = func && !isFunctionDefinitionWithBlock(func) ? firstLine : firstLine && firstLine.expression
             return func && hasOnlyOneStatement(func) && getMethodName(exp) === 'push'
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, (node, iteratee) => {
-                if (isCallToMethod(node, settings.version, 'forEach') && onlyHasPush(iteratee)) {
-                    context.report(node, 'Prefer _.map over a _.forEach with a push to an array inside')
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
+            if (isAliasOfMethod(version, 'forEach', method) && onlyHasPush(iteratee)) {
+                context.report(node, 'Prefer _.map over a _.forEach with a push to an array inside')
+            }
+        })
     }
 }

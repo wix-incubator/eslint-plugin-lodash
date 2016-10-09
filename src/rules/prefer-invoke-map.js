@@ -13,21 +13,19 @@ module.exports = {
     },
 
     create(context) {
-        const {getLodashMethodVisitor, isCallToMethod} = require('../util/lodashUtil')
+        const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {isCallFromObject, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {isAliasOfMethod} = require('../util/methodDataUtil')
 
         function isFunctionMethodCallOfParam(func) {
             const firstParamName = getFirstParamName(func)
             return firstParamName && isCallFromObject(getValueReturnedInFirstStatement(func), firstParamName)
         }
 
-        return {
-            CallExpression: getLodashMethodVisitor(settings, (node, iteratee) => {
-                if (isCallToMethod(node, settings.version, 'map') && isFunctionMethodCallOfParam(iteratee)) {
-                    context.report(node, 'Prefer _.invokeMap over map to a method call.')
-                }
-            })
-        }
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
+            if (isAliasOfMethod(version, 'map', method) && isFunctionMethodCallOfParam(iteratee)) {
+                context.report(node, 'Prefer _.invokeMap over map to a method call.')
+            }
+        })
     }
 }

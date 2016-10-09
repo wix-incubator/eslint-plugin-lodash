@@ -12,17 +12,23 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const toErrorObject = require('../testUtil/optionsUtil').fromMessage('Prefer _.compact over filtering of Boolean casting')
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const toErrorObject = fromMessage('Prefer _.compact over filtering of Boolean casting')
 ruleTester.run('prefer-compact', rule, {
     valid: [
         'var x = _.filter(arr, function(x) {return f(x) || g(x)})',
         'var x = _.filter(arr, function(x) {var a = 1; return f(x, a);})'
-    ],
+    ].map(withDefaultPragma),
     invalid: [
         '_(arr).map(f).filter(function(x) {return x})',
         '_.filter(arr, Boolean)',
         '_.filter(arr, function(x) { return !!x})',
         '_.filter(arr, function(x) {return Boolean(x) })',
         '_.filter(arr, x => !!x)'
-    ].map(toErrorObject)
+    ].map(withDefaultPragma).concat([{
+        code: 'import f from "lodash/filter"; f(arr, Boolean)',
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }]).map(toErrorObject)
 })

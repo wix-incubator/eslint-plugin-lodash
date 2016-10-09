@@ -12,6 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 
 const messages = {
     always: 'Prefer omitting the iteratee over a function that returns its argument',
@@ -42,7 +43,7 @@ ruleTester.run('identity-shorthand', rule, {
             code: 'var x = _.uniq(a, x => x)',
             options: ['never']
         }
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: 'var ids = _.map([], function (i) { return i; });',
         errors: [{message: messages.always, column: 21}]
@@ -65,5 +66,5 @@ ruleTester.run('identity-shorthand', rule, {
     }, {
         code: 'var ids = _(arr).map("x").map("y").map(function (i) { return i; });',
         errors: [{message: messages.always, column: 40}]
-    }]
+    }].map(withDefaultPragma)
 })

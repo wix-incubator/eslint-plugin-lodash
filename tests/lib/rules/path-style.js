@@ -12,6 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('path-style', rule, {
     valid: [
         "var aProp = _.property('a')",
@@ -20,7 +21,7 @@ ruleTester.run('path-style', rule, {
         {code: "var t = _.has(x, 'a.b')", options: ['string']},
         {code: "_.set(x, ['a'], t)", options: ['array']},
         "var t = _.replace(a, 'a', 'b')"
-    ],
+    ].map(withDefaultPragma),
     invalid: [{
         code: "var t = _.get(x, 'a.b');",
         errors: [{message: 'Use an array for deep paths', column: 18}],
@@ -49,5 +50,13 @@ ruleTester.run('path-style', rule, {
         code: "var t = _.get(x, ['a', 'b']);",
         errors: [{message: 'Use a string for paths', column: 18}],
         options: ['string']
-    }]
+    }].map(withDefaultPragma).concat([{
+        code: 'import g from "lodash/get"; var t = g(x, "a")',
+        errors: [{message: 'Use an array for paths'}],
+        options: ['array'],
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }
+    ])
 })

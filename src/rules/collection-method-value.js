@@ -11,47 +11,31 @@
 //------------------------------------------------------------------------------
 module.exports = {
     create(context) {
-        const {
-            isChainBreaker, 
-            isLodashCollectionMethod, 
-            isCallToMethod, 
-            isSideEffectIterationMethod,
-            isLodashCall,
-            isLodashChainStart
-        } = require('../util/lodashUtil')
-        const {getMethodName, isMethodCall} = require('../util/astUtil')
+        const {isChainBreaker, getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {getMethodName} = require('../util/astUtil')
+        const {getCollectionMethods, isAliasOfMethod, getSideEffectIterationMethods} = require('../util/methodDataUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
+        const includes = require('lodash/includes')
 
-        function parentUsesValue(node, isChain) {
-            const isBeforeChainBreaker = isChain && isChainBreaker(node.parent.parent, settings.version)
+        function parentUsesValue(node, callType) {
+            const isBeforeChainBreaker = callType === 'chained' && isChainBreaker(node.parent.parent, settings.version)
             return (isBeforeChainBreaker ? node.parent.parent : node).parent.type !== 'ExpressionStatement'
         }
 
-        function isPureLodashCollectionMethod(node) {
-            return isLodashCollectionMethod(node, settings.version) && !isCallToMethod(node, settings.version, 'remove')
+        function isPureLodashCollectionMethod(method, version) {
+            return includes(getCollectionMethods(version), method) && !isAliasOfMethod(version, 'remove', method)
         }
 
-        function reportIfMisused(node, isChain) {
-            if (isPureLodashCollectionMethod(node) && !parentUsesValue(node, isChain)) {
-                context.report(node, `Use value returned from _.${getMethodName(node)}`)
-            } else if (isSideEffectIterationMethod(node, settings.version) && parentUsesValue(node, isChain)) {
+        function isSideEffectIterationMethod(method, version) {
+            return includes(getSideEffectIterationMethods(version), method)
+        }
+
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
+            if (isPureLodashCollectionMethod(method, version) && !parentUsesValue(node, callType)) {
+                context.report(node, `Use value returned from _.${method}`)
+            } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType)) {
                 context.report(node, `Do not use value returned from _.${getMethodName(node)}`)
             }
-        }
-
-        return {
-            CallExpression(node) {
-                if (isLodashCall(node, settings.pragma)) {
-                    reportIfMisused(node, false)
-                }
-                if (isLodashChainStart(node, settings.pragma)) {
-                    let curr = node
-                    while (isMethodCall(curr.parent.parent) && !isChainBreaker(curr.parent.parent, settings.version)) {
-                        curr = curr.parent.parent
-                    }
-                    reportIfMisused(curr, true)
-                }
-            }
-        }
+        })
     }
 }

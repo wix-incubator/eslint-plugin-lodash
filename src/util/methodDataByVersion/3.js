@@ -1,66 +1,28 @@
 'use strict'
 module.exports = {
     aliases: {
-        forEach: [
-            'each'
-        ],
-        assign: [
-            'extend'
-        ],
-        first: [
-            'head'
-        ],
-        zipObject: [
-            'object'
-        ],
-        rest: [
-            'tail'
-        ],
-        uniq: [
-            'unique'
-        ],
-        reduce: [
-            'foldl',
-            'inject'
-        ],
-        reduceRight: [
-            'foldr'
-        ],
-        some: [
-            'any'
-        ],
-        map: [
-            'collect'
-        ],
-        includes: [
-            'contains',
-            'include'
-        ],
-        flowRight: [
-            'backflow',
-            'compose'
-        ],
-        isEqual: [
-            'eq'
-        ],
-        every: [
-            'all'
-        ],
-        find: [
-            'detect'
-        ],
-        forEachRight: [
-            'eachRight'
-        ],
-        filter: [
-            'select'
-        ],
-        functions: [
-            'methods'
-        ],
-        callback: [
-            'iteratee'
-        ]
+        each: 'forEach',
+        extend: 'assign',
+        head: 'first',
+        object: 'zipObject',
+        tail: 'rest',
+        unique: 'uniq',
+        foldl: 'reduce',
+        inject: 'reduce',
+        foldr: 'reduceRight',
+        any: 'some',
+        collect: 'map',
+        contains: 'includes',
+        include: 'includes',
+        backflow: 'flowRight',
+        compose: 'flowRight',
+        eq: 'isEqual',
+        all: 'every',
+        detect: 'find',
+        eachRight: 'forEachRight',
+        select: 'filter',
+        methods: 'functions',
+        iteratee: 'callback'
     },
     wrapper: [
         'concat',
@@ -77,11 +39,9 @@ module.exports = {
         'split'
     ],
     wrapperAliases: {
-        value: [
-            'run',
-            'toJSON',
-            'valueOf'
-        ]
+        run: 'value',
+        toJSON: 'value',
+        valueOf: 'value'
     },
     shorthand: [
         'dropRightWhile',

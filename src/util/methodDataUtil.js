@@ -15,7 +15,9 @@ function getMethodData(version) {
  */
 function expandAlias(version, method) {
     const methodData = getMethodData(version)
-    return [method].concat(methodData.aliases[method] || methodData.wrapperAliases[method] || [])
+    const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
+    const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
+    return [method, ...aliases, ...wrapperAliases]
 }
 
 /**
@@ -81,7 +83,7 @@ function getWrapperMethods(version) {
  * @returns {boolean}
  */
 function isAliasOfMethod(version, method, suspect) {
-    return _.includes(expandAlias(version, method), suspect)
+    return method === suspect || getMethodData(version).aliases[suspect] === method
 }
 
 /**
@@ -91,10 +93,7 @@ function isAliasOfMethod(version, method, suspect) {
  * @returns {string}
  */
 function getMainAlias(version, method) {
-    if (getMethodData(version).aliases[method]) {
-        return method
-    }
-    return _.findKey(getMethodData(version).aliases, aliases => _.includes(aliases, method)) || method
+    return getMethodData(version).aliases[method] || method
 }
 
 /**

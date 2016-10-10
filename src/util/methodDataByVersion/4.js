@@ -1,21 +1,11 @@
 'use strict'
 module.exports = {
     aliases: {
-        assignIn: [
-            'extend'
-        ],
-        assignInWith: [
-            'extendWith'
-        ],
-        forEach: [
-            'each'
-        ],
-        forEachRight: [
-            'eachRight'
-        ],
-        head: [
-            'first'
-        ],
+        extend: 'assignIn',
+        extendWith: 'assignInWith',
+        each: 'forEach',
+        eachRight: 'forEachRight',
+        first: 'head'
     },
     wrapper: [
         'concat',
@@ -30,10 +20,8 @@ module.exports = {
         'unshift'
     ],
     wrapperAliases: {
-        value: [
-            'toJSON',
-            'valueOf'
-        ]
+        toJSON: 'value',
+        valueOf: 'value'
     },
     shorthand: [
         'differenceBy',

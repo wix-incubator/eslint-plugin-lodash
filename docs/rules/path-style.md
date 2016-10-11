@@ -17,25 +17,27 @@ For more information, check out the [Lodash documentation for `_.property`](http
 
 ## Rule Details
 
-This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `string`, where `as-needed` means strings for shallow paths and arrays for deep paths).
+This rule takes one argument, the preferred style: `array`, `string` or `as-needed`. (default is `as-needed`, where `as-needed` means arrays for paths with variables).
 
 The following patterns are considered problems:
+
+```js
+/*eslint lodash/path-style: [2, "as-needed"]*/
+
+val = _.get(x, ['a', 'b']) // Use a string for simple paths
+
+thingExists = _.has(x, `a.${x}`); // Use an array for paths with variables
+
+thingExists = _.has(x, 'a.' + x) // Use an array for paths with variables
+
+```
 
 ```js
 /*eslint lodash/path-style: [2, "string"]*/
 
 var hasABIn = _.hasIn(x, ['a', 'b']); // Use a string for paths
 
-var val = _.get(x, ['a']); // Use a string for paths
-```
-
-```js
-/*eslint lodash/path-style: [2, "as-needed"]*/
-
-val = _.get(x, 'a.b') // Use an array for deep paths
-
-hasA = _.has(x, ['a']); // Use a string for single-level paths
-
+var val = _.get(x, ['a', x]); // Use a string for paths
 ```
 
 ```js

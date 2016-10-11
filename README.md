@@ -79,7 +79,7 @@ These rules are purely matters of style and are quite subjective.
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`
-* [path-style](docs/rules/path-style.md): Enforce a specific path style for methods like `get` and `property`: array, string, or arrays only for deep paths.
+* [path-style](docs/rules/path-style.md): Enforce a specific path style for methods like `get` and `property`: array, string, or arrays only for paths with variables.
 * [prefer-compact](docs/rules/prefer-compact.md): Prefer `_.compact` over `_.filter` for only truthy values.
 * [prefer-filter](docs/rules/prefer-filter.md): Prefer `_.filter` over `_.forEach` with an `if` statement inside.
 * [prefer-flat-map](docs/rules/prefer-flat-map.md): Prefer `_.flatMap` over consecutive `map` and `flatten`.

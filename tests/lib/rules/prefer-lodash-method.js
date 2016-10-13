@@ -52,5 +52,9 @@ ruleTester.run('prefer-lodash-method', rule, {
     }, {
         code: 'var x = Object.create(foo)',
         errors: [{message: "Prefer '_.create' over the native function."}]
+    }, {
+        code: 'var x = str.startsWith("something")',
+        errors: [{message: "Prefer '_.startsWith' over the native function."}]
+
     }].map(withDefaultPragma)
 })

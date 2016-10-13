@@ -33,7 +33,7 @@ module.exports = {
         const {isNativeCollectionMethodCall, getLodashImportVisitors, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {combineVisitorObjects} = require('../util/ruleUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
-        const [get, includes, cond, matches, property, some, map] = ['get', 'includes', 'cond', 'matches', 'property', 'some', 'map'].map(m => require(`lodash/${m}`))
+        const [get, includes, matches, some, map] = ['get', 'includes', 'matches', 'some', 'map'].map(m => require(`lodash/${m}`))
         const ignoredMethods = get(context, ['options', 0, 'ignoreMethods'], [])
         const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
         const usingLodash = new Set()
@@ -52,14 +52,22 @@ module.exports = {
             return (callerName in staticMethods) && includes(staticMethods[callerName], methodName) || isNonNullObjectCreate(callerName, methodName, node.arguments[0])
         }
 
-        function canUseLodash(node) {
-            return isNativeCollectionMethodCall(node) || isStaticNativeMethodCall(node)
+        function isNativeStringMethodCall(node) {
+            return includes(['endsWith', 'includes', 'padEnd', 'padStart', 'startsWith'], getMethodName(node))
         }
 
-        const getTextOfNode = cond([
-            [matches({type: 'Identifier'}), property('name')],
-            [property('type'), node => context.getSourceCode().getText(node)]
-        ])
+        function canUseLodash(node) {
+            return isNativeCollectionMethodCall(node) || isStaticNativeMethodCall(node) || isNativeStringMethodCall(node)
+        }
+
+        function getTextOfNode(node) {
+            if (node) {
+                if (node.type === 'Identifier') {
+                    return node.name
+                }
+                return context.getSourceCode().getText(node)
+            }
+        }
 
         function someMatch(patterns, str) {
             return str && some(patterns, pattern => str.match(pattern))

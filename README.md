@@ -4,7 +4,9 @@ ESLint-Plugin-Lodash
 [![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Dependencies][deps-image]][deps-url]
 
 Lodash-specific linting rules for ESLint.
-
+# News
+- Version 2.0.0 was released, and now supports importing single methods! For a list of changes, you can check the [changelog](CHANGELOG.md). 
+For a detailed rundown of breaking changes and additions, you can check the [release notes](https://github.com/wix/eslint-plugin-lodash/wiki/Release-Notes). 
 # Installation
 
 Install [ESLint](https://www.github.com/eslint/eslint) either locally or globally.

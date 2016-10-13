@@ -8,7 +8,32 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v1.10.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.0.0...HEAD
+
+## [2.0.0] - 2016-10-13
+## Added
+- Added support for single-method imports in all rules. ([`8a55217`][8a55217])
+## Changed
+- Changed role of the `pragma` setting to be a hint instead of mandatory and removed the default pragma, `_`. ([`8a55217`][8a55217])
+- Changed recommended config to be pragma-less and added the `canonical` config for use with the full lodash build's `_` pragma. ([`8a55217`][8a55217])
+- Changed `prefer-lodash-method`'s config object to only accept two values: `ignoreMethods` and `ignoreObjects`, both regular expressions. ([`fc9ecee`][fc9ecee])
+- Joined `prefer-chain` and `no-single-chain` into single rule, `chaining` that also enables disallowing chaining. ([`685e9e3`][685e9e3])
+- Changed rule `path-style` so that `as-needed` now only recommends arrays when using strings with variables ([`6ab30e6`][6ab30e6])
+### Removed
+- Removed support for node 0.10. ([`8a55217`][8a55217])
+## Fixed
+- Fixed `prefer-lodash-typecheck` to warn on undefined checks of declared variables. ([`8ee071a`][8ee071a])
+- Fixed case in `prefer-map` where the push is from a declared iteratee parameter. ([`fc5a592`][fc5a592])
+- Fixed case where `prop-shorthand` would warn erronously. ([`764f8a0`][764f8a0])
+
+[8ee071a]: https://github.com/wix/eslint-plugin-lodash/commit/8ee071a43b9c43ff2608d07c74b5c79344ae7351
+[8a55217]: https://github.com/wix/eslint-plugin-lodash/commit/8a5521746d6e1af808779c0e17e6e39f3c1c1c45
+[fc9ecee]: https://github.com/wix/eslint-plugin-lodash/commit/fc9ecee018811078bc812d17783ec430959e49c7
+[685e9e3]: https://github.com/wix/eslint-plugin-lodash/commit/685e9e310b7a96b266bb13ee144020c499f47ebc
+[fc5a592]: https://github.com/wix/eslint-plugin-lodash/commit/fc5a5923ca9eb5e7c1f584492d03641bdf649bb8
+[fc5a592]: https://github.com/wix/eslint-plugin-lodash/commit/764f8a067311f940b02329aa051df007b62c9202
+[6ab30e6]: https://github.com/wix/eslint-plugin-lodash/commit/6ab30e6f8713f88d93f95cc3f0d00ea67b27dbe6
+[2.0.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.0.0...v1.10.3
 
 ## [1.10.3] - 2016-09-05
 ### Fixed

@@ -12,13 +12,13 @@ module.exports = {
         schema: [{
             type: 'object',
             properties: {
-                methods: {
+                ignoredMethods: {
                     type: 'array',
                     items: {
                         type: 'string'
                     }
                 },
-                objects: {
+                ignoredObjects: {
                     type: 'array',
                     items: {
                         type: 'string'

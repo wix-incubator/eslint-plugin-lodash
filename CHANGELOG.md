@@ -8,12 +8,22 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.0.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.0...HEAD
+
+## [2.1.0] - 2016-10-13
+### Added
+- Added String.prototype methods to `prefer-lodash-method`. ([`6a44330`][6a44330])
+### Fixed
+- Fixed schema for `prefer-lodash-method`. ([`a3eb338`][a3eb338])
+
+[6a44330]: https://github.com/wix/eslint-plugin-lodash/commit/6a443301960f4e173b4e8911b2b4986066ed2eb2
+[a3eb338]: https://github.com/wix/eslint-plugin-lodash/commit/a3eb3388e92c47ac8e182dd203133703ee6c426c
+[2.1.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.0...v2.0.0
 
 ## [2.0.0] - 2016-10-13
-## Added
+### Added
 - Added support for single-method imports in all rules. ([`8a55217`][8a55217])
-## Changed
+### Changed
 - Changed role of the `pragma` setting to be a hint instead of mandatory and removed the default pragma, `_`. ([`8a55217`][8a55217])
 - Changed recommended config to be pragma-less and added the `canonical` config for use with the full lodash build's `_` pragma. ([`8a55217`][8a55217])
 - Changed `prefer-lodash-method`'s config object to only accept two values: `ignoreMethods` and `ignoreObjects`, both regular expressions. ([`fc9ecee`][fc9ecee])
@@ -21,7 +31,7 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 - Changed rule `path-style` so that `as-needed` now only recommends arrays when using strings with variables ([`6ab30e6`][6ab30e6])
 ### Removed
 - Removed support for node 0.10. ([`8a55217`][8a55217])
-## Fixed
+### Fixed
 - Fixed `prefer-lodash-typecheck` to warn on undefined checks of declared variables. ([`8ee071a`][8ee071a])
 - Fixed case in `prefer-map` where the push is from a declared iteratee parameter. ([`fc5a592`][fc5a592])
 - Fixed case where `prop-shorthand` would warn erronously. ([`764f8a0`][764f8a0])

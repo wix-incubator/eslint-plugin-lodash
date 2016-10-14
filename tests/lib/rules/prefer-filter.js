@@ -20,7 +20,8 @@ ruleTester.run('prefer-filter', rule, {
         'var x = _.filter(arr, function(x) {return x + 7})',
         '_.forEach(arr, function(x) { if (x.a) {} else {}})',
         '_.forEach(arr, function(x) {if (y) {}})',
-        '_.forEach(arr, function(x, y) { if (x){} })'
+        '_.forEach(arr, function(x, y) { if (x){} })',
+        '_.forEach(arr, f)'
     ].map(withDefaultPragma),
     invalid: [
         '_(arr).forEach(function(x) { if (x.a.b.c) {}})',

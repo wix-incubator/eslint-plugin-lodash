@@ -228,6 +228,15 @@ describe('astUtil', () => {
                     })
             })
         })
+        describe('other', () => {
+            it('should return a falsy value for identifiers', done => {
+                traverse('const one = 1')
+                    .get('Identifier', node => {
+                        assert(!astUtil.hasOnlyOneStatement(node))
+                        done()
+                    })
+            })
+        })
     })
     describe('isObjectOfMethodCall', () => {
         it('should return true if the node is an object of a method call', done => {

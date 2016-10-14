@@ -22,7 +22,9 @@ ruleTester.run('prefer-is-nil', rule, {
         'var t = _.isUndefined(x)',
         'var t = _.isUndefined(x) || _.isNull(y)',
         'var t = !_.isNull(x) && !_.isNull(y)'
-    ].map(withDefaultPragma),
+    ].map(withDefaultPragma).concat([
+        'const get = require("lodash/get"); module.exports = "foo" || "bar"'
+    ]),
     invalid: [
         'var t = x === undefined || x === null',
         'var t = undefined === x || x === null',

@@ -31,7 +31,13 @@ ruleTester.run('matches-prop-shorthand', rule, {
           code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
           options: ['always', { onlyLiterals: true }]
         }
-    ].map(withDefaultPragma),
+    ].map(withDefaultPragma).concat([{
+        code: 'import {map} from "lodash"; function foo() {map(bar, function(x) { return x})}',
+        parserOptions: {
+            ecmaVersion: 6,
+            sourceType: 'module'
+        }
+    }]),
     invalid: [{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
         errors: errors.always

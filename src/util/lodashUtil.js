@@ -169,7 +169,7 @@ function isNativeCollectionMethodCall(node) {
 
 function getImportedLodashMethod(context, node) {
     const contextData = contextsWithLodash.get(context)
-    if (!astUtil.isMethodCall(node) && contextData && contextData.methods) {
+    if (node && node.type === 'CallExpression' && !astUtil.isMethodCall(node) && contextData && contextData.methods) {
         return contextData.methods[node.callee.name]
     }
 }
@@ -222,7 +222,7 @@ function isLodashCallToMethod(node, settings, method, context) {
 }
 
 function isCallToLodashMethod(node, method, context) {
-    if (!node) {
+    if (!node || node.type !== 'CallExpression') {
         return false
     }
     const settings = settingsUtil.getSettings(context)

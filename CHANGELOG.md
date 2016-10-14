@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.2...HEAD
+
+## [2.1.2] - 2016-10-15
+### Fixed
+- Fixed crash in `prefer-filter`. ([`8d1d07c`][8d1d07c])
+
+[8d1d07c]: https://github.com/wix/eslint-plugin-lodash/commit/8d1d07c6264a1304a3ffcdaee01152e061869524
+[2.1.2]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.2...v2.1.1
 
 ## [2.1.1] - 2016-10-14
 ### Fixed

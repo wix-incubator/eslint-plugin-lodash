@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.1...HEAD
+
+## [2.1.1] - 2016-10-14
+### Fixed
+- Fixed crash in `matches-shorthand` and `prefer-is-nil`. ([`de49782`][de49782])
+
+[de49782]: https://github.com/wix/eslint-plugin-lodash/commit/de49782ffc0c325acc26d8f4db21f136209d04ee
+[2.1.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.1...v2.1.0
 
 ## [2.1.0] - 2016-10-13
 ### Added

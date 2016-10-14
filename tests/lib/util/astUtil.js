@@ -94,7 +94,7 @@ describe('astUtil', () => {
     describe('isMemberExpOf', () => {
         it('should return true if the expression is a memberExpression of an object', done => {
             traverse('a.b.c.d')
-                .first('MemberExpression', node => {
+                .first('MemberExpression:exit', node => {
                     assert(astUtil.isMemberExpOf(node, 'a'))
                     done()
                 })

@@ -17,17 +17,17 @@ module.exports = {
     },
 
     create(context) {
-        const {isChainable, isChainBreaker, isExplicitChainStart, isImplicitChainStart, getLodashImportVisitors} = require('../util/lodashUtil')
+        const {getLodashContext, isChainable, isChainBreaker} = require('../util/lodashUtil')
         const {isMethodCall} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
-        const {combineVisitorObjects} = require('../util/ruleUtil')
+        const lodashContext = getLodashContext(context)
+        const version = lodashContext.version
         const callExpressionVisitors = {
             'as-needed'(node) {
-                if (isExplicitChainStart(node, settings.pragma, context)) {
+                if (lodashContext.isExplicitChainStart(node)) {
                     let curr = node.parent.parent
                     let needed = false
-                    while (isMethodCall(curr) && !isChainBreaker(curr, settings.version)) {
-                        if (!isChainable(curr, settings.version) && !isChainBreaker(curr.parent.parent, settings.version)) {
+                    while (isMethodCall(curr) && !isChainBreaker(curr, version)) {
+                        if (!isChainable(curr, version) && !isChainBreaker(curr.parent.parent, version)) {
                             needed = true
                         }
                         curr = curr.parent.parent
@@ -38,19 +38,19 @@ module.exports = {
                 }
             },
             implicit(node) {
-                if (isExplicitChainStart(node, settings.pragma, context)) {
+                if (lodashContext.isExplicitChainStart(node)) {
                     context.report(node, 'Do not use explicit chaining')
                 }
             },
             explicit(node) {
-                if (isImplicitChainStart(node, settings.pragma, context)) {
+                if (lodashContext.isImplicitChainStart(node)) {
                     context.report(node, 'Do not use implicit chaining')
                 }
             }
         }
 
-        return combineVisitorObjects({
-            CallExpression: callExpressionVisitors[context.options[0] || 'as-needed']
-        }, getLodashImportVisitors(context))
+        const visitors = lodashContext.getImportVisitors()
+        visitors.CallExpression = callExpressionVisitors[context.options[0] || 'as-needed']
+        return visitors
     }
 }

@@ -26,8 +26,8 @@ module.exports = {
             return isMemberExpOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), {allowComputed: false})
         }
 
-        function canUseShorthand(iteratee) {
-            return isCallToLodashMethod(iteratee, 'property', context) || isExplicitParamFunction(iteratee)
+        function canUseShorthand(iteratee, lodashContext) {
+            return isCallToLodashMethod(iteratee, 'property', lodashContext) || isExplicitParamFunction(iteratee)
         }
 
         function usesShorthand(node, iteratee) {

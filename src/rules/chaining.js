@@ -21,11 +21,11 @@ module.exports = {
     },
 
     create(context) {
-        const {isLodashCall, getLodashImportVisitors, isLodashChainStart, getImportedLodashMethod, isChainBreaker} = require('../util/lodashUtil')
+        const {getLodashContext, isChainBreaker} = require('../util/lodashUtil')
         const {getCaller, isMethodCall, isObjectOfMethodCall} = require('../util/astUtil')
-        const {combineVisitorObjects} = require('../util/ruleUtil')
         const DEFAULT_LENGTH = 3
-        const {pragma, version} = require('../util/settingsUtil').getSettings(context)
+        const lodashContext = getLodashContext(context)
+        const version = lodashContext.version
         const negate = require('lodash/negate')
 
         const mode = context.options[0] || 'never'
@@ -40,7 +40,7 @@ module.exports = {
         function isNestedNLevels(node, n) {
             if (n === 0) {
                 return true
-            } else if (isLodashCall(node, pragma, context) || getImportedLodashMethod(context, node)) {
+            } else if (lodashContext.isLodashCall(node) || lodashContext.getImportedLodashMethod(node)) {
                 return isNestedNLevels(node.arguments[0], n - 1)
             }
         }
@@ -49,7 +49,7 @@ module.exports = {
             always: node => {
                 if (isNestedNLevels(node, ruleDepth)) {
                     context.report(getCaller(node.arguments[0]), 'Prefer chaining to composition')
-                } else if (isLodashChainStart(node, pragma, context)) {
+                } else if (lodashContext.isLodashChainStart(node)) {
                     const firstCall = node.parent.parent
                     if (isMethodCall(firstCall) && (isEndOfChain(firstCall) || isBeforeChainBreaker(firstCall))) {
                         context.report(firstCall, 'Do not use chain syntax for single method')
@@ -57,14 +57,14 @@ module.exports = {
                 }
             },
             never: node => {
-                if (isLodashChainStart(node, pragma, context)) {
+                if (lodashContext.isLodashChainStart(node)) {
                     context.report(node, 'Prefer composition to Lodash chaining')
                 }
             }
         }
 
-        return combineVisitorObjects({
-            CallExpression: callExpressionVisitors[mode]
-        }, getLodashImportVisitors(context))
+        const visitors = lodashContext.getImportVisitors()
+        visitors.CallExpression = callExpressionVisitors[mode]
+        return visitors
     }
 }

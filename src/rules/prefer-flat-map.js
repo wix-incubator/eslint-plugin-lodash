@@ -20,10 +20,10 @@ module.exports = {
             return callType === 'chained' && isCallToMethod(getCaller(node), version, 'map')
         }
 
-        return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType, lodashContext}) => {
             if (isAliasOfMethod(version, 'flatten', method) &&
                 (isChainedMapFlatten(callType, node, version) ||
-                isCallToLodashMethod(node.arguments[0], 'map', context))) {
+                isCallToLodashMethod(node.arguments[0], 'map', lodashContext))) {
                 context.report(node, 'Prefer _.flatMap over consecutive map and flatten.')
             }
         })

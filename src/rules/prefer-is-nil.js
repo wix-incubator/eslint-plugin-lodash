@@ -13,9 +13,9 @@
 module.exports = {
     create(context) {
         const {isNegationExpression, isEquivalentMemberExp} = require('../util/astUtil')
-        const {isCallToLodashMethod, getLodashImportVisitors} = require('../util/lodashUtil')
-        const {combineVisitorObjects} = require('../util/ruleUtil')
+        const {isCallToLodashMethod, getLodashContext} = require('../util/lodashUtil')
         const _ = require('lodash')
+        const lodashContext = getLodashContext(context)
         const nilChecks = {
             null: {
                 isValue: _.matches({type: 'Literal', value: null}),
@@ -29,7 +29,7 @@ module.exports = {
 
         function getLodashTypeCheckedBy(typecheck) {
             return function (node) {
-                return isCallToLodashMethod(node, typecheck, context) && node.arguments[0]
+                return isCallToLodashMethod(node, typecheck, lodashContext) && node.arguments[0]
             }
         }
 
@@ -73,18 +73,18 @@ module.exports = {
             return leftExp && isEquivalentMemberExp(leftExp, checkNegatedExpression(rightNil, node.right))
         }
 
-        return combineVisitorObjects({
-            LogicalExpression(node) {
-                if (node.operator === '||') {
-                    if (isEquivalentExistingExpression(node, 'undefined', 'null') ||
-                        isEquivalentExistingExpression(node, 'null', 'undefined')) {
-                        context.report(node, 'Prefer isNil over checking for undefined or null.')
-                    }
-                } else if (isEquivalentExistingNegation(node, 'undefined', 'null') ||
-                    isEquivalentExistingNegation(node, 'null', 'undefined')) {
+        const visitors = lodashContext.getImportVisitors()
+        visitors.LogicalExpression = function (node) {
+            if (node.operator === '||') {
+                if (isEquivalentExistingExpression(node, 'undefined', 'null') ||
+                    isEquivalentExistingExpression(node, 'null', 'undefined')) {
                     context.report(node, 'Prefer isNil over checking for undefined or null.')
                 }
+            } else if (isEquivalentExistingNegation(node, 'undefined', 'null') ||
+                isEquivalentExistingNegation(node, 'null', 'undefined')) {
+                context.report(node, 'Prefer isNil over checking for undefined or null.')
             }
-        }, getLodashImportVisitors(context))
+        }
+        return visitors
     }
 }

@@ -30,13 +30,19 @@ module.exports = {
 
     create(context) {
 
-        const {isNativeCollectionMethodCall, getLodashImportVisitors, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
-        const {combineVisitorObjects} = require('../util/ruleUtil')
+        const {getLodashContext, isNativeCollectionMethodCall, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
-        const [get, includes, matches, some, map] = ['get', 'includes', 'matches', 'some', 'map'].map(m => require(`lodash/${m}`))
+        const get = require('lodash/get')
+        const includes = require('lodash/includes')
+        const matches = require('lodash/matches')
+        const some = require('lodash/some')
+        const map = require('lodash/map')
+        const assign = require('lodash/assign')
         const ignoredMethods = get(context, ['options', 0, 'ignoreMethods'], [])
         const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
         const usingLodash = new Set()
+
+        const lodashContext = getLodashContext(context)
 
         function isNonNullObjectCreate(callerName, methodName, arg) {
             return callerName === 'Object' && methodName === 'create' && get(arg, 'value') !== null
@@ -76,9 +82,8 @@ module.exports = {
         function shouldIgnore(node) {
             return someMatch(ignoredMethods, getMethodName(node)) || someMatch(ignoredObjects, getTextOfNode(getCaller(node)))
         }
-
-        return combineVisitorObjects({
-            CallExpression: getLodashMethodCallExpVisitor(context, node => {
+        return assign({
+            CallExpression: getLodashMethodCallExpVisitor(lodashContext, node => {
                 usingLodash.add(node)
             }),
             'CallExpression:exit'(node) {
@@ -86,6 +91,6 @@ module.exports = {
                     context.report(node, `Prefer '_.${getMethodName(node)}' over the native function.`)
                 }
             }
-        }, getLodashImportVisitors(context))
+        }, lodashContext.getImportVisitors())
     }
 }

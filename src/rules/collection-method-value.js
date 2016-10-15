@@ -14,11 +14,10 @@ module.exports = {
         const {isChainBreaker, getLodashMethodVisitors} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')
         const {getCollectionMethods, isAliasOfMethod, getSideEffectIterationMethods} = require('../util/methodDataUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
         const includes = require('lodash/includes')
 
-        function parentUsesValue(node, callType) {
-            const isBeforeChainBreaker = callType === 'chained' && isChainBreaker(node.parent.parent, settings.version)
+        function parentUsesValue(node, callType, version) {
+            const isBeforeChainBreaker = callType === 'chained' && isChainBreaker(node.parent.parent, version)
             return (isBeforeChainBreaker ? node.parent.parent : node).parent.type !== 'ExpressionStatement'
         }
 
@@ -31,9 +30,9 @@ module.exports = {
         }
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
-            if (isPureLodashCollectionMethod(method, version) && !parentUsesValue(node, callType)) {
+            if (isPureLodashCollectionMethod(method, version) && !parentUsesValue(node, callType, version)) {
                 context.report(node, `Use value returned from _.${method}`)
-            } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType)) {
+            } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType, version)) {
                 context.report(node, `Do not use value returned from _.${getMethodName(node)}`)
             }
         })

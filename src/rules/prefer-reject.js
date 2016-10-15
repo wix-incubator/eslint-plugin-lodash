@@ -24,15 +24,15 @@ module.exports = {
         const DEFAULT_MAX_PROPERTY_PATH_LENGTH = 3
         const maxLength = parseInt(context.options[0], 10) || DEFAULT_MAX_PROPERTY_PATH_LENGTH
 
-        function isNegativeExpressionFunction(func) {
+        function isNegativeExpressionFunction(func, lodashContext) {
             const returnValue = getValueReturnedInFirstStatement(func)
             const firstParamName = getFirstParamName(func)
             return isNegationOfMemberOf(returnValue, firstParamName, {maxLength}) ||
-                isNotEqEqToMemberOf(returnValue, firstParamName, {maxLength}) || isCallToLodashMethod(func, 'negate', context)
+                isNotEqEqToMemberOf(returnValue, firstParamName, {maxLength}) || isCallToLodashMethod(func, 'negate', lodashContext)
         }
 
-        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
-            if (isAliasOfMethod(version, 'filter', method) && isNegativeExpressionFunction(iteratee)) {
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version, lodashContext}) => {
+            if (isAliasOfMethod(version, 'filter', method) && isNegativeExpressionFunction(iteratee, lodashContext)) {
                 context.report(node, 'Prefer _.reject over negative condition')
             }
         })

@@ -9,38 +9,38 @@
 
 module.exports = {
     create(context) {
-        const {isImplicitChainStart, isExplicitChainStart, isChainable, isCallToMethod, isChainBreaker, getLodashImportVisitors} = require('../util/lodashUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
+        const {getLodashContext, isChainable, isCallToMethod, isChainBreaker} = require('../util/lodashUtil')
         const {getCaller} = require('../util/astUtil')
         const negate = require('lodash/negate')
-        const {combineVisitorObjects} = require('../util/ruleUtil')
+        const lodashContext = getLodashContext(context)
+        const version = lodashContext.version
         function isCommit(node) {
-            return isCallToMethod(node, settings.version, 'commit')
+            return isCallToMethod(node, version, 'commit')
         }
 
         function getEndOfChain(node, isExplicit) {
             const stillInChain = isExplicit ? negate(isChainBreaker) : isChainable
             let curr = node.parent.parent
-            while (curr === getCaller(curr.parent.parent) && stillInChain(curr, settings.version)) {
+            while (curr === getCaller(curr.parent.parent) && stillInChain(curr, version)) {
                 curr = curr.parent.parent
             }
             return curr
         }
 
-        return combineVisitorObjects({
-            CallExpression(node) {
-                if (isImplicitChainStart(node, settings.pragma, context)) {
-                    const end = getEndOfChain(node, false)
-                    if (!isCommit(end) && isChainable(end, settings.version)) {
-                        context.report(end, 'Missing unwrapping at end of chain')
-                    }
-                } else if (isExplicitChainStart(node, settings.pragma, context)) {
-                    const end = getEndOfChain(node, true)
-                    if (!isCommit(end) && !isChainBreaker(end, settings.version)) {
-                        context.report(end, 'Missing unwrapping at end of chain')
-                    }
+        const visitors = lodashContext.getImportVisitors()
+        visitors.CallExpression = function(node) {
+            if (lodashContext.isImplicitChainStart(node)) {
+                const end = getEndOfChain(node, false)
+                if (!isCommit(end) && isChainable(end, version)) {
+                    context.report(end, 'Missing unwrapping at end of chain')
+                }
+            } else if (lodashContext.isExplicitChainStart(node)) {
+                const end = getEndOfChain(node, true)
+                if (!isCommit(end) && !isChainBreaker(end, version)) {
+                    context.report(end, 'Missing unwrapping at end of chain')
                 }
             }
-        }, getLodashImportVisitors(context))
+        }
+        return visitors
     }
 }

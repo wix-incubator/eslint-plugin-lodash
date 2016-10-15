@@ -12,15 +12,16 @@
 
 module.exports = {
     create(context) {
-        const {getLodashMethodCallExpVisitor, getLodashImportVisitors} = require('../util/lodashUtil')
+        const {getLodashMethodCallExpVisitor, getLodashContext} = require('../util/lodashUtil')
         const {getCollectionMethods} = require('../util/methodDataUtil')
         const {isFunctionDefinitionWithBlock} = require('../util/astUtil')
-        const {combineVisitorObjects} = require('../util/ruleUtil')
+        const assign = require('lodash/assign')
         let collectionMethods
         const funcInfos = new Map()
         let currFuncInfo = {}
-        return combineVisitorObjects({
-            'CallExpression:exit': getLodashMethodCallExpVisitor(context, (node, iteratee, {method, version}) => {
+        const lodashContext = getLodashContext(context)
+        return assign({
+            'CallExpression:exit': getLodashMethodCallExpVisitor(lodashContext, (node, iteratee, {method, version}) => {
                 collectionMethods = collectionMethods || new Set(getCollectionMethods(version))
                 if (collectionMethods.has(method) && funcInfos.has(iteratee)) {
                     const {hasReturn} = funcInfos.get(iteratee)
@@ -43,6 +44,6 @@ module.exports = {
             onCodePathEnd() {
                 currFuncInfo = currFuncInfo.upper
             }
-        }, getLodashImportVisitors(context))
+        }, lodashContext.getImportVisitors())
     }
 }

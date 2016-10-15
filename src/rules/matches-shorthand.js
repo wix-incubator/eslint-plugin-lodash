@@ -69,8 +69,8 @@ module.exports = {
             return isConjunctionOfEqEqEqToMemberOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), maxPropertyPathLength)
         }
 
-        function canUseShorthand(iteratee) {
-            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isCallToLodashMethod(iteratee, 'matches', context)
+        function canUseShorthand(iteratee, lodashContext) {
+            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isCallToLodashMethod(iteratee, 'matches', lodashContext)
         }
 
         function usesShorthand(node, iteratee) {

@@ -33,8 +33,8 @@ module.exports = {
             return isEqEqEqToMemberOf(getValueReturnedInFirstStatement(func), getFirstParamName(func), {onlyLiterals})
         }
 
-        function canUseShorthand(iteratee) {
-            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isCallToLodashMethod(iteratee, 'matchesProperty', context)
+        function canUseShorthand(iteratee, lodashContext) {
+            return isFunctionDeclarationThatCanUseShorthand(iteratee) || isCallToLodashMethod(iteratee, 'matchesProperty', lodashContext)
         }
 
         function callHasExtraParamAfterIteratee(node, iteratee) {

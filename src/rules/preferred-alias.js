@@ -19,15 +19,14 @@ module.exports = {
         const {version} = require('../util/settingsUtil').getSettings(context)
         const aliases = require('../util/methodDataUtil').getAliasesByVersion(version)
 
-        return getLodashMethodVisitors(context, node => {
-            const methodName = getMethodName(node)
-            if (aliases[methodName]) {
+        return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
+            if (aliases[method]) {
                 context.report({
                     node: node.callee.property,
                     message: "Method '{{old}}' is an alias, for consistency prefer using '{{new}}'",
                     data: {
-                        old: methodName,
-                        new: aliases[methodName]
+                        old: method,
+                        new: aliases[method]
                     }
                 })
             }

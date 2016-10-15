@@ -15,29 +15,29 @@ module.exports = {
         fixable: "code"
     },
     create(context) {
-        const {isImplicitChainStart, isChainBreaker, isChainable, getLodashImportVisitors} = require('../util/lodashUtil')
+        const {getLodashContext, isChainBreaker, isChainable} = require('../util/lodashUtil')
         const {isMethodCall, getCaller, getMethodName} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
-        const {combineVisitorObjects} = require('../util/ruleUtil')
-        return combineVisitorObjects({
-            CallExpression(node) {
-                if (isImplicitChainStart(node, settings.pragma, context)) {
-                    do {
-                        node = node.parent.parent
-                    } while (isMethodCall(node) && !isChainBreaker(node, settings.version))
-                    const caller = getCaller(node)
-                    if (isMethodCall(node) && !isChainable(caller, settings.version)) {
-                        context.report({
-                            node,
-                            message: 'Do not use .value() after chain-ending method {{method}}',
-                            data: {method: getMethodName(caller)},
-                            fix(fixer) {
-                                return fixer.removeRange([caller.range[1], node.range[1]])
-                            }
-                        })
-                    }
+        const lodashContext = getLodashContext(context)
+        const version = lodashContext.version
+        const visitors = lodashContext.getImportVisitors()
+        visitors.CallExpression = function (node) {
+            if (lodashContext.isImplicitChainStart(node)) {
+                do {
+                    node = node.parent.parent
+                } while (isMethodCall(node) && !isChainBreaker(node, version))
+                const caller = getCaller(node)
+                if (isMethodCall(node) && !isChainable(caller, version)) {
+                    context.report({
+                        node,
+                        message: 'Do not use .value() after chain-ending method {{method}}',
+                        data: {method: getMethodName(caller)},
+                        fix(fixer) {
+                            return fixer.removeRange([caller.range[1], node.range[1]])
+                        }
+                    })
                 }
             }
-        }, getLodashImportVisitors(context))
+        }
+        return visitors
     }
 }

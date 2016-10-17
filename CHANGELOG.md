@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.3...HEAD
+
+## [2.1.3] - 2016-10-17
+### Fixed
+- Fixed crash in `callback-binding` for node versions under 6. ([`afe904f`][afe904f])
+
+[afe904f]: https://github.com/wix/eslint-plugin-lodash/commit/afe904f52ea7df75a52996637d87edf44b72e067
+[2.1.3]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.3...v2.1.2
 
 ## [2.1.2] - 2016-10-15
 ### Fixed

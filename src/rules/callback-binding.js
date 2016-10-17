@@ -16,6 +16,7 @@ module.exports = {
         const {getMethodName} = require('../util/astUtil')
         const {version} = require('../util/settingsUtil').getSettings(context)
         const transformerMethods = ['reduce', 'reduceRight', 'transform']
+        const includes = require('lodash/includes')
 
         function isBound(node) {
             return node && node.type === 'CallExpression' && getMethodName(node) === 'bind' && node.arguments.length === 1
@@ -28,7 +29,7 @@ module.exports = {
                 }
             },
             4(node, iteratee, {method}) {
-                const isTransformerMethod = transformerMethods.includes(method)
+                const isTransformerMethod = includes(transformerMethods, method)
                 const iterateeIndex = node.arguments.indexOf(iteratee)
                 if (iterateeIndex !== -1 && (isTransformerMethod && node.arguments[iterateeIndex + 2] || (!isTransformerMethod && node.arguments[iterateeIndex + 1]))) {
                     context.report(iteratee, 'Do not use Lodash 3 thisArg, use binding instead')

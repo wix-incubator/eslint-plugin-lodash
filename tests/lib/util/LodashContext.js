@@ -1,188 +1,250 @@
 'use strict'
+const assign = require('lodash/assign')
 const traverser = require('eslint-traverser')
 const LodashContext = require('../../../src/util/LodashContext')
 const assert = require('assert')
+const defaultPragmaConfig = {settings: {lodash: {pragma: '_'}}}
+
+function visitWithContext(code, config, getVisitorsByLodashContext) {
+    traverser(code, config)
+        .runRuleCode(context => {
+            const lodashContext = new LodashContext(context)
+            const importVisitors = lodashContext.getImportVisitors()
+            return assign(importVisitors, getVisitorsByLodashContext(lodashContext))
+        })
+}
+
 describe('LodashContext', () => {
     describe('getLodashImportVisitors', () => {
         describe('ImportDeclaration', () => {
             it('should accept a namespace import as lodash', done => {
-                traverser('import * as lodash from "lodash"; lodash.map(arr, x => x)', {sourceType: 'module'})
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            assert(lodashContext.general[node.callee.object.name])
-                            done()
-                        }
-                        return visitors
-                    })
+                visitWithContext('import * as lodash from "lodash"; lodash.map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(lodashContext.general[node.callee.object.name])
+                        done()
+                    }
+                }))
             })
             it('should accept a destructured import as lodash', done => {
-                traverser('import {map} from "lodash"; map(arr, x => x)', {sourceType: 'module'})
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            assert(lodashContext.methods[node.callee.name] === 'map')
-                            done()
-                        }
-                        return visitors
-                    })
+                visitWithContext('import {map} from "lodash"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(lodashContext.methods[node.callee.name] === 'map')
+                        done()
+                    }
+                }))
             })
             it('should not throw error when trying to import lodash for side effects', () => {
                 traverser('import "lodash"', {sourceType: 'module'})
                     .runRuleCode(context => (new LodashContext(context)).getImportVisitors())
             })
             it('should not collect anything from arbitrary imports', done => {
-                traverser('import map from "some-other-map"; map(arr, x => x)', {sourceType: 'module'})
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            assert(!lodashContext.methods[node.callee.name])
-                            done()
-                        }
-                        return visitors
-                    })
+                visitWithContext('import map from "some-other-map"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(!lodashContext.methods[node.callee.name])
+                        done()
+                    }
+                }))
             })
         })
         describe('VariableDeclarator', () => {
             it('should accept a require of the entire lodash library', done => {
-                traverser('const _ = require("lodash"); _.map(arr, x => x)')
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            if (node.callee.property && node.callee.property.name === 'map') {
-                                assert(lodashContext.general[node.callee.object.name])
-                                done()
-                            }
+                visitWithContext('const _ = require("lodash"); _.map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.property && node.callee.property.name === 'map') {
+                            assert(lodashContext.general[node.callee.object.name])
+                            done()
                         }
-                        return visitors
-                    })
+                    }
+                }))
             })
             it('should accept a destructured require of the main module', done => {
-                traverser('const {map} = require("lodash"); map(arr, x => x)')
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            if (node.callee.name === 'map') {
-                                // assert(lodashUtil.isCallToLodashMethod(node, 'map', context))
-                                assert(lodashContext.methods[node.callee.name] === 'map')
-                                done()
-                            }
+                visitWithContext('const {map} = require("lodash"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(lodashContext.methods[node.callee.name] === 'map')
+                            done()
                         }
-                        return visitors
-                    })
+                    }
+                }))
             })
             it('should accept a single method require', done => {
-                traverser('const map = require("lodash/map"); map(arr, x => x)')
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            if (node.callee.name === 'map') {
-                                assert(lodashContext.methods[node.callee.name] === 'map')
-                                done()
-                            }
+                visitWithContext('const map = require("lodash/map"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(lodashContext.methods[node.callee.name] === 'map')
+                            done()
                         }
-                        return visitors
-                    })
+                    }
+                }))
             })
             it('should not collect arbitrary requires', done => {
-                traverser('const map = require("some-other-map"); map(arr, x => x)')
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            if (node.callee.name === 'map') {
-                                assert(lodashContext.methods[node.callee.name] !== 'map')
-                                done()
-                            }
+                visitWithContext('const map = require("some-other-map"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(lodashContext.methods[node.callee.name] !== 'map')
+                            done()
                         }
-                        return visitors
-                    })
+                    }
+                }))
             })
             it('should not collect anything from array patterns required from lodash', done => {
-                traverser('const [map] = require("lodash"); map(arr, x => x)')
-                    .runRuleCode(context => {
-                        const lodashContext = new LodashContext(context)
-                        const visitors = lodashContext.getImportVisitors()
-                        visitors.CallExpression = node => {
-                            if (node.callee.name === 'map') {
-                                assert(lodashContext.methods[node.callee.name] !== 'map')
-                                done()
-                            }
+                visitWithContext('const [map] = require("lodash"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(lodashContext.methods[node.callee.name] !== 'map')
+                            done()
                         }
-                        return visitors
-                    })
+                    }
+                }))
             })
         })
     })
     describe('isImportedLodash', () => {
         it('should return true for a lodash that was imported', done => {
-            traverser('import * as lodash from "lodash"; lodash.map(arr, x => x)', {sourceType: 'module'})
-                .runRuleCode(context => {
-                    const lodashContext = new LodashContext(context)
-                    const visitors = lodashContext.getImportVisitors()
-                    visitors.CallExpression = node => {
-                        assert(lodashContext.isImportedLodash(node.callee.object))
-                        done()
-                    }
-                    return visitors
-                })
+            visitWithContext('import * as lodash from "lodash"; lodash.map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isImportedLodash(node.callee.object))
+                    done()
+                }
+            }))
         })
         it('should return false for other identifiers', done => {
-            traverser('const one = 1')
-                .runRuleCode(context => {
-                    const lodashContext = new LodashContext(context)
-                    const visitors = lodashContext.getImportVisitors()
-                    visitors.Identifier = node => {
-                        assert(!lodashContext.isImportedLodash(node))
-                        done()
-                    }
-                    return visitors
-                })
+            visitWithContext('const one = 1', undefined, lodashContext => ({
+                Identifier(node) {
+                    assert(!lodashContext.isImportedLodash(node))
+                    done()
+                }
+            }))
         })
     })
     describe('getImportedLodashMethod', () => {
         it('should return the imported Lodash method when called as a single method', done => {
-            traverser('import map from "lodash/map"; map(arr, x => x)', {sourceType: 'module'})
-                .runRuleCode(context => {
-                    const lodashContext = new LodashContext(context)
-                    const visitors = lodashContext.getImportVisitors()
-                    visitors.CallExpression = node => {
-                        assert(lodashContext.getImportedLodashMethod(node) === 'map')
-                        done()
-                    }
-                    return visitors
-                })
+            visitWithContext('import map from "lodash/map"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.getImportedLodashMethod(node) === 'map')
+                    done()
+                }
+            }))
         })
         it('should return undefined for other function calls', done => {
-            traverser('const one = f()')
-                .runRuleCode(context => {
-                    const lodashContext = new LodashContext(context)
-                    const visitors = lodashContext.getImportVisitors()
-                    visitors.CallExpression = node => {
-                        assert(lodashContext.getImportedLodashMethod(node) === undefined)
-                        done()
-                    }
-                    return visitors
-                })
+            visitWithContext('const one = f()', undefined, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.getImportedLodashMethod(node) === undefined)
+                    done()
+                }
+            }))
         })
         it('should return undefined for other node types', done => {
-            traverser('const one = 1')
-                .runRuleCode(context => {
-                    const lodashContext = new LodashContext(context)
-                    const visitors = lodashContext.getImportVisitors()
-                    visitors.Identifier = node => {
-                        assert(lodashContext.getImportedLodashMethod(node) === undefined)
-                        done()
-                    }
-                    return visitors
-                })
+            visitWithContext('const one = 1', undefined, lodashContext => ({
+                Identifier(node) {
+                    assert(lodashContext.getImportedLodashMethod(node) === undefined)
+                    done()
+                }
+            }))
         })
     })
-
+    describe('isLodashCall', () => {
+        it('should return true if pragma is defined and it is a call from it', done => {
+            visitWithContext('const ids = _.map(users, "id")', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isLodashCall(node))
+                    done()
+                }
+            }))
+        })
+        it('should return true if no pragma is defined and the call is an imported lodash', done => {
+            visitWithContext('import _ from "lodash"; const ids = _.map(users, "id")', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isLodashCall(node))
+                    done()
+                }
+            }))
+        })
+        it('should return a falsy value if the call is a single method import', done => {
+            visitWithContext('import map from "lodash/map"; const ids = map(users, "id")', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isLodashCall(node))
+                    done()
+                }
+            }))
+        })
+    })
+    describe('isImplicitChainStart', () => {
+       it('should return true if the callExp is an implicit chain start', done => {
+           visitWithContext('const wrapper = _(val)', defaultPragmaConfig, lodashContext => ({
+               CallExpression(node) {
+                   assert(lodashContext.isImplicitChainStart(node))
+                   done()
+               }
+           }))
+       })
+        it('should return false if the callExp is an explicit chain start', done => {
+            visitWithContext('const wrapper = _.chain(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return false for any other lodash call', done => {
+            visitWithContext('const wrapper = _.map(val, f)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+    })
+    describe('isExplicitChainStart', () => {
+        it('should return false if the callExp is an implicit chain start', done => {
+            visitWithContext('const wrapper = _(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isExplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return true if the callExp is an explicit chain start', done => {
+            visitWithContext('const wrapper = _.chain(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isExplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return false for any other lodash call', done => {
+            visitWithContext('const wrapper = _.map(val, f)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isExplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+    })
+    describe('isLodashChainStart', () => {
+        it('should return true if the callExp is an implicit chain start', done => {
+            visitWithContext('const wrapper = _(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isLodashChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return true if the callExp is an explicit chain start', done => {
+            visitWithContext('const wrapper = _.chain(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isLodashChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return false for any other lodash call', done => {
+            visitWithContext('const wrapper = _.map(val, f)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isLodashChainStart(node))
+                    done()
+                }
+            }))
+        })
+    })
 })

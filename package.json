@@ -8,8 +8,9 @@
     "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
     "lint": "eslint ./",
     "test": "npm run lint && npm run unit-test",
-    "unit-test": "istanbul cover --dir reports/coverage node_modules/mocha/bin/_mocha tests/**/*.js -- --reporter dot",
-    "prepublish": "babel src -d lib"
+    "unit-test": "cross-env NODE_ENV=test nyc mocha tests/**/*.js --reporter=dot",
+    "build": "babel src -d lib",
+    "prepublish": "npm run build"
   },
   "files": [
     "LICENSE",
@@ -30,13 +31,17 @@
   },
   "devDependencies": {
     "babel-cli": "6.16.0",
+    "babel-plugin-istanbul": "2.0.3",
     "babel-preset-es2015": "6.16.0",
+    "babel-register": "6.16.3",
     "coveralls": "^2.11.11",
+    "cross-env": "3.1.3",
     "eslint": "3.7.1",
     "eslint-config-wix-editor": "0.2.3",
     "eslint-traverser": "1.4.0",
     "istanbul": "^0.4.4",
-    "mocha": "3.1.0"
+    "mocha": "3.1.0",
+    "nyc": "8.3.1"
   },
   "engines": {
     "node": ">=0.12.0"

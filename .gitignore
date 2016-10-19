@@ -19,3 +19,5 @@ sftp-config.json
 *.iml
 /lib
 .DS_Store
+coverage
+.nyc_output

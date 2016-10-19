@@ -1,3 +1,4 @@
-node_modules/**
-reports/**
-/lib
+node_modules
+reports
+coverage
+/liblib

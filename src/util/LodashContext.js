@@ -79,6 +79,23 @@ module.exports = class {
         }
     }
 
+    isLodash(node) {
+        if (node && node.type === 'Identifier') {
+            return this.pragma === node.name || this.isImportedLodash(node)
+        }
+    }
+
+    getLodashMethod(node) {
+        if (node) {
+            switch (node.type) {
+                case 'MemberExpression':
+                    return this.isLodash(node.object) ? node.property.name : undefined
+                case 'Identifier':
+                    return this.methods[node.name]
+            }
+        }
+    }
+
     /**
      * Returns the name of the Lodash method for this node, if any
      * @param node

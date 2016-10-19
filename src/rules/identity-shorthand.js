@@ -22,24 +22,18 @@ module.exports = {
         const [get, matches, overSome] = ['get', 'matches', 'overSome'].map(m => require(`lodash/${m}`))
         const {methodSupportsShorthand, getShorthandVisitors} = require('../util/lodashUtil')
         const {getFirstParamName, getValueReturnedInFirstStatement} = require('../util/astUtil')
-        const settings = require('../util/settingsUtil').getSettings(context)
-
 
         function isExplicitIdentityFunction(iteratee) {
             const firstParamName = getFirstParamName(iteratee)
             return firstParamName && get(getValueReturnedInFirstStatement(iteratee), 'name') === firstParamName
         }
 
-        const isLodashIdentityFunction = matches({
-            type: 'MemberExpression',
-            object: {name: settings.pragma},
-            property: {name: 'identity'}
-        })
+        function canUseShorthand(iteratee, lodashContext) {
+            return isExplicitIdentityFunction(iteratee) || lodashContext.getLodashMethod(iteratee) === 'identity'
+        }
 
-        const canUseShorthand = overSome(isExplicitIdentityFunction, isLodashIdentityFunction)
-
-        function usesShorthand(node, iteratee, method) {
-            return methodSupportsShorthand(settings.version, method) && !iteratee
+        function usesShorthand(node, iteratee, {method, version}) {
+            return methodSupportsShorthand(version, method) && !iteratee
         }
 
         return getShorthandVisitors(context, {

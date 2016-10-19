@@ -137,8 +137,8 @@ function getShorthandVisitors(context, checks, messages) {
                 context.report(iteratee, messages.always)
             }
         },
-        never(node, iteratee, {method}) {
-            if (checks.usesShorthand(node, iteratee, method)) {
+        never(node, iteratee, {method, version}) {
+            if (checks.usesShorthand(node, iteratee, {method, version})) {
                 context.report(iteratee || node.callee.property, messages.never)
             }
         }

@@ -18,21 +18,21 @@ module.exports = {
     create(context) {
         const includes = require('lodash/includes')
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
-        const {version} = require('../util/settingsUtil').getSettings(context)
         const {getMainAlias} = require('../util/methodDataUtil')
 
         const direction = context.options[0] || 'flow'
-        const mainDirectionMethod = getMainAlias(version, direction)
+        let mainDirectionMethod
 
-        function isOtherDirection(method) {
+        function isOtherDirection(method, version) {
             if (includes(possibleDirections, method)) {
                 const methodDirection = getMainAlias(version, method)
                 return methodDirection !== mainDirectionMethod
             }
         }
 
-        return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
-            if (isOtherDirection(method)) {
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
+            mainDirectionMethod = mainDirectionMethod || getMainAlias(version, direction)
+            if (isOtherDirection(method, version)) {
                 context.report(node, `Use _.${direction} for composition`)
             }
         })

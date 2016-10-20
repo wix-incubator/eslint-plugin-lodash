@@ -29,14 +29,14 @@ module.exports = {
             }
         }
 
-        function onlyPassesIdentifier(node) {
-            return node.arguments.length === 1 && node.arguments[0].type === 'Identifier'
+        function usesShorthandInChain(node) {
+            return node.arguments.length === 0 || (node.arguments[0].type === 'Identifier')
         }
 
 
         function isOnlyParamInvocationsWithOperator(node, paramName, operator) {
             if (node.type === 'CallExpression') {
-                return onlyPassesIdentifier(node) && node.arguments[0].name === paramName
+                return usesShorthandInChain(node) && node.arguments[0].name === paramName
             }
             if (node.type === 'LogicalExpression') {
                 return node.operator === operator &&
@@ -59,9 +59,9 @@ module.exports = {
             }
         }
 
-        function reportIfDoubleFilterLiteral(callType, iteratee, node, version) {
-            if (callType === 'chained' && iteratee.type === 'Identifier' && isObjectOfMethodCall(node) &&
-                isCallToConditionMethod(getMethodName(node.parent.parent), version) && onlyPassesIdentifier(node.parent.parent)) {
+        function reportIfDoubleFilterLiteral(callType, node, version) {
+            if (callType === 'chained' && usesShorthandInChain(node) && isObjectOfMethodCall(node) &&
+                isCallToConditionMethod(getMethodName(node.parent.parent), version) && usesShorthandInChain(node.parent.parent)) {
                 context.report(node, message, reportConstants['&&'])
             }
         }
@@ -69,7 +69,7 @@ module.exports = {
         return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
             if (isCallToConditionMethod(method, version)) {
                 reportIfConnectiveOfParamInvocations(iteratee)
-                reportIfDoubleFilterLiteral(callType, iteratee, node, version)
+                reportIfDoubleFilterLiteral(callType, node, version)
             }
         })
     }

@@ -38,6 +38,9 @@ ruleTester.run('prefer-over-quantifier', rule, {
         code: 'var t = _(arr).filter(f).filter(g).value();',
         errors: errors.every
     }, {
+        code: 'var t = _(arr).filter(f).filter().value();',
+        errors: errors.every
+    }, {
         code: 'var t = _(arr).map("subObject").filter(x => f(x) && g(x) && h(x)).value();',
         errors: errors.every
     }, {

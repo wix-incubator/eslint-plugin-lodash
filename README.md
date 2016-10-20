@@ -76,7 +76,7 @@ The following rules point out areas where you might have made mistakes.
 ### Stylistic Issues
 These rules are purely matters of style and are quite subjective.
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
-* [chaining](docs/rules/prefer-chain.md): Prefer a either a Lodash chain or nested Lodash calls
+* [chaining](docs/rules/chaining.md): Prefer a either a Lodash chain or nested Lodash calls
 * [consistent-compose](docs/rules/consistent-compose.md): Enforce a specific function composition direction: `flow` or `flowRight`.
 * [identity-shorthand](docs/rules/identity-shorthand.md): Prefer identity shorthand syntax
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax

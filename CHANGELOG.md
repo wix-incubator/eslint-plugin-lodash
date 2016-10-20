@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.4...HEAD
+
+## [2.1.4] - 2016-10-20
+### Fixed
+- Fixed crash in `prefer-over-quantifier`. ([`906fd72`][906fd72])
+
+[906fd72]: https://github.com/wix/eslint-plugin-lodash/commit/906fd723496ce0d570f5d30e2dabe0cf07c6944b
+[2.1.4]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.4...v2.1.3
 
 ## [2.1.3] - 2016-10-17
 ### Fixed

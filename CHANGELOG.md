@@ -8,7 +8,18 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.5...HEAD
+
+## [2.1.5] - 2016-10-22
+### Fixed
+- Fixed crash in `preferred-alias` in cases of single-method import. ([`c787496`][c787496])
+- Fixed devDependency of `eslint-traverser` to correct version. ([`e8cd613`][e8cd613])
+- Fixed incorrect warning of `chaining` rule when importing `toString`. ([`b105870`][b105870])
+
+[c787496]: https://github.com/wix/eslint-plugin-lodash/commit/c78749652e0c34041b419fbfd0a9741224483bd7
+[e8cd613]: https://github.com/wix/eslint-plugin-lodash/commit/e8cd61391026d8d8e708ba2c4b4a72e73a6a1fb5
+[b105870]: https://github.com/wix/eslint-plugin-lodash/commit/b105870f8d27cadae9ed8ce07056f2b603d6a8c2
+[2.1.5]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.5...v2.1.4
 
 ## [2.1.4] - 2016-10-20
 ### Fixed

@@ -28,7 +28,8 @@ const testCases = {
             'var t = _.isArray(x)',
             'var t = _.assign(a, b, c);',
             'var i = _.sortedIndex(arr, val, f);',
-            'var i = _.sortedIndexBy(arr, val, obj)'
+            'var i = _.sortedIndexBy(arr, val, obj)',
+            'var i = _.findIndex(arr, x => x, 2)'
         ].map(optionsUtil.withDefaultPragma),
         v4: [
             'var map = ()=>{}; var x = map(arr, f.bind(this))'
@@ -40,7 +41,7 @@ const testCases = {
             'var r = _.find(users, predicate.bind(this));'
         ].map(optionsUtil.fromVersion3WithDefaultPragma).map(optionsUtil.fromMessage('Unnecessary bind, pass `thisArg` to lodash method instead')),
         v4Default:[
-            'var t = _.find(users, function(user) { return this.x === user}, this);',
+            'var t = _.map(users, function(user) { return this.x}, this);',
             'var t = _.reduce(users, func, initial, this);'
         ].map(optionsUtil.withDefaultPragma).map(optionsUtil.fromMessage('Do not use Lodash 3 thisArg, use binding instead'))
     }

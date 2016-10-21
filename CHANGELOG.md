@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.6...HEAD
+
+## [2.1.6] - 2016-10-22
+### Fixed
+- Fixed `callback-binding` warning on methods with `fromIndex` in v4. ([`1d6a958`][1d6a958])
+
+[1d6a958]: https://github.com/wix/eslint-plugin-lodash/commit/1d6a958b7715e4b895394497c3b36ea12bc76fc5
+[2.1.6]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.6...v2.1.5
 
 ## [2.1.5] - 2016-10-22
 ### Fixed

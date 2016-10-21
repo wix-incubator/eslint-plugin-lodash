@@ -38,7 +38,7 @@
     "cross-env": "3.1.3",
     "eslint": "3.7.1",
     "eslint-config-wix-editor": "0.2.3",
-    "eslint-traverser": "1.5.1",
+    "eslint-traverser": "1.5.2",
     "istanbul": "^0.4.4",
     "mocha": "3.1.0",
     "nyc": "8.3.1"

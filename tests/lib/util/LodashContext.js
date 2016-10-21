@@ -97,6 +97,16 @@ describe('LodashContext', () => {
                     }
                 }))
             })
+            it('should not consider Object.prototype methods as Lodash', done => {
+                visitWithContext('const {toString} = require("lodash/fp"); const x = toString(y)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'toString') {
+                            assert(!lodashContext.isLodashChainStart(node))
+                            done()
+                        }
+                    }
+                }))
+            })
         })
     })
     describe('isImportedLodash', () => {

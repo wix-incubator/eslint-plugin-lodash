@@ -17,8 +17,8 @@ module.exports = class {
      */
     constructor(context) {
         this.context = context
-        this.general = {}
-        this.methods = {}
+        this.general = Object.create(null)
+        this.methods = Object.create(null)
     }
 
     /**

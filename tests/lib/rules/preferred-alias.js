@@ -25,5 +25,7 @@ ruleTester.run('preferred-alias', rule, {
         '_.each(users, function (i) { i.f(); });',
         '_(users).each(function (i) { i.f(); });',
         '_(users).map(function (i) { return i; }).each(function (i) {});'
-    ].map(toErrorObject).map(withDefaultPragma)
+    ].map(withDefaultPragma).concat([
+        'const each = require("lodash/each"); each(a, f)'
+    ]).map(toErrorObject)
 })

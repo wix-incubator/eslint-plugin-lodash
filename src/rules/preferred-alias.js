@@ -22,12 +22,8 @@ module.exports = {
         return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
             if (aliases[method]) {
                 context.report({
-                    node: node.callee.property,
-                    message: "Method '{{old}}' is an alias, for consistency prefer using '{{new}}'",
-                    data: {
-                        old: method,
-                        new: aliases[method]
-                    }
+                    node,
+                    message: `Method '${method}' is an alias, for consistency prefer using '${aliases[method]}'`
                 })
             }
         })

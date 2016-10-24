@@ -17,9 +17,10 @@ module.exports = {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {version} = require('../util/settingsUtil').getSettings(context)
         const aliases = require('../util/methodDataUtil').getAliasesByVersion(version)
+        const has = require('lodash/has')
 
         return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
-            if (aliases[method]) {
+            if (has(aliases, method)) {
                 context.report({
                     node,
                     message: `Method '${method}' is an alias, for consistency prefer using '${aliases[method]}'`

@@ -20,7 +20,9 @@ ruleTester.run('preferred-alias', rule, {
         '_.forEach();',
         '_(users).map().value().each(function (i) { i.f(); });',
         'var x = _.map(y, function (i) { return i; });'
-    ].map(withDefaultPragma),
+    ].map(withDefaultPragma).concat([
+        "const {toString} = require('lodash'); toString('something')"
+    ]),
     invalid: [
         '_.each(users, function (i) { i.f(); });',
         '_(users).each(function (i) { i.f(); });',

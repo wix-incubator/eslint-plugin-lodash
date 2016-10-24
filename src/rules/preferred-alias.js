@@ -15,7 +15,6 @@ module.exports = {
 
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
-        const {getMethodName} = require('../util/astUtil')
         const {version} = require('../util/settingsUtil').getSettings(context)
         const aliases = require('../util/methodDataUtil').getAliasesByVersion(version)
 

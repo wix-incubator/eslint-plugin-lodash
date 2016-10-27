@@ -36,7 +36,7 @@ module.exports = {
 
         function isOnlyParamInvocationsWithOperator(node, paramName, operator) {
             if (node.type === 'CallExpression') {
-                return usesShorthandInChain(node) && node.arguments[0].name === paramName
+                return usesShorthandInChain(node) && node.arguments[0] && node.arguments[0].name === paramName
             }
             if (node.type === 'LogicalExpression') {
                 return node.operator === operator &&

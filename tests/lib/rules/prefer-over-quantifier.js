@@ -23,7 +23,8 @@ ruleTester.run('prefer-over-quantifier', rule, {
         'var t = _.filter(a, function(x) { return f(x)})',
         'var t = _.filter(a, function(x) { return f(x) && (g(x) || h(x))})',
         'var t = _.filter(a, x => x % 2)',
-        'var t = _.filter(a, x => f(x) && x % 2)'
+        'var t = _.filter(a, x => f(x) && x % 2)',
+        'var t = _.find(a, b => b.f() && b.g())'
     ].map(withDefaultPragma),
     invalid: [{
         code: 'var t = _.filter(a, function(x) { return f(x) && g(x); })',

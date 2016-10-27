@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.6...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.7...HEAD
+
+## [2.1.7] - 2016-10-27
+### Fixed
+- Fixed `preferred-alias` erronous warning on `_.toString`. ([`d1df139`][d1df139])
+- Fixed crash in `prefer-over-quantifier` ([`caf5b8a`][caf5b8a])
+
+[d1df139]: https://github.com/wix/eslint-plugin-lodash/commit/d1df139e3d15ebb5610393b6b3f0c241a7087459
+[caf5b8a]: https://github.com/wix/eslint-plugin-lodash/commit/caf5b8aff6b67a9f841938263ea8857ca0fa1453
+[2.1.7]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.7...v2.1.6
 
 ## [2.1.6] - 2016-10-22
 ### Fixed

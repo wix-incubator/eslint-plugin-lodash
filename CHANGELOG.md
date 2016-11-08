@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.7...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.8...HEAD
+
+## [2.1.8] - 2016-11-08
+### Fixed
+- Improve performance of shorthand rules ([`5eed1ec`][5eed1ec])
+
+[5eed1ec]: https://github.com/wix/eslint-plugin-lodash/commit/5eed1ecc6900035f51cc72c336bf70abf88b4143
+[2.1.8]: https://github.com/wix/eslint-plugin-lodash/compare/v2.1.8...v2.1.7
 
 ## [2.1.7] - 2016-10-27
 ### Fixed

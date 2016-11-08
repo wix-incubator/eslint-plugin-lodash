@@ -99,16 +99,6 @@ function getLodashMethodCallExpVisitor(lodashContext, reporter) {
     }
 }
 
-/**
- * Returns whether the node's method call supports using shorthands in the specified version
- * @param {Number} version
- * @param {object} node
- * @returns {boolean}
- */
-function methodSupportsShorthand(version, method) {
-    return _.includes(methodDataUtil.getShorthandMethods(version), method)
-}
-
 function isLodashCallToMethod(node, method, lodashContext) {
     return lodashContext.isLodashCall(node) && isCallToMethod(node, lodashContext.version, method)
 }
@@ -133,7 +123,7 @@ function getShorthandVisitors(context, checks, messages) {
     const visitors = lodashContext.getImportVisitors()
     visitors.CallExpression = getLodashMethodCallExpVisitor(lodashContext, {
         always(node, iteratee, {method, version}) {
-            if (methodSupportsShorthand(version, method) && checks.canUseShorthand(iteratee, lodashContext)) {
+            if (methodDataUtil.methodSupportsShorthand(version, method) && checks.canUseShorthand(iteratee, lodashContext)) {
                 context.report(iteratee, messages.always)
             }
         },
@@ -163,7 +153,6 @@ module.exports = {
     getIsTypeMethod,
     isNativeCollectionMethodCall,
     getLodashMethodCallExpVisitor,
-    methodSupportsShorthand,
     isCallToLodashMethod,
     getShorthandVisitors,
     getLodashMethodVisitors,

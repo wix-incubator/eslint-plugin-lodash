@@ -3,6 +3,7 @@
 const _ = require('lodash')
 
 const _methodDataByVersion = {}
+const _shorthandMethodsByVersion = {}
 function getMethodData(version) {
     _methodDataByVersion[version] = _methodDataByVersion[version] || require(`./methodDataByVersion/${version}`)
     return _methodDataByVersion[version]
@@ -64,6 +65,19 @@ function getCollectionMethods(version) {
  */
 function getShorthandMethods(version) {
     return expandAliases(version, getMethodData(version).shorthand)
+}
+/**
+ * Returns whether the node's method call supports using shorthands in the specified version
+ * @param {Number} version
+ * @param {string} method
+ * @returns {boolean}
+ */
+function methodSupportsShorthand(version, method) {
+    if (!_shorthandMethodsByVersion[version]) {
+        const methods = getShorthandMethods(version)
+        _shorthandMethodsByVersion[version] = _.reduce(methods, (obj, key) => _.assign(obj, {[key]: true}), {})
+    }
+    return _shorthandMethodsByVersion[version][method]
 }
 
 /**
@@ -140,6 +154,7 @@ module.exports = {
     getAliasesByVersion,
     getChainableAliases,
     getShorthandMethods,
+    methodSupportsShorthand,
     getWrapperMethods,
     getCollectionMethods,
     getMainAlias,

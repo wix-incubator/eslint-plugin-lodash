@@ -19,8 +19,11 @@ module.exports = {
     },
 
     create(context) {
-        const [get, matches, overSome] = ['get', 'matches', 'overSome'].map(m => require(`lodash/${m}`))
-        const {methodSupportsShorthand, getShorthandVisitors} = require('../util/lodashUtil')
+        const get = require('lodash/get')
+        const matches = require('lodash/matches')
+        const overSome = require('lodash/overSome')
+        const {methodSupportsShorthand} = require('../util/methodDataUtil')
+        const {getShorthandVisitors} = require('../util/lodashUtil')
         const {getFirstParamName, getValueReturnedInFirstStatement} = require('../util/astUtil')
         const settings = require('../util/settingsUtil').getSettings(context)
 

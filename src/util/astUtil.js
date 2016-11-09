@@ -22,14 +22,17 @@ const getMethodName = _.property(['callee', 'property', 'name'])
  */
 const isMethodCall = _.matches({type: 'CallExpression', callee: {type: 'MemberExpression'}})
 
+const isFunctionExpression = _.overSome(
+    _.matchesProperty('type', 'FunctionExpression'),
+    _.matchesProperty('type', 'FunctionDeclaration')
+)
 /**
  * Returns whether the node is a function declaration that has a block
  * @param {Object} node
  * @returns {boolean}
  */
 const isFunctionDefinitionWithBlock = _.overSome(
-    _.matchesProperty('type', 'FunctionExpression'),
-    _.matchesProperty('type', 'FunctionDeclaration'),
+    isFunctionExpression,
     _.matches({type: 'ArrowFunctionExpression', body: {type: 'BlockStatement'}})
 )
 
@@ -335,6 +338,7 @@ module.exports = {
     comparisonType,
     getExpressionComparedToInt,
     isIndexOfCall,
+    isFunctionExpression,
     isFunctionDefinitionWithBlock,
     collectParameterValues
 }

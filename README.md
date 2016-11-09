@@ -71,6 +71,7 @@ The following rules point out areas where you might have made mistakes.
 * [collection-return](docs/rules/collection-return.md): Always return a value in iteratees of Lodash collection methods that aren't `forEach`.
 * [no-double-unwrap](docs/rules/no-double-unwrap.md): Do not use `.value()` on chains that have already ended (e.g. with `max()` or `reduce()`) (fixable)
 * [no-extra-args](docs/rules/no-extra-args.md): Do not use superfluous arguments on Lodash methods with a specified arity.
+* [no-unbound-this](docs/rules/no-unbound-this.md): Do not use `this` inside callbacks without binding them.
 * [unwrap](docs/rules/unwrap.md): Prevent chaining without evaluation via `value()` or non-chainable methods like `max()`.,
 
 ### Stylistic Issues

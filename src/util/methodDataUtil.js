@@ -4,6 +4,7 @@ const _ = require('lodash')
 
 const _methodDataByVersion = {}
 const _shorthandMethodsByVersion = {}
+const _expandedAliasesByVersion = {}
 function getMethodData(version) {
     _methodDataByVersion[version] = _methodDataByVersion[version] || require(`./methodDataByVersion/${version}`)
     return _methodDataByVersion[version]
@@ -15,10 +16,14 @@ function getMethodData(version) {
  * @returns {string[]}
  */
 function expandAlias(version, method) {
-    const methodData = getMethodData(version)
-    const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
-    const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
-    return [method, ...aliases, ...wrapperAliases]
+    if (!_.get(_expandedAliasesByVersion, [version, method])) {
+        const methodData = getMethodData(version)
+        const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
+        const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
+        _.set(_expandedAliasesByVersion, [version, method], [method, ...aliases, ...wrapperAliases])
+    }
+    return _expandedAliasesByVersion[version][method]
+
 }
 
 /**

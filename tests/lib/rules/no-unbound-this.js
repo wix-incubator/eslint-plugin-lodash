@@ -19,6 +19,7 @@ ruleTester.run('no-unbound-this', rule, {
         'var y = _.map(x, function(t) {return this.f(t)}.bind(this))',
         'var y = _.map(x, t => this.f(t))',
         'var y = _.invokeMap(x, prop)',
+        'var y = _.invokeMap(x, function () {this.f()})',
         'var y = _.map(x, prop)',
         'var y = _.map(x, function(t) { function f(i) {this.g(i)} return f.apply(z, t)})'
     ].map(withDefaultPragma),

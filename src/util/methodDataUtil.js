@@ -2,29 +2,20 @@
 
 const _ = require('lodash')
 
-const _methodDataByVersion = {}
-const _shorthandMethodsByVersion = {}
-const _expandedAliasesByVersion = {}
-function getMethodData(version) {
-    _methodDataByVersion[version] = _methodDataByVersion[version] || require(`./methodDataByVersion/${version}`)
-    return _methodDataByVersion[version]
-}
+const getMethodData = _.memoize(version => require(`./methodDataByVersion/${version}`))
+
 /**
  * Gets a major version number and method name and returns all its aliases including itself.
  * @param {Number} version
  * @param {string} method
  * @returns {string[]}
  */
-function expandAlias(version, method) {
-    if (!_.get(_expandedAliasesByVersion, [version, method])) {
-        const methodData = getMethodData(version)
-        const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
-        const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
-        _.set(_expandedAliasesByVersion, [version, method], [method, ...aliases, ...wrapperAliases])
-    }
-    return _expandedAliasesByVersion[version][method]
-
-}
+const expandAlias = _.memoize((version, method) => {
+    const methodData = getMethodData(version)
+    const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
+    const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
+    return [method, ...aliases, ...wrapperAliases]
+}, (version, method) => `${version}-${method}`)
 
 /**
  * Gets a major version number and a list of methods and returns a list of methods and all their aliases
@@ -64,13 +55,15 @@ function getCollectionMethods(version) {
 }
 
 /**
- * Gets a list of methods that support all shorthands per version
+ * Gets a lookup table of methods that support all shorthands per version
  * @param {Number} version
- * @returns {[string]}
+ * @returns {object}
  */
-function getShorthandMethods(version) {
-    return expandAliases(version, getMethodData(version).shorthand)
-}
+const getShorthandMethodsLookup = _.memoize(version => {
+    const methods =  expandAliases(version, getMethodData(version).shorthand)
+    return _.reduce(methods, (obj, key) => _.assign(obj, {[key]: true}), {})
+})
+
 /**
  * Returns whether the node's method call supports using shorthands in the specified version
  * @param {Number} version
@@ -78,11 +71,7 @@ function getShorthandMethods(version) {
  * @returns {boolean}
  */
 function methodSupportsShorthand(version, method) {
-    if (!_shorthandMethodsByVersion[version]) {
-        const methods = getShorthandMethods(version)
-        _shorthandMethodsByVersion[version] = _.reduce(methods, (obj, key) => _.assign(obj, {[key]: true}), {})
-    }
-    return _shorthandMethodsByVersion[version][method]
+    return getShorthandMethodsLookup(version)[method]
 }
 
 /**
@@ -158,7 +147,6 @@ module.exports = {
     isAliasOfMethod,
     getAliasesByVersion,
     getChainableAliases,
-    getShorthandMethods,
     methodSupportsShorthand,
     getWrapperMethods,
     getCollectionMethods,

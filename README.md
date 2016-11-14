@@ -1,7 +1,7 @@
 ESLint-Plugin-Lodash
 ===================
 
-[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Dependencies][deps-image]][deps-url]
+[![Maintenance Status][status-image]][status-url] [![NPM version][npm-image]][npm-url] [![Dependencies][deps-image]][deps-url] [![Build Status][build-image]][build-url]
 
 Lodash-specific linting rules for ESLint.
 # News
@@ -127,3 +127,6 @@ ESLint-plugin-lodash is licensed under the [MIT License](http://www.opensource.o
 
 [status-url]: https://github.com/wix/eslint-plugin-lodash/pulse
 [status-image]: http://img.shields.io/badge/status-maintained-brightgreen.svg?style=flat-square
+
+[build-image]: https://travis-ci.org/wix/eslint-plugin-lodash.svg?branch=master
+[build-url]: https://travis-ci.org/wix/eslint-plugin-lodash

@@ -5,7 +5,7 @@
   "description": "Lodash specific linting rules for ESLint",
   "main": "lib/index.js",
   "scripts": {
-    "coveralls": "cat ./reports/coverage/lcov.info | coveralls",
+    "coveralls": "nyc report --reporter=text.lcov | coveralls",
     "lint": "eslint ./",
     "test": "npm run lint && npm run unit-test",
     "unit-test": "cross-env NODE_ENV=test nyc mocha tests/**/*.js --reporter=dot",

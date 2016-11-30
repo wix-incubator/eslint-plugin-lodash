@@ -48,7 +48,7 @@ module.exports = {
         const callExpressionVisitors = {
             always: node => {
                 if (isNestedNLevels(node, ruleDepth)) {
-                    context.report(getCaller(node.arguments[0]), 'Prefer chaining to composition')
+                    context.report(node, 'Prefer chaining to composition')
                 } else if (lodashContext.isLodashChainStart(node)) {
                     const firstCall = node.parent.parent
                     if (isMethodCall(firstCall) && (isEndOfChain(firstCall) || isBeforeChainBreaker(firstCall))) {

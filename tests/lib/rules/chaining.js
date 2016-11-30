@@ -37,8 +37,9 @@ const testCases = {
     },
     invalid: {
         always: [
-            'var x = _.map(_.filter(_.uniq(a), g), f)'
-        ].map(code => ({code, options: ['always']})).map(fromMessage(messages.always)),
+            'var x = _.map(_.filter(_.uniq(a), g), f)',
+            'import _map from "lodash/map"; import _filter from "lodash/filter"; var x = _map(_filter(_.uniq(a), g), f)'
+        ].map(code => ({code, options: ['always'], parserOptions: {sourceType: 'module'}})).map(fromMessage(messages.always)),
         single: [
             'var x = _(a).map(f).value()',
             'var x = _(a).reduce(g, {})'

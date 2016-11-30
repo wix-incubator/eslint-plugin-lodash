@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.1...HEAD
+
+## [2.2.1] - 2016-11-30
+### Fixed
+- Fixed crash in `chaining` rule. ([`ccdae5`][ccdae5])
+
+[ccdae5]: https://github.com/wix/eslint-plugin-lodash/commit/ccdae593a9e91b8300890cc31a10d3bdd73c05b7
+[2.2.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.1...v2.2.0
 
 ## [2.2.0] - 2016-11-09
 ### Added

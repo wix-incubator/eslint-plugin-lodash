@@ -9,6 +9,13 @@ function getNameFromCjsRequire(init) {
         return init.arguments[0].value
     }
 }
+
+const isFullLodashImport = str => /^lodash(-es)?$/.test(str)
+const getMethodImportFromName = str => {
+    const match = /^lodash(-es)?\/(\w+)$/.exec(str)
+    return match && match[2]
+}
+
 /* Class representing lodash data for a given context */
 module.exports = class {
     /**
@@ -29,7 +36,7 @@ module.exports = class {
         const self = this
         return {
             ImportDeclaration({source, specifiers}) {
-                if (source.value === 'lodash') {
+                if (isFullLodashImport(source.value)) {
                     specifiers.forEach(spec => {
                         switch (spec.type) {
                             case 'ImportNamespaceSpecifier':
@@ -42,15 +49,15 @@ module.exports = class {
                         }
                     })
                 } else {
-                    const match = /^lodash\/(\w+)/.exec(source.value)
-                    if (match) {
-                        self.methods[specifiers[0].local.name] = match[1]
+                    const method = getMethodImportFromName(source.value)
+                    if (method) {
+                        self.methods[specifiers[0].local.name] = method
                     }
                 }
             },
             VariableDeclarator({init, id}) {
                 const required = getNameFromCjsRequire(init)
-                if (required === 'lodash') {
+                if (isFullLodashImport(required)) {
                     if (id.type === 'Identifier') {
                         self.general[id.name] = true
                     } else if (id.type === 'ObjectPattern') {
@@ -59,9 +66,9 @@ module.exports = class {
                         })
                     }
                 } else if (required) {
-                    const match = /^lodash\/(\w+)/.exec(required)
-                    if (match) {
-                        self.methods[id.name] = match[1]
+                    const method = getMethodImportFromName(required)
+                    if (method) {
+                        self.methods[id.name] = method
                     }
                 }
             }

@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.2...HEAD
+
+## [2.2.2] - 2016-12-01
+### Added
+- Added support for `lodash-es`. ([`d9caeb0`][d9caeb0])
+
+[d9caeb0]: https://github.com/wix/eslint-plugin-lodash/commit/d9caeb0875b6ca6c9d5c95415cd507aa6a99a7a4
+[2.2.2]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.2...v2.2.1
 
 ## [2.2.1] - 2016-11-30
 ### Fixed

@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.3...HEAD
+
+## [2.2.3] - 2016-12-08
+### Fixed
+- Fixed false positive in `matches-prop-shorthand` ([`5373377`][5373377])
+
+[5373377]: https://github.com/wix/eslint-plugin-lodash/commit/5373377f5e31284e0df08427a9c6f6ca9c5ae422
+[2.2.3]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.3...v2.2.2
 
 ## [2.2.2] - 2016-12-01
 ### Added

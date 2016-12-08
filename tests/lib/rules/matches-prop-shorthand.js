@@ -24,6 +24,7 @@ ruleTester.run('matches-prop-shorthand', rule, {
         'var r = _.findIndex(this.packages, {name: name});',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3; });',
+        'var different = _.reject(A, x => x.a === x.b)',
         {
             code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
             options: ['never']

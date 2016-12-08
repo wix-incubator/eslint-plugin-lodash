@@ -304,11 +304,17 @@ describe('astUtil', () => {
                     done()
                 })
         })
-
         it('should return true if the comparison is to a literal and onlyLiterals is true', done => {
             traverse('a.b.c.d === 1')
                 .get('BinaryExpression', node => {
                     assert(astUtil.isEqEqEqToMemberOf(node, 'a', {onlyLiterals: true}))
+                    done()
+                })
+        })
+        it('should return false if both sides are a member of the same object', done => {
+            traverse('a.x === a.y')
+                .get('BinaryExpression', node => {
+                    assert(!astUtil.isEqEqEqToMemberOf(node, 'a'))
                     done()
                 })
         })

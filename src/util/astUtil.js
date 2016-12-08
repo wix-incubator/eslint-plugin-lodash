@@ -137,10 +137,11 @@ function isLiteral(node) {
  * @returns {boolean|undefined}
  */
 function isBinaryExpWithMemberOf(operator, exp, objectName, {maxLength, allowComputed, onlyLiterals} = {}) {
-    return exp && exp.type === 'BinaryExpression' && exp.operator === operator &&
-        (isMemberExpOf(exp.left, objectName, {maxLength, allowComputed}) ||
-        isMemberExpOf(exp.right, objectName, {maxLength, allowComputed})) &&
-        (!onlyLiterals || (isLiteral(exp.left) || isLiteral(exp.right)))
+    if (!_.isMatch(exp, {type: 'BinaryExpression', operator})) {
+        return false
+    }
+    const [left, right] = [exp.left, exp.right].map(side => isMemberExpOf(side, objectName, {maxLength, allowComputed}))
+    return (left === !right) && (!onlyLiterals || isLiteral(exp.left) || isLiteral(exp.right))
 }
 
 

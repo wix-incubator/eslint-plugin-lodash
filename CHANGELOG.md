@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.4...HEAD
+
+## [2.2.4] - 2016-12-15
+### Fixed
+- Fixed false positive in `prefer-invoke-map` ([`5a8067d`][5a8067d])
+
+[5a8067d]: https://github.com/wix/eslint-plugin-lodash/commit/5a8067de6a9b1f646c6b536d15c5735a29622092
+[2.2.4]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.4...v2.2.3
 
 ## [2.2.3] - 2016-12-08
 ### Fixed

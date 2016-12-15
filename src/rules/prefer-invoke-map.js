@@ -17,9 +17,14 @@ module.exports = {
         const {isCallFromObject, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')
         const {isAliasOfMethod} = require('../util/methodDataUtil')
 
+        function isOnlyUsedForObject(func, firstParamName) {
+            const declaredVariables = context.eslint.getDeclaredVariables(func)
+            return declaredVariables.every(variable => variable.references.length === 0 || (variable.name === firstParamName && variable.references.length === 1))
+        }
+
         function isFunctionMethodCallOfParam(func) {
             const firstParamName = getFirstParamName(func)
-            return firstParamName && isCallFromObject(getValueReturnedInFirstStatement(func), firstParamName)
+            return firstParamName && isCallFromObject(getValueReturnedInFirstStatement(func), firstParamName) && isOnlyUsedForObject(func, firstParamName)
         }
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {

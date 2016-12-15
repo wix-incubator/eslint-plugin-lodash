@@ -19,7 +19,8 @@ ruleTester.run('prefer-invoke-map', rule, {
     valid: [
         'var x = _.invokeMap(arr, "f")',
         'var x = _.invokeMap(arr, "split", " ")',
-        'const x = _.map(arr, ({a}) => f(a))'
+        'const x = _.map(arr, ({a}) => f(a))',
+        'var t = _.map(xs, (x, i) => x.f(ys[i]))'
     ].map(withDefaultPragma),
     invalid: [
         '_.map(a, function(x) {return x.f()});',

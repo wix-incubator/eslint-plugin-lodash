@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.5...HEAD
+
+## [2.2.5] - 2016-12-20
+### Fixed
+- Removed `no-unbound-this` from the `v3` config ([`5d62f9f`][5d62f9f])
+
+[5d62f9f]: https://github.com/wix/eslint-plugin-lodash/commit/5d62f9fd145b2ae2bd6f00d9567afbfe1f496594
+[2.2.5]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.5...v2.2.4
 
 ## [2.2.4] - 2016-12-15
 ### Fixed

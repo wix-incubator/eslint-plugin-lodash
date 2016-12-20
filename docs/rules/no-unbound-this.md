@@ -39,3 +39,6 @@ var y = _.map(x, function(t) {
 })
  
 ```
+
+## When Not To Use It
+##### This rule is only relevant for Lodash 4. If you don't use Lodash 4, you should not use this rule.

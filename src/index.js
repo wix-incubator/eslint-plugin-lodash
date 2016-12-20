@@ -69,7 +69,6 @@ module.exports = {
                 'lodash/no-commit': 2,
                 'lodash/no-double-unwrap': 2,
                 'lodash/no-extra-args': 2,
-                'lodash/no-unbound-this': 2,
                 'lodash/path-style': [2, 'string'],
 
                 'lodash/prefer-compact': 2,

@@ -11,7 +11,7 @@
 //------------------------------------------------------------------------------
 module.exports = {
     create(context) {
-        const {isChainBreaker, getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {isChainBreaker, getLodashMethodVisitors, isCallToMethod} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')
         const {getCollectionMethods, isAliasOfMethod, getSideEffectIterationMethods} = require('../util/methodDataUtil')
         const includes = require('lodash/includes')
@@ -29,10 +29,14 @@ module.exports = {
             return includes(getSideEffectIterationMethods(version), method)
         }
 
+        function isParentCommit(node, callType, version) {
+            return callType === 'chained' && isCallToMethod(node.parent.parent, version, 'commit')
+        }
+
         return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
             if (isPureLodashCollectionMethod(method, version) && !parentUsesValue(node, callType, version)) {
                 context.report(node, `Use value returned from _.${method}`)
-            } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType, version)) {
+            } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType, version) && !isParentCommit(node, callType, version)) {
                 context.report(node, `Do not use value returned from _.${getMethodName(node)}`)
             }
         })

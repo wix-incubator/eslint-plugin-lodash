@@ -21,7 +21,11 @@ ruleTester.run('collection-method-value', rule, {
         'x = _(arr).filter(p).map(q).value()',
         '_(arr).filter(p).forEach(g)',
         {
-            code: '_.remove(arr, f)', settings: {lodash: {version: 3}}
+            code: '_.remove(arr, f)',
+            settings: {lodash: {version: 3}}
+        }, {
+           code: '_(x).forEach(f).commit()',
+           settings: {lodash: {version: 3}}
         }
     ].map(withDefaultPragma),
     invalid: [

@@ -8,7 +8,17 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.2.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.0...HEAD
+
+## [2.3.0] - 2017-01-16
+### Added
+- Added rule `import-scope` ([`def5067`][def5067])
+### Fixed
+- Fixed case in `v3` where `collection-method-value` warns when using `commit` ([`38394d4`][38394d4])
+
+[def5067]: https://github.com/wix/eslint-plugin-lodash/commit/def50672f52a372dd89d219f94deb647faddf0ef
+[38394d4]: https://github.com/wix/eslint-plugin-lodash/commit/38394d4c5a32f69a575362a30786b7befd7829d4
+[2.3.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.0...v2.2.5
 
 ## [2.2.5] - 2016-12-20
 ### Fixed

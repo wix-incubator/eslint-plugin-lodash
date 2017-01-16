@@ -80,6 +80,7 @@ These rules are purely matters of style and are quite subjective.
 * [chaining](docs/rules/chaining.md): Prefer a either a Lodash chain or nested Lodash calls
 * [consistent-compose](docs/rules/consistent-compose.md): Enforce a specific function composition direction: `flow` or `flowRight`.
 * [identity-shorthand](docs/rules/identity-shorthand.md): Prefer identity shorthand syntax
+* [import-scope](docs/rules/import-scope.md): Prefer a specific import scope (e.g. `lodash/map` vs `lodash`)
 * [matches-prop-shorthand](docs/rules/matches-prop-shorthand.md): Prefer matches property shorthand syntax
 * [matches-shorthand](docs/rules/matches-shorthand.md): Prefer matches shorthand syntax
 * [no-commit](docs/rules/no-commit.md): Do not use `.commit()` on chains that should end with `.value()`

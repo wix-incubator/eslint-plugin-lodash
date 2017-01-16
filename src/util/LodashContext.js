@@ -1,20 +1,8 @@
 'use strict'
 
-const get = require('lodash/get')
 const {getSettings} = require('./settingsUtil')
 const {isMethodCall, isCallFromObject, getCaller, getMethodName} = require('./astUtil')
-
-function getNameFromCjsRequire(init) {
-    if (get(init, 'callee.name') === 'require' && get(init, 'arguments.length') === 1 && init.arguments[0].type === 'Literal') {
-        return init.arguments[0].value
-    }
-}
-
-const isFullLodashImport = str => /^lodash(-es)?$/.test(str)
-const getMethodImportFromName = str => {
-    const match = /^lodash(-es)?\/(\w+)$/.exec(str)
-    return match && match[2]
-}
+const {getNameFromCjsRequire, isFullLodashImport, getMethodImportFromName} = require('./importUtil')
 
 /* Class representing lodash data for a given context */
 module.exports = class {

@@ -12,6 +12,7 @@ const recommended = {
         'lodash/collection-return': 2,
         'lodash/consistent-compose': [2, "flow"],
         'lodash/identity-shorthand': [2, 'always'],
+        'lodash/import-scope': [2],
         'lodash/matches-prop-shorthand': [2, 'always'],
         'lodash/matches-shorthand': [2, 'always', 3],
         'lodash/no-commit': 2,
@@ -48,7 +49,12 @@ module.exports = {
     rules: _.zipObject(rules, rules.map(rule => require(`./rules/${rule}`))),
     configs: {
         recommended,
-        canonical: _.assign({settings: {lodash: {pragma: '_'}}}, recommended),
+        canonical: _.defaultsDeep({
+            settings: {lodash: {pragma: '_'}},
+            rules: {
+                'lodash/import-scope': [2, 'full']
+            }
+        }, recommended),
         v3: {
             settings: {
                 lodash: {
@@ -63,6 +69,7 @@ module.exports = {
                 'lodash/collection-method-value': 2,
                 'lodash/collection-return': 2,
                 'lodash/consistent-compose': [2, "flow"],
+                'lodash/import-scope': [2, 'full'],
                 'lodash/identity-shorthand': [2, 'always'],
                 'lodash/matches-prop-shorthand': [2, 'always'],
                 'lodash/matches-shorthand': [2, 'always', 3],

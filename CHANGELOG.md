@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.1...HEAD
+
+## [2.3.1] - 2017-01-17
+### Fixed
+- Allowed asterisk import in `import-scope` in `full` config ([`4c0335e`][4c0335e])
+
+[4c0335e]: https://github.com/wix/eslint-plugin-lodash/commit/4c0335ec3b5d593b032a7876105bd2cacf2737c9
+[2.3.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.1...v2.3.0
 
 ## [2.3.0] - 2017-01-16
 ### Added

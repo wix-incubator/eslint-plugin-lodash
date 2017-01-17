@@ -12,20 +12,22 @@
 
 const {isFullLodashImport, getNameFromCjsRequire, getMethodImportFromName} = require('../util/importUtil')
 const every = require('lodash/every')
+const includes = require('lodash/includes')
 
 const messages = {
     method: 'Do not import from the full Lodash module.',
     member: 'Import members from the full Lodash module.',
-    full: 'Use the full Lodash module'
+    full: 'Use the full Lodash module.'
 }
 
 const importNodeTypes = {
-    method: 'ImportDefaultSpecifier',
-    member: 'ImportSpecifier',
-    full: 'ImportDefaultSpecifier'
+    method: ['ImportDefaultSpecifier'],
+    member: ['ImportSpecifier'],
+    full: ['ImportDefaultSpecifier', 'ImportNamespaceSpecifier']
 }
 
 const isMethodImport = name => Boolean(getMethodImportFromName(name))
+const allImportsAreOfType = (node, types) => every(node.specifiers, specifier => includes(types, specifier.type))
 
 module.exports = {
     meta: {
@@ -42,8 +44,7 @@ module.exports = {
                     if (importType === 'method') {
                         context.report(node, messages.method)
                     } else {
-                        const type = importNodeTypes[importType]
-                        if (!every(node.specifiers, {type})) {
+                        if (!allImportsAreOfType(node, importNodeTypes[importType])) {
                             context.report(node, messages[importType])
                         }
                     }

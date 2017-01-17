@@ -17,7 +17,7 @@ const {fromMessage, fromOptions} = require('../testUtil/optionsUtil')
 const messages = {
     method: 'Do not import from the full Lodash module.',
     member: 'Import members from the full Lodash module.',
-    full: 'Use the full Lodash module'
+    full: 'Use the full Lodash module.'
 }
 
 const withOption = option => fromOptions({options: [option]})
@@ -55,6 +55,7 @@ const testCases = {
             ],
             import: [
                 "import _ from 'lodash'",
+                "import * as _ from 'lodash'",
                 "import {someMember} from 'some-other-module'"
             ].map(fromModule)
         }

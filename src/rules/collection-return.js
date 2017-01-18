@@ -25,7 +25,7 @@ module.exports = {
                 collectionMethods = collectionMethods || new Set(getCollectionMethods(version))
                 if (collectionMethods.has(method) && funcInfos.has(iteratee)) {
                     const {hasReturn} = funcInfos.get(iteratee)
-                    if (isFunctionDefinitionWithBlock(iteratee) && !hasReturn) {
+                    if (isFunctionDefinitionWithBlock(iteratee) && !hasReturn && !iteratee.async) {
                         context.report(node, `Do not use _.${method} without returning a value`)
                     }
                 }

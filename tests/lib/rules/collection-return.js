@@ -22,7 +22,8 @@ ruleTester.run('collection-return', rule, {
         '_(a).transform(function(acc, item) {acc[item] = f(item);}, {}).mapValues(g).value()',
         'function x(a) {return a;}',
         'y = _.reject(x, p => p); _.forEach(t, s => {}).value();',
-        '_.map(a, x => f(x).then(() => {g()}))'
+        '_.map(a, x => f(x).then(() => {g()}))',
+        {code: '_.map(x, async t => {})', parserOptions: {ecmaVersion: 8}}
     ].map(withDefaultPragma),
     invalid: [{
         code: '_.map(arr, function(a) {console.log(a)})',

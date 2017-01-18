@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.2...HEAD
+
+## [2.3.2] - 2017-01-18
+### Fixed
+- Allowed async functions in `collection-return` ([`9d0a082`][9d0a082])
+
+[9d0a082]: https://github.com/wix/eslint-plugin-lodash/commit/9d0a082b7fca98e89f137f927fba13bd1005516e
+[2.3.2]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.2...v2.3.1
+
 
 ## [2.3.1] - 2017-01-17
 ### Fixed

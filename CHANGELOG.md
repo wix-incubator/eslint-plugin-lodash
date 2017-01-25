@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.3...HEAD
+
+## [2.3.3] - 2017-01-25
+### Fixed
+- Added missing shorthand functions for shorthand rules ([`1c290d0`][1c290d0])
+
+[1c290d0]: https://github.com/wix/eslint-plugin-lodash/commit/1c290d0d6fb754a25357bdb0ba6b5a19da366de1
+[2.3.3]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.3...v2.3.2
 
 ## [2.3.2] - 2017-01-18
 ### Fixed

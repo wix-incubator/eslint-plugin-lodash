@@ -20,7 +20,9 @@ ruleTester.run('prefer-noop', rule, {
         'x = function() { return 2}',
         'x = function(x) {return x}',
         'x = a => a.b',
-        'class A { m() {}}'
+        'class A { m() {}}',
+        'var x = function * () {}',
+        {code: 'var x = async function () {}', parserOptions: {ecmaVersion: 8}}
     ].map(withDefaultPragma),
     invalid: [
         'functionWithCb(function() {})',

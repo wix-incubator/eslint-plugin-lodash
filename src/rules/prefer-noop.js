@@ -15,7 +15,7 @@ module.exports = {
         const {getFirstFunctionLine} = require('../util/astUtil')
 
         function reportIfEmptyFunction(node) {
-            if (!getFirstFunctionLine(node) && node.parent.type !== 'MethodDefinition') {
+            if (!getFirstFunctionLine(node) && node.parent.type !== 'MethodDefinition' && !node.generator && !node.async) {
                 context.report(node, 'Prefer _.noop over an empty function')
             }
         }

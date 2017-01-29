@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.4...HEAD
+
+## [2.3.4] - 2017-01-29
+### Fixed
+- Fixed `prefer-noop` to stop reporting on async and generator functions ([`7d194cf`][7d194cf])
+
+[7d194cf]: https://github.com/wix/eslint-plugin-lodash/commit/44ebdca9fbd529b9bad6be1848feed1df
+[2.3.4]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.4...v2.3.3
 
 ## [2.3.3] - 2017-01-25
 ### Fixed

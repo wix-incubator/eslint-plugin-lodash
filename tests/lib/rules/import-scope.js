@@ -29,34 +29,55 @@ const testCases = {
         method: {
             require: [
                 "const map = require('lodash/map')",
-                "const someOtherModule = require('some-other-module')"
+                "const someOtherModule = require('some-other-module')",
+                "const fpMap = require('lodash/fp/map')",
+                "const fp = require('lodash/fp')",
+                "const {map} = require('lodash/fp')"
             ],
             import: [
                 "import map from 'lodash/map'",
-                "import someOtherModule from 'some-other-module'"
+                "import someOtherModule from 'some-other-module'",
+                "import fpMap from 'lodash/fp/map'",
+                "import fp from 'lodash/fp'",
+                "import {map} from 'lodash/fp'",
+                "import {map as fpMap} from 'lodash/fp'"
             ].map(fromModule)
         },
         member: {
             require: [
                 "const {map} = require('lodash')",
                 "const {map: m} = require('lodash')",
-                "const someOtherModule = require('some-other-module')"
+                "const someOtherModule = require('some-other-module')",
+                "const fpMap = require('lodash/fp/map')",
+                "const fp = require('lodash/fp')",
+                "const {map} = require('lodash/fp')"
             ],
             import: [
                 "import {map} from 'lodash'",
                 "import {map as m} from 'lodash'",
-                "import someOtherModule from 'some-other-module'"
+                "import someOtherModule from 'some-other-module'",
+                "import fpMap from 'lodash/fp/map'",
+                "import fp from 'lodash/fp'",
+                "import {map} from 'lodash/fp'",
+                "import {map as fpMap} from 'lodash/fp'"
             ].map(fromModule)
         },
         full: {
             require: [
                 "const _ = require('lodash')",
-                "const {someMember} = require('some-other-module')"
+                "const {someMember} = require('some-other-module')",
+                "const fpMap = require('lodash/fp/map')",
+                "const fp = require('lodash/fp')",
+                "const {map} = require('lodash/fp')"
             ],
             import: [
                 "import _ from 'lodash'",
                 "import * as _ from 'lodash'",
-                "import {someMember} from 'some-other-module'"
+                "import {someMember} from 'some-other-module'",
+                "import fpMap from 'lodash/fp/map'",
+                "import fp from 'lodash/fp'",
+                "import {map} from 'lodash/fp'",
+                "import {map as fpMap} from 'lodash/fp'"
             ].map(fromModule)
         }
     },

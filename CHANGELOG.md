@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.5...HEAD
+
+## [2.3.5] - 2017-02-08
+### Fixed
+- Fixed `import-scope` to stop warning against `lodash/fp` ([`c569b8c`][c569b8c])
+
+[c569b8c]: https://github.com/wix/eslint-plugin-lodash/commit/c569b8c8ed50031a7e4b78b06708bd70f008d7fe
+[2.3.5]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.5...v2.3.4
 
 ## [2.3.4] - 2017-01-29
 ### Fixed

@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.5...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.6...HEAD
+
+## [2.3.6] - 2017-03-15
+### Fixed
+- Added ES2015 string methods to `prefer-lodash-method` ([`6aa51cb`][6aa51cb])
+
+[6aa51cb]: https://github.com/wix/eslint-plugin-lodash/commit/6aa51cbbe192233e25527c95e44949b02088c96a
+[2.3.5]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.6...v2.3.5
 
 ## [2.3.5] - 2017-02-08
 ### Fixed

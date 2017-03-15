@@ -53,8 +53,40 @@ ruleTester.run('prefer-lodash-method', rule, {
         code: 'var x = Object.create(foo)',
         errors: [{message: "Prefer '_.create' over the native function."}]
     }, {
+        code: 'var x = fn().endsWith("something")',
+        errors: [{message: "Prefer '_.endsWith' over the native function."}]
+    }, {
+        code: 'var x = str.endsWith("something")',
+        errors: [{message: "Prefer '_.endsWith' over the native function."}]
+    }, {
+        code: 'var x = str.includes("something")',
+        errors: [{message: "Prefer '_.includes' over the native function."}]
+    }, {
+        code: 'var x = str.padEnd(42)',
+        errors: [{message: "Prefer '_.padEnd' over the native function."}]
+    }, {
+        code: 'var x = str.padStart(42, "foo")',
+        errors: [{message: "Prefer '_.padStart' over the native function."}]
+    }, {
+        code: 'var x = str.repeat(42)',
+        errors: [{message: "Prefer '_.repeat' over the native function."}]
+    }, {
+        code: 'var x = str.replace("foo", "bar")',
+        errors: [{message: "Prefer '_.replace' over the native function."}]
+    }, {
+        code: 'var x = str.split("-")',
+        errors: [{message: "Prefer '_.split' over the native function."}]
+    }, {
         code: 'var x = str.startsWith("something")',
         errors: [{message: "Prefer '_.startsWith' over the native function."}]
-
+    }, {
+        code: 'var x = str.toUpperCase()',
+        errors: [{message: "Prefer '_.toUpper' over the native function."}]
+    }, {
+        code: 'var x = str.toLowerCase()',
+        errors: [{message: "Prefer '_.toLower' over the native function."}]
+    }, {
+        code: 'var x = str.trim()',
+        errors: [{message: "Prefer '_.trim' over the native function."}]
     }].map(withDefaultPragma)
 })

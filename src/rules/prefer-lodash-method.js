@@ -32,6 +32,7 @@ module.exports = {
 
         const {getLodashContext, isNativeCollectionMethodCall, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
+        const keys = require('lodash/keys')
         const get = require('lodash/get')
         const includes = require('lodash/includes')
         const matches = require('lodash/matches')
@@ -41,6 +42,20 @@ module.exports = {
         const ignoredMethods = get(context, ['options', 0, 'ignoreMethods'], [])
         const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
         const usingLodash = new Set()
+
+        const nativeStringMap = {
+          endsWith: 'endsWith',
+          includes: 'includes',
+          padEnd: 'padEnd',
+          padStart: 'padStart',
+          repeat: 'repeat',
+          replace: 'replace',
+          split: 'split',
+          startsWith: 'startsWith',
+          toLowerCase: 'toLower',
+          toUpperCase: 'toUpper',
+          trim: 'trim'
+        }
 
         const lodashContext = getLodashContext(context)
 
@@ -59,7 +74,7 @@ module.exports = {
         }
 
         function isNativeStringMethodCall(node) {
-            return includes(['endsWith', 'includes', 'padEnd', 'padStart', 'startsWith'], getMethodName(node))
+            return includes(keys(nativeStringMap), getMethodName(node))
         }
 
         function canUseLodash(node) {
@@ -88,7 +103,11 @@ module.exports = {
             }),
             'CallExpression:exit'(node) {
                 if (!usingLodash.has(node) && !shouldIgnore(node) && canUseLodash(node)) {
-                    context.report(node, `Prefer '_.${getMethodName(node)}' over the native function.`)
+                    let lodashMethodName = getMethodName(node)
+                    if (isNativeStringMethodCall(node)) {
+                      lodashMethodName = nativeStringMap[lodashMethodName]
+                    }
+                    context.report(node, `Prefer '_.${lodashMethodName}' over the native function.`)
                 }
             }
         }, lodashContext.getImportVisitors())

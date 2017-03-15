@@ -11,7 +11,7 @@ This rule takes one argument - an optional options object. This object can have 
 - `ignoreObjects`: contains an array of regular expressions for objects that should not be reported on
 
 
-Examples: 
+Examples:
 
 If you do not wish to use `_.keys` but prefer `Object.keys`, the config would be:
 ```json
@@ -58,6 +58,8 @@ The following patterns are considered warnings:
 ```js
 
 var b = a.map(f);
+var c = arr.map(f).reduce(g);
+var d = 'hello'.toUpperCase();
 
 if (arr.some(f)) {
   // ...
@@ -69,9 +71,13 @@ The following patterns are not considered warnings:
 
 ```js
 
-_.map(a, f);
+var b = _.map(a, f);
+var c = _(arr).map(f).reduce(g);
+var d = _.toUpper('hello');
 
- _(arr).map(f).reduce(g);
+if (_.some(arr, f)) {
+  // ...
+}
 
 ```
 

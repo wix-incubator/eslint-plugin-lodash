@@ -33,7 +33,8 @@ If you wish to use this plugin with Lodash v3, this value should be `3`. (on by 
 
 Finally, enable all of the rules that you would like to use.
 ## Recommended configuration
-This plugin exports a `recommended` configuration that enforces all the rules. You can configure the plugin as follows:
+This plugin exports a `recommended` configuration that enforces all the rules.
+You can configure the plugin as follows:
 
 ```json
 {
@@ -42,7 +43,8 @@ This plugin exports a `recommended` configuration that enforces all the rules. Y
 }
 ```
 ## Configuration for use with the full Lodash object
-If you work with the full Lodash object with the same variable name every time, you can use the `canonical` for faster execution:
+If you work with the full Lodash object with the same variable name every time, you should use the `canonical` configuration. This allows rules to run without explicitly importing Lodash in your code, and allows for faster execution for some of the rules:
+
 ```json
 {
   "plugins": ["lodash"],

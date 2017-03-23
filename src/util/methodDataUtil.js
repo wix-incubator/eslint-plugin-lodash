@@ -132,6 +132,16 @@ function getFunctionMaxArity(version, name) {
     return getMethodData(version).args[name] || Infinity
 }
 
+/**
+ * Returns whether or not a method is supported in the given version of lodash
+ * @param {number} version
+ * @param {string} name
+ * @returns {boolean}
+ */
+function isMethodSupported(version, name) {
+    return getMethodData(version).args.hasOwnProperty(name)
+}
+
 const sideEffectIterationMethods = ['forEach', 'forEachRight', 'forIn', 'forInRight', 'forOwn', 'forOwnRight']
 
 /**
@@ -153,6 +163,7 @@ module.exports = {
     getMainAlias,
     getIterateeIndex,
     getFunctionMaxArity,
+    isMethodSupported,
     getSideEffectIterationMethods
 }
 

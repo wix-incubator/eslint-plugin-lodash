@@ -258,6 +258,7 @@ module.exports = {
         reject: 2,
         remove: 2,
         repeat: 2,
+        replace: 3,
         rest: 2,
         result: 3,
         reverse: 1,

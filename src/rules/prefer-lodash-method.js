@@ -32,7 +32,7 @@ module.exports = {
 
         const {getLodashContext, isNativeCollectionMethodCall, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
-        const keys = require('lodash/keys')
+        const {isMethodSupported} = require('../util/methodDataUtil')
         const get = require('lodash/get')
         const includes = require('lodash/includes')
         const matches = require('lodash/matches')
@@ -58,6 +58,7 @@ module.exports = {
         }
 
         const lodashContext = getLodashContext(context)
+        const {version} = lodashContext
 
         function isNonNullObjectCreate(callerName, methodName, arg) {
             return callerName === 'Object' && methodName === 'create' && get(arg, 'value') !== null
@@ -74,7 +75,8 @@ module.exports = {
         }
 
         function isNativeStringMethodCall(node) {
-            return includes(keys(nativeStringMap), getMethodName(node))
+            const methodName = getMethodName(node)
+            return nativeStringMap.hasOwnProperty(methodName) && isMethodSupported(version, nativeStringMap[methodName])
         }
 
         function canUseLodash(node) {

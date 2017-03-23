@@ -19,7 +19,8 @@ ruleTester.run('no-double-unwrap', rule, {
         'var x = _(a).map(f).value()',
         'var x = _.chain(a).reduce(f).value()',
         'var x = something.value()',
-        '_(a).filter(f).forEach(g);'
+        '_(a).filter(f).forEach(g);',
+        'var x = _(a).sortedUniqBy(f).value()'
     ].map(withDefaultPragma),
     invalid: [{
         code: 'var x = _(a).some(f).value();',

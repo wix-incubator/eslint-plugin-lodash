@@ -76,10 +76,11 @@ module.exports = {
         'overArgs', 'overEvery', 'overSome', 'partial', 'partialRight', 'partition', 'pick', 'pickBy', 'plant', 'property',
         'propertyOf', 'pull', 'pullAll', 'pullAllBy', 'pullAllWith', 'pullAt', 'push', 'range', 'rangeRight', 'rearg',
         'reject', 'remove', 'rest', 'reverse', 'sampleSize', 'set', 'setWith', 'shuffle', 'slice', 'sort', 'sortBy',
-        'splice', 'spread', 'tail', 'take', 'takeRight', 'takeRightWhile', 'takeWhile', 'tap', 'throttle', 'thru', 'toArray',
-        'toPairs', 'toPairsIn', 'toPath', 'toPlainObject', 'transform', 'unary', 'union', 'unionBy', 'unionWith', 'uniq',
-        'uniqBy', 'uniqWith', 'unset', 'unshift', 'unzip', 'unzipWith', 'update', 'updateWith', 'values', 'valuesIn',
-        'without', 'wrap', 'xor', 'xorBy', 'xorWith', 'zip', 'zipObject', 'zipObjectDeep', 'zipWith'
+        'sortedUniq', 'sortedUniqBy', 'splice', 'spread', 'tail', 'take', 'takeRight', 'takeRightWhile', 'takeWhile', 'tap',
+        'throttle', 'thru', 'toArray', 'toPairs', 'toPairsIn', 'toPath', 'toPlainObject', 'transform', 'unary', 'union',
+        'unionBy', 'unionWith', 'uniq', 'uniqBy', 'uniqWith', 'unset', 'unshift', 'unzip', 'unzipWith', 'update',
+        'updateWith', 'values', 'valuesIn', 'without', 'wrap', 'xor', 'xorBy', 'xorWith', 'zip', 'zipObject',
+        'zipObjectDeep', 'zipWith'
     ],
     iteratee: {
         any: ['cloneDeepWith', 'cloneWith', 'countBy', 'dropRightWhile', 'dropWhile', 'every', 'filter', 'find', 'findIndex',

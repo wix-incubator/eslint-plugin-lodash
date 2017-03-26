@@ -13,7 +13,7 @@ module.exports = {
     create(context) {
         const {isChainBreaker, getLodashMethodVisitors, isCallToMethod} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')
-        const {getCollectionMethods, isAliasOfMethod, getSideEffectIterationMethods} = require('../util/methodDataUtil')
+        const {isCollectionMethod, isAliasOfMethod, getSideEffectIterationMethods} = require('../util/methodDataUtil')
         const includes = require('lodash/includes')
 
         function parentUsesValue(node, callType, version) {
@@ -22,7 +22,7 @@ module.exports = {
         }
 
         function isPureLodashCollectionMethod(method, version) {
-            return includes(getCollectionMethods(version), method) && !isAliasOfMethod(version, 'remove', method)
+            return isCollectionMethod(version, method) && !isAliasOfMethod(version, 'remove', method)
         }
 
         function isSideEffectIterationMethod(method, version) {

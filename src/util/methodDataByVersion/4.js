@@ -1,342 +1,2411 @@
 'use strict'
 module.exports = {
-    aliases: {
-        extend: 'assignIn',
-        extendWith: 'assignInWith',
-        each: 'forEach',
-        eachRight: 'forEachRight',
-        first: 'head'
+    add: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
     },
-    wrapper: [
-        'concat',
-        'join',
-        'pop',
-        'push',
-        'replace',
-        'shift',
-        'sort',
-        'splice',
-        'split',
-        'unshift'
-    ],
-    wrapperAliases: {
-        toJSON: 'value',
-        valueOf: 'value'
+    after: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
     },
-    shorthand: [
-        'countBy',
-        'differenceBy',
-        'dropRightWhile',
-        'dropWhile',
-        'every',
-        'filter',
-        'find',
-        'findIndex',
-        'findKey',
-        'findLastIndex',
-        'findLastKey',
-        'flatMap',
-        'flatMapDeep',
-        'flatMapDepth',
-        'groupBy',
-        'intersectionBy',
-        'invertBy',
-        'map',
-        'mapValues',
-        'maxBy',
-        'minBy',
-        'omitBy',
-        'overSome',
-        'overEvery',
-        'partition',
-        'pickBy',
-        'pullAllBy',
-        'reject',
-        'remove',
-        'some',
-        'sortedIndexBy',
-        'sortedLastIndexBy',
-        'sortedUniqBy',
-        'sumBy',
-        'takeRightWhile',
-        'takeWhile',
-        'unionBy',
-        'uniqBy',
-        'xorBy'
-    ],
-    chainable: [
-        'after', 'ary', 'assign', 'assignIn', 'assignInWith', 'assignWith', 'at', 'before', 'bind', 'bindAll', 'bindKey',
-        'castArray', 'chain', 'chunk', 'commit', 'compact', 'concat', 'conforms', 'constant', 'countBy', 'create', 'curry',
-        'debounce', 'defaults', 'defaultsDeep', 'defer', 'delay', 'difference', 'differenceBy', 'differenceWith', 'drop',
-        'dropRight', 'dropRightWhile', 'dropWhile', 'fill', 'filter', 'flatMap', 'flatMapDeep', 'flatMapDepth', 'flatten',
-        'flattenDeep', 'flattenDepth', 'flip', 'flow', 'flowRight', 'fromPairs', 'functions', 'functionsIn', 'groupBy',
-        'initial', 'intersection', 'intersectionBy', 'intersectionWith', 'invert', 'invertBy', 'invokeMap', 'iteratee',
-        'keyBy', 'keys', 'keysIn', 'map', 'mapKeys', 'mapValues', 'matches', 'matchesProperty', 'memoize', 'merge',
-        'mergeWith', 'method', 'methodOf', 'mixin', 'negate', 'nthArg', 'omit', 'omitBy', 'once', 'orderBy', 'over',
-        'overArgs', 'overEvery', 'overSome', 'partial', 'partialRight', 'partition', 'pick', 'pickBy', 'plant', 'property',
-        'propertyOf', 'pull', 'pullAll', 'pullAllBy', 'pullAllWith', 'pullAt', 'push', 'range', 'rangeRight', 'rearg',
-        'reject', 'remove', 'rest', 'reverse', 'sampleSize', 'set', 'setWith', 'shuffle', 'slice', 'sort', 'sortBy',
-        'sortedUniq', 'sortedUniqBy', 'splice', 'spread', 'tail', 'take', 'takeRight', 'takeRightWhile', 'takeWhile', 'tap',
-        'throttle', 'thru', 'toArray', 'toPairs', 'toPairsIn', 'toPath', 'toPlainObject', 'transform', 'unary', 'union',
-        'unionBy', 'unionWith', 'uniq', 'uniqBy', 'uniqWith', 'unset', 'unshift', 'unzip', 'unzipWith', 'update',
-        'updateWith', 'values', 'valuesIn', 'without', 'wrap', 'xor', 'xorBy', 'xorWith', 'zip', 'zipObject',
-        'zipObjectDeep', 'zipWith'
-    ],
+    ary: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    assign: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    assignIn: {
+        aliases: [
+            "extend"
+        ],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    assignInWith: {
+        aliases: [
+            "extendWith"
+        ],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    assignWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    at: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    attempt: {
+      wrapper: false,
+      shorthand: false,
+      chainable: false,
+      iteratee: false
+    },
+    before: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    bind: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    bindAll: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    bindKey: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    camelCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    capitalize: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    castArray: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    ceil: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    chain: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    chunk: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    clamp: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    clone: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    cloneDeep: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    cloneDeepWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    cloneWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    commit: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    compact: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    concat: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    cond: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    conforms: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    constant: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    countBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    create: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    curry: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    curryRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    debounce: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    deburr: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    defaults: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    defaultsDeep: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    defer: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    delay: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    difference: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    differenceBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false
+    },
+    differenceWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    divide: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    drop: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    dropRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    dropRightWhile: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 3
+    },
+    dropWhile: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 3
+    },
+    endsWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    eq: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    escape: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    escapeRegExp: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    every: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    fill: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 4
+    },
+    filter: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    find: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    findIndex: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    findKey: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    findLast: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    findLastIndex: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    findLastKey: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    flatMap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    flatMapDeep: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    flatMapDepth: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 3
+    },
+    flatten: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    flattenDeep: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    flattenDepth: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    flip: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    floor: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    flow: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    flowRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    forEach: {
+        aliases: [
+            "each"
+        ],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    forEachRight: {
+        aliases: [
+            "eachRight"
+        ],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    forIn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    forInRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    forOwn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    forOwnRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    fromPairs: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    functions: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    functionsIn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    get: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    groupBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    gt: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    gte: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    has: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    hasIn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    head: {
+        aliases: [
+            "first"
+        ],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    identity: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    inRange: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    includes: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    indexBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true
+    },
+    indexOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    initial: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    intersection: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    intersectionBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false
+    },
+    intersectionWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    invert: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    invertBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    invoke: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false
+    },
+    invokeMap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    isArguments: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isArray: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isArrayBuffer: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isArrayLike: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isArrayLikeObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isBoolean: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isBuffer: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isDate: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isElement: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isEmpty: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isEqual: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    isEqualWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    isError: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isFinite: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isFunction: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isInteger: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isLength: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isMap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isMatch: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    isMatchWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    isNaN: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isNative: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isNil: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isNull: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isNumber: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isObjectLike: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isPlainObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isRegExp: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isSafeInteger: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isSet: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isString: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isSymbol: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isTypedArray: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isUndefined: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isWeakMap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    isWeakSet: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
     iteratee: {
-        any: ['cloneDeepWith', 'cloneWith', 'countBy', 'dropRightWhile', 'dropWhile', 'every', 'filter', 'find', 'findIndex',
-            'findKey', 'findLast', 'findLastIndex', 'findLastKey', 'flatMap', 'flatMapDeep', 'flatMapDepth', 'forEach', 'forEachRight', 'forIn', 'forInRight',
-            'forOwn', 'forOwnRight', 'groupBy', 'indexBy', 'invertBy', 'keyBy', 'map', 'mapKeys', 'mapValues', 'maxBy', 'meanBy', 'minBy', 'omitBy',
-            'partition', 'pickBy', 'reduce', 'reduceRight', 'reject', 'remove', 'some', 'sortedUniqBy',
-            'sumBy', 'takeRightWhile', 'takeWhile', 'tap', 'thru', 'times', 'transform', 'uniqBy', 'unzipWith', 'xorBy'],
-        differentIndex: {
-            pullAllBy: 2,
-            sortedIndex: 2,
-            sortedIndexBy: 2,
-            sortedLastIndex: 2,
-            sortedLastIndexBy: 2
-        }
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
     },
-    args: {
-        add: 2,
-        after: 2,
-        ary: 2,
-        before: 2,
-        camelCase: 1,
-        capitalize: 1,
-        castArray: 1,
-        ceil: 2,
-        chain: 1,
-        chunk: 2,
-        clamp: 3,
-        clone: 1,
-        cloneDeep: 1,
-        cloneDeepWith: 2,
-        cloneWith: 2,
-        compact: 1,
-        cond: 1,
-        conforms: 1,
-        constant: 1,
-        countBy: 2,
-        create: 2,
-        curry: 2,
-        curryRight: 2,
-        debounce: 3,
-        deburr: 1,
-        divide: 2,
-        drop: 2,
-        dropRight: 2,
-        dropRightWhile: 3,
-        dropWhile: 3,
-        endsWith: 3,
-        eq: 2,
-        escape: 1,
-        escapeRegExp: 1,
-        every: 2,
-        fill: 4,
-        filter: 2,
-        find: 3,
-        findIndex: 3,
-        findKey: 2,
-        findLast: 3,
-        findLastIndex: 3,
-        findLastKey: 2,
-        flatMap: 2,
-        flatMapDeep: 2,
-        flatMapDepth: 3,
-        flatten: 1,
-        flattenDeep: 1,
-        flattenDepth: 2,
-        flip: 1,
-        floor: 2,
-        forEach: 2,
-        forEachRight: 2,
-        forIn: 2,
-        forInRight: 2,
-        forOwn: 2,
-        forOwnRight: 2,
-        fromPairs: 1,
-        functions: 1,
-        functionsIn: 1,
-        get: 3,
-        groupBy: 2,
-        gt: 2,
-        gte: 2,
-        has: 2,
-        hasIn: 2,
-        head: 1,
-        identity: 1,
-        inRange: 3,
-        includes: 3,
-        indexOf: 3,
-        initial: 1,
-        invert: 1,
-        invertBy: 2,
-        isArguments: 1,
-        isArray: 1,
-        isArrayBuffer: 1,
-        isArrayLike: 1,
-        isArrayLikeObject: 1,
-        isBoolean: 1,
-        isBuffer: 1,
-        isDate: 1,
-        isElement: 1,
-        isEmpty: 1,
-        isEqual: 2,
-        isEqualWith: 3,
-        isError: 1,
-        isFinite: 1,
-        isFunction: 1,
-        isInteger: 1,
-        isLength: 1,
-        isMatch: 2,
-        isMatchWith: 3,
-        isNaN: 1,
-        isNative: 1,
-        isNil: 1,
-        isNull: 1,
-        isNumber: 1,
-        isObject: 1,
-        isObjectLike: 1,
-        isPlainObject: 1,
-        isRegExp: 1,
-        isSafeInteger: 1,
-        isSet: 1,
-        isString: 1,
-        isSymbol: 1,
-        isTypedArray: 1,
-        isUndefined: 1,
-        isWeakMap: 1,
-        isWeakSet: 1,
-        join: 2,
-        kebabCase: 1,
-        keyBy: 2,
-        keys: 1,
-        keysIn: 1,
-        last: 1,
-        lastIndexOf: 3,
-        lowerCase: 1,
-        lowerFirst: 1,
-        lt: 2,
-        lte: 2,
-        map: 2,
-        mapKeys: 2,
-        mapValues: 2,
-        matches: 1,
-        matchesProperty: 2,
-        max: 1,
-        maxBy: 2,
-        mean: 1,
-        meanBy: 2,
-        memoize: 2,
-        min: 1,
-        minBy: 2,
-        mixin: 3,
-        multiply: 2,
-        negate: 1,
-        noConflict: 0,
-        noop: 0,
-        now: 0,
-        nth: 2,
-        nthArg: 1,
-        once: 1,
-        orderBy: 3,
-        pad: 3,
-        padEnd: 3,
-        padStart: 3,
-        parseInt: 2,
-        partition: 2,
-        property: 1,
-        propertyOf: 1,
-        pullAll: 2,
-        pullAllBy: 3,
-        pullAllWith: 3,
-        random: 3,
-        range: 3,
-        rangeRight: 3,
-        reduce: 3,
-        reduceRight: 3,
-        reject: 2,
-        remove: 2,
-        repeat: 2,
-        rest: 2,
-        result: 3,
-        reverse: 1,
-        round: 2,
-        runInContext: 1,
-        sample: 1,
-        sampleSize: 2,
-        set: 3,
-        setWith: 4,
-        shuffle: 1,
-        size: 1,
-        slice: 3,
-        snakeCase: 1,
-        some: 2,
-        sortedIndex: 2,
-        sortedIndexBy: 3,
-        sortedIndexOf: 2,
-        sortedLastIndex: 2,
-        sortedLastIndexBy: 3,
-        sortedLastIndexOf: 2,
-        sortedUniq: 1,
-        sortedUniqBy: 2,
-        split: 3,
-        spread: 2,
-        startCase: 1,
-        startsWith: 3,
-        stubArray: 0,
-        stubFalse: 0,
-        stubObject: 0,
-        stubString: 0,
-        stubTrue: 0,
-        subtract: 2,
-        sum: 1,
-        sumBy: 2,
-        tail: 1,
-        take: 2,
-        takeRight: 2,
-        takeRightWhile: 2,
-        takeWhile: 2,
-        tap: 2,
-        template: 2,
-        throttle: 3,
-        thru: 2,
-        times: 2,
-        toArray: 1,
-        toInteger: 1,
-        toLength: 1,
-        toLower: 1,
-        toNumber: 1,
-        toPairs: 1,
-        toPairsIn: 1,
-        toPath: 1,
-        toPlainObject: 1,
-        toSafeInteger: 1,
-        toString: 1,
-        toUpper: 1,
-        transform: 3,
-        trim: 2,
-        trimEnd: 2,
-        trimStart: 2,
-        truncate: 3,
-        unary: 1,
-        unescape: 1,
-        uniq: 1,
-        uniqBy: 2,
-        uniqWith: 2,
-        uniqueId: 1,
-        unset: 2,
-        unzip: 1,
-        unzipWith: 2,
-        update: 3,
-        updateWith: 4,
-        upperCase: 1,
-        upperFirst: 1,
-        values: 1,
-        valuesIn: 1,
-        words: 2,
-        wrap: 2,
-        zipObject: 2,
-        zipObjectDeep: 2
+    join: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    kebabCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    keyBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    keys: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    keysIn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    last: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    lastIndexOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    lowerCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    lowerFirst: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    lt: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    lte: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    map: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    mapKeys: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    mapValues: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    matches: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    matchesProperty: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    max: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    maxBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    mean: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    meanBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    memoize: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    merge: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    mergeWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    method: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    methodOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    min: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    minBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    mixin: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    multiply: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    negate: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    next: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 0
+    },
+    noConflict: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    noop: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    now: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    nth: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    nthArg: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    omit: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    omitBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true
+    },
+    once: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    orderBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    over: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    overArgs: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    overEvery: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false
+    },
+    overSome: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false
+    },
+    pad: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    padEnd: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    padStart: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    parseInt: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    partial: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    partialRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    partition: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    pick: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    pickBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true
+    },
+    plant: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    pop: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false
+    },
+    property: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    propertyOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    pull: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    pullAll: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    pullAllBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false,
+        iterateeIndex: 2,
+        args: 3
+    },
+    pullAllWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    pullAt: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    push: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    random: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    range: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    rangeRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    rearg: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    reduce: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    reduceRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 3
+    },
+    reject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    remove: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    repeat: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    replace: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false
+    },
+    rest: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    result: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    reverse: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    round: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    runInContext: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    sample: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    sampleSize: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    set: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    setWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 4
+    },
+    shift: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false
+    },
+    shuffle: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    size: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    slice: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    snakeCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    some: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    sort: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    sortBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    sortedIndex: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        iterateeIndex: 2,
+        args: 2
+    },
+    sortedIndexBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: false,
+        iterateeIndex: 2,
+        args: 3
+    },
+    sortedIndexOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    sortedLastIndex: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        iterateeIndex: 2,
+        args: 2
+    },
+    sortedLastIndexBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: false,
+        iterateeIndex: 2,
+        args: 3
+    },
+    sortedLastIndexOf: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    sortedUniq: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    sortedUniqBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    splice: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    split: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    spread: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    startCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    startsWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    stubArray: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    stubFalse: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    stubObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    stubString: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    stubTrue: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    subtract: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    sum: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    sumBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    tail: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    take: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    takeRight: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    takeRightWhile: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    takeWhile: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    tap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    template: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    throttle: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    thru: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    times: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: true,
+        args: 2
+    },
+    toArray: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    toFinite: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toInteger: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toLength: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toLower: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toNumber: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toPairs: {
+        aliases: ['entries'],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    toPairsIn: {
+        aliases: ['entriesIn'],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    toPath: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    toPlainObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    toSafeInteger: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toString: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    toUpper: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    transform: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 3
+    },
+    trim: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    trimEnd: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    trimStart: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    truncate: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 3
+    },
+    unary: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    unescape: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    union: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    unionBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: false
+    },
+    unionWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    uniq: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    uniqBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    uniqWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    uniqueId: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    unset: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    unshift: {
+        aliases: [],
+        wrapper: true,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    unzip: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    unzipWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: true,
+        args: 2
+    },
+    update: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 3
+    },
+    updateWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 4
+    },
+    upperCase: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    upperFirst: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 1
+    },
+    value: {
+        aliases: ['toJSON', 'valueOf'],
+        wrapper: true,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 0
+    },
+    values: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    valuesIn: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 1
+    },
+    without: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    words: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
+    wrap: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    xor: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    xorBy: {
+        aliases: [],
+        wrapper: false,
+        shorthand: true,
+        chainable: true,
+        iteratee: true
+    },
+    xorWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    zip: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
+    },
+    zipObject: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    zipObjectDeep: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false,
+        args: 2
+    },
+    zipWith: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: true,
+        iteratee: false
     }
 }

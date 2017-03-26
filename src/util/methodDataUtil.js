@@ -10,12 +10,10 @@ const getMethodData = _.memoize(version => require(`./methodDataByVersion/${vers
  * @param {string} method
  * @returns {string[]}
  */
-const expandAlias = _.memoize((version, method) => {
-    const methodData = getMethodData(version)
-    const aliases = _.keys(_.pickBy(methodData.aliases, x => x === method))
-    const wrapperAliases = _.keys(_.pickBy(methodData.wrapperAliases, x => x === method))
-    return [method, ...aliases, ...wrapperAliases]
-}, (version, method) => `${version}-${method}`)
+const expandAlias = (version, method) => {
+    const methodAliases = _.get(getMethodData(version), [method, 'aliases'], [])
+    return [method, ...methodAliases]
+}
 
 /**
  * Gets a major version number and a list of methods and returns a list of methods and all their aliases
@@ -24,45 +22,40 @@ const expandAlias = _.memoize((version, method) => {
  * @returns {string[]}
  */
 function expandAliases(version, methods) {
-    return _.flatMap(methods, expandAlias.bind(null, version))
+    return _.flatMap(methods, method => expandAlias(version, method))
 }
 
 /**
- * Gets the raw aliases object for a specific version
+ * Returns whether the method is the main alias
  * @param version
- * @returns {Aliases}
+ * @param method
+ * @returns {Boolean}
  */
-function getAliasesByVersion(version) {
-    return getMethodData(version).aliases
+function isMainAlias(version, method) {
+    return Boolean(getMethodData(version)[method])
 }
 
 /**
  * Gets a list of all chainable methods and their aliases for a given version
  * @param {Number} version
- * @returns {[string]}
+ * @param {string} method
+ * @returns {boolean}
  */
-function getChainableAliases(version) {
-    return expandAliases(version, getMethodData(version).chainable)
+function isChainable(version, method) {
+    const data = getMethodData(version)
+    return _.get(data, [getMainAlias(version, method), 'chainable'], false)
 }
 
 /**
- * Gets a list of all lodash collection methods for a specific version
+ * Gets whether the method is a collection method
  * @param {Number} version
- * @returns {[string]}
+ * @param {string} method
+ * @returns {Boolean}
  */
-function getCollectionMethods(version) {
-    return expandAliases(version, getMethodData(version).shorthand.concat(['reduce', 'reduceRight']))
+function isCollectionMethod(version, method) {
+    return methodSupportsShorthand(version, method) || _.includes(expandAliases(version, ['reduce', 'reduceRight']), method)
 }
 
-/**
- * Gets a lookup table of methods that support all shorthands per version
- * @param {Number} version
- * @returns {object}
- */
-const getShorthandMethodsLookup = _.memoize(version => {
-    const methods =  expandAliases(version, getMethodData(version).shorthand)
-    return _.reduce(methods, (obj, key) => _.assign(obj, {[key]: true}), {})
-})
 
 /**
  * Returns whether the node's method call supports using shorthands in the specified version
@@ -71,18 +64,19 @@ const getShorthandMethodsLookup = _.memoize(version => {
  * @returns {boolean}
  */
 function methodSupportsShorthand(version, method) {
-    return getShorthandMethodsLookup(version)[method]
+    const mainAlias = getMainAlias(version, method)
+    return _.get(getMethodData(version), [mainAlias, 'shorthand'])
 }
 
 /**
- * Gets a list of all wrapper methods for a specific version
+ * Gets whether the method is a wrapper method
  * @param {Number} version
- * @returns {[string]}
+ * @param {string} method
+ * @returns {boolean}
  */
-function getWrapperMethods(version) {
-    return getMethodData(version).wrapper
+function isWrapperMethod(version, method) {
+    return _.get(getMethodData(version), [method, 'wrapper'], false)
 }
-
 /**
  * Gets whether the suspect is an alias of the method in a given version
  * @param {Number} version
@@ -91,7 +85,7 @@ function getWrapperMethods(version) {
  * @returns {boolean}
  */
 function isAliasOfMethod(version, method, suspect) {
-    return method === suspect || getMethodData(version).aliases[suspect] === method
+    return method === suspect || _.includes(_.get(getMethodData(version), [method, 'aliases']), suspect)
 }
 
 /**
@@ -101,7 +95,8 @@ function isAliasOfMethod(version, method, suspect) {
  * @returns {string}
  */
 function getMainAlias(version, method) {
-    return getMethodData(version).aliases[method] || method
+    const data = getMethodData(version)
+    return data[method] ? method : _.findKey(data, methodData => _.includes(methodData.aliases, method))
 }
 
 /**
@@ -112,11 +107,11 @@ function getMainAlias(version, method) {
  */
 function getIterateeIndex(version, method) {
     const mainAlias = getMainAlias(version, method)
-    const iteratees = getMethodData(version).iteratee
-    if (_.has(iteratees.differentIndex, mainAlias)) {
-        return iteratees.differentIndex[mainAlias]
+    const methodData = getMethodData(version)[mainAlias]
+    if (_.has(methodData, 'iterateeIndex')) {
+        return methodData.iterateeIndex
     }
-    if (_.includes(iteratees.any, mainAlias)) {
+    if (methodData && methodData.iteratee) {
         return 1
     }
     return -1
@@ -129,7 +124,7 @@ function getIterateeIndex(version, method) {
  * @returns {number}
  */
 function getFunctionMaxArity(version, name) {
-    return getMethodData(version).args[name] || Infinity
+    return _.get(getMethodData(version), [name, 'args'], Infinity)
 }
 
 const sideEffectIterationMethods = ['forEach', 'forEachRight', 'forIn', 'forInRight', 'forOwn', 'forOwnRight']
@@ -145,21 +140,16 @@ function getSideEffectIterationMethods(version) {
 
 module.exports = {
     isAliasOfMethod,
-    getAliasesByVersion,
-    getChainableAliases,
+    isChainable,
     methodSupportsShorthand,
-    getWrapperMethods,
-    getCollectionMethods,
+    isWrapperMethod,
+    isCollectionMethod,
+    isMainAlias,
     getMainAlias,
     getIterateeIndex,
     getFunctionMaxArity,
     getSideEffectIterationMethods
 }
-
-/**
- * A hash of all aliases for a Lodash method
- @typedef {Object.<string, [string]>} Aliases
- */
 
 /**
  * A JSON object containing method info for a specific lodash major version

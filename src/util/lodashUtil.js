@@ -12,7 +12,7 @@ const LodashContext = require('./LodashContext')
  * @returns {boolean}
  */
 function isChainable(node, version) {
-    return _.includes(methodDataUtil.getChainableAliases(version), astUtil.getMethodName(node))
+    return methodDataUtil.isChainable(version, astUtil.getMethodName(node))
 }
 
 /**
@@ -43,7 +43,7 @@ function isCallToMethod(node, version, method) {
  * @returns {boolean}
  */
 function isLodashWrapperMethod(node, version) {
-    return _.includes(methodDataUtil.getWrapperMethods(version), astUtil.getMethodName(node)) && node.type === 'CallExpression'
+    return methodDataUtil.isWrapperMethod(version, astUtil.getMethodName(node))
 }
 
 /**

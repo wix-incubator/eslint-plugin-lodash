@@ -15,16 +15,18 @@ module.exports = {
 
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
-        const {version} = require('../util/settingsUtil').getSettings(context)
-        const aliases = require('../util/methodDataUtil').getAliasesByVersion(version)
+        const {isMainAlias, getMainAlias} = require('../util/methodDataUtil')
         const has = require('lodash/has')
 
-        return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
-            if (has(aliases, method)) {
-                context.report({
-                    node,
-                    message: `Method '${method}' is an alias, for consistency prefer using '${aliases[method]}'`
-                })
+        return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
+            if (!isMainAlias(version, method)) {
+                const mainAlias = getMainAlias(version, method)
+                if (mainAlias) {
+                    context.report({
+                        node,
+                        message: `Method '${method}' is an alias, for consistency prefer using '${mainAlias}'`
+                    })
+                }
             }
         })
     }

@@ -19,7 +19,8 @@ ruleTester.run('preferred-alias', rule, {
     valid: [
         '_.forEach();',
         '_(users).map().value().each(function (i) { i.f(); });',
-        'var x = _.map(y, function (i) { return i; });'
+        'var x = _.map(y, function (i) { return i; });',
+        'var customResult = _.customFunction(customArg1, customArg2)'
     ].map(withDefaultPragma).concat([
         "const {toString} = require('lodash'); toString('something')"
     ]),

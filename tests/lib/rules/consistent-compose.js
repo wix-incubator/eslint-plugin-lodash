@@ -23,14 +23,11 @@ ruleTester.run('consistent-compose', rule, {
         errors: [{message: 'Use _.flow for composition'}]
     }, {
         code: 'var f = _.compose(h, g)',
+        settings: {lodash: {version: 3}},
         errors: [{message: 'Use _.flow for composition'}]
     }, {
         code: 'var f = _.flow(h, g)',
         errors: [{message: 'Use _.flowRight for composition'}],
         options: ['flowRight']
-    }, {
-        code: 'var f = _.compose(h, g)',
-        errors: [{message: 'Use _.pipe for composition'}],
-        options: ['pipe']
     }].map(withDefaultPragma)
 })

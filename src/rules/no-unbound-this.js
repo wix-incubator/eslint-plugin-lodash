@@ -9,10 +9,9 @@
 module.exports = {
     create(context) {
         const {getLodashMethodCallExpVisitor, getLodashContext} = require('../util/lodashUtil')
-        const {getCollectionMethods} = require('../util/methodDataUtil')
+        const {isCollectionMethod} = require('../util/methodDataUtil')
         const {isFunctionExpression} = require('../util/astUtil')
         const assign = require('lodash/assign')
-        let collectionMethods
         const funcInfos = new Map()
         let currFuncInfo = {
             thisUses: []
@@ -20,8 +19,7 @@ module.exports = {
         const lodashContext = getLodashContext(context)
         return assign({
             'CallExpression:exit': getLodashMethodCallExpVisitor(lodashContext, (node, iteratee, {method, version}) => {
-                collectionMethods = collectionMethods || new Set(getCollectionMethods(version).concat(['forEach', 'forEachRight']))
-                if (collectionMethods.has(method) && funcInfos.has(iteratee)) {
+                if ((isCollectionMethod(version, method) || /^forEach(Right)?$/.test(method)) && funcInfos.has(iteratee)) {
                     const {thisUses} = funcInfos.get(iteratee)
                     if (isFunctionExpression(iteratee) && thisUses.length) {
                         thisUses.forEach(thisNode => {context.report(thisNode, 'Do not use `this` without binding in collection methods')})

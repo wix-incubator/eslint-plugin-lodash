@@ -224,6 +224,14 @@ module.exports = {
         iteratee: false,
         args: 1
     },
+    conformsTo: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
+    },
     constant: {
         aliases: [],
         wrapper: false,
@@ -279,6 +287,14 @@ module.exports = {
         chainable: false,
         iteratee: false,
         args: 1
+    },
+    defaultTo: {
+        aliases: [],
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false,
+        args: 2
     },
     defaults: {
         aliases: [],

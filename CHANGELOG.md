@@ -8,14 +8,26 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.7...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.0...HEAD
+
+## [2.3.7] - 2017-03-27
+### Added
+- Added rule `prefer-some` ([`842f02d`][842f02d])
+### Fixed
+- Fixed error where `no-extra-args` did not warn on methods with 0 arguments ([`8d960ce`][8d960ce])
+- Added data for methods `conformsTo` and `defaultTo` ([`5333ff0`][5333ff0])
+
+[842f02d]: https://github.com/wix/eslint-plugin-lodash/commit/842f02d4587102f5cbe32f9ebe29c9f1dc1dee13
+[8d960ce]: https://github.com/wix/eslint-plugin-lodash/commit/8d960ce9a05b5753e733e644bc0d1303f84b3bdf
+[5333ff0]: https://github.com/wix/eslint-plugin-lodash/commit/5333ff03d2657217db002065679ac027f1cbf6aa
+[2.4.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.0...v2.3.7
 
 ## [2.3.7] - 2017-03-23
 ### Fixed
 - Added `sortedUniq` and `sortedUniqBy` as chainable methods ([`fcde2c0`][fcde2c0])
 
 [fcde2c0]: https://github.com/wix/eslint-plugin-lodash/commit/fcde2c0adac04f6d0c6c3744a547dfaaefd8be4f
-[2.3.5]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.7...v2.3.6
+[2.3.7]: https://github.com/wix/eslint-plugin-lodash/compare/v2.3.7...v2.3.6
 
 ## [2.3.6] - 2017-03-15
 ### Fixed

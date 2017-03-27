@@ -300,6 +300,13 @@ function getExpressionComparedToInt(node, value, checkOver) {
 const isIndexOfCall = node => isMethodCall(node) && getMethodName(node) === 'indexOf'
 
 /**
+ * Returns whether the node is a call to findIndex
+ * @param {Object} node
+ * @returns {boolean}
+ */
+const isFindIndexCall = node => isMethodCall(node) && getMethodName(node) === 'findIndex'
+
+/**
  * Returns an array of identifier names returned in a parameter or variable definition
  * @param node an AST node which is a parameter or variable declaration
  * @returns {string[]} List of names defined in the parameter
@@ -339,6 +346,7 @@ module.exports = {
     comparisonType,
     getExpressionComparedToInt,
     isIndexOfCall,
+    isFindIndexCall,
     isFunctionExpression,
     isFunctionDefinitionWithBlock,
     collectParameterValues

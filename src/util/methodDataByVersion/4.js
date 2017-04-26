@@ -1805,7 +1805,6 @@ module.exports = {
         shorthand: false,
         chainable: false,
         iteratee: false,
-        iterateeIndex: 2,
         args: 2
     },
     sortedIndexBy: {
@@ -1831,7 +1830,6 @@ module.exports = {
         shorthand: false,
         chainable: false,
         iteratee: false,
-        iterateeIndex: 2,
         args: 2
     },
     sortedLastIndexBy: {

@@ -13,9 +13,9 @@
 module.exports = {
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
+        const {getFunctionMaxArity} = require('../util/methodDataUtil')
         const {getMethodName} = require('../util/astUtil')
         const {version} = require('../util/settingsUtil').getSettings(context)
-        const methodsWithExtraArg = ['reduce', 'reduceRight', 'transform', 'find', 'findLast', 'findIndex', 'findLastIndex']
         const includes = require('lodash/includes')
 
         function isBound(node) {
@@ -28,10 +28,9 @@ module.exports = {
                     context.report(iteratee.callee.property, 'Unnecessary bind, pass `thisArg` to lodash method instead')
                 }
             },
-            4(node, iteratee, {method}) {
-                const hasExtraArg = includes(methodsWithExtraArg, method)
-                const iterateeIndex = node.arguments.indexOf(iteratee)
-                if (iterateeIndex !== -1 && (hasExtraArg && node.arguments[iterateeIndex + 2] || (!hasExtraArg && node.arguments[iterateeIndex + 1]))) {
+            4(node, iteratee, {method, callType}) {
+                const argsLength = node.arguments.length + (callType === 'chained' ? 1 : 0)
+                if (iteratee && argsLength > getFunctionMaxArity(4, method)) {
                     context.report(iteratee, 'Do not use Lodash 3 thisArg, use binding instead')
                 }
             }

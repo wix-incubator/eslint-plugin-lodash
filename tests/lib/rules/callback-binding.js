@@ -27,9 +27,10 @@ const testCases = {
             'var x = _.find(users, function(user) { return user.age > this.age}.bind(this));',
             'var t = _.isArray(x)',
             'var t = _.assign(a, b, c);',
-            'var i = _.sortedIndex(arr, val, f);',
+            'var i = _.sortedIndex(arr, val);',
             'var i = _.sortedIndexBy(arr, val, obj)',
-            'var i = _.findIndex(arr, x => x, 2)'
+            'var i = _.findIndex(arr, x => x, 2)',
+            'var i = _(a).map(f).findIndex(g, 2)'
         ].map(optionsUtil.withDefaultPragma),
         v4: [
             'var map = ()=>{}; var x = map(arr, f.bind(this))'

@@ -8,9 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.1...HEAD
 
-## [2.3.7] - 2017-03-27
+## [2.4.1] - 2017-04-26
+### Fixed
+- Reimpleneted rule `callback-binding` to use method data ([`97375de`][97375de])
+
+[97375de]: https://github.com/wix/eslint-plugin-lodash/commit/97375defe7a299e6262618ffb0a6cc80c0bcac6e
+[2.4.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.1...v2.4.0
+
+## [2.4.0] - 2017-03-27
 ### Added
 - Added rule `prefer-some` ([`842f02d`][842f02d])
 ### Fixed

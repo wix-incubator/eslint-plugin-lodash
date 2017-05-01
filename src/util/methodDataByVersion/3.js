@@ -1177,13 +1177,6 @@ module.exports = {
     iteratee: false,
     args: 2
   },
-  replace: {
-    aliases: [],
-    wrapper: true,
-    shorthand: false,
-    chainable: false,
-    iteratee: false
-  },
   rest: {
     aliases: [
       "tail"

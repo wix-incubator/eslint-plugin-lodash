@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.2...HEAD
+
+## [2.4.2] - 2017-05-01
+### Fixed
+- Fixed `prefer-lodash-method` warning on string methods not in the current version ([`401d28a`][401d28a])
+
+[401d28a]: https://github.com/wix/eslint-plugin-lodash/commit/401d28aaee8d7fd23b2b388243739eecb07a2052
+[2.4.2]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.2...v2.4.1
 
 ## [2.4.1] - 2017-04-26
 ### Fixed

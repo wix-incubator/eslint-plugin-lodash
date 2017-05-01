@@ -12,31 +12,36 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const {withDefaultPragma} = require('../testUtil/optionsUtil')
+const {withDefaultPragma, fromVersion3WithDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('prefer-lodash-method', rule, {
     valid: [
-        'var x = _.map(arr, f)',
-        'var x = _(arr).map(f).reduce(g)',
-        'var x = _.chain(arr).map(f).reduce(g).map(h).value()',
-        'var x = _.keys(obj)',
-        'var x = arr.indexOf(item)',
-        {
-            code: 'var x = a.map(f)',
-            options: [{ignoreMethods: ['map']}]
-        }, {
-            code: 'var x = fp.map(f, a)',
-            options: [{ignoreObjects: ['fp']}]
-        }, {
-            code: 'var x = React.Children.map(f)',
-            options: [{ignoreObjects: ['React.Children']}]
-        },
-        {
-            code: 'var x = $el.filter(f)',
-            options: [{ignoreObjects: ['^\\$.+']}]
-        },
-        '_.chain(a).get(p).map(f).value()',
-        'var x = Object.create(null)'
-    ].map(withDefaultPragma),
+        ...[
+            'var x = _.map(arr, f)',
+            'var x = _(arr).map(f).reduce(g)',
+            'var x = _.chain(arr).map(f).reduce(g).map(h).value()',
+            'var x = _.keys(obj)',
+            'var x = arr.indexOf(item)',
+            {
+                code: 'var x = a.map(f)',
+                options: [{ignoreMethods: ['map']}]
+            }, {
+                code: 'var x = fp.map(f, a)',
+                options: [{ignoreObjects: ['fp']}]
+            }, {
+                code: 'var x = React.Children.map(f)',
+                options: [{ignoreObjects: ['React.Children']}]
+            },
+            {
+                code: 'var x = $el.filter(f)',
+                options: [{ignoreObjects: ['^\\$.+']}]
+            },
+            '_.chain(a).get(p).map(f).value()',
+            'var x = Object.create(null)'
+        ].map(withDefaultPragma),
+        ...[
+            'var x = str.replace(something, withSomething)'
+        ].map(fromVersion3WithDefaultPragma)
+    ],
     invalid: [{
         code: 'var x = a.map(function(x) {return x.f()});',
         errors: [{message: 'Prefer \'_.map\' over the native function.'}]

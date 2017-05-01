@@ -138,6 +138,16 @@ function getSideEffectIterationMethods(version) {
     return expandAliases(version, sideEffectIterationMethods)
 }
 
+/**
+ * Returns whether the method exists in the specified version
+ * @param {number} version
+ * @param {string} method
+ * @returns {boolean}
+ */
+function methodExists(version, method) {
+    return Boolean(getMethodData(version)[method])
+}
+
 module.exports = {
     isAliasOfMethod,
     isChainable,
@@ -148,7 +158,8 @@ module.exports = {
     getMainAlias,
     getIterateeIndex,
     getFunctionMaxArity,
-    getSideEffectIterationMethods
+    getSideEffectIterationMethods,
+    methodExists
 }
 
 /**

@@ -26,6 +26,8 @@ ruleTester.run('matches-shorthand', rule, {
         'var isPublic = _.map([], function (i) { return i.id + "?"; });',
         'lang.fonts = _.filter(lang.fonts, function (font) { return font.permissions !== "legacy"});',
         'var isPublic = _.findLastIndex([], function (i) { return i.id == 3 && f(i); });',
+        'var result = _.filter(users, _.matches({age: 30, name: "Bob"}));',
+        'var x = _.matches({age: 30, name: "Bob"});var result = _.filter(users, x);',
         {
             code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
             options: ['never']

@@ -30,7 +30,7 @@ module.exports = {
         }
 
         function usesShorthandInChain(node) {
-            return node.arguments.length === 0 || (node.arguments[0].type === 'Identifier')
+            return node.arguments.length === 0 || (node.arguments.length === 1 && node.arguments[0].type === 'Identifier')
         }
 
 

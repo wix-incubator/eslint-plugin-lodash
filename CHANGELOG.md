@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.3...HEAD
+
+## [2.4.3] - 2017-06-19
+### Fixed
+- Fixed `prefer-over-quantifier` warning on condition functions with more than one argument ([`cf10ed1`][cf10ed1])
+
+[cf10ed1]: https://github.com/wix/eslint-plugin-lodash/commit/cf10ed1c05ea532bee1fdb2dba92e2abfb293b6d
+[2.4.3]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.3...v2.4.2
 
 ## [2.4.2] - 2017-05-01
 ### Fixed

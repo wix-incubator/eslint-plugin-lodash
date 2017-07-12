@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.3...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.4...HEAD
+
+## [2.4.4] - 2017-07-12
+### Fixed
+- Added a step to clean old generated files before every build ([`18c0eeb`][18c0eeb])
+
+[18c0eeb]: https://github.com/wix/eslint-plugin-lodash/commit/18c0eeb87cadd29d5022cd7337b2dd42ccd74e99
+[2.4.4]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.4...v2.4.3
 
 ## [2.4.3] - 2017-06-19
 ### Fixed

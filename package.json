@@ -6,10 +6,12 @@
   "main": "lib/index.js",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
+    "clean": "rimraf lib",
     "lint": "eslint ./",
     "test": "npm run lint && npm run unit-test",
     "unit-test": "cross-env NODE_ENV=test nyc mocha tests/**/*.js --reporter=dot",
-    "build": "babel src -d lib",
+    "babel": "babel src -d lib",
+    "build": "npm run clean && npm run babel",
     "prepublish": "npm run build"
   },
   "files": [
@@ -41,7 +43,8 @@
     "eslint-traverser": "1.5.2",
     "istanbul": "^0.4.4",
     "mocha": "3.3.0",
-    "nyc": "10.2.0"
+    "nyc": "10.2.0",
+    "rimraf": "2.6.1"
   },
   "engines": {
     "node": ">=0.12.0"

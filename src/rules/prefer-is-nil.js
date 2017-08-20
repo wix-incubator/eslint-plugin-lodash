@@ -78,11 +78,11 @@ module.exports = {
             if (node.operator === '||') {
                 if (isEquivalentExistingExpression(node, 'undefined', 'null') ||
                     isEquivalentExistingExpression(node, 'null', 'undefined')) {
-                    context.report(node, 'Prefer isNil over checking for undefined or null.')
+                    context.report({node, message: 'Prefer isNil over checking for undefined or null.'})
                 }
             } else if (isEquivalentExistingNegation(node, 'undefined', 'null') ||
                 isEquivalentExistingNegation(node, 'null', 'undefined')) {
-                context.report(node, 'Prefer isNil over checking for undefined or null.')
+                context.report({node, message: 'Prefer isNil over checking for undefined or null.'})
             }
         }
         return visitors

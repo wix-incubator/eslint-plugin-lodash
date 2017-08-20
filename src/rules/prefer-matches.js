@@ -44,7 +44,7 @@ module.exports = {
                 if (shouldCheckDeeper(node, state.node)) {
                     expStates.push({depth: state.depth + 1, node: node.right.left.object})
                     if (isEquivalentMemberExp(get(node, 'left.left.object'), get(node, 'right.left.object')) && state.depth >= ruleDepth - 2) {
-                        context.report(node, 'Prefer _.isMatch over conditions on the same object')
+                        context.report({node, message: 'Prefer _.isMatch over conditions on the same object'})
                     }
                 }
             },

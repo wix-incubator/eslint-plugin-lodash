@@ -17,7 +17,7 @@ module.exports = {
         const visitors = lodashContext.getImportVisitors()
         visitors.CallExpression = function(node) {
             if (lodashContext.isLodashChainStart(node) && isLodashWrapperMethod(node.arguments[0], lodashContext.version)) {
-                context.report(node, 'Prefer {{name}} with wrapper method over inside the chain start.', {name: node.arguments[0].callee.property.name})
+                context.report({node, message: 'Prefer {{name}} with wrapper method over inside the chain start.', data: {name: node.arguments[0].callee.property.name}})
             }
         }
         return visitors

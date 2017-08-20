@@ -24,7 +24,7 @@ module.exports = {
             if (isAliasOfMethod(version, 'flatten', method) &&
                 (isChainedMapFlatten(callType, node, version) ||
                 isCallToLodashMethod(node.arguments[0], 'map', lodashContext))) {
-                context.report(node, 'Prefer _.flatMap over consecutive map and flatten.')
+                context.report({node, message: 'Prefer _.flatMap over consecutive map and flatten.'})
             }
         })
     }

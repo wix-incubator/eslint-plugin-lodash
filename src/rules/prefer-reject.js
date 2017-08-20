@@ -33,7 +33,7 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version, lodashContext}) => {
             if (isAliasOfMethod(version, 'filter', method) && isNegativeExpressionFunction(iteratee, lodashContext)) {
-                context.report(node, 'Prefer _.reject over negative condition')
+                context.report({node, message: 'Prefer _.reject over negative condition'})
             }
         })
     }

@@ -42,7 +42,7 @@ module.exports = {
         function reportIfLikeConstant(func, node) {
             const valueReturnedInFirstLine = func(node)
             if (valueReturnedInFirstLine && isCompletelyLiteral(valueReturnedInFirstLine)) {
-                context.report(node, 'Prefer _.constant over a function returning a literal')
+                context.report({node, message: 'Prefer _.constant over a function returning a literal'})
             }
         }
 

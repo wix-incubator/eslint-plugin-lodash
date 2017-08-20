@@ -22,7 +22,7 @@ module.exports = {
                 if ((isCollectionMethod(version, method) || /^forEach(Right)?$/.test(method)) && funcInfos.has(iteratee)) {
                     const {thisUses} = funcInfos.get(iteratee)
                     if (isFunctionExpression(iteratee) && thisUses.length) {
-                        thisUses.forEach(thisNode => {context.report(thisNode, 'Do not use `this` without binding in collection methods')})
+                        thisUses.forEach(thisNode => {context.report({node: thisNode, message: 'Do not use `this` without binding in collection methods'})})
                     }
                 }
             }),

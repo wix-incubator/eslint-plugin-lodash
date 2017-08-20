@@ -54,7 +54,7 @@ module.exports = {
             const paramName = getFirstParamName(node)
             if (retVal && retVal.type === 'LogicalExpression' && (retVal.operator === '&&' || retVal.operator === '||')) {
                 if (isOnlyParamInvocationsWithOperator(retVal, paramName, retVal.operator)) {
-                    context.report(node, message, reportConstants[retVal.operator])
+                    context.report({node, message, data: reportConstants[retVal.operator]})
                 }
             }
         }
@@ -62,7 +62,7 @@ module.exports = {
         function reportIfDoubleFilterLiteral(callType, node, version) {
             if (callType === 'chained' && usesShorthandInChain(node) && isObjectOfMethodCall(node) &&
                 isCallToConditionMethod(getMethodName(node.parent.parent), version) && usesShorthandInChain(node.parent.parent)) {
-                context.report(node, message, reportConstants['&&'])
+                context.report({node, message, data: reportConstants['&&']})
             }
         }
 

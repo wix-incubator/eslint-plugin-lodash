@@ -31,14 +31,14 @@ module.exports = {
 
         const visitors = getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
             if (isAliasOfMethod(version, 'findIndex', method) && node === getExpressionComparedToInt(node.parent, -1, true)) {
-                context.report(node, 'Prefer _.some over findIndex comparison to -1')
+                context.report({node, message: 'Prefer _.some over findIndex comparison to -1'})
             }
         })
 
         if (includeNative) {
             visitors.BinaryExpression = node => {
                 if (isFindIndexCall(getExpressionComparedToInt(node, -1, true))) {
-                    context.report(node, 'Prefer _.some over findIndex comparison to -1')
+                    context.report({node, message: 'Prefer _.some over findIndex comparison to -1'})
                 }
             }
         }

@@ -27,7 +27,7 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
             if (isAliasOfMethod(version, 'forEach', method) && onlyHasPush(iteratee)) {
-                context.report(node, 'Prefer _.map over a _.forEach with a push to an array inside')
+                context.report({node, message: 'Prefer _.map over a _.forEach with a push to an array inside'})
             }
         })
     }

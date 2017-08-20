@@ -16,7 +16,7 @@ module.exports = {
 
         function reportIfEmptyFunction(node) {
             if (!getFirstFunctionLine(node) && node.parent.type !== 'MethodDefinition' && !node.generator && !node.async) {
-                context.report(node, 'Prefer _.noop over an empty function')
+                context.report({node, message: 'Prefer _.noop over an empty function'})
             }
         }
 

@@ -17,7 +17,7 @@ module.exports = {
         const get = require('lodash/get')
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
             if (isAliasOfMethod(version, 'map', method) && get(iteratee, 'params.length') === 0) {
-                context.report(node, 'Prefer _.times over _.map without using arguments')
+                context.report({node, message: 'Prefer _.times over _.map without using arguments'})
             }
         })
     }

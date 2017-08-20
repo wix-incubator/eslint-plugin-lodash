@@ -42,30 +42,30 @@ module.exports = {
             ImportDeclaration(node) {
                 if (isFullLodashImport(node.source.value)) {
                     if (importType === 'method') {
-                        context.report(node, messages.method)
+                        context.report({node, message: messages.method})
                     } else {
                         if (!allImportsAreOfType(node, importNodeTypes[importType])) {
-                            context.report(node, messages[importType])
+                            context.report({node, message: messages[importType]})
                         }
                     }
                 } else if (isMethodImport(node.source.value) && importType !== 'method') {
-                    context.report(node, messages[importType])
+                    context.report({node, message: messages[importType]})
                 }
             },
             VariableDeclarator(node) {
                 const name = getNameFromCjsRequire(node.init)
                 if (isFullLodashImport(name)) {
                     if (importType === 'method') {
-                        context.report(node, messages.method)
+                        context.report({node, message: messages.method})
                     } else {
                         const isObjectPattern = node.id.type === 'ObjectPattern'
                         const isMemberImport = importType === 'member'
                         if (isObjectPattern !== isMemberImport) {
-                            context.report(node, messages[importType])
+                            context.report({node, message: messages[importType]})
                         }
                     }
                 } else if (isMethodImport(name) && importType !== 'method') {
-                    context.report(node, messages[importType])
+                    context.report({node, message: messages[importType]})
                 }
             }
         }

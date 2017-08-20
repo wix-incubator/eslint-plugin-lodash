@@ -52,14 +52,22 @@ module.exports = {
             BinaryExpression(node) {
                 const typeofCompareType = getTypeofCompareType(node)
                 if (typeofCompareType) {
-                    context.report(node, REPORT_MESSAGE, {
-                        method: getIsTypeMethod(typeofCompareType),
-                        actual: '\'typeof\' comparison'
+                    context.report({
+                        node,
+                        message: REPORT_MESSAGE,
+                        data: {
+                            method: getIsTypeMethod(typeofCompareType),
+                            actual: '\'typeof\' comparison'
+                        }
                     })
                 } else if (node.operator === 'instanceof') {
                     const lodashEquivalent = getIsTypeMethod(node.right.name)
                     if (node.right.type === 'Identifier' && lodashEquivalent) {
-                        context.report(node, REPORT_MESSAGE, {method: lodashEquivalent, actual: `'instanceof ${node.right.name}'`})
+                        context.report({
+                            node,
+                            message: REPORT_MESSAGE,
+                            data: {method: lodashEquivalent, actual: `'instanceof ${node.right.name}'`}
+                        })
                     }
                 }
             }

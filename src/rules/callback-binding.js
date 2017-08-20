@@ -25,13 +25,13 @@ module.exports = {
         const callExpressionReporters = {
             3(node, iteratee) {
                 if (isBound(iteratee)) {
-                    context.report(iteratee.callee.property, 'Unnecessary bind, pass `thisArg` to lodash method instead')
+                    context.report({node: iteratee.callee.property, message: 'Unnecessary bind, pass `thisArg` to lodash method instead'})
                 }
             },
             4(node, iteratee, {method, callType}) {
                 const argsLength = node.arguments.length + (callType === 'chained' ? 1 : 0)
                 if (iteratee && argsLength > getFunctionMaxArity(4, method)) {
-                    context.report(iteratee, 'Do not use Lodash 3 thisArg, use binding instead')
+                    context.report({node: iteratee, message: 'Do not use Lodash 3 thisArg, use binding instead'})
                 }
             }
         }

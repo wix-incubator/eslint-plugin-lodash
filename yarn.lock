@@ -1018,6 +1018,10 @@ eslint-config-wix-editor@0.2.3:
   version "0.2.3"
   resolved "https://registry.yarnpkg.com/eslint-config-wix-editor/-/eslint-config-wix-editor-0.2.3.tgz#0e489462fc68b8823c7e17bae23f872d1df90fec"
 
+eslint-plugin-eslint-plugin@^0.8.0:
+  version "0.8.0"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-eslint-plugin/-/eslint-plugin-eslint-plugin-0.8.0.tgz#3c493945b092f61a059ed3a38b0a635fd71bb1ac"
+
 eslint-traverser@1.5.2:
   version "1.5.2"
   resolved "https://registry.yarnpkg.com/eslint-traverser/-/eslint-traverser-1.5.2.tgz#8e7923d70330586e7acde61a8306e88872044613"

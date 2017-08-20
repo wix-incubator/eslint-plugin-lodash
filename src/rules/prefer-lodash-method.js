@@ -109,7 +109,7 @@ module.exports = {
                     if (isNativeStringMethodCall(node)) {
                       lodashMethodName = nativeStringMap[lodashMethodName]
                     }
-                    context.report(node, `Prefer '_.${lodashMethodName}' over the native function.`)
+                    context.report({node, message: `Prefer '_.${lodashMethodName}' over the native function.`})
                 }
             }
         }, lodashContext.getImportVisitors())

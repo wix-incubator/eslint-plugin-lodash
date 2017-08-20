@@ -33,18 +33,18 @@ module.exports = {
                         curr = curr.parent.parent
                     }
                     if (isMethodCall(curr) && !needed) {
-                        context.report(node, 'Unnecessary explicit chaining')
+                        context.report({node, message: 'Unnecessary explicit chaining'})
                     }
                 }
             },
             implicit(node) {
                 if (lodashContext.isExplicitChainStart(node)) {
-                    context.report(node, 'Do not use explicit chaining')
+                    context.report({node, message: 'Do not use explicit chaining'})
                 }
             },
             explicit(node) {
                 if (lodashContext.isImplicitChainStart(node)) {
-                    context.report(node, 'Do not use implicit chaining')
+                    context.report({node, message: 'Do not use implicit chaining'})
                 }
             }
         }

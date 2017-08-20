@@ -50,7 +50,7 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
             if (isAliasOfMethod(version, 'forEach', method) && onlyHasSimplifiableIf(iteratee)) {
-                context.report(node, 'Prefer _.filter or _.some over an if statement inside a _.forEach')
+                context.report({node, message: 'Prefer _.filter or _.some over an if statement inside a _.forEach'})
             }
         })
     }

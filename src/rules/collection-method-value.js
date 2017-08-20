@@ -35,9 +35,9 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version, callType}) => {
             if (isPureLodashCollectionMethod(method, version) && !parentUsesValue(node, callType, version)) {
-                context.report(node, `Use value returned from _.${method}`)
+                context.report({node, message: `Use value returned from _.${method}`})
             } else if (isSideEffectIterationMethod(method, version) && parentUsesValue(node, callType, version) && !isParentCommit(node, callType, version)) {
-                context.report(node, `Do not use value returned from _.${getMethodName(node)}`)
+                context.report({node, message: `Do not use value returned from _.${getMethodName(node)}`})
             }
         })
     }

@@ -33,7 +33,7 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method}) => {
             if (isOtherDirection(method)) {
-                context.report(node, `Use _.${direction} for composition`)
+                context.report({node, message: `Use _.${direction} for composition`})
             }
         })
     }

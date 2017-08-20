@@ -21,7 +21,7 @@ module.exports = {
         const visitors = lodashContext.getImportVisitors()
         visitors.CallExpression = function (node) {
             if (lodashContext.isLodashChainStart(node) && isSingleArgumentFunctionCall(node.arguments[0])) {
-                context.report(node, 'Prefer using thru instead of function call in chain start.')
+                context.report({node, message: 'Prefer using thru instead of function call in chain start.'})
             }
         }
         return visitors

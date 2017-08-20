@@ -85,19 +85,19 @@ module.exports = {
         const reportIfViolates = {
             'as-needed'(node) {
                 if (isArrayOfLiterals(node)) {
-                    context.report(node, 'Use a string for simple paths')
+                    context.report({node, message: 'Use a string for simple paths'})
                 } else if (isPathStringWithVariableProps(node)) {
-                    context.report(node, 'Use an array for paths with variables')
+                    context.report({node, message: 'Use an array for paths with variables'})
                 }
             },
             array(node) {
                 if (isLiteral(node)) {
-                    context.report(node, 'Use an array for paths')
+                    context.report({node, message: 'Use an array for paths'})
                 }
             },
             string(node) {
                 if (isArrayExpression(node)) {
-                    context.report(node, 'Use a string for paths')
+                    context.report({node, message: 'Use a string for paths'})
                 }
             }
         }

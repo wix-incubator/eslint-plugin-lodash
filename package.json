@@ -40,6 +40,7 @@
     "cross-env": "4.0.0",
     "eslint": "3.19.0",
     "eslint-config-wix-editor": "0.2.3",
+    "eslint-plugin-eslint-plugin": "^0.8.0",
     "eslint-traverser": "1.5.2",
     "istanbul": "^0.4.4",
     "mocha": "3.3.0",

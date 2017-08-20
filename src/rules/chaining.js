@@ -48,17 +48,17 @@ module.exports = {
         const callExpressionVisitors = {
             always: node => {
                 if (isNestedNLevels(node, ruleDepth)) {
-                    context.report(node, 'Prefer chaining to composition')
+                    context.report({node, message: 'Prefer chaining to composition'})
                 } else if (lodashContext.isLodashChainStart(node)) {
                     const firstCall = node.parent.parent
                     if (isMethodCall(firstCall) && (isEndOfChain(firstCall) || isBeforeChainBreaker(firstCall))) {
-                        context.report(firstCall, 'Do not use chain syntax for single method')
+                        context.report({node: firstCall, message: 'Do not use chain syntax for single method'})
                     }
                 }
             },
             never: node => {
                 if (lodashContext.isLodashChainStart(node)) {
-                    context.report(node, 'Prefer composition to Lodash chaining')
+                    context.report({node, message: 'Prefer composition to Lodash chaining'})
                 }
             }
         }

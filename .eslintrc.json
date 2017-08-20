@@ -1,5 +1,9 @@
 {
-    "extends": "wix-editor/node",
+    "extends": [
+        "wix-editor/node",
+        "plugin:eslint-plugin/recommended"
+    ],
+    "plugins": ["eslint-plugin"],
     "rules": {
         "consistent-return": 0,
         "no-confusing-arrow": 0,

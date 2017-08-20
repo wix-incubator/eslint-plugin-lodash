@@ -29,7 +29,7 @@ module.exports = {
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
             if (isAliasOfMethod(version, 'map', method) && isFunctionMethodCallOfParam(iteratee)) {
-                context.report(node, 'Prefer _.invokeMap over map to a method call.')
+                context.report({node, message: 'Prefer _.invokeMap over map to a method call.'})
             }
         })
     }

@@ -32,12 +32,12 @@ module.exports = {
             if (lodashContext.isImplicitChainStart(node)) {
                 const end = getEndOfChain(node, false)
                 if (!isCommit(end) && isChainable(end, version)) {
-                    context.report(end, 'Missing unwrapping at end of chain')
+                    context.report({node: end, message: 'Missing unwrapping at end of chain'})
                 }
             } else if (lodashContext.isExplicitChainStart(node)) {
                 const end = getEndOfChain(node, true)
                 if (!isCommit(end) && !isChainBreaker(end, version)) {
-                    context.report(end, 'Missing unwrapping at end of chain')
+                    context.report({node: end, message: 'Missing unwrapping at end of chain'})
                 }
             }
         }

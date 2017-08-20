@@ -16,7 +16,7 @@ module.exports = {
         return {
             BinaryExpression(node) {
                 if (isIndexOfCall(getExpressionComparedToInt(node, 0))) {
-                    context.report(node, 'Prefer _.startsWith instead of comparing indexOf() to 0')
+                    context.report({node, message: 'Prefer _.startsWith instead of comparing indexOf() to 0'})
                 }
             }
         }

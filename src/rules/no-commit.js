@@ -22,7 +22,7 @@ module.exports = {
                     node = node.parent.parent
                 } while (isMethodCall(node) && !isCallToMethod(node, lodashContext.version, 'commit'))
                 if (isCallToMethod(node, lodashContext.version, 'commit')) {
-                    context.report(node, 'Do not end chain with commit.')
+                    context.report({node, message: 'Do not end chain with commit.'})
                 }
             }
         }

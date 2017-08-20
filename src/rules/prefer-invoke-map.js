@@ -18,7 +18,7 @@ module.exports = {
         const {isAliasOfMethod} = require('../util/methodDataUtil')
 
         function isOnlyUsedForObject(func, firstParamName) {
-            const declaredVariables = context.eslint.getDeclaredVariables(func)
+            const declaredVariables = context.getDeclaredVariables(func)
             return declaredVariables.every(variable => variable.references.length === 0 || (variable.name === firstParamName && variable.references.length === 1))
         }
 

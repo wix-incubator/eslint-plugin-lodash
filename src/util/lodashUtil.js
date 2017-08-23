@@ -16,7 +16,7 @@ function isChainable(node, version) {
 }
 
 /**
- * Returns whehter the node is a chain breaker method in the specified version
+ * Returns whether the node is a chain breaker method in the specified version
  * @param {Object} node
  * @param {number} version
  * @returns {boolean}

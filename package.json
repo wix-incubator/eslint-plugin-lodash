@@ -3,7 +3,7 @@
   "version": "2.4.5",
   "author": "Omer Ganim <ganimomer@gmail.com>",
   "description": "Lodash specific linting rules for ESLint",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
     "clean": "rimraf lib",

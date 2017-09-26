@@ -12,11 +12,11 @@ For a detailed rundown of breaking changes and additions, you can check the [rel
 
 Install [ESLint](https://www.github.com/eslint/eslint) either locally or globally.
 
-    $ npm install eslint
+    $ npm install eslint --save-dev
 
 If you installed `ESLint` globally, you have to install the Lodash plugin globally too. Otherwise, install it locally.
 
-    $ npm install eslint-plugin-lodash
+    $ npm install eslint-plugin-lodash --save-dev
 
 # Configuration
 

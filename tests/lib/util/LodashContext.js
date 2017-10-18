@@ -65,6 +65,22 @@ describe('LodashContext', () => {
                     }
                 }))
             })
+            it('should accept a single method package import as lodash', done => {
+                visitWithContext('import map from "lodash.map"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(lodashContext.methods[node.callee.name] === 'map')
+                        done()
+                    }
+                }))
+            })
+            it('should not accept a single method packge import from lodash-es as lodash', done => {
+                visitWithContext('import map from "lodash-es.map"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(!lodashContext.methods[node.callee.name])
+                        done()
+                    }
+                }))
+            })
             it('should not throw error when trying to import lodash for side effects', () => {
                 traverser('import "lodash"', {sourceType: 'module'})
                     .runRuleCode(context => (new LodashContext(context)).getImportVisitors())
@@ -134,6 +150,26 @@ describe('LodashContext', () => {
                     CallExpression(node) {
                         if (node.callee.name === 'map') {
                             assert(lodashContext.methods[node.callee.name] === 'map')
+                            done()
+                        }
+                    }
+                }))
+            })
+            it('should accept a single method package require', done => {
+                visitWithContext('const map = require("lodash.map"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(lodashContext.methods[node.callee.name] === 'map')
+                            done()
+                        }
+                    }
+                }))
+            })
+            it('should not accept a single method package require from lodash-es', done => {
+                visitWithContext('const map = require("lodash-es.map"); map(arr, x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'map') {
+                            assert(!lodashContext.methods[node.callee.name])
                             done()
                         }
                     }

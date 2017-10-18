@@ -10,7 +10,7 @@ function getNameFromCjsRequire(init) {
 
 const isFullLodashImport = str => /^lodash(-es)?$/.test(str)
 const getMethodImportFromName = str => {
-    const match = /^lodash(-es)?\/(?!fp)(\w+)$/.exec(str)
+    const match = /^lodash(-es\/|[./])(?!fp)(\w+)$/.exec(str)
     return match && match[2]
 }
 

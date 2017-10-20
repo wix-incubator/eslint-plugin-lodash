@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.4.4...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.5.0...HEAD
+
+## [2.5.0] - 2017-10-20
+### Added
+- Added support for single-method packages ([`3037b9f`][3037b9f])
+- Added option to enforce single-method packages import in `import-scope` ([`e4555c3`](e4555c3))
+
+[3037b9f]: https://github.com/wix/eslint-plugin-lodash/commit/3037b9f8d858ab0e263f1e1f06bac9459c0aa8c8
+[e4555c3]: https://github.com/wix/eslint-plugin-lodash/commit/e4555c3c2475813a07dc42031acb1daa52d251a0
+[2.5.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.5.0...v2.4.4
 
 ## [2.4.4] - 2017-07-12
 ### Fixed

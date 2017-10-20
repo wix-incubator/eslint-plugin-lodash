@@ -15,24 +15,27 @@ const every = require('lodash/every')
 const includes = require('lodash/includes')
 
 const messages = {
-    method: 'Do not import from the full Lodash module.',
+    method: 'Import individual methods from the Lodash module.',
     member: 'Import members from the full Lodash module.',
-    full: 'Use the full Lodash module.'
+    full: 'Use the full Lodash module.',
+    'method-package': 'Import Lodash methods only from method packages (e.g. lodash.map)'
 }
 
 const importNodeTypes = {
     method: ['ImportDefaultSpecifier'],
+    'method-package': ['ImportDefaultSpecifier'],
     member: ['ImportSpecifier'],
     full: ['ImportDefaultSpecifier', 'ImportNamespaceSpecifier']
 }
 
-const isMethodImport = name => Boolean(getMethodImportFromName(name))
+const isMethodImport = name => getMethodImportFromName(name) && !includes(name, '.')
+const isMethodPackageImport = name => getMethodImportFromName(name) && includes(name, '.')
 const allImportsAreOfType = (node, types) => every(node.specifiers, specifier => includes(types, specifier.type))
 
 module.exports = {
     meta: {
         schema: [{
-            enum: ['method', 'member', 'full']
+            enum: ['method', 'member', 'full', 'method-package']
         }]
     },
     create(context) {
@@ -41,22 +44,23 @@ module.exports = {
         return {
             ImportDeclaration(node) {
                 if (isFullLodashImport(node.source.value)) {
-                    if (importType === 'method') {
-                        context.report({node, message: messages.method})
+                    if (importType === 'method' || importType === 'method-package') {
+                        context.report({node, message: messages[importType]})
                     } else {
                         if (!allImportsAreOfType(node, importNodeTypes[importType])) {
                             context.report({node, message: messages[importType]})
                         }
                     }
-                } else if (isMethodImport(node.source.value) && importType !== 'method') {
+                } else if ((isMethodImport(node.source.value) && importType !== 'method') ||
+                           (isMethodPackageImport(node.source.value) && importType !== 'method-package')) {
                     context.report({node, message: messages[importType]})
                 }
             },
             VariableDeclarator(node) {
                 const name = getNameFromCjsRequire(node.init)
                 if (isFullLodashImport(name)) {
-                    if (importType === 'method') {
-                        context.report({node, message: messages.method})
+                    if (importType === 'method' || importType === 'method-package') {
+                        context.report({node, message: messages[importType]})
                     } else {
                         const isObjectPattern = node.id.type === 'ObjectPattern'
                         const isMemberImport = importType === 'member'
@@ -64,7 +68,8 @@ module.exports = {
                             context.report({node, message: messages[importType]})
                         }
                     }
-                } else if (isMethodImport(name) && importType !== 'method') {
+                } else if ((isMethodImport(name) && importType !== 'method') ||
+                           (isMethodPackageImport(name) && importType !== 'method-package')) {
                     context.report({node, message: messages[importType]})
                 }
             }

@@ -30,6 +30,7 @@ const recommended = {
         'lodash/prefer-immutable-method': 2,
         'lodash/prefer-includes': [2, {includeNative: true}],
         'lodash/prefer-invoke-map': 2,
+        'lodash/prefer-invoke': 2,
         'lodash/prefer-is-nil': 2,
         'lodash/prefer-lodash-chain': 2,
         'lodash/prefer-lodash-method': 2,

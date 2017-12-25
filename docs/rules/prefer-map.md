@@ -10,7 +10,7 @@ The following patterns are considered warnings:
 
 ```js
 
-_.forEach(arr, function(x) { newArr.push(f(x))}
+_.forEach(arr, function(x) { newArr.push(f(x))})
 
 ```
 
@@ -18,8 +18,7 @@ The following patterns are not considered warnings:
 
 ```js
 
-_.forEach(arr, function(x) { if (x.a) {a.push(x)}})
- 
+_.forEach(arr, function(x) { if (x.a) { a.push(x) }})
 ```
 
 

@@ -9,13 +9,13 @@ This rule takes no arguments.
 The following patterns are considered warnings:
 
 ```js
-var ids = _.collect(users, 'id');
+_.each(users, f);
 ```
 
 The following patterns are not considered warnings:
 
 ```js
-var ids = _.map(users, 'id');
+_.forEach(users, f);
 ```
 
 

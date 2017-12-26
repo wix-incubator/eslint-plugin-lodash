@@ -12,7 +12,7 @@ The following patterns are considered warnings:
 
 ```js
 /*eslint lodash/identity-shorthand: [2, "always"] */
-var topScore = _.max(scores, function (score) {
+var topScore = _.maxBy(scores, function (score) {
   return score;
 });
 ```
@@ -21,7 +21,7 @@ The following patterns are not considered warnings:
 
 ```js
 /*eslint lodash/identity-shorthand: [2, "never"] */
-var topScore = _.max(scores);
+var topScore = _.maxBy(scores);
 ```
 
 ## When Not To Use It

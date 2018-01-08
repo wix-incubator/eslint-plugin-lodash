@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-wrapper-method.md'
+        }
+    },
+
     create(context) {
         const {isLodashWrapperMethod, getLodashContext} = require('../util/lodashUtil')
         const lodashContext = getLodashContext(context)

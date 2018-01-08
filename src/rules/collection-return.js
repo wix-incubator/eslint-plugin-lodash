@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/collection-return.md'
+        }
+    },
+
     create(context) {
         const {getLodashMethodCallExpVisitor, getLodashContext} = require('../util/lodashUtil')
         const {isCollectionMethod} = require('../util/methodDataUtil')

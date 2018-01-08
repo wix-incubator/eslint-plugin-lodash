@@ -12,8 +12,12 @@
 
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/no-double-unwrap.md'
+        },
         fixable: "code"
     },
+
     create(context) {
         const {getLodashContext, isChainBreaker, isChainable} = require('../util/lodashUtil')
         const {isMethodCall, getCaller, getMethodName} = require('../util/astUtil')

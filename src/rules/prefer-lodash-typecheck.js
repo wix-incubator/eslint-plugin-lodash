@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-lodash-typecheck.md'
+        }
+    },
+
     create(context) {
         const some = require('lodash/some')
         const {getIsTypeMethod} = require('../util/lodashUtil')

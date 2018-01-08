@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-noop.md'
+        }
+    },
+
     create(context) {
         const {getFirstFunctionLine} = require('../util/astUtil')
 

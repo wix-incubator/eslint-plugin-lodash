@@ -12,6 +12,9 @@
 
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-some.md'
+        },
         schema: [{
             type: 'object',
             properties: {
@@ -21,7 +24,6 @@ module.exports = {
             }
         }]
     },
-
 
     create(context) {
         const includeNative = context.options[0] && context.options[0].includeNative

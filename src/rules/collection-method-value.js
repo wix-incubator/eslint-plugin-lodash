@@ -10,6 +10,12 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/collection-method-value.md'
+        }
+    },
+
     create(context) {
         const {isChainBreaker, getLodashMethodVisitors, isCallToMethod} = require('../util/lodashUtil')
         const {getMethodName} = require('../util/astUtil')

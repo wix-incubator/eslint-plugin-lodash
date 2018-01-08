@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-compact.md'
+        }
+    },
+
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {isNegationExpression, isIdentifierWithName, getValueReturnedInFirstStatement, getFirstParamName} = require('../util/astUtil')

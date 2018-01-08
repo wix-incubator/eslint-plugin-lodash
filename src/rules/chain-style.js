@@ -11,6 +11,9 @@
 //------------------------------------------------------------------------------
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/chain-style.md'
+        },
         schema: [{
             enum: ['as-needed', 'implicit', 'explicit']
         }]

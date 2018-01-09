@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-lodash-chain.md'
+        }
+    },
+
     create(context) {
         const {getLodashContext, isChainBreaker, isNativeCollectionMethodCall, isLodashWrapperMethod} = require('../util/lodashUtil')
         const {isMethodCall, isObjectOfMethodCall, getMethodName} = require('../util/astUtil')

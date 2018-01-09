@@ -11,6 +11,12 @@
 // ------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/callback-binding.md'
+        }
+    },
+
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {getFunctionMaxArity} = require('../util/methodDataUtil')

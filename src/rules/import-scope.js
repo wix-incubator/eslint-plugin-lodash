@@ -34,10 +34,14 @@ const allImportsAreOfType = (node, types) => every(node.specifiers, specifier =>
 
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/import-scope.md'
+        },
         schema: [{
             enum: ['method', 'member', 'full', 'method-package']
         }]
     },
+
     create(context) {
         const importType = context.options[0] || 'method'
 

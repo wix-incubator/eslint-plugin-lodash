@@ -8,6 +8,12 @@
 // ------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/unwrap.md'
+        }
+    },
+
     create(context) {
         const {getLodashContext, isChainable, isCallToMethod, isChainBreaker} = require('../util/lodashUtil')
         const {getCaller} = require('../util/astUtil')

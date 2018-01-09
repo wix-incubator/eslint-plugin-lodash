@@ -11,7 +11,11 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
-    meta: {},
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/preferred-alias.md'
+        }
+    },
 
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
@@ -31,4 +35,3 @@ module.exports = {
         })
     }
 }
-

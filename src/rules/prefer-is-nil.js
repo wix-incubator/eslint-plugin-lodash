@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-is-nil.md'
+        }
+    },
+
     create(context) {
         const {isNegationExpression, isEquivalentMemberExp} = require('../util/astUtil')
         const {isCallToLodashMethod, getLodashContext} = require('../util/lodashUtil')

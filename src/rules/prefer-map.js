@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-map.md'
+        }
+    },
+
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {getFirstFunctionLine, hasOnlyOneStatement, getMethodName, isFunctionDefinitionWithBlock, collectParameterValues} = require('../util/astUtil')

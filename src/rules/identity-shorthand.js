@@ -13,6 +13,9 @@
 
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/identity-shorthand.md'
+        },
         schema: [{
             enum: ['always', 'never']
         }]

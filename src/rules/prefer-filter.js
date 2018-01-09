@@ -12,6 +12,9 @@
 
 module.exports = {
     meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-filter.md'
+        },
         schema: [{
             type: 'integer'
         }]

@@ -11,6 +11,12 @@
 //------------------------------------------------------------------------------
 
 module.exports = {
+    meta: {
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-flat-map.md'
+        }
+    },
+
     create(context) {
         const {getLodashMethodVisitors, isCallToMethod, isCallToLodashMethod} = require('../util/lodashUtil')
         const {getCaller} = require('../util/astUtil')

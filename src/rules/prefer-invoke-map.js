@@ -9,7 +9,9 @@
 
 module.exports = {
     meta: {
-        docs: {}
+        docs: {
+            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-invoke-map.md'
+        }
     },
 
     create(context) {

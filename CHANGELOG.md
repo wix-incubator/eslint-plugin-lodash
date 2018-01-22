@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.5.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.5.1...HEAD
+
+## [2.5.1] - 2018-01-22
+### Fixed
+- Fix case where collection-return erronously reports on generator functions ([`19079ef`][19079ef])
+
+[3037b9f]: https://github.com/wix/eslint-plugin-lodash/commit/19079efa2c5584ed5e0e4f11ed97d797a405f9f8
+[2.5.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.5.1...v2.5.0
 
 ## [2.5.0] - 2017-10-20
 ### Added

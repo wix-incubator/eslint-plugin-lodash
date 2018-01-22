@@ -29,7 +29,7 @@ module.exports = {
             'CallExpression:exit': getLodashMethodCallExpVisitor(lodashContext, (node, iteratee, {method, version}) => {
                 if (isCollectionMethod(version, method) && funcInfos.has(iteratee)) {
                     const {hasReturn} = funcInfos.get(iteratee)
-                    if (isFunctionDefinitionWithBlock(iteratee) && !hasReturn && !iteratee.async) {
+                    if (isFunctionDefinitionWithBlock(iteratee) && !hasReturn && !iteratee.async && !iteratee.generator) {
                         context.report({node, message: `Do not use _.${method} without returning a value`})
                     }
                 }

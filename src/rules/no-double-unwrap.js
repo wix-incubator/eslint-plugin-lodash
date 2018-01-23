@@ -3,9 +3,6 @@
  */
 'use strict'
 
-/**
- * @fileoverview Rule to make sure value() wasn't called on a lodash chain twice
- */
 // ------------------------------------------------------------------------------
 // Rule Definition
 // ------------------------------------------------------------------------------

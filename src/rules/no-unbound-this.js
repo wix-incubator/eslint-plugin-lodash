@@ -2,6 +2,7 @@
  * @fileoverview Rule to check that all uses of `this` inside collection methods are bound
  */
 'use strict'
+
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------

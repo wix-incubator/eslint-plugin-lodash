@@ -3,9 +3,6 @@
  */
 'use strict'
 
-/**
- * @fileoverview Rule to check if a call to map and flatten should be a call to _.flatMap
- */
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------

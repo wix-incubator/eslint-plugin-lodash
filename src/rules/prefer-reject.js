@@ -3,9 +3,6 @@
  */
 'use strict'
 
-/**
- * @fileoverview Rule to check if a call to filter should be a call to reject
- */
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------

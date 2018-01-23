@@ -3,9 +3,6 @@
  */
 'use strict'
 
-/**
- * @fileoverview Rule to check if there's a JS native method in the lodash chain
- */
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------

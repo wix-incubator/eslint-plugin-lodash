@@ -3,9 +3,6 @@
  */
 'use strict'
 
-/**
- * @fileoverview Rule to check if a call to _.forEach should be a call to _.filter
- */
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------

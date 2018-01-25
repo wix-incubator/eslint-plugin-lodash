@@ -6,12 +6,15 @@
 //------------------------------------------------------------------------------
 // Rule Definition
 //------------------------------------------------------------------------------
+
+const getDocsUrl = require('../util/getDocsUrl')
+
 const possibleDirections = ['pipe', 'compose', 'flow', 'flowRight']
 
 module.exports = {
     meta: {
         docs: {
-            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/consistent-compose.md'
+            url: getDocsUrl('consistent-compose.md')
         },
         schema: [{
             enum: possibleDirections

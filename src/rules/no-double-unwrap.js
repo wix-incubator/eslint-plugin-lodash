@@ -7,10 +7,12 @@
 // Rule Definition
 // ------------------------------------------------------------------------------
 
+const getDocsUrl = require('../util/getDocsUrl')
+
 module.exports = {
     meta: {
         docs: {
-            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/no-double-unwrap.md'
+            url: getDocsUrl('no-double-unwrap.md')
         },
         fixable: "code"
     },

@@ -7,10 +7,12 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 
+const getDocsUrl = require('../util/getDocsUrl')
+
 module.exports = {
     meta: {
         docs: {
-            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-includes.md'
+            url: getDocsUrl('prefer-includes.md')
         },
         schema: [{
             type: 'object',

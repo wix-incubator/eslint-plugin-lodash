@@ -8,6 +8,7 @@
 // ------------------------------------------------------------------------------
 
 const {isFullLodashImport, getNameFromCjsRequire, getMethodImportFromName} = require('../util/importUtil')
+const getDocsUrl = require('../util/getDocsUrl')
 const every = require('lodash/every')
 const includes = require('lodash/includes')
 
@@ -32,7 +33,7 @@ const allImportsAreOfType = (node, types) => every(node.specifiers, specifier =>
 module.exports = {
     meta: {
         docs: {
-            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/import-scope.md'
+            url: getDocsUrl('import-scope.md')
         },
         schema: [{
             enum: ['method', 'member', 'full', 'method-package']

@@ -7,10 +7,12 @@
 // Rule Definition
 //------------------------------------------------------------------------------
 
+const getDocsUrl = require('../util/getDocsUrl')
+
 module.exports = {
     meta: {
         docs: {
-            url: 'https://github.com/wix/eslint-plugin-lodash/tree/master/docs/rules/prefer-reject.md'
+            url: getDocsUrl('prefer-reject.md')
         },
         schema: [{
             type: 'integer'

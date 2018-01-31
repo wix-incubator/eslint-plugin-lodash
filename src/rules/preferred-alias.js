@@ -13,16 +13,28 @@ module.exports = {
     meta: {
         docs: {
             url: getDocsUrl('preferred-alias.md')
-        }
+        },
+        schema: [{
+            type: 'object',
+            properties: {
+                ingoreMethods: {
+                    type: 'array',
+                    items: {
+                        type: 'string'
+                    }
+                }
+            }
+        }]
     },
 
     create(context) {
         const {getLodashMethodVisitors} = require('../util/lodashUtil')
         const {isMainAlias, getMainAlias} = require('../util/methodDataUtil')
-        const has = require('lodash/has')
+        const [{ignoreMethods = []} = {}] = context.options
+        const includes = require('lodash/includes')
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
-            if (!isMainAlias(version, method)) {
+            if (!includes(ignoreMethods, method) && !isMainAlias(version, method)) {
                 const mainAlias = getMainAlias(version, method)
                 if (mainAlias) {
                     context.report({

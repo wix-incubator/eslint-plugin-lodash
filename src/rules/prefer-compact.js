@@ -38,7 +38,7 @@ module.exports = {
         }
 
         return getLodashMethodVisitors(context, (node, iteratee, {method, version}) => {
-            if (isAliasOfMethod(version, 'filter', method) && isBooleanCastingFunction(iteratee)) {
+            if (isAliasOfMethod(version, 'filter', method) && (isBooleanCastingFunction(iteratee) || !iteratee)) {
                 context.report({node, message: 'Prefer _.compact over filtering of Boolean casting'})
             }
         })

@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.1...HEAD
+
+## [2.6.1] - 2018-02-04
+### Fixed
+- Fixed `prefer-compact` to report on `_.filter` with identity shorthand ([`55f6de3`][55f6de3])
+
+[55f6de3]: https://github.com/wix/eslint-plugin-lodash/commit/55f6de3f796070b8648e01e187eee16b6ddd8950
+[2.6.1]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.1...v2.6.0
 
 ## [2.6.0] - 2018-01-31
 ### Added

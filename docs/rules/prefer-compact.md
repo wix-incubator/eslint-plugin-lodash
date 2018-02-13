@@ -21,7 +21,9 @@ The following patterns are not considered warnings:
 
 var x = _.filter(arr, function(x) {return !x.a && p});
 
-var x = _.filter(arr, function(x) {return f(x) || g(x)}) 
+var x = _.filter(arr, function(x) {return f(x) || g(x)});
+
+var x = _.compact(arr);
 ```
 
 

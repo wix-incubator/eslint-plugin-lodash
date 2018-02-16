@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('prefer-reject.md')
+            url: getDocsUrl('prefer-reject')
         },
         schema: [{
             type: 'integer'

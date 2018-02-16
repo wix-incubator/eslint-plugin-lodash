@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('path-style.md')
+            url: getDocsUrl('path-style')
         },
         schema: [{
             enum: ['as-needed', 'array', 'string']

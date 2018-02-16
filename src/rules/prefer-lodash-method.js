@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('prefer-lodash-method.md')
+            url: getDocsUrl('prefer-lodash-method')
         },
         schema: [{
             type: 'object',

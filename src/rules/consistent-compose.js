@@ -14,7 +14,7 @@ const possibleDirections = ['pipe', 'compose', 'flow', 'flowRight']
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('consistent-compose.md')
+            url: getDocsUrl('consistent-compose')
         },
         schema: [{
             enum: possibleDirections

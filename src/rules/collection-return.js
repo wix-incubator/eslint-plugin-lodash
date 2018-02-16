@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('collection-return.md')
+            url: getDocsUrl('collection-return')
         }
     },
 

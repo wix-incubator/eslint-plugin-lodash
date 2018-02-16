@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('unwrap.md')
+            url: getDocsUrl('unwrap')
         }
     },
 

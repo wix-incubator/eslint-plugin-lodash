@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('callback-binding.md')
+            url: getDocsUrl('callback-binding')
         }
     },
 

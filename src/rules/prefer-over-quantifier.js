@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('prefer-over-quantifier.md')
+            url: getDocsUrl('prefer-over-quantifier')
         }
     },
 

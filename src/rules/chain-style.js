@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('chain-style.md')
+            url: getDocsUrl('chain-style')
         },
         schema: [{
             enum: ['as-needed', 'implicit', 'explicit']

@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('preferred-alias.md')
+            url: getDocsUrl('preferred-alias')
         },
         schema: [{
             type: 'object',

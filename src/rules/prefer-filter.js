@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('prefer-filter.md')
+            url: getDocsUrl('prefer-filter')
         },
         schema: [{
             type: 'integer'

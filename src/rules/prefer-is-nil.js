@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('prefer-is-nil.md')
+            url: getDocsUrl('prefer-is-nil')
         }
     },
 

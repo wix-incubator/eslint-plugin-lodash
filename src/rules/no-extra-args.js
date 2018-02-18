@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('no-extra-args.md')
+            url: getDocsUrl('no-extra-args')
         }
     },
 

@@ -33,7 +33,7 @@ const allImportsAreOfType = (node, types) => every(node.specifiers, specifier =>
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('import-scope.md')
+            url: getDocsUrl('import-scope')
         },
         schema: [{
             enum: ['method', 'member', 'full', 'method-package']

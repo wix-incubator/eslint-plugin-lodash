@@ -12,7 +12,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 module.exports = {
     meta: {
         docs: {
-            url: getDocsUrl('matches-prop-shorthand.md')
+            url: getDocsUrl('matches-prop-shorthand')
         },
         schema: [{
             enum: ['always', 'never']

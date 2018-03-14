@@ -4,6 +4,7 @@ const path = require('path')
 const _ = require('lodash')
 const rules = fs.readdirSync(path.resolve(__dirname, 'rules')).map(f => f.replace(/\.js$/, ''))
 const recommended = {
+    plugins: ['lodash'],
     rules: {
         'lodash/callback-binding': 2,
         'lodash/chain-style': [2, 'as-needed'],

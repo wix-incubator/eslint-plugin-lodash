@@ -148,7 +148,7 @@ function getLodashContext(context) {
 module.exports = {
     isChainable,
     isChainBreaker,
-    isCallToMethod,
+isCallToMethod,
     isLodashWrapperMethod,
     getIsTypeMethod,
     isNativeCollectionMethodCall,

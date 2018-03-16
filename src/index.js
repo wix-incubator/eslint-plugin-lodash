@@ -24,6 +24,7 @@ const recommended = {
         'lodash/prefer-compact': 2,
         'lodash/prefer-constant': 2,
         'lodash/prefer-filter': [2, 3],
+        'lodash/prefer-find': 2,
         'lodash/prefer-flat-map': 2,
         'lodash/prefer-get': [2, 3],
         'lodash/prefer-immutable-method': 2,

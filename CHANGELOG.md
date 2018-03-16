@@ -8,7 +8,14 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.2...HEAD
+
+## [2.6.2] - 2018-03-16
+### Fixed
+- Fixed `recommended` config to include `lodash` in the list of plugins ([`6381bff`][6381bff])
+
+[6381bff]: https://github.com/wix/eslint-plugin-lodash/commit/6381bff9db2cf3012629eae5c4df2b8803d9ef31
+[2.6.2]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.2...v2.6.1
 
 ## [2.6.1] - 2018-02-04
 ### Fixed

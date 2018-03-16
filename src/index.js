@@ -26,6 +26,7 @@ const recommended = {
         'lodash/prefer-filter': [2, 3],
         'lodash/prefer-flat-map': 2,
         'lodash/prefer-get': [2, 3],
+        'lodash/prefer-immutable-method': 2,
         'lodash/prefer-includes': [2, {includeNative: true}],
         'lodash/prefer-invoke-map': 2,
         'lodash/prefer-is-nil': 2,

@@ -8,7 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.6.2...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.7.0...HEAD
+
+## [2.7.0] - 2018-03-17
+### Added
+- Added rule `prefer-immutable-method` ([`c4fe9cd`][c4fe9cd])
+- Added rule `prefer-find` ([`c81ef24`][c81ef24])
+
+[c4fe9cd]: https://github.com/wix/eslint-plugin-lodash/commit/c4fe9cd709385b394c8b6418d958c3c266f953b7
+[c81ef24]: https://github.com/wix/eslint-plugin-lodash/commit/c81ef24cbe8cfa5f9fa27a31da9301a53f240ef0
+[2.7.0]: https://github.com/wix/eslint-plugin-lodash/compare/v2.7.0...v2.6.2
 
 ## [2.6.2] - 2018-03-16
 ### Fixed

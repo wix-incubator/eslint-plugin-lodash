@@ -22,7 +22,7 @@ ruleTester.run('preferred-alias', rule, {
             '_(users).map().value().each(function (i) { i.f(); });',
             'var x = _.map(y, function (i) { return i; });',
             'var customResult = _.customFunction(customArg1, customArg2)',
-            {code: "_.each(users, x => x)", options: [{ignoreMethods: ['each']}]}
+            {code: '_.each(users, x => x)', options: [{ignoreMethods: ['each']}]}
         ].map(withDefaultPragma),
         "const {toString} = require('lodash'); toString('something')"
     ],

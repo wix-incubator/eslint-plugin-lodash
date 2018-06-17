@@ -14,7 +14,7 @@ module.exports = {
         docs: {
             url: getDocsUrl('no-double-unwrap')
         },
-        fixable: "code"
+        fixable: 'code'
     },
 
     create(context) {

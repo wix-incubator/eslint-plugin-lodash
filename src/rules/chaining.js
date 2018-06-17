@@ -24,7 +24,7 @@ module.exports = {
 
     create(context) {
         const {getLodashContext, isChainBreaker} = require('../util/lodashUtil')
-        const {getCaller, isMethodCall, isObjectOfMethodCall} = require('../util/astUtil')
+        const {isMethodCall, isObjectOfMethodCall} = require('../util/astUtil')
         const DEFAULT_LENGTH = 3
         const lodashContext = getLodashContext(context)
         const version = lodashContext.version

@@ -21,7 +21,6 @@ module.exports = {
         const {getFunctionMaxArity} = require('../util/methodDataUtil')
         const {getMethodName} = require('../util/astUtil')
         const {version} = require('../util/settingsUtil').getSettings(context)
-        const includes = require('lodash/includes')
 
         function isBound(node) {
             return node && node.type === 'CallExpression' && getMethodName(node) === 'bind' && node.arguments.length === 1

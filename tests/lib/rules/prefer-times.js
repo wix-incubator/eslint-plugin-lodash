@@ -26,7 +26,7 @@ ruleTester.run('prefer-times', rule, {
         'var x = _.map(a, ({f: x}) => x);',
         'var x = _.map(a, ({f: {x}}) => x);',
         '_.map(a, x => _.map(b, y => x.f(y)))',
-        '_.map(arr, function(a, c = 1) {return b})',
+        '_.map(arr, function(a, c = 1) {return b})'
     ].map(withDefaultPragma),
     invalid: [
         '_(arr).map(function(){return g}).value()',

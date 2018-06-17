@@ -48,10 +48,8 @@ module.exports = {
                 if (isFullLodashImport(node.source.value)) {
                     if (importType === 'method' || importType === 'method-package') {
                         context.report({node, message: messages[importType]})
-                    } else {
-                        if (!allImportsAreOfType(node, importNodeTypes[importType])) {
-                            context.report({node, message: messages[importType]})
-                        }
+                    } else if (!allImportsAreOfType(node, importNodeTypes[importType])) {
+                        context.report({node, message: messages[importType]})
                     }
                 } else if ((isMethodImport(node.source.value) && importType !== 'method') ||
                            (isMethodPackageImport(node.source.value) && importType !== 'method-package')) {

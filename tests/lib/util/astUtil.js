@@ -704,6 +704,5 @@ describe('astUtil', () => {
                     done()
                 })
         })
-
     })
 })

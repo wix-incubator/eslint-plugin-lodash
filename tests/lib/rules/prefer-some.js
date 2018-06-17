@@ -34,7 +34,7 @@ ruleTester.run('prefer-some', rule, {
         'x = 0 > _.findIndex(a, b)',
         {code: 'x = a.findIndex(b) !== -1', options: [{includeNative: true}]},
         {code: 'x = a.findIndex(b) >= 0', options: [{includeNative: true}]},
-        {code: '0 <= a.findIndex(b)', options: [{includeNative: true}]},
+        {code: '0 <= a.findIndex(b)', options: [{includeNative: true}]}
     ].map(withDefaultPragma).concat([{
         code: 'import io from "lodash/findIndex"; x = io(a) !== -1',
         parserOptions: {

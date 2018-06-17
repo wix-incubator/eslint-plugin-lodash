@@ -30,7 +30,7 @@ module.exports = class {
                             case 'ImportNamespaceSpecifier':
                             case 'ImportDefaultSpecifier':
                                 self.general[spec.local.name] = true
-                                    break
+                                break
                             case 'ImportSpecifier':
                                 self.methods[spec.local.name] = spec.imported.name
                                 break

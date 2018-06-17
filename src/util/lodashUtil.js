@@ -2,7 +2,6 @@
 const _ = require('lodash')
 const methodDataUtil = require('./methodDataUtil')
 const astUtil = require('./astUtil')
-const settingsUtil = require('./settingsUtil')
 const LodashContext = require('./LodashContext')
 
 /**
@@ -148,7 +147,7 @@ function getLodashContext(context) {
 module.exports = {
     isChainable,
     isChainBreaker,
-isCallToMethod,
+    isCallToMethod,
     isLodashWrapperMethod,
     getIsTypeMethod,
     isNativeCollectionMethodCall,

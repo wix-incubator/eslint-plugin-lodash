@@ -1,4 +1,4 @@
- 'use strict'
+'use strict'
 
 // ------------------------------------------------------------------------------
 // Requirements
@@ -24,8 +24,8 @@ ruleTester.run('collection-method-value', rule, {
             code: '_.remove(arr, f)',
             settings: {lodash: {version: 3}}
         }, {
-           code: '_(x).forEach(f).commit()',
-           settings: {lodash: {version: 3}}
+            code: '_(x).forEach(f).commit()',
+            settings: {lodash: {version: 3}}
         }
     ].map(withDefaultPragma),
     invalid: [
@@ -37,7 +37,7 @@ ruleTester.run('collection-method-value', rule, {
         '_(arr).filter(g).map(f).value()',
         '_.chain(arr).find(p).map(f).value()',
         {
-            code:'import f from "lodash/map"; f(x, g)',
+            code: 'import f from "lodash/map"; f(x, g)',
             parserOptions: {
                 sourceType: 'module'
             }

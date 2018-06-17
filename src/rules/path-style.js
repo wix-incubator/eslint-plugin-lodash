@@ -30,7 +30,6 @@ module.exports = {
         const findIndex = require('lodash/findIndex')
         const some = require('lodash/some')
         const every = require('lodash/every')
-        const get = require('lodash/get')
         const matches = require('lodash/matches')
         const isPropAccess = x => x === '.' || x === '['
 

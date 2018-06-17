@@ -53,6 +53,5 @@ module.exports = {
             always: 'Prefer omitting the iteratee over a function that returns its argument',
             never: 'Do not use the identity shorthand syntax'
         })
-
     }
 }

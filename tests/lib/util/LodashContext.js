@@ -278,14 +278,14 @@ describe('LodashContext', () => {
         })
     })
     describe('isImplicitChainStart', () => {
-       it('should return true if the callExp is an implicit chain start', done => {
-           visitWithContext('const wrapper = _(val)', defaultPragmaConfig, lodashContext => ({
-               CallExpression(node) {
-                   assert(lodashContext.isImplicitChainStart(node))
-                   done()
-               }
-           }))
-       })
+        it('should return true if the callExp is an implicit chain start', done => {
+            visitWithContext('const wrapper = _(val)', defaultPragmaConfig, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isImplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
         it('should return false if the callExp is an explicit chain start', done => {
             visitWithContext('const wrapper = _.chain(val)', defaultPragmaConfig, lodashContext => ({
                 CallExpression(node) {

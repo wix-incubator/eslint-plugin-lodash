@@ -13,5 +13,5 @@ const REPO_URL = 'https://github.com/wix/eslint-plugin-lodash'
 * @returns {string} URL to the documentation for the given rule
 */
 module.exports = function getDocsUrl(ruleName) {
-   return `${REPO_URL}/blob/v${pkg.version}/docs/rules/${ruleName}.md`
+    return `${REPO_URL}/blob/v${pkg.version}/docs/rules/${ruleName}.md`
 }

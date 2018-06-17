@@ -30,8 +30,8 @@ ruleTester.run('matches-shorthand', rule, {
             code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
             options: ['never']
         }, {
-          code: 'var b = 1; var isPublic = _.find([], function(i) { return i.id === 3 && i.a === b; });',
-          options: ['always', 1, true, { onlyLiterals: true }]
+            code: 'var b = 1; var isPublic = _.find([], function(i) { return i.id === 3 && i.a === b; });',
+            options: ['always', 1, true, {onlyLiterals: true}]
         }
     ].map(withDefaultPragma),
     invalid: [{
@@ -64,8 +64,8 @@ ruleTester.run('matches-shorthand', rule, {
         options: ['never'],
         errors: [{message: messages.never, column: 22}]
     }, {
-      code: 'var isPublic = _.find([], function(i) { return i.id === 3 && i.a === "b"; });',
-      options: ['always', 1, true, { onlyLiterals: true }],
-      errors: [{message: messages.always, column: 27}]
+        code: 'var isPublic = _.find([], function(i) { return i.id === 3 && i.a === "b"; });',
+        options: ['always', 1, true, {onlyLiterals: true}],
+        errors: [{message: messages.always, column: 27}]
     }].map(withDefaultPragma)
 })

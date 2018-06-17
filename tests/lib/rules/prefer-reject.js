@@ -24,7 +24,7 @@ ruleTester.run('prefer-reject', rule, {
         '_.filter(users, function(user) {return user.name.givenName !== "Bob";});',
         '_.filter(users, function(user) {return !user.isSomething;});',
         '_.filter(arr, user => !user.active)',
-        `_.filter(arr, _.negate(f));`
+        '_.filter(arr, _.negate(f));'
     ].map(withDefaultPragma).concat([{
         code: 'import f from "lodash/filter"; t = f(arr, x => !x.a)',
         parserOptions: {

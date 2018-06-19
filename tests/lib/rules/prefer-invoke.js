@@ -23,18 +23,18 @@ ruleTester.run('prefer-invoke', rule, {
         {code: "if (!_.isFunction(obj.foo)) {   throw new Error('foo is not a function')}"}, 
         {code: "if(_.isFunction(obj.foo)) {obj.foo();console.log('calling foo')}"}, 
         {code: "if(shouldRender) {_.invoke(obj, 'render');}"}, 
-        {code: "if (_.isFunction(f) && someHeavyCalculationThatTakesAWhile(...someArguments)) {f()}"} 
+        {code: 'if (_.isFunction(f) && someHeavyCalculationThatTakesAWhile(...someArguments)) {f()}'} 
 
     ].map(withDefaultPragma),
     invalid: [
         {code: "if (_.get(x, 'a')) {  x();}", errors: [errorMessage]}, 
         {code: "if (_.has(x, 'a')) {  x();}", errors: [errorMessage]}, 
-        {code: "if (_.isFunction(x))   x()", errors: [errorMessage]},
+        {code: 'if (_.isFunction(x))   x()', errors: [errorMessage]},
         {code: 'if (_.isFunction(obj.foo)) {obj.foo(a, b, c)}', errors: [errorMessage]},
         {code: "var f = () => console.log('i am a function');if(_.isFunction(f)){f()}", errors: [errorMessage]},
-        {code: "if(shouldRender && _.isFunction(obj.render)) {obj.render()}", errors: [errorMessage]}, 
+        {code: 'if(shouldRender && _.isFunction(obj.render)) {obj.render()}', errors: [errorMessage]}, 
         {code: "if(shouldRender && _.get(obj, 'render')) {obj.render()}", errors: [errorMessage]}, 
         {code: "if(shouldRender && _.has(obj, 'render')) {obj.render()}", errors: [errorMessage]}, 
-        {code: "if (shouldRender && !shouldSkip && _.isFunction(f)) {f();}", errors: [errorMessage]} 
+        {code: 'if (shouldRender && !shouldSkip && _.isFunction(f)) {f();}', errors: [errorMessage]} 
     ].map(withDefaultPragma)
 })

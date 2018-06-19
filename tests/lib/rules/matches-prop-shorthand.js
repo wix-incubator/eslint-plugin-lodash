@@ -29,8 +29,8 @@ ruleTester.run('matches-prop-shorthand', rule, {
             code: 'var isPublic = _.find([], function(i) { return i.id === 3});',
             options: ['never']
         }, {
-          code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
-          options: ['always', { onlyLiterals: true }]
+            code: 'var isPublic = _.findIndex(arr, (i) => {return i.id === b.id})',
+            options: ['always', {onlyLiterals: true}]
         }
     ].map(withDefaultPragma).concat([{
         code: 'import {map} from "lodash"; function foo() {map(bar, function(x) { return x})}',
@@ -67,7 +67,7 @@ ruleTester.run('matches-prop-shorthand', rule, {
         errors: errors.always
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
-        options: ['always', { onlyLiterals: true }],
+        options: ['always', {onlyLiterals: true}],
         errors: errors.always
     }].map(withDefaultPragma)
 })

@@ -6,7 +6,7 @@
 
 const rule = require('../../../src/rules/no-extra-args')
 const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
-const {withDefaultPragma}= require('../testUtil/optionsUtil')
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 // ------------------------------------------------------------------------------
 // Tests
 // ------------------------------------------------------------------------------

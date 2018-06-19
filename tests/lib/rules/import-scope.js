@@ -149,7 +149,7 @@ const testCases = {
                 "import * as _ from 'lodash'",
                 "import map from 'lodash/map'"
             ].map(fromModule)
-        },
+        }
     }
 }
 ruleTester.run('import-scope', rule, {
@@ -165,8 +165,8 @@ ruleTester.run('import-scope', rule, {
             ...testCases.valid.full.import
         ].map(withOption('full')),
         ...[
-          ...testCases.valid['method-package'].require,
-          ...testCases.valid['method-package'].import
+            ...testCases.valid['method-package'].require,
+            ...testCases.valid['method-package'].import
         ].map(withOption('method-package'))
     ],
     invalid: [
@@ -183,8 +183,8 @@ ruleTester.run('import-scope', rule, {
             ...testCases.invalid.full.import
         ].map(withOptionAndMessage('full')),
         ...[
-          ...testCases.invalid['method-package'].require,
-          ...testCases.invalid['method-package'].import
+            ...testCases.invalid['method-package'].require,
+            ...testCases.invalid['method-package'].import
         ].map(withOptionAndMessage('method-package'))
     ]
 })

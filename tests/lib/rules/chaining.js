@@ -23,7 +23,7 @@ const testCases = {
     valid: {
         always: [
             'var x = _.map(a, f)',
-            'var x = _(a).map(f).reduce(g, {})',
+            'var x = _(a).map(f).reduce(g, {})'
         ].map(code => ({code, options: ['always']})),
         cutoff: [
             'var x = _.map(_.filter(a, g), f)'

@@ -36,7 +36,7 @@ module.exports = {
         }
 
         const visitors = lodashContext.getImportVisitors()
-        visitors.CallExpression = function(node) {
+        visitors.CallExpression = function (node) {
             if (lodashContext.isImplicitChainStart(node)) {
                 const end = getEndOfChain(node, false)
                 if (!isCommit(end) && isChainable(end, version)) {

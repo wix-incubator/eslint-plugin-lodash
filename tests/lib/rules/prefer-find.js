@@ -12,7 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const { fromMessage, withDefaultPragma } = require('../testUtil/optionsUtil')
+const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
 const toFindError = fromMessage('Prefer using `_.find` over selecting the first item of a filtered result')
 const toFindLastError = fromMessage('Prefer using `_.findLast` over selecting the last item of a filtered result')
 

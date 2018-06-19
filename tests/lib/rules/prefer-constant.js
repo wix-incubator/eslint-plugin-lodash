@@ -12,7 +12,6 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const errors = [{message: 'Prefer _.constant over a function returning a literal'}]
 const {withDefaultPragma, fromMessage} = require('../testUtil/optionsUtil')
 const toErrorObject = fromMessage('Prefer _.constant over a function returning a literal')
 ruleTester.run('prefer-constant', rule, {

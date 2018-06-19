@@ -34,33 +34,29 @@ module.exports = {
     },
 
     create(context) {
-
         const {getLodashContext, isNativeCollectionMethodCall, getLodashMethodCallExpVisitor} = require('../util/lodashUtil')
         const {getMethodName, getCaller} = require('../util/astUtil')
         const {methodExists} = require('../util/methodDataUtil')
-        const keys = require('lodash/keys')
         const get = require('lodash/get')
         const includes = require('lodash/includes')
-        const matches = require('lodash/matches')
         const some = require('lodash/some')
-        const map = require('lodash/map')
         const assign = require('lodash/assign')
         const ignoredMethods = get(context, ['options', 0, 'ignoreMethods'], [])
         const ignoredObjects = get(context, ['options', 0, 'ignoreObjects'], [])
         const usingLodash = new Set()
 
         const nativeStringMap = {
-          endsWith: 'endsWith',
-          includes: 'includes',
-          padEnd: 'padEnd',
-          padStart: 'padStart',
-          repeat: 'repeat',
-          replace: 'replace',
-          split: 'split',
-          startsWith: 'startsWith',
-          toLowerCase: 'toLower',
-          toUpperCase: 'toUpper',
-          trim: 'trim'
+            endsWith: 'endsWith',
+            includes: 'includes',
+            padEnd: 'padEnd',
+            padStart: 'padStart',
+            repeat: 'repeat',
+            replace: 'replace',
+            split: 'split',
+            startsWith: 'startsWith',
+            toLowerCase: 'toLower',
+            toUpperCase: 'toUpper',
+            trim: 'trim'
         }
 
         const lodashContext = getLodashContext(context)
@@ -112,7 +108,7 @@ module.exports = {
                 if (!usingLodash.has(node) && !shouldIgnore(node) && canUseLodash(node)) {
                     let lodashMethodName = getMethodName(node)
                     if (isNativeStringMethodCall(node)) {
-                      lodashMethodName = nativeStringMap[lodashMethodName]
+                        lodashMethodName = nativeStringMap[lodashMethodName]
                     }
                     context.report({node, message: `Prefer '_.${lodashMethodName}' over the native function.`})
                 }

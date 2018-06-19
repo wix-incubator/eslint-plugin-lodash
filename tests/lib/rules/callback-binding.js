@@ -41,7 +41,7 @@ const testCases = {
             'var r = _.find(users, function (user) { return user.age > this.age; }.bind(this));',
             'var r = _.find(users, predicate.bind(this));'
         ].map(optionsUtil.fromVersion3WithDefaultPragma).map(optionsUtil.fromMessage('Unnecessary bind, pass `thisArg` to lodash method instead')),
-        v4Default:[
+        v4Default: [
             'var t = _.map(users, function(user) { return this.x}, this);',
             'var t = _.reduce(users, func, initial, this);'
         ].map(optionsUtil.withDefaultPragma).map(optionsUtil.fromMessage('Do not use Lodash 3 thisArg, use binding instead'))

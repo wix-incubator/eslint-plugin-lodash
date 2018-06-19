@@ -33,7 +33,7 @@ module.exports = {
     },
     assignIn: {
         aliases: [
-            "extend"
+            'extend'
         ],
         wrapper: false,
         shorthand: false,
@@ -42,7 +42,7 @@ module.exports = {
     },
     assignInWith: {
         aliases: [
-            "extendWith"
+            'extendWith'
         ],
         wrapper: false,
         shorthand: false,
@@ -64,10 +64,10 @@ module.exports = {
         iteratee: false
     },
     attempt: {
-      wrapper: false,
-      shorthand: false,
-      chainable: false,
-      iteratee: false
+        wrapper: false,
+        shorthand: false,
+        chainable: false,
+        iteratee: false
     },
     before: {
         aliases: [],
@@ -569,7 +569,7 @@ module.exports = {
     },
     forEach: {
         aliases: [
-            "each"
+            'each'
         ],
         wrapper: false,
         shorthand: false,
@@ -579,7 +579,7 @@ module.exports = {
     },
     forEachRight: {
         aliases: [
-            "eachRight"
+            'eachRight'
         ],
         wrapper: false,
         shorthand: false,
@@ -693,7 +693,7 @@ module.exports = {
     },
     head: {
         aliases: [
-            "first"
+            'first'
         ],
         wrapper: false,
         shorthand: false,

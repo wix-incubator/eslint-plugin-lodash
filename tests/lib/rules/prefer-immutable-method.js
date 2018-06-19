@@ -12,7 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('prefer-immutable-method', rule, {
     valid: [
         'const x = _.without(arr, 1)'

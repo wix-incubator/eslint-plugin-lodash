@@ -24,7 +24,7 @@ module.exports = {
         const version = lodashContext.version
 
         const visitors = lodashContext.getImportVisitors()
-        visitors.CallExpression = function(node) {
+        visitors.CallExpression = function (node) {
             if (lodashContext.isLodashChainStart(node)) {
                 do {
                     node = node.parent.parent

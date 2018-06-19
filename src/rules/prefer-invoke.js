@@ -3,6 +3,7 @@
  */
 "use strict"
 const _ = require("lodash")
+const {isEquivalentMemberExp} = require('../util/astUtil')
 
 //------------------------------------------------------------------------------
 // Rule Definition
@@ -16,53 +17,55 @@ module.exports = {
   create(context) {
     const { getLodashMethodVisitors } = require("../util/lodashUtil")
 
+    const {isAliasOfMethod} = require('../util/methodDataUtil')
 
-    const getParentIfStatement = n => {
-      if (_.get(n, 'parent.type') === "IfStatement") {
-        return n.parent
-      } else if (_.get(n, "parent.parent.type") === "IfStatement") {
-        return n.parent.parent
-      }
-    }
-
-    const getIsFunctionArgument = node => 
-      _.get(node, 'arguments[0].name') || _.get(node, 'arguments[0].property.name')
-
-
-    const calleeInside = consequentBody => {
-      const callee = _.get(consequentBody, 'body[0].expression.callee')
-      return _.get(callee, 'property.name') || _.get(callee, 'name')
-    }
-
-    const checkSingleCallExpressionInsideIf = (node, consequentBody, suspectedFunctionName) => {
-
-      if (_.get(node, 'parent.type') === 'LogicalExpression') {
-        if (_.get(node, 'parent.right.callee.property.name') === 'isFunction') {
-          return report(node)
-        }
-      } else if (calleeInside(consequentBody) === suspectedFunctionName) {
-        return report(node)
-      }
-
-    }
-
+    const relevantMethods = ['isFunction', 'get', 'has']
     const report = node => context.report({node, message: 'Prefer _.invoke(f) over _.isFunction(f) && f()'})
 
+    const getIf = node => {
+      if (_.get(node, 'parent.type') === "IfStatement") {
+        return node.parent
+      } else if (_.get(node, "parent.parent.type") === "IfStatement") {
+        return  node.parent.parent
+      }
+    }
+
+
+
+
+    const calleeInside = consequentBody => 
+      _.get(consequentBody, 'expression.callee') ||
+        _.get(consequentBody, 'body[0].expression.callee')
+
+
+
+    const checkSingleCallExpressionInsideIf = (node, consequentBody, susspectedCalle) => {
+
+      if (_.get(node, 'parent.type') === 'LogicalExpression') {
+        if (relevantMethods.includes(_.get(node, 'parent.right.callee.property.name'))) {
+          return report(node)
+        }
+        } else if (isEquivalentMemberExp(calleeInside(consequentBody), susspectedCalle) && _.includes(relevantMethods, _.get(node, 'callee.property.name'))) {
+          return report(node)
+      }
+
+    }
 
     return getLodashMethodVisitors(context, (node, iteratee, { method, version }) => {
-      const parentIf = getParentIfStatement(node)
-      if (!parentIf) {
+      if (!_.find(relevantMethods, m => isAliasOfMethod(version, m, method))) {
+        return
+      }
+      const ifStatement = getIf(node)
+      if (!ifStatement) {
         return
       }
 
-      const consequentBody = _.get(parentIf, 'consequent')
-      if (_.get(consequentBody, 'body.length') !== 1) {
+      const consequentBody = _.get(ifStatement, 'consequent')
+      if (_.get(consequentBody, 'body.length') !== 1 && !_.chain(consequentBody).get('expression.type').isEqual('CallExpression').value()) {
         return
       }
       
-      if (_.get(consequentBody, 'body[0].expression.type') === 'CallExpression') {
-        checkSingleCallExpressionInsideIf(node, consequentBody, getIsFunctionArgument(node))
-      }
+      checkSingleCallExpressionInsideIf(node, consequentBody, _.get(node, 'arguments[0]'))
     }
     )
   }

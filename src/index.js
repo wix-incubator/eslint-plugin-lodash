@@ -69,7 +69,7 @@ module.exports = {
             rules: {
                 'lodash/callback-binding': 2,
                 'lodash/chain-style': [2, 'as-needed'],
-                'lodash/chaining': [2, 'always'],
+                'lodash/chaining': [2, 'implicit'],
                 'lodash/collection-method-value': 2,
                 'lodash/collection-return': 2,
                 'lodash/consistent-compose': [2, 'flow'],

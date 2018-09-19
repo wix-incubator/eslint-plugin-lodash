@@ -6,10 +6,13 @@ which evaluates them lazily.
 
 ## Rule Details
 
-This rule allows users to enforce a specific style: either always use chaining (starting a certain length) or never.
+This rule allows users to enforce a specific style:
+- `always`: Always use chaining over a certain length
+- `never`: Always use composition over a certain length
+- `implicit`: Only report on composition if it can be replaced with an implict chain.
  
 ## Options
-This rule takes two arguments. The first is the mode: `always` or `never` (default is `never`).
+This rule takes two arguments. The first is the mode: `always`,  `never` or `implicit` (default is `never`).
 
 ### never
 When the rule is set to `never`, any use of `_()` or `_.chain()` is prohibited.

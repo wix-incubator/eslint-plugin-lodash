@@ -12,12 +12,7 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 // ------------------------------------------------------------------------------
 
 const ruleTester = ruleTesterUtil.getRuleTester()
-const {fromMessage, withDefaultPragma} = require('../testUtil/optionsUtil')
-const messages = {
-    always: 'Prefer chaining to composition',
-    never: 'Prefer composition to Lodash chaining',
-    single: 'Do not use chain syntax for single method'
-}
+const {withDefaultPragma} = require('../testUtil/optionsUtil')
 
 const testCases = {
     valid: {
@@ -33,23 +28,55 @@ const testCases = {
         ].map(code => ({code, options: ['never']})),
         default: [
             'import {map, filter, uniq} from "lodash"; var x = map(filter(uniq(a), g), f)'
-        ].map(code => ({code, parserOptions: {sourceType: 'module'}}))
+        ].map(code => ({code, parserOptions: {sourceType: 'module'}})),
+        implicit: [
+            'var x = _(x).map(f).filter(g).uniq().value()',
+            'var x = _.map(_.compact(_.cloneDeep(t)), f)'
+        ].map(code => ({code, options: ['implicit']}))
     },
     invalid: {
         always: [
             'var x = _.map(_.filter(_.uniq(a), g), f)',
             'import _map from "lodash/map"; import _filter from "lodash/filter"; var x = _map(_filter(_.uniq(a), g), f)'
-        ].map(code => ({code, options: ['always'], parserOptions: {sourceType: 'module'}})).map(fromMessage(messages.always)),
+        ].map(code => ({
+            code, 
+            options: ['always'], 
+            parserOptions: {sourceType: 'module'},
+            errors: [{messageId: 'always'}]
+        })),
         single: [
             'var x = _(a).map(f).value()',
             'var x = _(a).reduce(g, {})'
-        ].map(code => ({code, options: ['always']})).map(fromMessage(messages.single)),
+        ].map(code => ({
+            code, 
+            options: ['always'],
+            errors: [{messageId: 'single'}]
+        })),
         never: [
             'var x = _.chain(a).map(f).reduce(g, {}).get(h).value',
             'var x = _(a).map(f).reduce(g, {})',
             'var x = _(a).map(f).value()',
             'var x = _(a).reduce(g, {})'
-        ].map(code => ({code, options: ['never']})).map(fromMessage(messages.never))
+        ].map(code => ({
+            code, 
+            options: ['never'],
+            errors: [{messageId: 'never'}]
+        })),
+        implicit: [
+            'var x = _.map(_.filter(_.uniq(a), g), f)',
+            "var x = _.get(_.filter(_.uniq(a), g), 'a')"
+        ].map(code => ({
+            code, 
+            options: ['implicit'],
+            errors: [{messageId: 'always'}]
+        })),
+        implicitSingle: [
+            'var x = _(a).map(f).value()'
+        ].map(code => ({
+            code, 
+            options: ['implicit'],
+            errors: [{messageId: 'single'}]
+        }))
     }
 }
 
@@ -59,11 +86,14 @@ ruleTester.run('chaining', rule, {
         ...testCases.valid.always,
         ...testCases.valid.cutoff,
         ...testCases.valid.never,
-        ...testCases.valid.default
+        ...testCases.valid.default,
+        ...testCases.valid.implicit
     ].map(withDefaultPragma),
     invalid: [
         ...testCases.invalid.always,
         ...testCases.invalid.single,
-        ...testCases.invalid.never
+        ...testCases.invalid.never,
+        ...testCases.invalid.implicit,
+        ...testCases.invalid.implicitSingle
     ].map(withDefaultPragma)
 })

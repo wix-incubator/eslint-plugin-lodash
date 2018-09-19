@@ -16,7 +16,14 @@ module.exports = {
         },
         schema: [{
             enum: ['as-needed', 'array', 'string']
-        }]
+        }],
+        fixable: 'code',
+        messages: {
+            stringForSimple: 'Use a string for simple paths',
+            arrayForVars: 'Use an array for paths with variables',
+            array: 'Use an array for paths',
+            string: 'Use a string for paths'
+        }
     },
 
     create(context) {
@@ -31,6 +38,7 @@ module.exports = {
         const some = require('lodash/some')
         const every = require('lodash/every')
         const matches = require('lodash/matches')
+        const toPath = require('lodash/toPath')
         const isPropAccess = x => x === '.' || x === '['
 
         function endsWithPropAccess(str) {
@@ -79,26 +87,88 @@ module.exports = {
                 (isLiteral(node.right) && startsWithPropAccess(node.right.value)))
         }
 
-        function isPathStringWithVariableProps(node) {
-            return isTemplateStringWithVariableProps(node) || isStringConcatWithVariableProps(node)
+        function canBeDotNotation(node) {
+            return node.value && /^[a-zA-z0-9_$][\w\$]*$/.test(node.value)
+        }
+
+        function convertToStringStyleWithoutVariables(node) {
+            return `'${node.elements
+                .map(el => canBeDotNotation(el) ? `.${el.value}` : `[${el.value}]`)
+                .join('')
+                .replace(/^\./, '')}'`
+        }
+
+        function convertToStringStyleWithVariables(node) {
+            return `\`${node.elements
+                .map(el => {
+                    if (canBeDotNotation(el)) {
+                        return `.${el.value}`
+                    }
+                    if (isLiteral(el)) {
+                        return `[${el.value}]`
+                    }
+                    return `\$\{${context.getSourceCode().getText(el)}\}`
+                })
+                .join('')
+                .replace(/^\./, '')}\``
+        }
+
+        function convertToStringStyle(node, hasVariables) {
+            if (!hasVariables || isArrayOfLiterals(node)) {
+                return convertToStringStyleWithoutVariables(node)
+            }
+            return convertToStringStyleWithVariables(node)
         }
 
         const reportIfViolates = {
             'as-needed'(node) {
                 if (isArrayOfLiterals(node)) {
-                    context.report({node, message: 'Use a string for simple paths'})
-                } else if (isPathStringWithVariableProps(node)) {
-                    context.report({node, message: 'Use an array for paths with variables'})
+                    context.report({
+                        node, 
+                        messageId: 'stringForSimple',
+                        fix(fixer) {
+                            return fixer.replaceText(node, convertToStringStyle(node, false))
+                        }
+                    })
+                } else if (isStringConcatWithVariableProps(node)) {
+                    context.report({
+                        node, 
+                        messageId: 'arrayForVars'
+                    })
+                } else if (isTemplateStringWithVariableProps(node)) {
+                    context.report({
+                        node, 
+                        messageId: 'arrayForVars'
+                    })
                 }
             },
             array(node) {
                 if (isLiteral(node)) {
-                    context.report({node, message: 'Use an array for paths'})
+                    context.report({
+                        node, 
+                        messageId: 'array',
+                        fix(fixer) {
+                            return fixer.replaceText(node, `[${toPath(node.value)
+                                .map(x => `'${x}'`)
+                                .join(', ')}]`)
+                        }
+                    })
+                } else if (isTemplateLiteral(node)) {
+                    context.report({
+                        node, 
+                        messageId: 'array'
+                    })
                 }
             },
             string(node) {
                 if (isArrayExpression(node)) {
-                    context.report({node, message: 'Use a string for paths'})
+                    context.report({
+                        node, 
+                        messageId: 'string',
+                        fix(fixer) {
+                            return fixer.replaceText(node, convertToStringStyle(node, true))
+                        }
+                    })
                 }
             }
         }

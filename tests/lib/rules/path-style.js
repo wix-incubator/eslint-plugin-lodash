@@ -28,29 +28,52 @@ ruleTester.run('path-style', rule, {
     ].map(withDefaultPragma),
     invalid: [{
         code: "_.invoke(x, ['a'])",
-        errors: [{message: 'Use a string for simple paths'}]
+        errors: [{messageId: 'stringForSimple'}],
+        output: "_.invoke(x, 'a')"
+    }, {
+        code: "_.invoke(x, ['a', 'some-value'])",
+        errors: [{messageId: 'stringForSimple'}],
+        output: "_.invoke(x, 'a[some-value]')"
     }, {
         code: "_(x).invoke(['a']).filter(f).value()",
-        errors: [{message: 'Use a string for simple paths'}]
+        errors: [{messageId: 'stringForSimple'}],
+        output: "_(x).invoke('a').filter(f).value()"
     }, {
         code: "var t = _.matchesProperty(['a', 'b'])",
-        errors: [{message: 'Use a string for simple paths'}]
+        errors: [{messageId: 'stringForSimple'}],
+        output: "var t = _.matchesProperty('a.b')"
     }, {
         code: "var t = _.has(y, 'a.' + x)",
-        errors: [{message: 'Use an array for paths with variables'}]
+        errors: [{messageId: 'arrayForVars'}]
     }, {
         code: "var t = _.has(y, x + '[b]')",
-        errors: [{message: 'Use an array for paths with variables'}]
+        errors: [{messageId: 'arrayForVars'}]
     }, {
         code: 'var t = _.has(y, `a[${x}]`)',
-        errors: [{message: 'Use an array for paths with variables'}]
+        errors: [{messageId: 'arrayForVars'}]
     }, {
-        code: "var t = _.get(x, 'a');",
-        errors: [{message: 'Use an array for paths', column: 18}],
+        code: "var t = _.get(x, 'a')",
+        errors: [{messageId: 'array', column: 18}],
+        options: ['array'],
+        output: "var t = _.get(x, ['a'])"
+    }, {
+        code: 'var t = _.get(y, `a.${x}`)',
+        errors: [{messageId: 'array'}],
         options: ['array']
     }, {
-        code: "var t = _.get(x, ['a', 'b']);",
-        errors: [{message: 'Use a string for paths', column: 18}],
-        options: ['string']
+        code: "var t = _.get(y, [a, 'x'])",
+        errors: [{messageId: 'string'}],
+        options: ['string'],
+        output: 'var t = _.get(y, `${a}.x`)'
+    }, {
+        code: 'var t = _.get(y, [a, 0])',
+        errors: [{messageId: 'string'}],
+        options: ['string'],
+        output: 'var t = _.get(y, `${a}[0]`)'
+    }, {
+        code: "var t = _.get(x, ['a', 'b'])",
+        errors: [{messageId: 'string', column: 18}],
+        options: ['string'],
+        output: "var t = _.get(x, 'a.b')"
     }].map(withDefaultPragma)
 })

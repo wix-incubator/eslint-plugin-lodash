@@ -8,7 +8,17 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v2.7.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v3.0.0...HEAD
+
+## [3.0.0] - 2018-09-19
+### Fixed
+- (Breaking) Added cases reported by `path-style` ([`170e31f`][170e31f])
+
+### Added
+- Added fixer for some cases in `path-style` ([`170e31f`][170e31f])
+
+[170e31f]: https://github.com/wix/eslint-plugin-lodash/commit/170e31f983a0237b2da3e1b4700f1f36f95bf36e
+[3.0.0]: https://github.com/wix/eslint-plugin-lodash/compare/v3.0.0...v2.7.0
 
 ## [2.7.0] - 2018-03-17
 ### Added

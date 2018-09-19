@@ -8,7 +8,15 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v3.0.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v3.1.0...HEAD
+
+## [3.1.0] - 2018-09-19
+
+### Added
+- Added `implicit` option to `chaining`. ([`c4cbbce`][c4cbbce])
+
+[170e31f]: https://github.com/wix/eslint-plugin-lodash/commit/c4cbbcee438ca5c069f95da90e6aaaee34230296
+[3.1.0]: https://github.com/wix/eslint-plugin-lodash/compare/v3.1.0...v3.0.0
 
 ## [3.0.0] - 2018-09-19
 ### Fixed

@@ -320,6 +320,14 @@ describe('LodashContext', () => {
                 }
             }))
         })
+        it('should return false if chain was imported from lodash', done => {
+            visitWithContext('import {chain} from "lodash"; const wrapper = chain(val)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
     })
     describe('isExplicitChainStart', () => {
         it('should return false if the callExp is an implicit chain start', done => {

@@ -108,7 +108,7 @@ module.exports = class {
      * @returns {boolean|undefined}
      */
     isImplicitChainStart(node) {
-        return (this.pragma && node.callee.name === this.pragma) || this.isImportedLodash(node.callee)
+        return (this.pragma && node.callee.name === this.pragma) || this.isImportedLodash(node.callee) && node.callee.name !== 'chain'
     }
 
     /**

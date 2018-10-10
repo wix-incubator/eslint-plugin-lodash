@@ -1,6 +1,6 @@
 # Collection Return Statement
 
-When using a lodash collection method that isn't forEach, the iteratee should return a value, otherwise it could result in either unclear code or unexpected results.
+When using a Lodash collection method that isn't forEach, the iteratee should return a value, otherwise it could result in either unclear code or unexpected results.
 
 ## Rule Details
 
@@ -10,11 +10,11 @@ The following patterns are considered warnings:
 
 ```js
 
-_.map(arr, function(x) { console.log(x) });
+_.map(arr, function(x) { console.log(x); });
 
-_.some(arr, function(x) { if (x.a) {f(x);});
+_.some(arr, function(x) { if (x.a) {f(x); });
 
-_.every(collection, x => { f(x);});
+_.every(collection, x => { f(x); });
 
 ```
 

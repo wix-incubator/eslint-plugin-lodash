@@ -33,6 +33,10 @@ module.exports = class {
                                 break
                             case 'ImportSpecifier':
                                 self.methods[spec.local.name] = spec.imported.name
+
+                                if (spec.imported.name === 'chain') {
+                                    self.general[spec.local.name] = true
+                                }
                                 break
                         }
                     })
@@ -113,12 +117,21 @@ module.exports = class {
     }
 
     /**
+     * Returns whether the node is chain start imported as member, chain()... import { chain } from 'lodash'
+     * @param node
+     * @returns {boolean}
+     */
+    isMemberImportedChainStart(node) {
+        return node.callee.name === 'chain' && this.isImportedLodash(node.callee)
+    }
+
+    /**
      * Returns whether the node is a Lodash chain start, implicit or explicit
      * @param node
      * @returns {*|boolean|boolean|undefined}
      */
     isLodashChainStart(node) {
-        return node && node.type === 'CallExpression' && (this.isImplicitChainStart(node) || this.isExplicitChainStart(node))
+        return node && node.type === 'CallExpression' && (this.isImplicitChainStart(node) || this.isExplicitChainStart(node) || this.isMemberImportedChainStart(node))
     }
 
     /**

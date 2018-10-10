@@ -55,6 +55,10 @@ module.exports = class {
                     } else if (id.type === 'ObjectPattern') {
                         id.properties.forEach(prop => {
                             self.methods[prop.value.name] = prop.key.name
+
+                            if (prop.value.name === 'chain') {
+                                self.general[prop.value.name] = true
+                            }
                         })
                     }
                 } else if (required) {
@@ -119,9 +123,9 @@ module.exports = class {
     /**
      * Returns whether the node is chain start imported as member, chain()... import { chain } from 'lodash'
      * @param node
-     * @returns {boolean}
+     * @returns {boolean|undefined}
      */
-    isMemberImportedChainStart(node) {
+    isImportedChainStart(node) {
         return node.callee.name === 'chain' && this.isImportedLodash(node.callee)
     }
 
@@ -131,7 +135,7 @@ module.exports = class {
      * @returns {*|boolean|boolean|undefined}
      */
     isLodashChainStart(node) {
-        return node && node.type === 'CallExpression' && (this.isImplicitChainStart(node) || this.isExplicitChainStart(node) || this.isMemberImportedChainStart(node))
+        return node && node.type === 'CallExpression' && (this.isImplicitChainStart(node) || this.isExplicitChainStart(node) || this.isImportedChainStart(node))
     }
 
     /**

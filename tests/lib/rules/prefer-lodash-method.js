@@ -36,7 +36,11 @@ ruleTester.run('prefer-lodash-method', rule, {
                 options: [{ignoreObjects: ['^\\$.+']}]
             },
             '_.chain(a).get(p).map(f).value()',
-            'var x = Object.create(null)'
+            'var x = Object.create(null)',
+            {
+                code: 'import {chain} from "lodash"; var x = chain(a).map(f).value()',
+                parserOptions: {sourceType: 'module'}
+            }
         ].map(withDefaultPragma),
         ...[
             'var x = str.replace(something, withSomething)'

@@ -8,7 +8,17 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v3.1.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v4.0.0...HEAD
+
+## [4.0.0] - 2018-11-21
+
+### Fixed
+- Fixed case where `prefer-lodash-method` reports on chained methods. ([`e32432b`][e32432b])
+- Fixed case where `prop-shorthand` doesn't report on `_.sortBy`. ([`9288ad4`][9288ad4])
+
+[e32432b]: https://github.com/wix/eslint-plugin-lodash/commit/e32432ba80f4bf09d630891da1a68d06cdb8bcb5
+[9288ad4]: https://github.com/wix/eslint-plugin-lodash/commit/9288ad494397e0f6d7df6ea212b5022737599dae
+[4.0.0]: https://github.com/wix/eslint-plugin-lodash/compare/v4.0.0...v3.1.0
 
 ## [3.1.0] - 2018-09-19
 

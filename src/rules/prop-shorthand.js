@@ -41,6 +41,6 @@ module.exports = {
         }, {
             always: 'Prefer property shorthand syntax',
             never: 'Do not use property shorthand syntax'
-        })
+        }, 'prop')
     }
 }

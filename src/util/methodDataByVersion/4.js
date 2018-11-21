@@ -1795,9 +1795,11 @@ module.exports = {
     sortBy: {
         aliases: [],
         wrapper: false,
-        shorthand: false,
+        shorthand: {
+            prop: true
+        },
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     sortedIndex: {
         aliases: [],

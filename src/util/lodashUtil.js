@@ -117,12 +117,12 @@ function getLodashMethodVisitors(context, lodashCallExpVisitor) {
     return visitors
 }
 
-function getShorthandVisitors(context, checks, messages) {
+function getShorthandVisitors(context, checks, messages, shorthandType) {
     const lodashContext = new LodashContext(context)
     const visitors = lodashContext.getImportVisitors()
     visitors.CallExpression = getLodashMethodCallExpVisitor(lodashContext, {
         always(node, iteratee, {method, version}) {
-            if (methodDataUtil.methodSupportsShorthand(version, method) && checks.canUseShorthand(iteratee, lodashContext)) {
+            if (methodDataUtil.methodSupportsShorthand(version, method, shorthandType) && checks.canUseShorthand(iteratee, lodashContext)) {
                 context.report(iteratee, messages.always)
             }
         },

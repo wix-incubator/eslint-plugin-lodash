@@ -59,6 +59,9 @@ ruleTester.run('prop-shorthand', rule, {
         code: 'var ids = _.map([], i => i.a.b.c);',
         errors: [{message: messages.always, column: 21}]
     }, {
+        code: 'var ids = _.sortBy(arr, i => i.a);',
+        errors: [{message: messages.always}]
+    }, {
         code: 'var ids = _.map(arr, "id");',
         options: ['never'],
         errors: [{message: messages.never, column: 22}]

@@ -63,9 +63,10 @@ function isCollectionMethod(version, method) {
  * @param {string} method
  * @returns {boolean}
  */
-function methodSupportsShorthand(version, method) {
+function methodSupportsShorthand(version, method, shorthandType) {
     const mainAlias = getMainAlias(version, method)
-    return _.get(getMethodData(version), [mainAlias, 'shorthand'])
+    const methodShorthandData = _.get(getMethodData(version), [mainAlias, 'shorthand'])
+    return _.isBoolean(methodShorthandData) ? methodShorthandData : Boolean(shorthandType && methodShorthandData[shorthandType])
 }
 
 /**

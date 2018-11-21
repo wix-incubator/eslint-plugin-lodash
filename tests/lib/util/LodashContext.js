@@ -41,6 +41,14 @@ describe('LodashContext', () => {
                     }
                 }))
             })
+            it('should accept a chain imported as module', done => {
+                visitWithContext('import { chain } from "lodash"; chain.map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
+                    CallExpression(node) {
+                        assert(lodashContext.general[node.callee.object.name])
+                        done()
+                    }
+                }))
+            })
             it('should accept a destructured import as lodash', done => {
                 visitWithContext('import {map} from "lodash"; map(arr, x => x)', {sourceType: 'module'}, lodashContext => ({
                     CallExpression(node) {
@@ -120,6 +128,16 @@ describe('LodashContext', () => {
                     CallExpression(node) {
                         if (node.callee.name === 'map') {
                             assert(lodashContext.methods[node.callee.name] === 'map')
+                            done()
+                        }
+                    }
+                }))
+            })
+            it('should accept chain destructured from the main module', done => {
+                visitWithContext('const {chain} = require("lodash"); chain(arr).map(x => x)', undefined, lodashContext => ({
+                    CallExpression(node) {
+                        if (node.callee.name === 'chain') {
+                            assert(lodashContext.general[node.callee.name])
                             done()
                         }
                     }
@@ -302,6 +320,14 @@ describe('LodashContext', () => {
                 }
             }))
         })
+        it('should return false if chain was imported from lodash', done => {
+            visitWithContext('import {chain} from "lodash"; const wrapper = chain(val)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
     })
     describe('isExplicitChainStart', () => {
         it('should return false if the callExp is an implicit chain start', done => {
@@ -324,6 +350,32 @@ describe('LodashContext', () => {
             visitWithContext('const wrapper = _.map(val, f)', defaultPragmaConfig, lodashContext => ({
                 CallExpression(node) {
                     assert(!lodashContext.isExplicitChainStart(node))
+                    done()
+                }
+            }))
+        })
+    })
+    describe('isImportedChainStart', () => {
+        it('should return true if the chain() is imported from lodash', done => {
+            visitWithContext('import {chain} from "lodash"; const wrapper = chain(val)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(lodashContext.isImportedChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return false if chain is not imported from lodash', done => {
+            visitWithContext('const chain = () => false; const wrapper = chain(val)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImportedChainStart(node))
+                    done()
+                }
+            }))
+        })
+        it('should return false for any other lodash call', done => {
+            visitWithContext('import {chain} from "lodash"; const wrapper = _.map(val, f)', {sourceType: 'module'}, lodashContext => ({
+                CallExpression(node) {
+                    assert(!lodashContext.isImportedChainStart(node))
                     done()
                 }
             }))

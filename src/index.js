@@ -10,6 +10,7 @@ const recommended = {
         'lodash/chain-style': [2, 'as-needed'],
         'lodash/chaining': 2,
         'lodash/collection-method-value': 2,
+        'lodash/collection-ordering': 2,
         'lodash/collection-return': 2,
         'lodash/consistent-compose': [2, 'flow'],
         'lodash/identity-shorthand': [2, 'always'],
@@ -81,7 +82,6 @@ module.exports = {
                 'lodash/no-double-unwrap': 2,
                 'lodash/no-extra-args': 2,
                 'lodash/path-style': [2, 'string'],
-
                 'lodash/prefer-compact': 2,
                 'lodash/prefer-constant': 2,
                 'lodash/prefer-filter': [2, 3],

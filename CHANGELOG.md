@@ -8,7 +8,20 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v4.0.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.0...HEAD
+
+## [4.0.0] - 2018-11-21
+
+### Added
+- Added rule `collection-ordering`. ([`4673524`][4673524])
+
+### Removed
+- Removed support for Node versions under 6.x. ([`7889a0a`][7889a0a])
+
+[4673524]: https://github.com/wix/eslint-plugin-lodash/commit/4673524ad4d7397c38feaad8ff72ff141af8810f
+[7889a0a]: https://github.com/wix/eslint-plugin-lodash/commit/7889a0a6dea186c03296868d3b5afe8081f2312c
+[5.0.0]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.0...v4.0.0
+
 
 ## [4.0.0] - 2018-11-21
 

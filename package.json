@@ -3,21 +3,18 @@
   "version": "4.0.0",
   "author": "Omer Ganim <ganimomer@gmail.com>",
   "description": "Lodash specific linting rules for ESLint",
-  "main": "lib/index.js",
+  "main": "src/index.js",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "clean": "rimraf lib",
-    "lint": "eslint ./",
+    "lint": "eslint .",
     "test": "npm run lint && npm run unit-test",
-    "unit-test": "cross-env NODE_ENV=test nyc mocha tests/**/*.js --reporter=dot",
-    "babel": "babel src -d lib",
-    "build": "npm run clean && npm run babel",
-    "prepublish": "npm run build"
+    "unit-test": "cross-env NODE_ENV=test nyc mocha tests/**/*.js --reporter=dot"
   },
   "files": [
     "LICENSE",
     "README.md",
-    "lib"
+    "src",
+    "docs"
   ],
   "repository": {
     "type": "git",
@@ -32,10 +29,6 @@
     "lodash": "4.17.11"
   },
   "devDependencies": {
-    "babel-cli": "6.26.0",
-    "babel-plugin-istanbul": "5.1.0",
-    "babel-preset-es2015": "6.24.1",
-    "babel-register": "6.26.0",
     "coveralls": "3.0.2",
     "cross-env": "5.2.0",
     "eslint": "5.9.0",
@@ -44,11 +37,10 @@
     "eslint-traverser": "1.5.2",
     "istanbul": "^0.4.4",
     "mocha": "5.2.0",
-    "nyc": "13.1.0",
-    "rimraf": "2.6.2"
+    "nyc": "13.1.0"
   },
   "engines": {
-    "node": ">=0.12.0"
+    "node": ">=6"
   },
   "keywords": [
     "eslint",

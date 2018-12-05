@@ -27,6 +27,7 @@ ruleTester.run('prop-shorthand', rule, {
         'var r = _.map([], function() { return React.PropTypes.object; })',
         'var r = _.map([])',
         'var r = _.map(results, result => result[result.length - 1]);',
+        'var x = _.mixedInMethod()',
         {
             code: 'var r = _.map([], function(x) { return x.id})',
             options: ['never']

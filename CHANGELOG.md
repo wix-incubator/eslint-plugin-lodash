@@ -8,11 +8,18 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.1...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v5.1.0...HEAD
+
+## [5.1.0] - 2018-12-05
+### Changed
+- Changed `collection-ordering` not to enforce arrays on iteratees by default. ([`bae2b12`][bae2b12])
+
+[bae2b12]: https://github.com/wix/eslint-plugin-lodash/commit/bae2b1203a3dca33fdd0a2e6bda85663e1f8e89f
+[5.1.0]: https://github.com/wix/eslint-plugin-lodash/compare/v5.1.0...v5.0.1
 
 ## [5.0.1] - 2018-12-05
 ### Fixed
-- Fixed `prop-shorthand` crashing when using method introduced with `_.mixin` ([`ca1faf4`][ca1faf4])
+- Fixed `prop-shorthand` crashing when using method introduced with `_.mixin`. ([`ca1faf4`][ca1faf4])
 
 [ca1faf4]: https://github.com/wix/eslint-plugin-lodash/commit/ca1faf4896d62314c5d75bbc6fb4e05308eca505
 [5.0.1]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.1...v5.0.0

@@ -8,9 +8,16 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 ### Added
 - (none)
 
-[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.0...HEAD
+[unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.1...HEAD
 
-## [4.0.0] - 2018-11-21
+## [5.0.1] - 2018-12-05
+### Fixed
+- Fixed `prop-shorthand` crashing when using method introduced with `_.mixin` ([`ca1faf4`][ca1faf4])
+
+[ca1faf4]: https://github.com/wix/eslint-plugin-lodash/commit/ca1faf4896d62314c5d75bbc6fb4e05308eca505
+[5.0.1]: https://github.com/wix/eslint-plugin-lodash/compare/v5.0.1...v5.0.0
+
+## [5.0.0] - 2018-12-03
 
 ### Added
 - Added rule `collection-ordering`. ([`4673524`][4673524])

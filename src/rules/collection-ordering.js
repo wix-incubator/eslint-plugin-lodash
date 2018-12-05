@@ -36,7 +36,7 @@ function canUseSortBy(orderingNode) {
 }
 
 function enforceArraysOption(node, useArray, method, context) {
-    if (node) {
+    if (node && !_.isUndefined(useArray)) {
         if (useArray === 'always' && node.type !== 'ArrayExpression') {
             context.report({node, messageId: 'useArrayAlways', data: {method}})
         } else if (useArray === 'as-needed' && node.type === 'ArrayExpression' && node.elements.length === 1) {
@@ -66,12 +66,12 @@ module.exports = {
             orderBy: 'Use _.orderBy for ordering in ascending order.',
             omitOrders: 'Omit the order when all orders are ascending.',
             orderByExplicit: 'Use _.orderBy and specify the orders.',
-            useArrayAlways: 'Use arrays when calling _.{{method}}.',
-            useArrayAsNeeded: 'Use an array when specifying iteratees and order in _.{{method}}'
+            useArrayAlways: 'Wrap ordering iteratees with arrays in _.{{method}}.',
+            useArrayAsNeeded: 'Do not wrap a single ordering iteratee with array in _.{{method}}.'
         }
     },
     create(context) {
-        const {method: mode = 'sortBy', useArray = 'always'} = context.options[0] || {}
+        const {method: mode = 'sortBy', useArray} = context.options[0] || {}
 
         return getLodashMethodVisitors(context, (node, iteratee, {version, method, callType}) => {
             const mainAlias = getMainAlias(version, method)

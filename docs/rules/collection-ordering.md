@@ -25,7 +25,7 @@ This rule takes one argument: an options object with two fields:
   - `sortBy`: Prefer the `sortBy` method, if no ordering is descending.
   - `orderBy`: Prefer the `orderBy` method, omitting the orders if all are ascending.
   - `orderByExplicit`: Prefer the `orderBy` method, and always declare the ordering.
-- `useArray`: When to wrap the iteratees and orders in arrays. Accepts `always` or `as-needed` (default is `always`).
+- `useArray`: When to wrap the iteratees and orders in arrays. Accepts `always` or `as-needed`, and not enforced when the key is omitted (omitted by default).
   - `always`: Wrap the iteratees and ordering in arrays, even if there is a single iteratee or ordering.
   - `as-needed`: Wrap the iteratees and ordering in arrays only if there is more than one.
 

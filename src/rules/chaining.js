@@ -67,15 +67,18 @@ module.exports = {
             }
         }
 
+        function reportOnSingleChain(node) {
+            if (isMethodCall(node) && (isEndOfChain(node) || isBeforeChainBreaker(node))) {
+                context.report({node, messageId: 'single'})
+            }
+        }
+
         const callExpressionVisitors = {
             always: node => {
                 if (isNestedNLevels(node, ruleDepth, true)) {
                     context.report({node, messageId: 'always'})
                 } else if (lodashContext.isLodashChainStart(node)) {
-                    const firstCall = node.parent.parent
-                    if (isMethodCall(firstCall) && (isEndOfChain(firstCall) || isBeforeChainBreaker(firstCall))) {
-                        context.report({node: firstCall, messageId: 'single'})
-                    }
+                    reportOnSingleChain(node.parent.parent)
                 }
             },
             never: node => {
@@ -87,10 +90,7 @@ module.exports = {
                 if (isNestedNLevels(node, ruleDepth, false)) {
                     context.report({node, messageId: 'always'})
                 } else if (lodashContext.isLodashChainStart(node)) {
-                    const firstCall = node.parent.parent
-                    if (isMethodCall(firstCall) && (isEndOfChain(firstCall) || isBeforeChainBreaker(firstCall))) {
-                        context.report({node: firstCall, messageId: 'single'})
-                    }
+                    reportOnSingleChain(node.parent.parent)
                 }
             } 
         }

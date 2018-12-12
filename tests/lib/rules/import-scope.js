@@ -103,11 +103,13 @@ const testCases = {
         method: {
             require: [
                 "const _ = require('lodash')",
+                "const _ = require('lodash/')",
                 "const {map} = require('lodash')",
                 "const map = require('lodash.map')"
             ],
             import: [
                 "import _ from 'lodash'",
+                "import _ from 'lodash/'",
                 "import {map} from 'lodash'",
                 "import * as _ from 'lodash'",
                 "import map from 'lodash.map'"

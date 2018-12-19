@@ -4,7 +4,7 @@ Some Lodash methods have one or more aliases, which can lead to inconsistent cod
 
 ## Rule Details
 
-This rule takes one argument - an optional options object. This object can have this object can have one key:
+This rule takes one argument - an optional options object. This object can have one key:
 - `ignoreMethods`: contains an array of method names that should not be reported on.
 
 The following patterns are considered warnings:

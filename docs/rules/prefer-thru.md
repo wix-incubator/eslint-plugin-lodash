@@ -1,6 +1,6 @@
 # Prefer thru
 
-When starting a chain with an initial value that contains a function call on a single argument, , it could improve readability to move that function to the chain itself with `thru`.
+When starting a chain with an initial value that contains a function call on a single argument, it could improve readability to move that function to the chain itself with `thru`.
 
 ## Rule Details
 

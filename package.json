@@ -26,7 +26,7 @@
     "eslint": ">=2.10.0"
   },
   "dependencies": {
-    "lodash": "4.17.15"
+    "lodash": "^4.17.15"
   },
   "devDependencies": {
     "babel-plugin-istanbul": "5.1.0",

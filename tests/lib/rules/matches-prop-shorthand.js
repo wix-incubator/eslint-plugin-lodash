@@ -4,9 +4,12 @@
 // Requirements
 // ------------------------------------------------------------------------------
 
+const _ = require('lodash')
 const rule = require('../../../src/rules/matches-prop-shorthand')
 const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
+const {methodSupportsShorthand, getIterateeIndex} = require('../../../src/util/methodDataUtil')
 
+const getMethodData = version => require(`../../../src/util/methodDataByVersion/${version}`)
 
 // ------------------------------------------------------------------------------
 // Tests
@@ -17,6 +20,46 @@ const errors = {
     always: [{message: 'Prefer matches property syntax'}],
     never: [{message: 'Do not use matches property syntax'}]
 }
+
+const methodsThatSupportShorthand = _([3, 4])
+    .map(version =>
+        _(getMethodData(version))
+            .map((data, method) => ({method, version, iterateeIndex: getIterateeIndex(version, method)}))
+            .filter(({method}) => methodSupportsShorthand(version, method))
+            .value()
+    )
+    .flatten()
+    .value()
+
+const getExampleCodeWithPropShorthand = ({version, method, iterateeIndex}) => {
+    switch (version) {
+        case 3:
+            switch (iterateeIndex) {
+                case 1:
+                    return `var isPublic = _.${method}(arr, "id", 3);`
+                case 2:
+                    return `var isPublic = _.${method}(arr, foo, "id", 3);`
+                case 3:
+                    return `var isPublic = _.${method}(arr, foo, bar, "id", 3);`
+                default:
+                    throw new Error(`${iterateeIndex} for ${method} not supported`)
+            }
+        case 4:
+            switch (iterateeIndex) {
+                case 1:
+                    return `var isPublic = _.${method}(arr, ["id", 3]);`
+                case 2:
+                    return `var isPublic = _.${method}(arr, foo, ["id", 3]);`
+                case 3:
+                    return `var isPublic = _.${method}(arr, foo, bar, ["id", 3]);`
+                default:
+                    throw new Error(`${iterateeIndex} for ${method} not supported`)
+            }
+        default:
+            throw new Error(`version ${version} not supported`)
+    }
+}
+
 const {withDefaultPragma} = require('../testUtil/optionsUtil')
 ruleTester.run('matches-prop-shorthand', rule, {
     valid: [
@@ -39,7 +82,14 @@ ruleTester.run('matches-prop-shorthand', rule, {
             sourceType: 'module'
         }
     }]),
-    invalid: [{
+    invalid: methodsThatSupportShorthand.map(({version, method, iterateeIndex}) => ({
+        code: getExampleCodeWithPropShorthand({version, method, iterateeIndex}),
+        options: ['never'],
+        errors: errors.never,
+        settings: {
+            lodash: {version}
+        }
+    })).concat([{
         code: 'var isPublic = _.find([], function (i) { return i.id === 3; });',
         errors: errors.always
     }, {
@@ -48,17 +98,6 @@ ruleTester.run('matches-prop-shorthand', rule, {
     }, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
         errors: errors.always
-    }, {
-        code: 'var isPublic = _.filter(arr, ["id", 3])',
-        options: ['never'],
-        errors: errors.never
-    }, {
-        code: 'var isPublic = _.filter(arr, "id", 3)',
-        options: ['never'],
-        errors: errors.never,
-        settings: {
-            lodash: {version: 3}
-        }
     }, {
         code: 'var isPublic = _.find([], i => i[0] === 3);',
         errors: errors.always
@@ -69,5 +108,5 @@ ruleTester.run('matches-prop-shorthand', rule, {
         code: 'var isPublic = _.filter(arr, i => i.id === 3)',
         options: ['always', {onlyLiterals: true}],
         errors: errors.always
-    }].map(withDefaultPragma)
+    }]).map(withDefaultPragma)
 })

@@ -360,7 +360,7 @@ module.exports = {
     findLast: {
         aliases: [],
         wrapper: false,
-        shorthand: false,
+        shorthand: true,
         chainable: false,
         iteratee: true,
         args: 3
@@ -1198,7 +1198,7 @@ module.exports = {
     result: {
         aliases: [],
         wrapper: false,
-        shorthand: true,
+        shorthand: false,
         chainable: false,
         iteratee: false,
         args: 3
@@ -1318,7 +1318,7 @@ module.exports = {
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     sortedIndex: {
         aliases: [],

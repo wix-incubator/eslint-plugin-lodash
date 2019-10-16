@@ -783,6 +783,9 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 [collection-method-value]: docs/rules/collection-method-value.md
 [consistent-compose]: docs/rules/consistent-compose.md
 
+d
+fgdfgfg
+
 <!--
 ### Added
 ### Changed

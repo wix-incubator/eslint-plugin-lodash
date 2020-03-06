@@ -101,6 +101,9 @@ module.exports = {
         function convertToStringStyleWithVariables(node) {
             return `\`${node.elements
                 .map(el => {
+                    if (el.type === 'MemberExpression') {
+                        return `.\$\{${context.getSourceCode().getText(el)}\}`
+                    }
                     if (canBeDotNotation(el)) {
                         return `.${el.value}`
                     }

@@ -1,6 +1,3 @@
 {
-  "reporter": ["html", "text-summary"],
-  "require": ["@babel/register"],
-  "sourceMap": false,
-  "instrument": false
+  "reporter": ["html", "text-summary"]
 }

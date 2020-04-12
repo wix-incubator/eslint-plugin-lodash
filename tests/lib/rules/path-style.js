@@ -75,5 +75,10 @@ ruleTester.run('path-style', rule, {
         errors: [{messageId: 'string', column: 18}],
         options: ['string'],
         output: "var t = _.get(x, 'a.b')"
+    }, {
+        code: 'var t = _.set(x, [b.a, b.c], a)',
+        errors: [{messageId: 'string', column: 18}],
+        options: ['string'],
+        output: 'var t = _.set(x, `${b.a}.${b.c}`, a)'
     }].map(withDefaultPragma)
 })

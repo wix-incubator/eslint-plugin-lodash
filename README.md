@@ -80,6 +80,7 @@ The following rules point out areas where you might have made mistakes.
 These rules are purely matters of style and are quite subjective.
 * [chain-style](docs/rules/chain-style.md): Enforce a specific chain style: explicit, implicit, or explicit only when necessary.
 * [chaining](docs/rules/chaining.md): Prefer a either a Lodash chain or nested Lodash calls
+* [collection-ordering](docs/rules/collection-ordering.md): Enforce a specific collection sorting method: `sortBy` or `orderBy`
 * [consistent-compose](docs/rules/consistent-compose.md): Enforce a specific function composition direction: `flow` or `flowRight`.
 * [identity-shorthand](docs/rules/identity-shorthand.md): Prefer identity shorthand syntax
 * [import-scope](docs/rules/import-scope.md): Prefer a specific import scope (e.g. `lodash/map` vs `lodash`)

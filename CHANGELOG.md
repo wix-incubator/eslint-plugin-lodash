@@ -5,8 +5,9 @@ This change log adheres to standards from [Keep a CHANGELOG](http://keepachangel
 
 
 ## [Unreleased][unreleased]
-### Added
-- (none)
+
+- Drop Node 8 support.
+- `lodash` is now declared as a `peerDependency`.
 
 [unreleased]: https://github.com/wix/eslint-plugin-lodash/compare/v6.0.0...HEAD
 

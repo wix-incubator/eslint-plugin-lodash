@@ -336,7 +336,7 @@ module.exports = {
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     differenceWith: {
         aliases: [],
@@ -468,7 +468,7 @@ module.exports = {
     findLast: {
         aliases: [],
         wrapper: false,
-        shorthand: false,
+        shorthand: true,
         chainable: false,
         iteratee: true,
         args: 3
@@ -760,7 +760,7 @@ module.exports = {
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     intersectionWith: {
         aliases: [],
@@ -1435,14 +1435,14 @@ module.exports = {
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     overSome: {
         aliases: [],
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     pad: {
         aliases: [],
@@ -2222,7 +2222,7 @@ module.exports = {
         wrapper: false,
         shorthand: true,
         chainable: true,
-        iteratee: false
+        iteratee: true
     },
     unionWith: {
         aliases: [],

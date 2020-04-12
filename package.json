@@ -12,7 +12,7 @@
     "patch": "npm version patch -m\"update version to %s\" && git push --follow-tags",
     "minor": "npm version minor -m\"update version to %s\" && git push --follow-tags",
     "major": "npm version major -m\"update version to %s\" && git push --follow-tags",
-    "version": "auto-changelog -p && git add CHANGELOG.md"
+    "version": "auto-changelog -p && git add CHANGELOG.md && git commit -m'update change log' && git push"
   },
   "files": [
     "LICENSE",

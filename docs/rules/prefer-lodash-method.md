@@ -49,7 +49,7 @@ And if you don't want the rule to work on any object starting with `$`:
 ```js
 {
   "rules": {
-    "lodash/prefer-lodash-method": [2, {"ignorePatterns": ["^\$[a-zA-Z0-9\_]+"]}]
+    "lodash/prefer-lodash-method": [2, {"ignoreObjects": ["^\$[a-zA-Z0-9\_]+"]}]
   }
 }
 ```

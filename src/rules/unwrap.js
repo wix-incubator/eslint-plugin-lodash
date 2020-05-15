@@ -29,7 +29,7 @@ module.exports = {
         function getEndOfChain(node, isExplicit) {
             const stillInChain = isExplicit ? negate(isChainBreaker) : isChainable
             let curr = node.parent.parent
-            while (curr === getCaller(curr.parent.parent) && stillInChain(curr, version)) {
+            while (curr.parent && curr === getCaller(curr.parent.parent) && stillInChain(curr, version)) {
                 curr = curr.parent.parent
             }
             return curr

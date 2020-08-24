@@ -72,7 +72,7 @@ function isNativeCollectionMethodCall(node) {
  */
 function getLodashMethodCallExpVisitor(lodashContext, reporter) {
     return function (node) {
-        const version = lodashContext.version
+        const {version} = lodashContext
         let iterateeIndex
         if (lodashContext.isLodashChainStart(node)) {
             let prevNode = node

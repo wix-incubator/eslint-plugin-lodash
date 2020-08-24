@@ -23,7 +23,7 @@ module.exports = {
         const {getLodashContext, isChainable, isChainBreaker} = require('../util/lodashUtil')
         const {isMethodCall} = require('../util/astUtil')
         const lodashContext = getLodashContext(context)
-        const version = lodashContext.version
+        const {version} = lodashContext
         const callExpressionVisitors = {
             'as-needed'(node) {
                 if (lodashContext.isExplicitChainStart(node)) {

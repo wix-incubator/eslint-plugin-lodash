@@ -21,7 +21,7 @@ module.exports = {
         const {isMethodCall, isObjectOfMethodCall, getMethodName} = require('../util/astUtil')
         const REPORT_MESSAGE = "Do not break chain before method '{{method}}'."
         const lodashContext = getLodashContext(context)
-        const version = lodashContext.version
+        const {version} = lodashContext
 
         const visitors = lodashContext.getImportVisitors()
         visitors.CallExpression = function (node) {

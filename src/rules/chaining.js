@@ -33,7 +33,7 @@ module.exports = {
         const {isChainable} = require('../util/methodDataUtil')
         const DEFAULT_LENGTH = 3
         const lodashContext = getLodashContext(context)
-        const version = lodashContext.version
+        const {version} = lodashContext
         const negate = require('lodash/negate')
 
         const mode = context.options[0] || 'never'

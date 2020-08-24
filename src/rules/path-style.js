@@ -70,7 +70,7 @@ module.exports = {
         }
 
         function isAdjacentToPropAccessInTemplate(exp, literal) {
-            const quasiAfterIndex = findIndex(literal.quasis, quasi => quasi.start > exp.end)
+            const quasiAfterIndex = findIndex(literal.quasis, quasi => quasi.range[0] >= exp.range[1])
             const quasiBefore = literal.quasis[quasiAfterIndex - 1]
             const quasiAfter = literal.quasis[quasiAfterIndex]
             return (quasiBefore && endsWithPropAccess(quasiBefore.value.raw)) ||
@@ -127,7 +127,7 @@ module.exports = {
             'as-needed'(node) {
                 if (isArrayOfLiterals(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'stringForSimple',
                         fix(fixer) {
                             return fixer.replaceText(node, convertToStringStyle(node, false))
@@ -135,12 +135,12 @@ module.exports = {
                     })
                 } else if (isStringConcatWithVariableProps(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'arrayForVars'
                     })
                 } else if (isTemplateStringWithVariableProps(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'arrayForVars'
                     })
                 }
@@ -148,7 +148,7 @@ module.exports = {
             array(node) {
                 if (isLiteral(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'array',
                         fix(fixer) {
                             return fixer.replaceText(node, `[${toPath(node.value)
@@ -158,7 +158,7 @@ module.exports = {
                     })
                 } else if (isTemplateLiteral(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'array'
                     })
                 }
@@ -166,7 +166,7 @@ module.exports = {
             string(node) {
                 if (isArrayExpression(node)) {
                     context.report({
-                        node, 
+                        node,
                         messageId: 'string',
                         fix(fixer) {
                             return fixer.replaceText(node, convertToStringStyle(node, true))

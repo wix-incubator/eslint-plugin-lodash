@@ -13,8 +13,11 @@ const ruleTesterUtil = require('../testUtil/ruleTesterUtil')
 
 const ruleTester = ruleTesterUtil.getRuleTester()
 const {withDefaultPragma} = require('../testUtil/optionsUtil')
+
+const withDefaultPragmaArr = a => a.map(withDefaultPragma)
+
 ruleTester.run('path-style', rule, {
-    valid: [
+    valid: withDefaultPragmaArr([
         "var aProp = _.property('a');",
         "var aProp = _.property('a.b');",
         'var aProp = _.property(`${name}id`);',
@@ -25,8 +28,8 @@ ruleTester.run('path-style', rule, {
         {code: "var t = _.has(x, 'a.b.' + x)", options: ['string']},
         {code: "_.set(x, ['a'], t)", options: ['array']},
         "var t = _.replace(a, 'a', 'b')"
-    ].map(withDefaultPragma),
-    invalid: [{
+    ]),
+    invalid: withDefaultPragmaArr([{
         code: "_.invoke(x, ['a'])",
         errors: [{messageId: 'stringForSimple'}],
         output: "_.invoke(x, 'a')"
@@ -80,5 +83,5 @@ ruleTester.run('path-style', rule, {
         errors: [{messageId: 'string', column: 18}],
         options: ['string'],
         output: 'var t = _.set(x, `${b.a}.${b.c}`, a)'
-    }].map(withDefaultPragma)
+    }])
 })

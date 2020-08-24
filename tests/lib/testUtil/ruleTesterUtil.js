@@ -1,5 +1,5 @@
 'use strict'
-const RuleTester = require('eslint').RuleTester
+const {RuleTester} = require('eslint')
 
 module.exports = {
     /**

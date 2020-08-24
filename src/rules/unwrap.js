@@ -21,7 +21,7 @@ module.exports = {
         const {getCaller} = require('../util/astUtil')
         const negate = require('lodash/negate')
         const lodashContext = getLodashContext(context)
-        const version = lodashContext.version
+        const {version} = lodashContext
         function isCommit(node) {
             return isCallToMethod(node, version, 'commit')
         }

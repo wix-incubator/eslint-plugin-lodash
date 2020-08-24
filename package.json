@@ -27,8 +27,7 @@
   "homepage": "https://github.com/wix/eslint-plugin-lodash",
   "bugs": "https://github.com/wix/eslint-plugin-lodash/issues",
   "peerDependencies": {
-    "eslint": ">=2",
-    "lodash": ">=4"
+    "eslint": ">=2"
   },
   "devDependencies": {
     "auto-changelog": "^2.2.0",
@@ -52,5 +51,7 @@
     "lodash"
   ],
   "license": "MIT",
-  "dependencies": {}
+  "dependencies": {
+    "lodash": ">=4"
+  }
 }

@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "scripts": {
     "coveralls": "nyc report --reporter=text-lcov | coveralls",
-    "lint": "eslint .",
+    "lint": "eslint . --cache",
     "test": "npm run lint && npm run unit-test",
     "unit-test": "cross-env nyc mocha \"tests/**/*.js\" --reporter=dot",
     "patch": "npm version patch -m\"update version to %s\" && git push --follow-tags",
@@ -30,15 +30,14 @@
     "eslint": ">=2"
   },
   "devDependencies": {
-    "auto-changelog": "^2.2.0",
+    "auto-changelog": "^2.2.1",
     "coveralls": "^3.1.0",
-    "cross-env": "^7.0.2",
-    "eslint": "^7.7.0",
-    "eslint-config-wix-editor": "^8.1.0",
+    "cross-env": "^7.0.3",
+    "eslint": "^7.21.0",
+    "eslint-config-wix-editor": "^8.4.0",
     "eslint-plugin-eslint-plugin": "^2.3.0",
     "eslint-traverser": "^1.5.2",
-    "lodash": "^4.17.20",
-    "mocha": "^8.1.1",
+    "mocha": "^8.3.1",
     "nyc": "^15.1.0"
   },
   "engines": {

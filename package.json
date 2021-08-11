@@ -30,14 +30,14 @@
     "eslint": ">=2"
   },
   "devDependencies": {
-    "auto-changelog": "^2.2.1",
-    "coveralls": "^3.1.0",
+    "auto-changelog": "^2.3.0",
+    "coveralls": "^3.1.1",
     "cross-env": "^7.0.3",
-    "eslint": "^7.21.0",
+    "eslint": "^7.32.0",
     "eslint-config-wix-editor": "^8.4.0",
-    "eslint-plugin-eslint-plugin": "^2.3.0",
+    "eslint-plugin-eslint-plugin": "^3.5.3",
     "eslint-traverser": "^1.5.2",
-    "mocha": "^8.3.1",
+    "mocha": "^9.0.3",
     "nyc": "^15.1.0"
   },
   "engines": {

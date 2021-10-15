@@ -1,5 +1,5 @@
 /**
- * @fileoverview Rule to make sure value() wasn't called on a lodash chain twice
+ * @fileoverview Rule to make sure certain native functions are used instead of lodash functions.
  */
 'use strict'
 

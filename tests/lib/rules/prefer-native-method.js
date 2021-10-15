@@ -26,29 +26,36 @@ ruleTester.run('prefer-native-method', rule, {
     invalid: [{
         code: 'var x = _.map(arr, f)',
         errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
-        output: 'var x = arr.map(f)'
+        output: 'var x = (arr).map(f)'
     }, {
         code: 'import {map} from "lodash"; var x = map(arr, f)',
         errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
-        output: 'import {map} from "lodash"; var x = arr.map(f)',
+        output: 'import {map} from "lodash"; var x = (arr).map(f)',
         parserOptions: {
             sourceType: 'module'
         }
     }, {
         code: 'var x = _.map(arr, (i) => i)',
         errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
-        output: 'var x = arr.map((i) => i)'
+        output: 'var x = (arr).map((i) => i)'
     }, {
         code: 'import {map as renamedMap} from "lodash"; var x = renamedMap(arr, (i) => i)',
         errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
-        output: 'import {map as renamedMap} from "lodash"; var x = arr.map((i) => i)',
+        output: 'import {map as renamedMap} from "lodash"; var x = (arr).map((i) => i)',
         parserOptions: {
             sourceType: 'module'
         }
     }, {
         code: 'import {map as renamedMap} from "lodash"; var x = renamedMap(compact([1,2,3,null]), (i) => i)',
         errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
-        output: 'import {map as renamedMap} from "lodash"; var x = compact([1,2,3,null]).map((i) => i)',
+        output: 'import {map as renamedMap} from "lodash"; var x = (compact([1,2,3,null])).map((i) => i)',
+        parserOptions: {
+            sourceType: 'module'
+        }
+    }, {
+        code: 'import {map} from "lodash"; var x = map(a ? b : c, (i) => i)',
+        errors: [{message: 'Prefer \'Array.prototype.map\' over the lodash function.'}],
+        output: 'import {map} from "lodash"; var x = (a ? b : c).map((i) => i)',
         parserOptions: {
             sourceType: 'module'
         }

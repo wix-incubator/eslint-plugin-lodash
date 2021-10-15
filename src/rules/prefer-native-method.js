@@ -30,7 +30,7 @@ module.exports = {
                     message: 'Prefer \'Array.prototype.map\' over the lodash function.',
                     fix(fixer) {
                         const [firstArg, ...restArgs] = node.arguments
-                        return fixer.replaceText(node, `${sourceCode.getText(firstArg)}.map(${restArgs.map(arg => sourceCode.getText(arg)).join(', ')})`)
+                        return fixer.replaceText(node, `(${sourceCode.getText(firstArg)}).map(${restArgs.map(arg => sourceCode.getText(arg)).join(', ')})`)
                     }
                 })
             }

@@ -13,6 +13,7 @@ const possibleDirections = ['pipe', 'compose', 'flow', 'flowRight']
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('consistent-compose')
         },

@@ -22,6 +22,8 @@ const forEach = require('lodash/forEach')
 
 module.exports = {
     meta: {
+        type: 'problem',
+        schema: [],
         docs: {
             url: getDocsUrl('prefer-immutable-method')
         }
@@ -35,7 +37,7 @@ module.exports = {
             forEach(mutatingMethods, (preferred, mutatingMethod) => {
                 if (isAliasOfMethod(version, mutatingMethod, method)) {
                     context.report({
-                        node, 
+                        node,
                         message: `Prefer _.${preferred} instead of _.${mutatingMethod}`
                     })
                 }

@@ -11,6 +11,8 @@ const getDocsUrl = require('../util/getDocsUrl')
 
 module.exports = {
     meta: {
+        type: 'problem',
+        schema: [],
         docs: {
             url: getDocsUrl('prefer-map')
         }

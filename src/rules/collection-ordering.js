@@ -47,6 +47,7 @@ function enforceArraysOption(node, useArray, method, context) {
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('collection-ordering')
         },

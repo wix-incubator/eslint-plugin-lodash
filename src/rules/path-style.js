@@ -11,6 +11,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('path-style')
         },

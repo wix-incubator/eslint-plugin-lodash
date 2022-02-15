@@ -11,10 +11,10 @@ const getDocsUrl = require('../util/getDocsUrl')
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('prefer-constant')
         },
-
         schema: [{
             type: 'boolean'
         }, {

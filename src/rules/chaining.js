@@ -11,6 +11,7 @@ const getDocsUrl = require('../util/getDocsUrl')
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('chaining')
         },
@@ -48,7 +49,7 @@ module.exports = {
         function isNestedNLevelsInner(node, n, includeUnchainable) {
             if (n === 0) {
                 return true
-            } 
+            }
             if (lodashContext.isLodashCall(node) && (includeUnchainable || isChainable(version, getMethodName(node)))) {
                 return isNestedNLevelsInner(node.arguments[0], n - 1)
             }
@@ -92,7 +93,7 @@ module.exports = {
                 } else if (lodashContext.isLodashChainStart(node)) {
                     reportOnSingleChain(node.parent.parent)
                 }
-            } 
+            }
         }
 
         const visitors = lodashContext.getImportVisitors()

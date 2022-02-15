@@ -32,6 +32,7 @@ const allImportsAreOfType = (node, types) => every(node.specifiers, specifier =>
 
 module.exports = {
     meta: {
+        type: 'problem',
         docs: {
             url: getDocsUrl('import-scope')
         },

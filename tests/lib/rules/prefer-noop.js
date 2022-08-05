@@ -22,11 +22,13 @@ ruleTester.run('prefer-noop', rule, {
         'x = a => a.b',
         'class A { m() {}}',
         'var x = function * () {}',
-        {code: 'var x = async function () {}', parserOptions: {ecmaVersion: 8}}
+        {code: 'var x = async function () {}', parserOptions: {ecmaVersion: 8}},
+        {code: 'x = () => { /* no-op for now */ }', options: [{ifContainsComment: true}]}
     ].map(withDefaultPragma),
     invalid: [
         'functionWithCb(function() {})',
         'x = function(){/* */}',
-        'CallCb(()=> {})'
+        'CallCb(()=> {})',
+        {code: 'x = () => { /* no-op for now */ }', options: [{ifContainsComment: false}]}
     ].map(toErrorObject).map(withDefaultPragma)
 })

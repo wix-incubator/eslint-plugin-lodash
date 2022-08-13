@@ -94,7 +94,7 @@ module.exports = {
 
         function convertToStringStyleWithoutVariables(node) {
             return `'${node.elements
-                .map(el => canBeDotNotation(el) ? `.${el.value}` : `[${el.value}]`)
+                .map(el => canBeDotNotation(el) ? `.${el.value}` : `["${el.value}"]`)
                 .join('')
                 .replace(/^\./, '')}'`
         }

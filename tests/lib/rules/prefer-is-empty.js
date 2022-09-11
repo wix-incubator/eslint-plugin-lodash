@@ -29,7 +29,7 @@ ruleTester.run('prefer-is-empty', rule, {
         {code: 'const myLengthEqualZero = myVar.length > 0 ? "first" : "second";', output: 'const myLengthEqualZero = !isEmpty(myVar) ? "first" : "second";'},
         {code: 'const myLengthEqualZero = myVar.myProp.mySecondProp.length === 0;', output: 'const myLengthEqualZero = isEmpty(myVar.myProp.mySecondProp);'},
         {code: 'const myLengthEqualZero = myVar.myProp.mySecondProp.length > 0;', output: 'const myLengthEqualZero = !isEmpty(myVar.myProp.mySecondProp);'},
-        {code: 'const myLengthEqualZero = myVar && myVar.myProp.mySecondProp.length > 0;', output: 'const myLengthEqualZero = myVar && !isEmpty(myVar.myProp.mySecondProp);'},
+        {code: 'const myLengthEqualZero = myVar?.myProp.mySecondProp.length > 0;', output: 'const myLengthEqualZero = !isEmpty(myVar?.myProp.mySecondProp);', parserOptions: {ecmaVersion: 2020}},
         {code: 'const myLengthEqualZero = myVar[myProp].mySecondProp.length > 0;', output: 'const myLengthEqualZero = !isEmpty(myVar[myProp].mySecondProp);'},
         {code: `
         const xprop = "x"

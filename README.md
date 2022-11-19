@@ -107,6 +107,7 @@ For example, Lodash collection methods (e.g. `map`, `forEach`) are generally fas
 * [prefer-constant](docs/rules/prefer-constant.md): Prefer `_.constant` over functions returning literals.
 * [prefer-get](docs/rules/prefer-get.md): Prefer using `_.get` or `_.has` over expression chains like `a && a.b && a.b.c`.
 * [prefer-includes](docs/rules/prefer-includes.md): Prefer `_.includes` over comparing `indexOf` to -1.
+* [prefer-is-empty](docs/rules/prefer-is-empty.md): Prefer `_.isEmpty` over manual checking for length value.
 * [prefer-is-nil](docs/rules/prefer-is-nil.md): Prefer `_.isNil` over checks for both null and undefined.
 * [prefer-lodash-chain](docs/rules/prefer-lodash-chain.md): Prefer using Lodash chains (e.g. `_.map`) over native and mixed chains.
 * [prefer-lodash-method](docs/rules/prefer-lodash-method.md): Prefer using Lodash collection methods (e.g. `_.map`) over native array methods.

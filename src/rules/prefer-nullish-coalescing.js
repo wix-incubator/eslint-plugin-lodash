@@ -36,7 +36,7 @@ module.exports = {
         visitors.ConditionalExpression = function (node) {
             const statement = node.test
             if (statement.operator === '!') {
-                if (statement.argument.callee.name === 'isNil') {
+                if (statement.argument && statement.argument.callee && statement.argument.callee.name && statement.argument.callee.name === 'isNil') {
                     const argument = getTextOfNode(statement.argument.arguments[0])
                     const consequent = getTextOfNode(node.consequent)
                     const alternate = getTextOfNode(node.alternate)

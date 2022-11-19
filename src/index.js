@@ -38,6 +38,7 @@ const recommended = {
         'lodash/prefer-map': 2,
         'lodash/prefer-matches': [2, 3],
         'lodash/prefer-noop': 2,
+        'lodash/prefer-nullish-coalescing': 2,
         'lodash/prefer-over-quantifier': 2,
         'lodash/prefer-reject': [2, 3],
         'lodash/prefer-some': [2, {includeNative: true}],

@@ -30,6 +30,40 @@ const isMethodImport = name => getMethodImportFromName(name) && !includes(name, 
 const isMethodPackageImport = name => getMethodImportFromName(name) && includes(name, '.')
 const allImportsAreOfType = (node, types) => every(node.specifiers, specifier => includes(types, specifier.type))
 
+/**
+ * Creates a fix(fixer) method for `full` imports
+ * @param {*} context 
+ * @param {*} node 
+ * @returns 
+ */
+const createFullFix = (context, node) => {
+    const sourceCode = context.getSourceCode();
+    const text = sourceCode.getText(node);
+    if ( !/.*(lodash)';$/.test(text) ) {
+      return () => [];
+    }
+
+    const regexp = new RegExp(/(\w+)/g);
+    const matches = text.match(regexp);
+    if ( !matches ) {
+      return () => [];
+    }
+
+    const libs = matches
+    .filter( match => !['import', 'from', 'lodash'].includes(match))
+    if (!libs || libs.length < 1) {
+      return () => [];
+    }
+
+    const imports = libs
+    .sort()
+    .map(lib => `import ${lib} from 'lodash/${lib}';`)
+    .join('\n');
+        
+    return (fixer) => [fixer.insertTextAfter(node, imports), fixer.remove(node)];
+}
+
+
 module.exports = {
     meta: {
         type: 'problem',
@@ -54,7 +88,7 @@ module.exports = {
                     }
                 } else if ((isMethodImport(node.source.value) && importType !== 'method') ||
                            (isMethodPackageImport(node.source.value) && importType !== 'method-package')) {
-                    context.report({node, message: messages[importType]})
+                    context.report({node, message: messages[importType], fix: createFullFix(context, node)})
                 }
             },
             VariableDeclarator(node) {

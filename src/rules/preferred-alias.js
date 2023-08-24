@@ -18,7 +18,7 @@ module.exports = {
         schema: [{
             type: 'object',
             properties: {
-                ingoreMethods: {
+                ignoreMethods: {
                     type: 'array',
                     items: {
                         type: 'string'
